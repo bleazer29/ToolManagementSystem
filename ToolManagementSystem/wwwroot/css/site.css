@@ -1,4 +1,4 @@
-/*@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -176,11 +176,11 @@ app {
         display: none;
     }
 
-    .sidebar .collapse {*/
-        /* Never collapse the sidebar for wide screens */
-        /*display: block;
+    .sidebar .collapse {
+         
+        display: block;
     }
-}*/
+}
 
 
 @import url('fontawesome.css');
@@ -374,7 +374,7 @@ main {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-@media (max-width: 767.98px) {
+/*@media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
         display: none;
     }
@@ -386,7 +386,7 @@ main {
     .main .top-row a, .main .top-row .btn-link {
         margin-left: 0;
     }
-}
+}*/
 
 @media (min-width: 768px) {
     .sidebar {
