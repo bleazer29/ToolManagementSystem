@@ -1,4 +1,4 @@
-
+@import "/css/fontawesome.css";
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -466,4 +466,8 @@ main {
 
 .login-heading img {
     max-width: 60px;
+}
+
+.hidden{
+    display:none;
 }
