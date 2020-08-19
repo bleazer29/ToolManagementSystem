@@ -422,6 +422,14 @@ main {
     }
 }
 
+.table td{
+    text-align:center;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
 /* NAVBAR */
 .navbar-expand-lg {
     flex-direction: column;

@@ -5,45 +5,47 @@
             <h3>Nomenclature</h3>
         </div>
         <div class="col-1">
-            <button class="btn btn-primary w-100 pb-2">+</button>
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus"></button>
         </div>
     </div>
 </div>
 
 <div class="container">
     @* Search panel start *@
-    <div class="row">
-            <div class="card w-100">
-                <div class="card-header">
-                    <p>Search</p>
-                    <a class="card-link float-right fa-caret-down" data-toggle="collapse" href="#collapseOne">
+    <div class="row mb-3 mt-3">
+        <div class="card w-100">
+            <div class="card-header pt-0 pb-0">
+                <p class="pt-4">
+                    Search
+                    <a class="card-link float-right fa @Caret" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
                     </a>
-                </div>
-                <div id="collapseOne" class="collapse">
-                    <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Title:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                </p>
+            </div>
+            <div id="collapseOne" class="collapse">
+                <form class="m-3">
+                    <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Title:
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Vendor code:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                <button class="btn btn-primary">Search</button>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Vendor code:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                            <button class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     @* Search panel end *@
@@ -65,8 +67,10 @@
                         <tbody>
                             <tr>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary">111</button>
-                                    <button class="btn btn-primary">222</button>
+                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-times" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
                                 <td class="align-middle">Наименование1</td>
                                 <td class="align-middle">12345678</td>
@@ -84,8 +88,77 @@
         </div>
     </div>
     @* Table end *@
+
+    @*Modal Delete*@
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deleting entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to delete this entry?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Accept</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Delete*@
+
+    @*Modal Edit*@
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editing entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Title:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Vendor code:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Edit*@
 </div>
 
 @code {
+    private bool isCaretUp = false;
+    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
 
+    public void ChangeCaret()
+    {
+        isCaretUp = !isCaretUp;
+    }
 }
+
