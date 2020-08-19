@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "@shore/bootstrap@3.3.5-shore.76",
+      "destination": "wwwroot/shore/bootstrap/",
+      "files": [
+        "js/collapse.js",
+        "dist/js/npm.js",
+        "dist/js/bootstrap.min.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+﻿@page "/NRI/Nomenclature"
+<div class="container">
+    <div class="row">
+        <div class="col-11">
+            <h3>Nomenclature</h3>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-primary">+</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    @* Search panel start *@
+    <div class="row">
+        <div class="container">
+                <div class="row pt-2">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Search:
+                    </button>
+                </div>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Title:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Vendor code:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                <button class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @* Search panel end *@
+
+    @* Table start *@
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width:15%;">Управление</th>
+                                <th style="width:25%;">Наименование</th>
+                                <th style="width:20%;">Артикул</th>
+                                <th style="width:40%;">Спецификации</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <button class="btn btn-primary">111</button>
+                                    <button class="btn btn-primary">222</button>
+                                </td>
+                                <td class="align-middle">Наименование1</td>
+                                <td class="align-middle">12345678</td>
+                                <td class="align-middle">
+                                    Длина - 1 <br />
+                                    Ширина - 2 <br />
+                                    Вес - 3 <br />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @* Table end *@
+</div>
+
+@code {
+
+}
