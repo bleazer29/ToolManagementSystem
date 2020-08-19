@@ -1,26 +1,25 @@
 ﻿@page "/NRI/Nomenclature"
 <div class="container">
     <div class="row">
-        <div class="col-11">
+        <div class="col-11 pt-2">
             <h3>Nomenclature</h3>
         </div>
         <div class="col-1">
-            <button class="btn btn-primary">+</button>
+            <button class="btn btn-primary w-100 pb-2">+</button>
         </div>
     </div>
 </div>
-<div class="container">
 
+<div class="container">
     @* Search panel start *@
     <div class="row">
-        <div class="container">
-                <div class="row pt-2">
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Search:
-                    </button>
+            <div class="card w-100">
+                <div class="card-header">
+                    <p>Search</p>
+                    <a class="card-link float-right fa-caret-down" data-toggle="collapse" href="#collapseOne">
+                    </a>
                 </div>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
+                <div id="collapseOne" class="collapse">
                     <form>
                         <div class="container-fluid">
                             <div class="row pt-2">
@@ -45,9 +44,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
         </div>
-
     </div>
     @* Search panel end *@
 
