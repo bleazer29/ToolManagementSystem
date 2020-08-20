@@ -422,6 +422,12 @@ main {
     }
 }
 
+@media (min-width: 992px) {
+    .modal-dialog {
+        max-width: 65%;
+    }
+}
+
 .table td{
     text-align:center;
 }
@@ -474,4 +480,19 @@ main {
 
 .login-heading img {
     max-width: 60px;
+}
+
+th{
+    background-color:dimgrey;
+    color:white;
+    border:none;
+}
+
+.modal-header {
+    background-color: grey;
+    color: white;
+}
+
+.close{
+    color:white;
 }

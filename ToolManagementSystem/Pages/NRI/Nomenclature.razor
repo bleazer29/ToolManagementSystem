@@ -1,11 +1,12 @@
 ﻿@page "/NRI/Nomenclature"
 <div class="container">
     <div class="row">
-        <div class="col-11 pt-2">
+        <div class="col-11">
             <h3>Nomenclature</h3>
         </div>
-        <div class="col-1">
-            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus"></button>
+        <div class="col-1 pr-0">
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+                    data-toggle="modal" data-target="#createModal"></button>
         </div>
     </div>
 </div>
@@ -15,11 +16,11 @@
     <div class="row mb-3 mt-3">
         <div class="card w-100">
             <div class="card-header pt-0 pb-0">
-                <p class="pt-4">
+                <h5 class="pt-3 pb-3">
                     Search
-                    <a class="card-link float-right fa @Caret" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
                     </a>
-                </p>
+                </h5>
             </div>
             <div id="collapseOne" class="collapse">
                 <form class="m-3">
@@ -118,6 +119,92 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Editing entry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa fa-times"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Title:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Vendor code:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Specifications:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:25%;">Наименование</th>
+                                                    <th style="width:25%;">Единица измерения</th>
+                                                    <th style="width:40%;">Значение</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle">   
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
+                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Length</option>
+                                                            <option>Width</option>
+                                                            <option>Mass</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        mm
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <input class="form-control" type="number" value="12"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Edit*@
+
+    @*Modal Create*@
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Creating new entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -140,6 +227,52 @@
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Specifications:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:25%;">Наименование</th>
+                                                    <th style="width:25%;">Единица измерения</th>
+                                                    <th style="width:40%;">Значение</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
+                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Length</option>
+                                                            <option>Width</option>
+                                                            <option>Mass</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        mm
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <input class="form-control" type="number" value="12" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -149,7 +282,7 @@
             </div>
         </div>
     </div>
-    @*Modal Edit*@
+    @*Modal Create*@
 </div>
 
 @code {
