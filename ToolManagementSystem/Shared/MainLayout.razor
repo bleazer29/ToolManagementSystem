@@ -1,12 +1,62 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime jsRuntime
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3 sidebar">
-            <NavMenu />
+<div class="container-fluid ">
+    <div class="status-bar-row row align-items-center">
+        <div class="col-5 ">
+            <p class="mb-0">
+                <i class="fa fas fa-user"></i>
+                <span>User1@gmail.com!</span>
+            </p>
         </div>
-        <div class="col-9 pt-3">
+        <div class="col-7">
+            <button class="btn btn-transperent float-right">
+                <i class="fa fas fa-sign-out-alt"></i>
+            </button>
+            <button class="btn btn-transperent float-right">
+                <i class="fa fas fa-cog"></i>
+            </button>
+        </div>
+    </div>
+    <div class="main-row row">
+        <div class="@SideBarCssClass sidebar col-md-3">
+            <NavMenu />
+            <button class="@SideBarCssClass btn btn-primary navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
+                <i class="fa-arrow-left fas fa"></i>
+            </button>
+        </div>
+        <div class="@OpenSideBarButtonCssClass sidebar col-md-1">
+            <button class="btn btn-primary float-right" @onclick="ToggleOpenSideBarButton">
+                <i class="fa-arrow-right fas fa"></i>
+            </button>
+        </div>
+        <div class="@BodyColCssClass col pt-3">
             @Body
         </div>
     </div>
 </div>
+
+
+@code {
+
+    private int windowSize = 0;
+    private bool collapseSideMenu = false;
+    private string SideBarCssClass => collapseSideMenu ? "collapse" : null;
+    private string OpenSideBarButtonCssClass => collapseSideMenu ? null : "collapse";
+    private string BodyColCssClass => collapseSideMenu ? "col-md-11" : "col-md-9";
+
+    private void ToggleHideSideBarButton()
+    {
+        collapseSideMenu = true;
+    }
+    private void ToggleOpenSideBarButton()
+    {
+
+        collapseSideMenu = false;
+    }
+
+    private async Task GetWindowSize()
+    {
+        windowSize = await jsRuntime.InvokeAsync<int>("GetWindowSize");
+    }
+}

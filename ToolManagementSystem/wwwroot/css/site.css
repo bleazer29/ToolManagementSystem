@@ -1,5 +1,5 @@
 @import "/css/fontawesome.css";
-@import url('jquery.mCustomScrollbar.css');
+/*@import url('jquery.mCustomScrollbar.css');*/
 
 /*app {
     position: relative;
@@ -364,8 +364,6 @@ main {
 
 @media (min-width: 768px) {
     .sidebar {
-        width: 270px;
-        height: 100vh;
         position: sticky;
         top: 0;
     }
@@ -375,9 +373,10 @@ main {
     }
 
     .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
+         /*Never collapse the sidebar for wide screens */
         display: block;
     }
+    
 }
 
 @media (max-width: 767px) {
@@ -386,8 +385,9 @@ main {
     }
 
     .navbar-hide-toggler {
-        display: none;
+        display: block;
     }
+
 }
 
 @media (min-width: 400px) {
@@ -467,14 +467,13 @@ main {
 .btn-transperent {
     background-color: Transparent;
     outline: none;
-    color: rgba(255, 255, 255, 0.7);
-    
+    color: rgba(255, 255, 255, 0.85); 
 }
 
-    .btn-transperent:hover {
-        background-color: rgba(255, 255, 255, 0.5);
-    }
+.btn-transperent:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }
+
 
 th{
     background-color:dimgrey;
@@ -489,4 +488,27 @@ th{
 
 .close{
     color:white;
+}
+
+.navbar-brand img{
+    max-width:25px;
+}
+
+.status-bar-row {
+    background-color: #808080;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#menuTreeView a {
+    white-space: normal;
+    height: auto;
+    padding-bottom:5px;
+}
+
+.sidebar .navbar-hide-toggler {
+    position:relative;
+    margin: 0 auto;
+    display: block;
+    bottom: 93%;
+    transform: translate(-30%);
 }
