@@ -14,6 +14,17 @@ namespace ToolManagementSystem.Shared.Models
         public string FullName { get { return LastName + " " + FirstName + " " + Patronymic; } }
         [DataType(DataType.Date), Required]
         public DateTime BirthDate { get; set; }
-        public virtual Users Users { get; set; }
+        
+        [Required]
+        [RegularExpression(@"^\+[1-9]\d{2}-\d{3}-\d{4}$", ErrorMessage = "Номер телефона должен иметь формат +xxx-xxx-xxxx")]
+        public string Phone { get; set; }
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Password { get; set; }
+        public string Question { get; set; }
+        [Required]
+        public string Answer { get; set; }
+
     }
 }

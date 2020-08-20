@@ -1,0 +1,68 @@
+﻿@page "/Employee/Edit/{Id}"
+@inject NavigationManager NavigationManager
+@inject ToolManagementSystem.Shared.Service.EmployeeService objEmpService
+@using ToolManagementSystem.Shared.Models
+
+<h3>Edit data Employee</h3>
+<hr />
+
+<EditForm Model="@employee">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>First Name:</label>
+        <div class="form-group">
+            <InputText @bind-Value="@employee.FirstName" class="form-control" />
+            <ValidationMessage For="@(()=>employee.FirstName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Patronymic:</label>
+        <div class="form-group">
+            <InputText @bind-Value="@employee.Patronymic" class="form-control" />
+            <ValidationMessage For="@(()=>employee.Patronymic)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+
+            <label>Last Name:</label>
+            <InputText @bind-Value="@employee.LastName" class="form-control" />
+            <ValidationMessage For="@(()=>employee.LastName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Birth Date:</label>
+        <div class="form-group">
+            <InputDate @bind-Value="@employee.BirthDate" class="form-control" />
+            <ValidationMessage For="@(()=>employee.BirthDate)" />
+        </div>
+    </div>
+    <div class="container">
+        <button type="submit" class="btn btn-success col-md-12" @onclick="@EditEmployee">Edit data about employee</button>
+    </div>
+    <div class="container">
+        <input type="button" class="btn btn-success col-md-12" @onclick="@Cancel" value="Cancel" />
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter] public string Id { get; set; }
+    Employees employee = new Employees();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await Task.Run(() => objEmpService.GetEmployeeById(Convert.ToInt32(Id)));
+    }
+
+    private async Task EditEmployee()
+    {
+        await objEmpService.EditEmployee(employee);
+        NavigationManager.NavigateTo("employee/employee");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("employee/employee");
+    }
+}

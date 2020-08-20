@@ -1,0 +1,45 @@
+﻿@page "/employee/details/{Id}"
+@inject NavigationManager NavigationManager
+@inject ToolManagementSystem.Shared.Service.EmployeeService objEmpService
+@using ToolManagementSystem.Shared.Models
+
+<h3>Details</h3>
+@if (employee == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <h4>Employee</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Id</dt>
+            <dd class="col-sm-10">@employee.Id </dd>
+            <dt class="col-sm-2">FirstName</dt>
+            <dd class="col-sm-10">@employee.FirstName</dd>
+            <dt class="col-sm-2">LastName</dt>
+            <dd class="col-sm-10">@employee.LastName</dd>
+            <dt class="col-sm-2">Patronymic</dt>
+            <dd class="col-sm-10">@employee.Patronymic</dd>
+            <dt class="col-sm-2">FullName</dt>
+            <dd class="col-sm-10">@employee.FullName</dd>
+            <dt class="col-sm-2">BirthDate</dt>
+            <dd class="col-sm-10">@employee.BirthDate</dd>
+        </dl>
+    </div>
+    <div>
+        <a class="dropdown-item btn btn-primary" href="employee/edit/@employee.Id">Edit</a>
+        <a class="btn btn-primary" href="employee">Back to List</a>
+    </div>
+}
+
+@code {
+    [Parameter] public string Id { get; set; }
+    Employees employee = new Employees();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await Task.Run(() => objEmpService.GetEmployeeById(Convert.ToInt32(Id)));
+    }
+}

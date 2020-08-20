@@ -1,0 +1,108 @@
+﻿@page "/Employee/employee"
+@using ToolManagementSystem.Shared.Service
+@using ToolManagementSystem.Shared.Models
+@inject EmployeeService EmployeeService
+
+<h3>List Employee</h3>
+
+
+<NavLink ActiveClass="nav-link" href="/Employee/AddEmployee">
+    <span class="oi oi-plus" aria-hidden="true"></span>Add New Employee
+</NavLink>
+
+@if (empl == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Manage</th>
+                <th>FirstName</th>
+                <th>LastName </th>
+                <th>Patronymic </th>
+                <th>FullName</th>
+                <th>BirthDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in empl)
+            {
+                <tr>
+
+                    <td>
+                        <div class="dropdown">
+                            <button class="dropbtn">...</button>
+                            <div class="dropdown-content">
+                                <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
+                                <a class="dropdown-item btn btn-primary" href="employee/details/@employee.Id">Details</a>
+                                <a class="dropdown-item btn btn-primary" @onclick="@(()=>EmployeeService.DeleteEmployee(employee))">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.Patronymic</td>
+                    <td>@employee.FullName</td>
+                    <td>@employee.BirthDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+
+
+
+@code {
+    List<Employees> empl;
+    protected override async Task OnInitializedAsync()
+    {
+        empl = await Task.Run(() => EmployeeService.GetEmployee());
+    }
+}
+
+<style>
+    .dropbtn {
+        background-color: blue;
+        color: white;
+        font-size: 14px;
+        padding: 10px;
+        border: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        top: 0;
+        left: 100%;
+    }
+
+        .dropdown-content a {
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: lightblue;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: cadetblue;
+    }
+</style>
