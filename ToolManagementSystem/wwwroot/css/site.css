@@ -400,6 +400,20 @@ main {
     }
 }
 
+@media (min-width: 992px) {
+    .modal-dialog {
+        max-width: 65%;
+    }
+}
+
+.table td{
+    text-align:center;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
 /* NAVBAR */
 .navbar-expand-lg {
     flex-direction: column;
@@ -460,3 +474,19 @@ main {
     .btn-transperent:hover {
         background-color: rgba(255, 255, 255, 0.5);
     }
+}
+
+th{
+    background-color:dimgrey;
+    color:white;
+    border:none;
+}
+
+.modal-header {
+    background-color: grey;
+    color: white;
+}
+
+.close{
+    color:white;
+}
