@@ -19,28 +19,6 @@ namespace ToolManagementSystem.Client.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ToolManagementSystem.Shared.Models.EmployeeRoles", b =>
-                {
-                    b.Property<int>("EmployeeRolesId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("EmployeesIdId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RolesId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeeRolesId");
-
-                    b.HasIndex("EmployeesIdId");
-
-                    b.HasIndex("RolesId1");
-
-                    b.ToTable("EmployeeRoles");
-                });
-
             modelBuilder.Entity("ToolManagementSystem.Shared.Models.Employees", b =>
                 {
                     b.Property<int>("Id")
@@ -83,12 +61,12 @@ namespace ToolManagementSystem.Client.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("ToolManagementSystem.Shared.Models.Pages", b =>
                 {
-                    b.Property<int>("PageId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -96,14 +74,14 @@ namespace ToolManagementSystem.Client.Migrations
                     b.Property<string>("NamePage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PageId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Pages");
+                    b.ToTable("Page");
                 });
 
             modelBuilder.Entity("ToolManagementSystem.Shared.Models.Roles", b =>
                 {
-                    b.Property<int>("RolesId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -111,56 +89,9 @@ namespace ToolManagementSystem.Client.Migrations
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RolesId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("ToolManagementSystem.Shared.Models.RolesPages", b =>
-                {
-                    b.Property<int>("RolesPagesId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsVisible")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("PagesIdPageId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RolesId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("RolesPagesId");
-
-                    b.HasIndex("PagesIdPageId");
-
-                    b.HasIndex("RolesId1");
-
-                    b.ToTable("RolesPages");
-                });
-
-            modelBuilder.Entity("ToolManagementSystem.Shared.Models.EmployeeRoles", b =>
-                {
-                    b.HasOne("ToolManagementSystem.Shared.Models.Employees", "EmployeesId")
-                        .WithMany()
-                        .HasForeignKey("EmployeesIdId");
-
-                    b.HasOne("ToolManagementSystem.Shared.Models.Roles", "RolesId")
-                        .WithMany()
-                        .HasForeignKey("RolesId1");
-                });
-
-            modelBuilder.Entity("ToolManagementSystem.Shared.Models.RolesPages", b =>
-                {
-                    b.HasOne("ToolManagementSystem.Shared.Models.Pages", "PagesId")
-                        .WithMany()
-                        .HasForeignKey("PagesIdPageId");
-
-                    b.HasOne("ToolManagementSystem.Shared.Models.Roles", "RolesId")
-                        .WithMany()
-                        .HasForeignKey("RolesId1");
+                    b.ToTable("Role");
                 });
 #pragma warning restore 612, 618
         }

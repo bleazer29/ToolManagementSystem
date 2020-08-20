@@ -10,8 +10,8 @@ using ToolManagementSystem.Shared.Data;
 namespace ToolManagementSystem.Client.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200820062301_sr4")]
-    partial class sr4
+    [Migration("20200820134052_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,10 @@ namespace ToolManagementSystem.Client.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
@@ -39,40 +43,11 @@ namespace ToolManagementSystem.Client.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Patronymic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("ToolManagementSystem.Shared.Models.Users", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Patronymic")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -80,7 +55,6 @@ namespace ToolManagementSystem.Client.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Question")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
@@ -89,14 +63,37 @@ namespace ToolManagementSystem.Client.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Employee");
                 });
 
-            modelBuilder.Entity("ToolManagementSystem.Shared.Models.Employees", b =>
+            modelBuilder.Entity("ToolManagementSystem.Shared.Models.Pages", b =>
                 {
-                    b.HasOne("ToolManagementSystem.Shared.Models.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("UsersId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NamePage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Page");
+                });
+
+            modelBuilder.Entity("ToolManagementSystem.Shared.Models.Roles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
                 });
 #pragma warning restore 612, 618
         }
