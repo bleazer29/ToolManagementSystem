@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/js/vakata-jstree-6dce227/dist/themes/default/style.min.css" />
     <script src="/js/jquery.min.js"></script>
     <script src="/js/vakata-jstree-6dce227/dist/jstree.min.js"></script>
+    <script src="/js/custom.js"></script>
     <link href="css/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -37,26 +38,3 @@
     <script src="_framework/blazor.server.js"></script>
 </body>
 </html>
-
-<script>
-
-        $('#menuTreeView').jstree({
-        "plugins": ["wholerow", "contextmenu", "search"],
-        "core": {
-            "multiple": false,
-            "themes": {
-                "dots": false,
-                "icons": false,
-                "responsive":false
-            },
-            'data': [
-                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
-            ]
-        }
-      
-        });
-</script>
-
