@@ -1,0 +1,198 @@
+﻿@page "/Orders/Details/{OrderId:int}"
+@inject IJSRuntime jsRunTime
+<h3>OrderDetails</h3>
+
+<div class="container">
+        <div class="card">
+            <div class="container">
+                <div class="row">
+                    <div class="col-5">
+                        <p>Наряд на работу №00000001</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="float-right">Статус: Активный</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Дата начала:
+                    </div>
+                    <div class="col-2">
+                        31.07.2020
+                    </div>
+                    <div class="col-3">
+                        Скважина:
+                    </div>
+                    <div class="col-3">
+                        Скважина10
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Расчётная дата конца:
+                    </div>
+                    <div class="col-2">
+                        01.08.2020
+                    </div>
+                    <div class="col-3">
+                        Контракт:
+                    </div>
+                    <div class="col-3">
+                        №00000006
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        Фактическая дата конца:
+                    </div>
+                    <div class="col-2">
+                        03.08.2020
+                    </div>
+                    <div class="col-3">
+                        Ответственный:
+                    </div>
+                    <div class="col-3">
+                        Иванов Иван Иванович
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid pt-3">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#operatingTab">Наработка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#instrumentTab">Инструменты</a>
+                </li>
+            </ul>
+
+            @* Operating time tab start *@
+        <div class="tab-content">
+            <div class="container">
+                <div class="row mb-3 mt-3">
+                    <div class="col-9">
+                        <div class="card w-100">
+                            <div class="card-header pt-0 pb-0">
+                                <h5 class="pt-2 pb-2">
+                                    Search
+                                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse">
+                                <form class="m-3">
+                                    <div class="container-fluid">
+                                        <div class="row pt-2">
+                                            <div class="col-md-2 pt-1">
+                                                Number:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-2 pt-1">
+                                                Status:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <select class="form-control">
+                                                    <option selected="selected">Active</option>
+                                                    <option>Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-2 pt-1">
+                                                Period:
+                                            </div>
+                                            <div class="col-5 pr-0">
+                                                <input type="datetime-local" />
+                                            </div>
+                                            <div class="col-5 pr-0">
+                                                <input type="datetime-local" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-2 pt-1">
+                                                Well:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-2 pt-1">
+                                                Contract:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-2 pt-1">
+                                                Responsible:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                            <button class="btn btn-primary">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Неделя: </p>
+                                </div>
+                                <div class="input-group align-items-center">
+                                    <div id="weekpicker1" @onchange="OnWeekPickerChange"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+
+            </div>
+            <div class="container">
+
+            </div>
+        </div>
+            @* Operating time tab end *@
+            @* Instrument tab start *@
+
+            @* Instrument tab end *@
+        </div>
+</div>
+
+@code {
+    [Parameter]
+    public int OrderId { get; set; }
+
+    private bool isCaretUp = false;
+    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await jsRunTime.InvokeVoidAsync("initDatePicker");
+    }
+
+    public void ChangeCaret()
+    {
+        isCaretUp = !isCaretUp;
+    }
+
+    public async Task OnWeekPickerChange()
+    {
+        await jsRunTime.InvokeVoidAsync("dpChange");
+    }
+}

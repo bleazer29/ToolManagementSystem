@@ -1,8 +1,8 @@
-﻿@page "/NRI/Nomenclature"
+﻿@page "/Orders/"
 <div class="container">
     <div class="row">
         <div class="col-11">
-            <h3>Nomenclature</h3>
+            <h3>Orders</h3>
         </div>
         <div class="col-1 pr-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
@@ -27,7 +27,7 @@
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Title:
+                                Number:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
@@ -35,7 +35,45 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Vendor code:
+                                Status:
+                            </div>
+                            <div class="col pr-0">
+                                <select class="form-control">
+                                    <option selected="selected">Active</option>
+                                    <option>Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Period:
+                            </div>
+                            <div class="col-5 pr-0">
+                                <input type="datetime-local" />
+                            </div>
+                            <div class="col-5 pr-0">
+                                <input type="datetime-local" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Well:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Contract:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Responsible:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
@@ -59,10 +97,14 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th style="width:15%;">Управление</th>
-                                <th style="width:25%;">Наименование</th>
-                                <th style="width:20%;">Артикул</th>
-                                <th style="width:40%;">Спецификации</th>
+                                <th>Управление</th>
+                                <th>Номер</th>
+                                <th>Статус</th>
+                                <th>Дата начала</th>
+                                <th>Расчётная дата конца</th>
+                                <th>Ответственный</th>
+                                <th>Скважина</th>
+                                <th>Контракт</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,12 +115,18 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">Наименование1</td>
-                                <td class="text-left">12345678</td>
+                                <td class="text-left"><a href="#">00000001</a></td>
+                                <td class="text-left">Active</td>
                                 <td class="text-left">
-                                    Длина - 1 <br />
-                                    Ширина - 2 <br />
-                                    Вес - 3 <br />
+                                    31.07.2020
+                                </td>
+                                <td class="text-left">
+                                    01.08.2020
+                                </td>
+                                <td class="text-left">Иванов Иван Иванович</td>
+                                <td class="text-left">Скважина4</td>
+                                <td class="text-left">
+                                    00000008
                                 </td>
                             </tr>
                         </tbody>
@@ -164,7 +212,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-left">   
+                                                    <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"
                                                                 data-toggle="modal" data-target="#editModal"></button>
                                                     </td>
@@ -179,7 +227,7 @@
                                                         mm
                                                     </td>
                                                     <td class="text-left">
-                                                        <input class="form-control" type="number" value="12"/>
+                                                        <input class="form-control" type="number" value="12" />
                                                     </td>
                                                 </tr>
                                             </tbody>

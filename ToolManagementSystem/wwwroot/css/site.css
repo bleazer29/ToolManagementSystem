@@ -466,13 +466,12 @@ main {
     
 }
 
-    .btn-transperent:hover {
+.btn-transperent:hover {
         background-color: rgba(255, 255, 255, 0.5);
-    }
 }
 
 th{
-    background-color:dimgrey;
+    background-color:gray;
     color:white;
     border:none;
 }
@@ -484,4 +483,19 @@ th{
 
 .close{
     color:white;
+}
+
+.card-header{
+    background-color:lightgray;
+}
+
+.bootstrap-datetimepicker-widget .datepicker-days table tbody tr:hover {
+    background-color: #eee;
+}
+
+.usetwentyfour * {
+    border-radius: 0px !important;
+}
+.usetwentyfour * :hover{
+    
 }

@@ -211,6 +211,31 @@
 //     return result;
 // };
 
+$(document).ready(function () {
+    console.log("111");
+    moment.locale('ru', {
+
+        week: { dow: 1 } // Monday is the first day of the week
+    });
+});
+
+var weekpicker;
+
+function initDatePicker() {
+    weekpicker = $("#weekpicker1").weekpicker();
+}
+
+function dpChange() {
+    console.log(weekpicker.getWeek());
+    console.log(weekpicker.getYear());
+
+    var inputField = weekpicker.find("input");
+    inputField.datetimepicker().on("dp.change", function () {
+        console.log(weekpicker.getWeek());
+        console.log(weekpicker.getYear());
+    })
+}
+
 function AddMainMenuTree(elementName) {
     var elem = '#' + elementName;
     $(elem).jstree({
