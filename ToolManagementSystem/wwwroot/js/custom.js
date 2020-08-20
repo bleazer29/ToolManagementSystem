@@ -223,18 +223,22 @@ function AddMainMenuTree(elementName) {
                 "responsive": false
             },
             'data': [
-                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
-                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
-                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" }
+                { "id": "1", "parent": "#", "text": "НСИ" },
+                { "id": "2", "parent": "#", "text": "Наряды на работу" },
+                { "id": "3", "parent": "#", "text": "Контракты" },
+                { "id": "4", "parent": "#", "text": "Инструменты" },
+                { "id": "5", "parent": "#", "text": "Сервисное обслуживание" },
+                { "id": "6", "parent": "#", "text": "Ремонт" },
+                { "id": "7", "parent": "#", "text": "Администрирование" },
+                { "id": "8", "parent": "#", "text": "Отчёты" },
+                { "id": "9", "parent": "#", "text": "Документация" },
+                { "id": "10", "parent": "1", "text": "Подразделения" },
+                { "id": "11", "parent": "1", "text": "Статусы" },
+                { "id": "12", "parent": "1", "text": "Класификация иинструментов" },
+                { "id": "13", "parent": "1", "text": "Атрибуты" },
+                { "id": "14", "parent": "1", "text": "Номенклатура" },
+                { "id": "15", "parent": "1", "text": "Контрагенты" },
+                { "id": "16", "parent": "1", "text": "Скважины" }
             ]
         }
 
