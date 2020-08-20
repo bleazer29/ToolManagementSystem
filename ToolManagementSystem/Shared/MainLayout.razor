@@ -47,16 +47,36 @@
 
     private void ToggleHideSideBarButton()
     {
-        collapseSideMenu = true;
+        GetWindowSize();
+        if (windowSize > 768)
+        {
+            collapseSideMenu = true;
+        }
+        else
+        {
+            collapseSideMenu = false;
+
+        }
+
     }
+
     private void ToggleOpenSideBarButton()
     {
+        GetWindowSize();
+        if (windowSize > 768)
+        {
+            collapseSideMenu = false;
+        }
+        else
+        {
+            collapseSideMenu = false;
 
-        collapseSideMenu = false;
+        }
     }
 
-    private async Task GetWindowSize()
+    private async void GetWindowSize()
     {
-        windowSize = await jsRuntime.InvokeAsync<int>("GetWindowSize");
+        windowSize = await jsRuntime.InvokeAsync<int>("GetWindowInnerSize");
+
     }
 }
