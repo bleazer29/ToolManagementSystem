@@ -1,20 +1,7 @@
+@import "/css/fontawesome.css";
+@import url('jquery.mCustomScrollbar.css');
 
-
-html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-a, .btn-link {
-    color: #0366d6;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-app {
+/*app {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -180,11 +167,10 @@ app {
          
         display: block;
     }
-}
+}*/
 
 
-@import url('fontawesome.css');
-@import url('jquery.mCustomScrollbar.css');
+/*CUSTOM*/
 
 @font-face {
     font-family: 'montserrat';
@@ -374,19 +360,6 @@ main {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-/*@media (max-width: 767.98px) {
-    .main .top-row:not(.auth) {
-        display: none;
-    }
-
-    .main .top-row.auth {
-        justify-content: space-between;
-    }
-
-    .main .top-row a, .main .top-row .btn-link {
-        margin-left: 0;
-    }
-}*/
 
 @media (min-width: 768px) {
     .sidebar {
@@ -480,6 +453,22 @@ main {
 
 .login-heading img {
     max-width: 60px;
+}
+
+.hidden{
+    display:none;
+}
+
+.btn-transperent {
+    background-color: Transparent;
+    outline: none;
+    color: rgba(255, 255, 255, 0.7);
+    
+}
+
+    .btn-transperent:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
 }
 
 th{

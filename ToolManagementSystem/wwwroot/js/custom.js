@@ -211,3 +211,32 @@
 //     return result;
 // };
 
+function AddMainMenuTree(elementName) {
+    var elem = '#' + elementName;
+    $(elem).jstree({
+        "plugins": ["wholerow", "contextmenu", "search"],
+        "core": {
+            "multiple": false,
+            "themes": {
+                "dots": false,
+                "icons": false,
+                "responsive": false
+            },
+            'data': [
+                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+                { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+                { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+                { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+                { "id": "ajson4", "parent": "ajson2", "text": "Child 2" }
+            ]
+        }
+
+    });
+}

@@ -1,13 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
 
-<div class="main">
-
-    <div class="content px-4">
-        @Body
+    <div class="sidebar">
+        <NavMenu />
     </div>
-   
-</div>
+
+    <div class="main">    
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-copyright">
+                &copy; 2020 - Infocom LTD
+            </p>
+        </div>
+    </footer>
