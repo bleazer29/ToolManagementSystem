@@ -361,6 +361,7 @@ main {
 }
 
 
+
 @media (min-width: 768px) {
     .sidebar {
         width: 270px;
@@ -382,6 +383,10 @@ main {
 @media (max-width: 767px) {
     main {
         flex-direction: column;
+    }
+
+    .navbar-hide-toggler {
+        display: none;
     }
 }
 
