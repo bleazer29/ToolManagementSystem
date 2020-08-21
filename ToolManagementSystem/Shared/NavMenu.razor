@@ -1,37 +1,35 @@
 ﻿@inject IJSRuntime jsRuntime
 
-    <div class="top-row pl-4 navbar navbar-dark">
+
+    <div class="top-row pl-4 pr-0 navbar navbar-dark">   
         <a class="navbar-brand" href="">
-            <i class="nav-icon fas fa fa-home" aria-hidden="true"></i>
-            Tool Managment System
+            <img src="images/Weatherford_logo.png" class="img-fluid">
+            TMS
         </a>
 
         <button class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <button class="@SideBarButtonCssClass btn btn-transperent navbar-hide-toggler">
-            <i class="fas fa fa-times"></i>
-        </button>
     </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <div id="menuTreeView" name="menuTreeView">
+    <div id="menuTreeView" name="menuTreeView" >
 
     </div>
 </div>
 
 @code {
     private bool collapseNavMenu = true;
+   
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-    private string SideBarButtonCssClass => !collapseNavMenu ? "collapse" : null;
-
+   
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
+
 
     private async Task AddTree()
     {

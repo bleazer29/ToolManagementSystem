@@ -243,29 +243,38 @@ function AddMainMenuTree(elementName) {
         "core": {
             "multiple": false,
             "themes": {
+                "name": "default-dark",
                 "dots": false,
                 "icons": false,
                 "responsive": false
             },
             'data': [
-                { "id": "1", "parent": "#", "text": "НСИ" },
-                { "id": "2", "parent": "#", "text": "Наряды на работу" },
-                { "id": "3", "parent": "#", "text": "Контракты" },
-                { "id": "4", "parent": "#", "text": "Инструменты" },
-                { "id": "5", "parent": "#", "text": "Сервисное обслуживание" },
-                { "id": "6", "parent": "#", "text": "Ремонт" },
-                { "id": "7", "parent": "#", "text": "Администрирование" },
-                { "id": "8", "parent": "#", "text": "Отчёты" },
-                { "id": "9", "parent": "#", "text": "Документация" },
-                { "id": "10", "parent": "1", "text": "Подразделения" },
-                { "id": "11", "parent": "1", "text": "Статусы" },
-                { "id": "12", "parent": "1", "text": "Класификация иинструментов" },
-                { "id": "13", "parent": "1", "text": "Атрибуты" },
-                { "id": "14", "parent": "1", "text": "Номенклатура" },
-                { "id": "15", "parent": "1", "text": "Контрагенты" },
-                { "id": "16", "parent": "1", "text": "Скважины" }
+                { "id": "1", "parent": "#", "text": "НСИ", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "2", "parent": "#", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true", "disabled": "true" }  },
+                { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "12", "parent": "20", "text": "Класификация", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "13", "parent": "20", "text": "Атрибуты", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "14", "parent": "20", "text": "Номенклатура", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "15", "parent": "21", "text": "Контрагенты", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "16", "parent": "21", "text": "Скважины", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "17", "parent": "7", "text": "Пользователи", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "18", "parent": "7", "text": "Роли", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } }
             ]
         }
-
     });
+}
+
+function GetWindowInnerSize() {
+    return window.innerWidth;
 }
