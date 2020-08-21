@@ -36,6 +36,27 @@
             <InputDate @bind-Value="@employee.BirthDate" class="form-control" />
             <ValidationMessage For="@(()=>employee.BirthDate)" />
         </div>
+    </div> 
+    <div class="form-group">
+        <label>Phone:</label>
+        <div class="form-group">
+            <InputText @bind-Value="@employee.Phone" class="form-control" />
+            <ValidationMessage For="@(()=>employee.Phone)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>UserName:</label>
+        <div class="form-group">
+            <InputText @bind-Value="@employee.UserName" class="form-control" />
+            <ValidationMessage For="@(()=>employee.UserName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Password:</label>
+        <div class="form-group">
+            <InputText @bind-Value="@employee.Password" class="form-control" />
+            <ValidationMessage For="@(()=>employee.Password)" />
+        </div>
     </div>
     <div class="container">
         <button type="submit" class="btn btn-success col-md-12" @onclick="@EditEmployee">Edit data about employee</button>

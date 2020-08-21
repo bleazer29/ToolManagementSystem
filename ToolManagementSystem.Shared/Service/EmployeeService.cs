@@ -22,9 +22,8 @@ namespace ToolManagementSystem.Shared.Service
 
         public async Task<string> Create(Employees employees)
         {
-            var employee = await db.Employee.SingleOrDefaultAsync(e=>e.FirstName == employees.FirstName
-            && e.LastName == employees.LastName);
-            if(employee != null)
+            var singleEmployee = await db.Employee.SingleOrDefaultAsync(e=>e.FirstName == employees.FirstName && e.LastName == employees.LastName);
+            if(singleEmployee != null)
             {
                 return "Failed!";
             }

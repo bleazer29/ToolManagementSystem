@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToolManagementSystem.Shared.Models
 {
@@ -16,15 +18,17 @@ namespace ToolManagementSystem.Shared.Models
         public DateTime BirthDate { get; set; }
         
         [Required]
-        [RegularExpression(@"^\+[1-9]\d{2}-\d{3}-\d{4}$", ErrorMessage = "Номер телефона должен иметь формат +xxx-xxx-xxxx")]
         public string Phone { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
-        public string Question { get; set; }
+        public string Question { get; set; } = "Who are you?";
         [Required]
-        public string Answer { get; set; }
+        public string Answer { get; set; } = "Admin";
+
+        [NotMapped]
+        public IList<EmployeeRoles> EmployeeRoles { get; }
 
     }
 }

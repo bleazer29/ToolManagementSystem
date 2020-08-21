@@ -13,24 +13,36 @@ else
     <div>
         <h4>Employee</h4>
         <hr />
-        <dl class="row">
-            <dt class="col-sm-2">Id</dt>
-            <dd class="col-sm-10">@employee.Id </dd>
-            <dt class="col-sm-2">FirstName</dt>
-            <dd class="col-sm-10">@employee.FirstName</dd>
-            <dt class="col-sm-2">LastName</dt>
-            <dd class="col-sm-10">@employee.LastName</dd>
-            <dt class="col-sm-2">Patronymic</dt>
-            <dd class="col-sm-10">@employee.Patronymic</dd>
-            <dt class="col-sm-2">FullName</dt>
-            <dd class="col-sm-10">@employee.FullName</dd>
-            <dt class="col-sm-2">BirthDate</dt>
-            <dd class="col-sm-10">@employee.BirthDate</dd>
-        </dl>
+        <div class="container">
+            <dl class="row">
+                <dt class="col-sm-5">Id</dt>
+                <dd class="col-sm-7">@employee.Id </dd>
+                <dt class="col-sm-5">FirstName</dt>
+                <dd class="col-sm-7">@employee.FirstName</dd>
+                <dt class="col-sm-5">LastName</dt>
+                <dd class="col-sm-7">@employee.LastName</dd>
+                <dt class="col-sm-5">Patronymic</dt>
+                <dd class="col-sm-7">@employee.Patronymic</dd>
+                <dt class="col-sm-5">FullName</dt>
+                <dd class="col-sm-7">@employee.FullName</dd>
+                <dt class="col-sm-5">BirthDate</dt>
+                <dd class="col-sm-7">@employee.BirthDate</dd>
+                <dt class="col-sm-5">Phone</dt>
+                <dd class="col-sm-7">@employee.Phone</dd> 
+                <dt class="col-sm-5">UserName</dt>
+                <dd class="col-sm-7">@employee.UserName</dd>
+                <dt class="col-sm-5">Password</dt>
+                <dd class="col-sm-7">@employee.Password</dd>
+                <dt class="col-sm-5">Question</dt>
+                <dd class="col-sm-7">@employee.Question</dd>
+                <dt class="col-sm-5">Answer</dt>
+                <dd class="col-sm-7">@employee.Answer</dd>
+            </dl>
+        </div>
     </div>
-    <div>
-        <a class="dropdown-item btn btn-primary" href="employee/edit/@employee.Id">Edit</a>
-        <a class="btn btn-primary" href="employee">Back to List</a>
+    <div class="container">
+        <a class="dropdown-item btn btn-primary" href="employee/edit/@employee.Id">Edit date employee</a>
+        <a class="btn btn-primary" href="employee/employee">Back to List</a>
     </div>
 }
 
