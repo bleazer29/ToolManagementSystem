@@ -211,20 +211,14 @@
 //     return result;
 // };
 
-$(document).ready(function () {
-    console.log("111");
-    moment.locale('ru', {
-
-        week: { dow: 1 } // Monday is the first day of the week
-    });
-});
-
 var weekpicker;
 
 function initDatePicker() {
-    weekpicker = $("#weekpicker1").weekpicker();
+    weekpicker = $("#weekpicker1").weekpicker({
+        locale: 'ru'
+    });
 }
-
+    
 function dpChange() {
     console.log(weekpicker.getWeek());
     console.log(weekpicker.getYear());
@@ -277,4 +271,21 @@ function AddMainMenuTree(elementName) {
 
 function GetWindowInnerSize() {
     return window.innerWidth;
+}
+
+function addResizeEvent() {
+    window.addEventListener('resize', function () {
+        if (this.document.documentElement.clientWidth < 780) {
+            $('#sidebarShowBtn').click();
+            if ($('.tree-container').hasClass('collapse') == false) {
+                $('.tree-container').addClass('collapse');
+            }
+        }
+    });
+}
+
+function initTooltips() {
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 }

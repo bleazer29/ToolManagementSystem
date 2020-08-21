@@ -1,5 +1,5 @@
 /**
- * ### Search plugin
+ * ### Поиск plugin
  *
  * Adds search functionality to jsTree.
  */

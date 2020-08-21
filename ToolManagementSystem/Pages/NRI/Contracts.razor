@@ -1,8 +1,8 @@
-﻿@page "/NRI/Departments"
+﻿@page "/NRI/Contracts"
 <div class="container">
     <div class="row">
         <div class="col-11">
-            <h3>Departments</h3>
+            <h3>Контракты</h3>
         </div>
         <div class="col-1 pr-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
@@ -27,14 +27,35 @@
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Наименование:
+                                Номер контракта:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
-                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">Поиск</button>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Дата начала:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="date" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Дата конца:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="date" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Контрагент:
+                            </div>
+                            <div class="col pr-0">
+                                <select class="form-control" />
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -52,18 +73,24 @@
                         <thead>
                             <tr>
                                 <th style="width:15%;">Управление</th>
-                                <th style="width:85%;">Наименование</th>
+                                <th style="width:25%;">Номер контракта</th>
+                                <th style="width:20%;">Дата начала</th>
+                                <th style="width:20%;">Дата конца</th>
+                                <th style="width:20%;">Контрагент</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="align-middle">
+                                <td class="text-left">
                                     <button class="btn btn-primary fa fa-edit" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">ООО "Weatherford"</td>
+                                <td class="text-left">№00000001</td>
+                                <td class="text-left">31.07.2020</td>
+                                <td class="text-left">01.08.2020</td>
+                                <td class="text-left">ООО "Рога и копыта"</td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,8 +114,8 @@
                     Вы действительно хотите удалить запись?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary ">Accept</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
                 </div>
             </div>
         </div>
@@ -110,10 +137,34 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Наименование:
+                                    Номер контракта:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Дата начала:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Дата конца:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Контрагент:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -132,7 +183,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Сздание новой записи</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -140,14 +191,36 @@
                 <div class="modal-body">
                     <form>
                         <div class="container-fluid">
-                            <div class="container-fluid">
-                                <div class="row pt-2">
-                                    <div class="col-md-2 pt-1">
-                                        Наименование:
-                                    </div>
-                                    <div class="col pr-0">
-                                        <input type="text" class="form-control" />
-                                    </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Номер контракта:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Дата начала:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Дата конца:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Контрагент:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control" />
                                 </div>
                             </div>
                         </div>

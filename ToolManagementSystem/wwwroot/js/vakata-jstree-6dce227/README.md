@@ -539,7 +539,7 @@ Adds the possibility to search for items in the tree and show only matching node
 ```html
 <form id="s">
   <input type="search" id="q" />
-  <button type="submit">Search</button>
+  <button type="submit">Поиск</button>
 </form>
 <script>
 $("#container").jstree({

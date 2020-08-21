@@ -379,13 +379,39 @@ main {
     
 }
 
+.sidebar .navbar-hide-toggler {
+    position: absolute;
+    margin: 0 auto;
+    display: block;
+    bottom: 93%;
+    right:65px;
+    top:5px;
+    max-height:40px;
+    max-width:44px;
+    min-height:40px;
+    min-width:44px;
+}
+
+
+.main-row {
+   height: 100vh;
+}
+
 @media (max-width: 767px) {
     main {
         flex-direction: column;
     }
 
-    .navbar-hide-toggler {
-        display: block;
+    .main-row {
+        height: 100%;
+    }
+
+    .sidebar .navbar-hide-toggler {
+        display: none;
+    }
+
+    .sidebar-hide {
+        display: none;
     }
 
 }
@@ -505,15 +531,6 @@ th{
     padding-bottom:5px;
 }
 
-.sidebar .navbar-hide-toggler {
-    position:relative;
-    margin: 0 auto;
-    display: block;
-    bottom: 93%;
-    transform: translate(-30%);
-}
-}
-
 .card-header{
     background-color:lightgray;
 }
@@ -527,4 +544,8 @@ th{
 }
 .usetwentyfour * :hover{
     
+}
+
+.scrollable{
+    overflow-x:auto;
 }

@@ -12,12 +12,12 @@
 </div>
 
 <div class="container">
-    @* Search panel start *@
+    @* Поиск panel start *@
     <div class="row mb-3 mt-3">
         <div class="card w-100">
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
-                    Search
+                    Поиск
                     <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
                     </a>
                 </h5>
@@ -27,7 +27,7 @@
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Title:
+                                Наименование:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
@@ -35,7 +35,7 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                EDRPOU:
+                                ЕДРПОУ:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
@@ -43,21 +43,21 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Address:
+                                Адрес:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">Search</button>
+                            <button class="btn btn-primary">Найти</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    @* Search panel end *@
+    @* Поиск panel end *@
 
     @* Table start *@
     <div class="row">
@@ -98,13 +98,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Deleting entry</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Do you really want to delete this entry?
+                    Вы действительно хотите удалить запись?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -120,7 +120,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editing entry</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
@@ -130,7 +130,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Title:
+                                    Наименование:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -138,7 +138,7 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    EDRPOU:
+                                    ЕДРПОУ:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -146,7 +146,7 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Address:
+                                    Адрес:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -156,7 +156,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -168,7 +168,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Creating new entry</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -178,7 +178,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Title:
+                                    Наименование:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -186,7 +186,7 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    EDRPOU:
+                                    ЕДРПОУ:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -194,7 +194,7 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Address:
+                                    Адрес:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -204,7 +204,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ">Save</button>
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
                 </div>
             </div>
         </div>

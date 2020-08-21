@@ -21,12 +21,12 @@
     <div class="main-row row">
         <div class="@SideBarCssClass sidebar col-md-3">
             <NavMenu />
-            <button class="@SideBarCssClass btn btn-primary navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
+            <button class="btn btn-primary @SideBarCssClass navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
                 <i class="fa-arrow-left fas fa"></i>
             </button>
         </div>
-        <div class="@OpenSideBarButtonCssClass sidebar col-md-1">
-            <button class="btn btn-primary float-right" @onclick="ToggleOpenSideBarButton">
+        <div class="@OpenSideBarButtonCssClass sidebar col-md-1 sidebar-hide text-center">
+            <button id="sidebarShowBtn" class="btn btn-primary mt-3 sidebar-hide" @onclick="ToggleOpenSideBarButton">
                 <i class="fa-arrow-right fas fa"></i>
             </button>
         </div>
@@ -36,47 +36,30 @@
     </div>
 </div>
 
-
 @code {
-
     private int windowSize = 0;
     private bool collapseSideMenu = false;
     private string SideBarCssClass => collapseSideMenu ? "collapse" : null;
     private string OpenSideBarButtonCssClass => collapseSideMenu ? null : "collapse";
     private string BodyColCssClass => collapseSideMenu ? "col-md-11" : "col-md-9";
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        jsRuntime.InvokeVoidAsync("addResizeEvent");
+    }
+
     private void ToggleHideSideBarButton()
     {
-        GetWindowSize();
-        if (windowSize > 768)
-        {
-            collapseSideMenu = true;
-        }
-        else
-        {
-            collapseSideMenu = false;
-
-        }
-
+        collapseSideMenu = true;
     }
 
     private void ToggleOpenSideBarButton()
     {
-        GetWindowSize();
-        if (windowSize > 768)
-        {
-            collapseSideMenu = false;
-        }
-        else
-        {
-            collapseSideMenu = false;
-
-        }
+        collapseSideMenu = false;
     }
 
     private async void GetWindowSize()
     {
         windowSize = await jsRuntime.InvokeAsync<int>("GetWindowInnerSize");
-
     }
 }
