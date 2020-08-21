@@ -23,7 +23,7 @@ namespace ToolManagementSystem.Shared.Service
 
         public async Task CreateRole(Roles role)
         {
-            var singleRole = await db.Role.SingleOrDefaultAsync(e => e.RoleName == role.RoleName);
+            var singleRole = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
             if (singleRole != null)
             {
                 return;
@@ -32,6 +32,22 @@ namespace ToolManagementSystem.Shared.Service
             await db.SaveChangesAsync();
         }
 
+        public async Task<Roles> GetRoleById(int id)
+        {
+            return await db.Role.FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+
+        public async Task EditRole(Roles role)
+        {
+            var singleRoles = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
+            if (singleRoles != null)
+            {
+                return;
+            }
+            db.Role.Update(role);
+            await db.SaveChangesAsync();
+        }
 
     }
 }

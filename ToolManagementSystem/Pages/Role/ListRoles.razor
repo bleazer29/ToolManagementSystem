@@ -45,13 +45,12 @@ else
             @foreach (var role in Roles)
             {
                 <tr>
-
                     <td>
                         <div class="dropdown">
                             <button class="dropbtn">...</button>
                             <div class="dropdown-content">
                                 <a class="dropdown-item btn btn-primary" href="/Role/EditRole/@role.Id">Edit</a>
-                                <a class="dropdown-item btn btn-primary" href="/Role/detailsRole/@role.Id">Details</a>
+                                <a class="dropdown-item btn btn-primary" href="/Role/detailsRole/@role.Id">Details</a> @*Тут если что остановились*@
                                 @*<a class="dropdown-item btn btn-primary" @onclick="@(()=>RolesService.DeleteEmployee(role))">Delete</a>*@
                             </div>
                         </div>

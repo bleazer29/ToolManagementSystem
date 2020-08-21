@@ -1,0 +1,47 @@
+﻿@page "/Role/EditRole/{UrlRoleId}"
+@inject NavigationManager NavigationManager
+@inject ToolManagementSystem.Shared.Service.RolesService RolesService
+@using ToolManagementSystem.Shared.Models
+    <h3>Edit data Role</h3>
+
+    <EditForm Model="@role">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label>First Name:</label>
+            <div class="form-group">
+                <InputText @bind-Value="@role.RoleName" class="form-control" />
+                <ValidationMessage For="@(()=>role.RoleName)" />
+            </div>
+        </div>
+       
+        <div class="container">
+            <button type="submit" class="btn btn-success col-md-12" @onclick="@EditDataRole">Edit data about role</button>
+        </div>
+        <div class="container">
+            <input type="button" class="btn btn-success col-md-12" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </EditForm>
+
+
+@code {
+    [Parameter] public string UrlRoleId { get; set; }
+
+    Roles role = new Roles();
+
+    protected override async Task OnInitializedAsync()
+    {
+        role = await Task.Run(() => RolesService.GetRoleById(Convert.ToInt32(UrlRoleId)));
+    }
+
+    private async Task EditDataRole()
+    {
+        await RolesService.EditRole(role);
+        NavigationManager.NavigateTo("Role/ListRoles");
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("Role/ListRoles");
+    }
+
+}
