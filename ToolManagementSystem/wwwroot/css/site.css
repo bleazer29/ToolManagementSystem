@@ -349,6 +349,7 @@ main {
 
 .sidebar {
     background: #424242;
+   
 }
 
 .content {
@@ -413,7 +414,14 @@ main {
     .sidebar-hide {
         display: none;
     }
+}
 
+
+
+@media (min-width: 768px) {
+    .main-sidebar {
+        max-width: 300px;
+    }
 }
 
 @media (min-width: 400px) {
@@ -528,11 +536,10 @@ th{
 #menuTreeView a {
     white-space: normal;
     height: auto;
-    padding-bottom:5px;
 }
 
-.card-header{
-    background-color:lightgray;
+.card-header {
+    background-color: lightgray;
 }
 
 .bootstrap-datetimepicker-widget .datepicker-days table tbody tr:hover {

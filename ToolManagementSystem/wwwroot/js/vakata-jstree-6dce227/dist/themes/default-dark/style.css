@@ -502,6 +502,7 @@
 .jstree-default-dark.jstree-rtl > .jstree-no-dots .jstree-node,
 .jstree-default-dark.jstree-rtl > .jstree-no-dots .jstree-leaf > .jstree-ocl {
   background: transparent;
+
 }
 .jstree-default-dark.jstree-rtl > .jstree-no-dots .jstree-open > .jstree-ocl {
   background-position: -36px -36px;
