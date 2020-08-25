@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="main-row row">
-        <div class="@SideBarCssClass sidebar col-md-3">
+        <div class="@SideBarCssClass sidebar main-sidebar col-md-4 col-lg-3">
             <NavMenu />
             <button class="btn btn-primary @SideBarCssClass navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
                 <i class="fa-arrow-left fas fa"></i>
@@ -30,7 +30,7 @@
                 <i class="fa-arrow-right fas fa"></i>
             </button>
         </div>
-        <div class="@BodyColCssClass col pt-3">
+        <div class="@BodyColCssClass col pt-3 layout-body">
             @Body
         </div>
     </div>
@@ -41,7 +41,7 @@
     private bool collapseSideMenu = false;
     private string SideBarCssClass => collapseSideMenu ? "collapse" : null;
     private string OpenSideBarButtonCssClass => collapseSideMenu ? null : "collapse";
-    private string BodyColCssClass => collapseSideMenu ? "col-md-11" : "col-md-9";
+    private string BodyColCssClass => collapseSideMenu ? "col-md-11" : "col-md-8 col-lg-9";
 
     protected override void OnAfterRender(bool firstRender)
     {
