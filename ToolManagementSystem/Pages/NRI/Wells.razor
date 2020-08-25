@@ -1,8 +1,8 @@
-﻿@page "/Contracts"
+﻿@page "/NRI/Wells"
 <div class="container">
     <div class="row">
         <div class="col-11">
-            <h3>Справочник контрактов</h3>
+            <h3>Справочник скважин</h3>
         </div>
         <div class="col-1 pr-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
@@ -27,7 +27,7 @@
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Номер контракта:
+                                Наименование:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
@@ -35,18 +35,10 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Дата начала:
+                                Номер:
                             </div>
                             <div class="col pr-0">
-                                <input type="date" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Дата конца:
-                            </div>
-                            <div class="col pr-0">
-                                <input type="date" class="form-control" />
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -54,7 +46,15 @@
                                 Контрагент:
                             </div>
                             <div class="col pr-0">
-                                <select class="form-control" />
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Адрес:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
@@ -76,10 +76,10 @@
                         <thead>
                             <tr>
                                 <th style="width:15%;">Управление</th>
-                                <th style="width:25%;">Номер контракта</th>
-                                <th style="width:20%;">Дата начала</th>
-                                <th style="width:20%;">Дата конца</th>
-                                <th style="width:20%;">Контрагент</th>
+                                <th style="width:20%;">Наименование</th>
+                                <th style="width:15%;">Номер</th>
+                                <th style="width:25%;">Контрагент</th>
+                                <th style="width:25%;">Адрес</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,10 +90,10 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
+                                <td class="text-left">Скважина1</td>
                                 <td class="text-left">№00000001</td>
-                                <td class="text-left">31.07.2020</td>
-                                <td class="text-left">01.08.2020</td>
-                                <td class="text-left">ООО "Рога и копыта"</td>
+                                <td class="text-left">ООО "Weatherford"</td>
+                                <td class="text-left">Украина, г.Запорожье, ул.Дудыкина 48А</td>
                             </tr>
                         </tbody>
                     </table>
@@ -140,7 +140,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Номер контракта:
+                                    Наименование:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -148,18 +148,18 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Дата начала:
+                                    Номер:
                                 </div>
                                 <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Дата конца:
+                                    Адрес:
                                 </div>
                                 <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
@@ -167,7 +167,11 @@
                                     Контрагент:
                                 </div>
                                 <div class="col pr-0">
-                                    <select class="form-control" />
+                                    <select class="form-control">
+                                        <option>Контрагент1</option>
+                                        <option>Контрагент2</option>
+                                        <option>Контрагент3</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +200,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Номер контракта:
+                                    Наименование:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -204,18 +208,18 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Дата начала:
+                                    Номер:
                                 </div>
                                 <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Дата конца:
+                                    Адрес:
                                 </div>
                                 <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
@@ -223,7 +227,11 @@
                                     Контрагент:
                                 </div>
                                 <div class="col pr-0">
-                                    <select class="form-control" />
+                                    <select class="form-control">
+                                        <option>Контрагент1</option>
+                                        <option>Контрагент2</option>
+                                        <option>Контрагент3</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
