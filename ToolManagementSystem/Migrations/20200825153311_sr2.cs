@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ToolManagementSystem.Client.Migrations
 {
-    public partial class sr1 : Migration
+    public partial class sr2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -106,7 +106,7 @@ namespace ToolManagementSystem.Client.Migrations
             migrationBuilder.InsertData(
                 table: "Employee",
                 columns: new[] { "Id", "Answer", "BirthDate", "FirstName", "LastName", "Password", "Patronymic", "Phone", "Question", "UserName" },
-                values: new object[] { 1, "Admin", new DateTime(2020, 8, 21, 11, 18, 59, 507, DateTimeKind.Local).AddTicks(3840), "admin", "admin", "admin", "admin", "00-000-00-00", "Who are you?", "admin" });
+                values: new object[] { 1, "Admin", new DateTime(2020, 8, 25, 18, 32, 35, 929, DateTimeKind.Local).AddTicks(6761), "admin", "admin", "admin", "admin", "00-000-00-00", "Who are you?", "admin" });
 
             migrationBuilder.InsertData(
                 table: "Page",

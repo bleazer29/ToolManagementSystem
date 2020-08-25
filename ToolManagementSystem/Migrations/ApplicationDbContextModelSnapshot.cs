@@ -90,7 +90,7 @@ namespace ToolManagementSystem.Client.Migrations
                         {
                             Id = 1,
                             Answer = "Admin",
-                            BirthDate = new DateTime(2020, 8, 21, 11, 18, 59, 507, DateTimeKind.Local).AddTicks(3840),
+                            BirthDate = new DateTime(2020, 8, 25, 18, 32, 35, 929, DateTimeKind.Local).AddTicks(6761),
                             FirstName = "admin",
                             LastName = "admin",
                             Password = "admin",

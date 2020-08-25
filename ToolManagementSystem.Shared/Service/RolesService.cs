@@ -49,5 +49,12 @@ namespace ToolManagementSystem.Shared.Service
             await db.SaveChangesAsync();
         }
 
+
+
+        public async Task EditUsersInRole(List<Roles> roles, int userId)
+        {
+
+        }
+
     }
 }

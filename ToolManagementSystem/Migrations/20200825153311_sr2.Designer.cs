@@ -10,8 +10,8 @@ using ToolManagementSystem.Shared.Data;
 namespace ToolManagementSystem.Client.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200821081901_sr1")]
-    partial class sr1
+    [Migration("20200825153311_sr2")]
+    partial class sr2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,7 +92,7 @@ namespace ToolManagementSystem.Client.Migrations
                         {
                             Id = 1,
                             Answer = "Admin",
-                            BirthDate = new DateTime(2020, 8, 21, 11, 18, 59, 507, DateTimeKind.Local).AddTicks(3840),
+                            BirthDate = new DateTime(2020, 8, 25, 18, 32, 35, 929, DateTimeKind.Local).AddTicks(6761),
                             FirstName = "admin",
                             LastName = "admin",
                             Password = "admin",

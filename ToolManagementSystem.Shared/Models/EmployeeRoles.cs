@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ToolManagementSystem.Shared.Models
@@ -10,5 +11,6 @@ namespace ToolManagementSystem.Shared.Models
         public Employees Employe { get; set; }
         public int RoleId { get; set; }
         public Roles Role { get; set; }
+
     }
 }

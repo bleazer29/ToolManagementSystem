@@ -14,5 +14,8 @@ namespace ToolManagementSystem.Shared.Models
         public IList<EmployeeRoles> EmployeeRoles { get; set; }
         [NotMapped]
         public IList<RolesPages> RolesPages { get; set; }
+
+        [NotMapped]
+        public bool IsSelected { get; set; }
     }
 }
