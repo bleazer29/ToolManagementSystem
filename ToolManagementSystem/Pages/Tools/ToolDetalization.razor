@@ -1,79 +1,58 @@
-﻿@page "/Orders/Details/{OrderId:int}"
+﻿@page "/Tools/Details/{ToolId:int}"
 @inject IJSRuntime jsRunTime
 
 <div class="container">
-        <div class="card">
-            <div class="container">
-                <div class="row">
-                    <div class="col-5">
-                        <p>Наряд на работу №00000001</p>
-                    </div>
-                    <div class="col-7">
-                        <p class="float-right">Статус: Активный</p>
-                    </div>
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <p>Инструмент №00000001</p>
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        Дата начала:
-                    </div>
-                    <div class="col-2">
-                        31.07.2020
-                    </div>
-                    <div class="col-3">
-                        Скважина:
-                    </div>
-                    <div class="col-3">
-                        Скважина10
-                    </div>
+                <div class="col-7">
+                    <p class="float-right">Статус: RFU</p>
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        Расчётная дата конца:
-                    </div>
-                    <div class="col-2">
-                        01.08.2020
-                    </div>
-                    <div class="col-3">
-                        Контракт:
-                    </div>
-                    <div class="col-3">
-                        №00000006
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Серийный номер:
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        Фактическая дата конца:
-                    </div>
-                    <div class="col-2">
-                        03.08.2020
-                    </div>
-                    <div class="col-3">
-                        Ответственный:
-                    </div>
-                    <div class="col-3">
-                        Иванов Иван Иванович
-                    </div>
+                <div class="col-3">
+                    12345678
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Партийный номер:
+                </div>
+                <div class="col-3">
+                    12345678
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Артикул:
+                </div>
+                <div class="col-3">
+                    12345678
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container-fluid pt-3 pl-0 pr-0">
-            <ul class="nav nav-tabs">
-                <li class="nav-item active">
-                    <a class="nav-link" data-toggle="tab" href="#operatingTab">Наработка</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#instrumentTab">Инструменты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#historyTab">История</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#docTab">Документы</a>
-                </li>
-            </ul>
+    <div class="container-fluid pt-3 pl-0 pr-0">
+        <ul class="nav nav-tabs">
+            <li class="nav-item active">
+                <a class="nav-link" data-toggle="tab" href="#operatingTab">Детали</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#instrumentTab">История наработки</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#historyTab">История инструмента</a>
+            </li>
+        </ul>
 
-            @* Operating time tab start *@
+        @* Operating history tab start *@
         <div class="tab-content pl-0 pr-0t">
             <div id="operatingTab" class="container tab-pane active">
                 <div class="container">
@@ -92,21 +71,10 @@
                                         <div class="container-fluid">
                                             <div class="row pt-2">
                                                 <div class="col-md-4 pt-1">
-                                                    Наименование:
+                                                    Сообщение:
                                                 </div>
                                                 <div class="col pr-0">
                                                     <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Статус:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <select class="form-control">
-                                                        <option selected="selected">Активный</option>
-                                                        <option>Неактивный</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
@@ -124,30 +92,6 @@
                                                 </div>
                                                 <div class="col-3  form-group">
                                                     <input class="form-control" type="date" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Серийный номер:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Партийный номер:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Артикул:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
@@ -172,157 +116,31 @@
                         </div>
                     </div>
                     <div class="row">
-                        @*Operation time table start*@
+                        @* Operating history table start*@
                         <div class="table-responsive scrollable">
                             <table class="table  table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th></th>
-                                        <th>Статус</th>
-                                        <th>Инструмент</th>
-                                        <th>Серийный номер</th>
-                                        <th>Партийный номер</th>
-                                        <th>Артикул</th>
-                                        <th>Пн</th>
-                                        <th>Вт</th>
-                                        <th>Ср</th>
-                                        <th>Чт</th>
-                                        <th>Пт</th>
-                                        <th class="bg-danger">Сб</th>
-                                        <th class="bg-danger">Вс</th>
+                                        <th>Дата</th>
+                                        <th>Сообщение</th>
+                                        <th>Ответственный</th>
+                                        <th>Комментарий</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td class="text-left">
-                                            <input type="checkbox" class="form-check" />
+                                            23.08.2020
                                         </td>
-                                        <td class="text-left"><a href="#">FJ</a></td>
-                                        <td class="text-left">00000001</td>
+                                        <td class="text-left"><a href="#">Попал в наряд на работу №00000001</a></td>
+                                        <td class="text-left">Иванов Иван Иванович</td>
                                         <td class="text-left">
-                                            12345678
-                                        </td>
-                                        <td class="text-left">
-                                            12345678
-                                        </td>
-                                        <td class="text-left">12345678</td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    8
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    4
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    9
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    5
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    3
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-7">
-                                                        <p class="float-right"></p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    0
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-7">
-                                                        <p class="float-right"></p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    0
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        @*Operation time table end*@
+                        @* Operating history table end*@
                     </div>
                     <div class="row">
                         <div class="card w-100 mt-2 mb-1">
@@ -372,9 +190,9 @@
                     </div>
                 </div>
             </div>
-            @* Operating time tab end *@
+            @* Operating history tab end *@
 
-            @* Instrument tab start *@
+            @* Parts start *@
             <div id="instrumentTab" class="container tab-pane fade">
                 <div class="container">
                     <div class="row mb-3 mt-3">
@@ -392,34 +210,7 @@
                                         <div class="container-fluid">
                                             <div class="row pt-2">
                                                 <div class="col-md-4 pt-1">
-                                                    Статус:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <select class="form-control">
-                                                        <option selected="selected">Active</option>
-                                                        <option>Inactive</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Наименование:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Серийный номер:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Партийный номер:
+                                                    Номенклатура:
                                                 </div>
                                                 <div class="col pr-0">
                                                     <input type="text" class="form-control" />
@@ -428,14 +219,6 @@
                                             <div class="row pt-2">
                                                 <div class="col-md-4 pt-1">
                                                     Артикул:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Вид:
                                                 </div>
                                                 <div class="col pr-0">
                                                     <input type="text" class="form-control" />
@@ -451,50 +234,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        @*Instrument table start*@
+                        @* Parts table start*@
                         <div class="table-responsive scrollable">
                             <table class="table  table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th></th>
-                                        <th>Статус</th>
-                                        <th>Кол-во</th>
-                                        <th>Инструмент</th>
-                                        <th>Серийный номер</th>
-                                        <th>Партийный номер</th>
-                                        <th>Артикул</th>
-                                        <th>Классификация</th>
+                                        <th width="25%">Номенклатура</th>
+                                        <th width="75%">Артикул</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt" />
+                                            Номенклатура1
                                         </td>
-                                        <td class="text-left"><a href="#">FJ</a></td>
-                                        <td class="text-left">1</td>
-                                        <td class="text-left">
-                                            00000001
-                                        </td>
-                                        <td class="text-left">
-                                            12345678
-                                        </td>
-                                        <td class="text-left">12345678</td>
-                                        <td class="text-left">
-                                            12354685
-                                        </td>
-                                        <td class="text-left">
-                                            Вид1->Тип3->Подтип2
-                                        </td>
+                                        <td class="text-left">12312312</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        @*Instrument table end*@
+                        @* Parts table end*@
                     </div>
                 </div>
             </div>
-            @* Instrument tab end *@
+            @* Parts tab end *@
 
             @* History tab start *@
             <div id="historyTab" class="container tab-pane fade">
@@ -644,12 +407,13 @@
             </div>
             @* Docs tab end *@
         </div>
-        </div>
+    </div>
 </div>
 
 @code {
     [Parameter]
-    public int OrderId { get; set; }
+    public int ToolId { get; set; }
+
     bool isFirstRender = true;
 
     private bool isCaretUp = false;

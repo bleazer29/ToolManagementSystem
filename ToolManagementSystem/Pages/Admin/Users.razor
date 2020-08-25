@@ -1,8 +1,8 @@
-﻿@page "/NRI/Contracts"
+﻿@page "/Administrative/Users"
 <div class="container">
     <div class="row">
         <div class="col-11">
-            <h3>Справочник контрактов</h3>
+            <h3>Пользователи</h3>
         </div>
         <div class="col-1 pr-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
@@ -27,7 +27,7 @@
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Номер контракта:
+                                ФИО:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
@@ -35,26 +35,10 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Дата начала:
+                                Логин:
                             </div>
                             <div class="col pr-0">
-                                <input type="date" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Дата конца:
-                            </div>
-                            <div class="col pr-0">
-                                <input type="date" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Контрагент:
-                            </div>
-                            <div class="col pr-0">
-                                <select class="form-control" />
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
@@ -76,24 +60,24 @@
                         <thead>
                             <tr>
                                 <th style="width:15%;">Управление</th>
-                                <th style="width:25%;">Номер контракта</th>
-                                <th style="width:20%;">Дата начала</th>
-                                <th style="width:20%;">Дата конца</th>
-                                <th style="width:20%;">Контрагент</th>
+                                <th style="width:25%;">Логин</th>
+                                <th style="width:20%;">ФИО</th>
+                                <th style="width:20%;">Роли</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-left">
+                                <td class="text-center">
                                     <button class="btn btn-primary fa fa-edit" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-undo-alt" type="button"
+                                            data-toggle="modal" data-target="#resetModal"></button>
                                 </td>
-                                <td class="text-left">№00000001</td>
-                                <td class="text-left">31.07.2020</td>
-                                <td class="text-left">01.08.2020</td>
-                                <td class="text-left">ООО "Рога и копыта"</td>
+                                <td class="text-left">Admin@ia.ua</td>
+                                <td class="text-left">Иванов Иван Иванович</td>
+                                <td class="text-left">Адмиистратор <br /> Оператор НСИ <br /> Оператор инструмента</td>
                             </tr>
                         </tbody>
                     </table>
@@ -125,61 +109,27 @@
     </div>
     @*Modal Delete*@
 
-    @*Modal Edit*@
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @*Modal Reset password*@
+    <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Сброс пароля</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="fa fa fa-times"></span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Номер контракта:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Дата начала:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="date" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Дата конца:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="date" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Контрагент:
-                                </div>
-                                <div class="col pr-0">
-                                    <select class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    Вы действительно хотите сбросить пароль пользователю?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
                 </div>
             </div>
         </div>
     </div>
-    @*Modal Edit*@
+    @*Modal Reset password*@
 
     @*Modal Create*@
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -196,7 +146,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Номер контракта:
+                                    Логин:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -204,26 +154,54 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Дата начала:
+                                    Пароль:
                                 </div>
                                 <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Дата конца:
+                                    ФИО:
                                 </div>
                                 <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Контрагент:
+                                <div class="col-10 pt-1 pr-0">
+                                    Роли:
                                 </div>
-                                <div class="col pr-0">
-                                    <select class="form-control" />
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:90%;">Наименование</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Администратор</option>
+                                                            <option>Оператор НСИ</option>
+                                                            <option>Оператор инструмента</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +214,82 @@
         </div>
     </div>
     @*Modal Create*@
+
+    @*Modal Edit*@
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Логин:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Пароль:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    ФИО:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:90%;">Наименование</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Администратор</option>
+                                                            <option>Оператор НСИ</option>
+                                                            <option>Оператор инструмента</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Edit*@
 </div>
 
 @code {

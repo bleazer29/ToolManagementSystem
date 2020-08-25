@@ -1,8 +1,8 @@
-﻿@page "/NRI/Contracts"
+﻿@page "/Tools/"
 <div class="container">
     <div class="row">
         <div class="col-11">
-            <h3>Справочник контрактов</h3>
+            <h3>Склад</h3>
         </div>
         <div class="col-1 pr-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
@@ -26,35 +26,46 @@
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Номер контракта:
+                            <div class="col-md-3 pt-1">
+                                Наименование:
                             </div>
                             <div class="col pr-0">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Дата начала:
+                            <div class="col-md-3 pt-1">
+                                Статус:
                             </div>
                             <div class="col pr-0">
-                                <input type="date" class="form-control" />
+                                <select class="form-control">
+                                    <option selected="selected">Активный</option>
+                                    <option>Inactive</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Дата конца:
+                            <div class="col-md-3 pt-1">
+                                Серийный номер:
                             </div>
                             <div class="col pr-0">
-                                <input type="date" class="form-control" />
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>  
+                        <div class="row pt-2">
+                            <div class="col-md-3 pt-1">
+                                Партийный номер:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Контрагент:
+                            <div class="col-md-3 pt-1">
+                                Классификация:
                             </div>
                             <div class="col pr-0">
-                                <select class="form-control" />
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
@@ -75,11 +86,13 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th style="width:15%;">Управление</th>
-                                <th style="width:25%;">Номер контракта</th>
-                                <th style="width:20%;">Дата начала</th>
-                                <th style="width:20%;">Дата конца</th>
-                                <th style="width:20%;">Контрагент</th>
+                                <th>Управление</th>
+                                <th>Наименование</th>
+                                <th>Статус</th>
+                                <th>Серийный номер</th>
+                                <th>Партийный номер</th>
+                                <th>Артикул</th>
+                                <th>Классификация</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,15 +103,22 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">№00000001</td>
-                                <td class="text-left">31.07.2020</td>
-                                <td class="text-left">01.08.2020</td>
-                                <td class="text-left">ООО "Рога и копыта"</td>
+                                <td class="text-left"><a href="#">00000001</a></td>
+                                <td class="text-left">RFU</td>
+                                <td class="text-left">
+                                    12345678
+                                </td>
+                                <td class="text-left">
+                                    12345678
+                                </td>
+                                <td class="text-left">12345678</td>
+                                <td class="text-left">Вид1 -> Тип2 -> Подтип4</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
     @* Table end *@
@@ -139,35 +159,64 @@
                     <form>
                         <div class="container-fluid">
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Номер контракта:
+                                <div class="col-2 pt-1">
+                                    Серийный номер:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Дата начала:
+                                <div class="col-2 pt-1 pr-0">
+                                    Партийный номер:
                                 </div>
-                                <div class="col pr-0">
-                                    <input type="date" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Дата конца:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                <div class="col pt-1 pr-0">
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Контрагент:
+                                <div class="col-2 pt-1 pr-0">
+                                    Артикул:
                                 </div>
-                                <div class="col pr-0">
-                                    <select class="form-control" />
+                                <div class="col pt-1 pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Детали:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:30%;">Наименование</th>
+                                                    <th style="width:30%;">Артикул</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
+                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Номенклатура1
+                                                    </td>
+                                                    <td class="text-left">
+                                                        12345678
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -195,35 +244,64 @@
                     <form>
                         <div class="container-fluid">
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Номер контракта:
+                                <div class="col-2 pt-1">
+                                    Серийный номер:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Дата начала:
+                                <div class="col-2 pt-1 pr-0">
+                                    Партийный номер:
                                 </div>
-                                <div class="col pr-0">
-                                    <input type="date" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Дата конца:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="date" class="form-control" />
+                                <div class="col pt-1 pr-0">
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Контрагент:
+                                <div class="col-2 pt-1 pr-0">
+                                    Артикул:
                                 </div>
-                                <div class="col pr-0">
-                                    <select class="form-control" />
+                                <div class="col pt-1 pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Детали:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:30%;">Наименование</th>
+                                                    <th style="width:30%;">Артикул</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
+                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Номенклатура1
+                                                    </td>
+                                                    <td class="text-left">
+                                                        12345678
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
