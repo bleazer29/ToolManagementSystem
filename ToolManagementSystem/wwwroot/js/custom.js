@@ -233,7 +233,7 @@ function dpChange() {
 function AddMainMenuTree(elementName) {
     var elem = '#' + elementName;
     $(elem).jstree({
-        "plugins": ["wholerow", "contextmenu", "search"],
+        "plugins": ["wholerow", "search"],
         "core": {
             "multiple": false,
             "themes": {
@@ -244,27 +244,31 @@ function AddMainMenuTree(elementName) {
             },
             'data': [
                 { "id": "1", "parent": "#", "text": "НСИ", "state": { "opened": "true", "disabled": "true" } },
-                { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" } },
-                { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true"} },
-                { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true"}  },
-                { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true"}   },
-                { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true"}   },
-                { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true", "disabled": "true" }   },
-                { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true"}   },
-                { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true"}   },
-                { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true"}   },
-                { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true"}   },
-                { "id": "12", "parent": "20", "text": "Класификация", "state": { "opened": "true"}   },
-                { "id": "13", "parent": "20", "text": "Атрибуты", "state": { "opened": "true"}   },
-                { "id": "14", "parent": "20", "text": "Номенклатура", "state": { "opened": "true"}   },
-                { "id": "15", "parent": "21", "text": "Контрагенты", "state": { "opened": "true"}   },
-                { "id": "16", "parent": "21", "text": "Скважины", "state": { "opened": "true"}   },
-                { "id": "17", "parent": "7", "text": "Пользователи", "state": { "opened": "true"}   },
-                { "id": "18", "parent": "7", "text": "Роли", "state": { "opened": "true"} },
-                { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true"} },
-                { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true"} },
+                { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" } },
+                { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Contracts" } },
+                { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true" }, "a_attr": { "href": "/Orders/" } },
+                { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true" } },
+                { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" } },
+                { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true" } },
+                { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true" } },
+                { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Departments" } },
+                { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Statuses" } },
+                { "id": "12", "parent": "20", "text": "Класификация", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Classification" } },
+                { "id": "13", "parent": "20", "text": "Атрибуты", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Attributes" } },
+                { "id": "14", "parent": "20", "text": "Номенклатура", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Nomenclature" } },
+                { "id": "15", "parent": "21", "text": "Контрагенты", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Counterparties" } },
+                { "id": "16", "parent": "21", "text": "Скважины", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Wells" } },
+                { "id": "17", "parent": "7", "text": "Пользователи", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Users" } },
+                { "id": "18", "parent": "7", "text": "Роли", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Roles" } },
+                { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } }
             ]
+        }
+    }).bind("changed.jstree", function (e, data) {
+        if (data.node && !data.state.disabled) {
+            document.location = data.node.a_attr.href;
         }
     });
 }
@@ -339,26 +343,4 @@ function AddClasificationTree(elementName) {
             "width": "100%"
         }
     });
-
-
-    //// load jstree
-    //$(elem).jstree({
-    //    "plugins": ["table", "dnd", "contextmenu", "sort"],
-    //    "core": {
-    //        "data": data
-    //    },
-    //    // configure tree table
-    //    "table": {
-    //       "columns": [
-    //            { "width": 200, "header": "Name" },
-    //            { "width": 150, "value": "price", "header": "Price", "format": function (v) { if (v) { return '$' + v.toFixed(2) } } },
-    //            { "width": 150, "value": "quantity", "header": "Qty"}
-    //        ],
-    //        "resizable": true,
-    //        "draggable": true,
-    //        "contextmenu": true,
-    //        "width": 500,
-    //        "height": 300
-    //    }
-    //});
 }
