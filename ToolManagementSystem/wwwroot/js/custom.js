@@ -252,7 +252,7 @@ function AddMainMenuTree(elementName) {
                 { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true", "disabled": "true" }   },
                 { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true", "disabled": "true" }   },
                 { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true", "disabled": "true" }   },
-                { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true", "disabled": "true" }   },
+                { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true", "disabled": "true" },   },
                 { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true", "disabled": "true" }   },
                 { "id": "12", "parent": "20", "text": "Класификация", "state": { "opened": "true", "disabled": "true" }   },
                 { "id": "13", "parent": "20", "text": "Атрибуты", "state": { "opened": "true", "disabled": "true" }   },
