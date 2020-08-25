@@ -317,6 +317,7 @@ function AddClasificationTree(elementName) {
         "table": {
             "columns": [
                 {
+                    "width": 50,
                     "header": "ляля тополя",
                     "tree": false,
                     "value": "title",
@@ -325,14 +326,15 @@ function AddClasificationTree(elementName) {
                             + "data-toggle='modal' data-target='#editModal'></button>"
                             + "<button class='btn btn-primary fa fa-times' type='button'"
                             + "data-toggle='modal' data-target='#deleteModal'></button>");
-                    },
-                    "width": "30%"
+                    }
+                    
                 },
                 {
+                    "width": 50,
                     "header": "Наименование",
                     "tree": true,
                     "value": "title",
-                    "width": "30%"
+                    
                 },
             ],
             "headerContextMenu": "false",
