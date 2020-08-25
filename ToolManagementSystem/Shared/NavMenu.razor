@@ -1,48 +1,46 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">ToolManagementSystem</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿@inject IJSRuntime jsRuntime
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="/Employee/employee">
-                <span class="oi oi-align-center" aria-hidden="true"></span> Employees
-            </NavLink>
-        </li>
-        
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="/Role/ListRoles">
-                <span class="oi oi-align-center" aria-hidden="true"></span> Roles
-            </NavLink>
-        </li>
-    </ul>
+
+    <div class="top-row pl-4 pr-0 navbar navbar-dark">   
+        <a class="navbar-brand" href="">
+            <img src="images/Weatherford_logo.png" class="img-fluid">
+            TMS
+        </a>
+
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+<div class="tree-container @NavMenuCssClass" @onclick="ToggleNavMenu">
+    <div id="menuTreeView" name="menuTreeView" >
+
+    </div>
 </div>
 
 @code {
     private bool collapseNavMenu = true;
+   
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+   
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
+
+
+    private async Task AddTree()
+    {
+        await jsRuntime.InvokeVoidAsync("AddMainMenuTree", "menuTreeView");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await AddTree();
+    }
 }
+
+
+

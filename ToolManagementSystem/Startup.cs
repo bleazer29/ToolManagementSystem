@@ -9,7 +9,7 @@ using ToolManagementSystem.Shared.Service;
 
 namespace ToolManagementSystem
 {
-    public class Startup
+    public class Startup 
     {
         public Startup(IConfiguration configuration)
         {

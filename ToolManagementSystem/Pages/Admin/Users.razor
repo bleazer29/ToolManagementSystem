@@ -1,0 +1,304 @@
+﻿@page "/Administrative/Users"
+<div class="container">
+    <div class="row">
+        <div class="col-11">
+            <h3>Пользователи</h3>
+        </div>
+        <div class="col-1 pr-0">
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+                    data-toggle="modal" data-target="#createModal"></button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    @* Поиск panel start *@
+    <div class="row mb-3 mt-3">
+        <div class="card w-100">
+            <div class="card-header pt-0 pb-0">
+                <h5 class="pt-2 pb-2">
+                    Поиск
+                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse">
+                <form class="m-3">
+                    <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                ФИО:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-2 pt-1">
+                                Логин:
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                            <button class="btn btn-primary fa fa-search"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @* Поиск panel end *@
+
+    @* Table start *@
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width:15%;">Управление</th>
+                                <th style="width:25%;">Логин</th>
+                                <th style="width:20%;">ФИО</th>
+                                <th style="width:20%;">Роли</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-times" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-undo-alt" type="button"
+                                            data-toggle="modal" data-target="#resetModal"></button>
+                                </td>
+                                <td class="text-left">Admin@ia.ua</td>
+                                <td class="text-left">Иванов Иван Иванович</td>
+                                <td class="text-left">Адмиистратор <br /> Оператор НСИ <br /> Оператор инструмента</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Table end *@
+
+    @*Modal Delete*@
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Delete*@
+
+    @*Modal Reset password*@
+    <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Сброс пароля</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите сбросить пароль пользователю?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Reset password*@
+
+    @*Modal Create*@
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Логин:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Пароль:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    ФИО:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Роли:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:90%;">Наименование</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Администратор</option>
+                                                            <option>Оператор НСИ</option>
+                                                            <option>Оператор инструмента</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Create*@
+
+    @*Modal Edit*@
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Логин:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Пароль:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    ФИО:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10%;"></th>
+                                                    <th style="width:90%;">Наименование</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Администратор</option>
+                                                            <option>Оператор НСИ</option>
+                                                            <option>Оператор инструмента</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Edit*@
+</div>
+
+@code {
+    private bool isCaretUp = false;
+    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+
+    public void ChangeCaret()
+    {
+        isCaretUp = !isCaretUp;
+    }
+}
+
