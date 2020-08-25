@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ToolManagementSystem.API\ToolManagementSystem.API.csproj" />
     <ProjectReference Include="..\ToolManagementSystem.Shared\ToolManagementSystem.Shared.csproj" />
   </ItemGroup>
