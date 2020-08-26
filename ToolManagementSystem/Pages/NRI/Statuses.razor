@@ -1,15 +1,15 @@
 ﻿@page "/NRI/Statuses"
-<div class="container">
-    <div class="row">
-        <div class="col-11">
-            <h3>Справочник статусов</h3>
-        </div>
-        <div class="col-1 pr-0">
-            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
-                    data-toggle="modal" data-target="#createModal"></button>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
+                <h3>Справочник статусов</h3>
+            </div>
+            <div class="col-lg-1 col-md-2 pr-0 pl-0">
+                <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+                        data-toggle="modal" data-target="#createModal"></button>
+            </div>
         </div>
     </div>
-</div>
 
 <div class="container">
     @* Поиск panel start *@
@@ -26,15 +26,17 @@
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Наименование:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary fa fa-search"></button>
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -161,20 +163,18 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Наименование:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        <div class="form-group row">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>
@@ -193,22 +193,18 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="container-fluid">
-                                <div class="row pt-2">
-                                    <div class="col-md-2 pt-1">
-                                        Наименование:
-                                    </div>
-                                    <div class="col pr-0">
-                                        <input type="text" class="form-control" />
-                                    </div>
-                                </div>
+                        <div class="form-group row">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>

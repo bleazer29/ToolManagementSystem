@@ -3,27 +3,29 @@
 
 <div class="container-fluid ">
     <div class="status-bar-row row align-items-center">
-        <div class="col-5 ">
+        <div class="col-12 col-sm-5 ">
             <p class="mb-0">
                 <i class="fa fas fa-user"></i>
                 <span>User1@gmail.com!</span>
             </p>
         </div>
-        <div class="col-7">
-            <button class="btn btn-transperent float-right">
+        <div class="w-100 d-sm-none"></div>
+        <div class="col-12 col-sm-7">
+            <button class="btn btn-transperent float-md-right">
                 <i class="fa fas fa-sign-out-alt"></i>
             </button>
-            <button class="btn btn-transperent float-right">
+            <button class="btn btn-transperent float-md-right">
                 <i class="fa fas fa-cog"></i>
             </button>
         </div>
+        <button class="btn btn-primary @SideBarCssClass navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
+            <i class="fa-arrow-left fas fa"></i>
+        </button>
     </div>
     <div class="main-row row justify-content-between">
         <div class="@SideBarCssClass sidebar main-sidebar col-md-4 col-lg-3">
             <NavMenu />
-            <button class="btn btn-primary @SideBarCssClass navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
-                <i class="fa-arrow-left fas fa"></i>
-            </button>
+           
         </div>
         <div class="@OpenSideBarButtonCssClass sidebar col-md-1 sidebar-hide text-center">
             <button id="sidebarShowBtn" class="btn btn-primary mt-3 sidebar-hide" @onclick="ToggleOpenSideBarButton">

@@ -380,8 +380,8 @@ main {
     
 }
 
-.sidebar .navbar-hide-toggler {
-    position: relative;
+ .navbar-hide-toggler {
+    position: absolute;
     margin: 0 auto;
     display: block;
     bottom: 93%;
@@ -409,7 +409,7 @@ main {
         height: 100%;
     }
 
-    .sidebar .navbar-hide-toggler {
+    .navbar-hide-toggler {
         display: none;
     }
 

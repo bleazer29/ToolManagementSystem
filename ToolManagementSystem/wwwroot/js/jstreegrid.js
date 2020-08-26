@@ -259,7 +259,7 @@
 						'.jstree-grid-width-auto {width:auto;display:block;}',
 						'.jstree-grid-column {display: table-cell; overflow: hidden;-ms-scroll-limit: 0 0 0 0;}',
 						'.jstree-grid-ellipsis {text-overflow: ellipsis;}',
-						'.jstree-grid-col-0 {width: 100%; border-left:none; height:44px !important;}'
+						'.jstree-grid-col-0 {width: 100%; border-left:none;}'
 					];
 					$('<style type="text/css">'+styles.join("\n")+'</style>').appendTo("head");
 				}
@@ -490,7 +490,8 @@
 				// find the line-height of the first known node
 				var anchorHeight = this.element.find("[class~='jstree-anchor']:first").outerHeight(), q,
 				cls = this.element.attr("class") || "";
-				$('<style type="text/css">div.jstree-grid-cell-root-'+this.rootid+' {line-height: '+anchorHeight+'px; height: '+anchorHeight+'px;}</style>').appendTo("head");
+				//$('<style type="text/css">div.jstree-grid-cell-root-'+this.rootid+' {line-height: '+anchorHeight+'px; height: '+anchorHeight+'px;}</style>').appendTo("head");
+				$('<style type="text/css">div.jstree-grid-cell-root-' + this.rootid + ' {padding: ' + 15 + 'px;}</style>').appendTo("head");
 
 				// add container classes to the wrapper - EXCEPT those that are added by jstree, i.e. "jstree" and "jstree-*"
 				q = cls.split(/\s+/).map(function(i){
