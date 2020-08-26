@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToolManagementSystem.Shared.Data;
 
 namespace ToolManagementSystem.Client.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200826054633_sr4")]
+    partial class sr4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,6 +29,9 @@ namespace ToolManagementSystem.Client.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.HasKey("RoleId", "EmployeeId");
 
                     b.HasIndex("EmployeeId");
@@ -37,7 +42,8 @@ namespace ToolManagementSystem.Client.Migrations
                         new
                         {
                             RoleId = 1,
-                            EmployeeId = 1
+                            EmployeeId = 1,
+                            IsSelected = false
                         });
                 });
 
@@ -90,7 +96,7 @@ namespace ToolManagementSystem.Client.Migrations
                         {
                             Id = 1,
                             Answer = "Admin",
-                            BirthDate = new DateTime(2020, 8, 26, 15, 18, 22, 310, DateTimeKind.Local).AddTicks(5435),
+                            BirthDate = new DateTime(2020, 8, 26, 8, 46, 15, 976, DateTimeKind.Local).AddTicks(3629),
                             FirstName = "admin",
                             LastName = "admin",
                             Password = "admin",

@@ -5,78 +5,81 @@
 @inject NavigationManager NavigationManager
 
 
-<h3>AssignmentRole</h3>
-
-<div>
-    @if (listRoles!=null)
-    {
-        foreach (var role in listRoles)
-        {
-            //if () //доделать проверку соответственному пальзователю выводить его роли
-            //{
-
-            //}
-            <h5 class="card-title">@role.RoleName</h5>
-            <br />
+    @*<div class="container">
+        <h1>Роли, которые относятся к пользователю @RolesService.GetEmployee(userId).FirstName @RolesService.GetEmployee(userId).LastName </h1>
+        <hr/><br />
+        @{
+            foreach (var item in listUserRole)
+            {
+                <div class="h3">@item</div>
+            }
         }
-        <div class="container">
-            <EditForm Model="listRoles">
-                <div class="card">
-                    <div class="card-header">
-                        <h1>Add or remove users from this role</h1>
-                    </div>
-                    <div class="card-body">
-                        @for (int i = 0; i < listRoles.Count; i++)
-                        {
-                            var local = i;
-                            <div class="custom-control custom-checkbox">
-                                <InputCheckbox @bind-Value="listRoles[local].IsSelected" class="form-check-input" />
-                                <label class="form-check-label"  for="@listRoles[i].IsSelected" >
-                                    @listRoles[i].RoleName
-                                </label>
-                            </div>
-                            <br />
-                        }
-                    </div>
-                    <div class="card-footer">
-                        <div class="container">
-                            <button type="submit" class="btn btn-success col-md-12" @onclick="@UpdateEmployeeRole" value="Update" />
+        <br />
+    </div>
+<hr /><br />*@
+
+    <div class="container">
+        <h1>Назначение ролей</h1>
+        <h2>Добавить или удалить роли для пользователя</h2>
+        <br /><hr />
+        <div class="container-fluid">
+            @if (listRoles != null)
+            {
+                <EditForm Model="@listRoles">
+                    @for (int i = 0; i < listRoles.Count; i++)
+                    {
+                        var local = i;
+                        <div class="custom-control custom-checkbox">
+                            <InputCheckbox @bind-Value="listRoles[local].IsSelected" class=" big-checkbox" />
+                            <label class="form-check-label h4" for="@listRoles[local].IsSelected">
+                                @listRoles[local].RoleName
+                            </label>
                         </div>
-                        <div class="container">
-                            <button type="button" class="btn btn-success col-md-12" @onclick="@Cancel" value="Cancel" />
-                        </div>
-                    </div>
+                        <br />
+                    }
+                </EditForm>
+                <div class="container-fluid">
+                    <button type="submit" class="btn btn-primary col-6" @onclick="@UpdateEmployeeRole" >Update</button>
+                    <button type="button" class="btn btn-primary col-4" @onclick="@Cancel">Cancel</button>
                 </div>
-            </EditForm>
+            }
+            else
+            {
+                <h5 class="card-title">None at the moment</h5>
+            }
         </div>
+    </div>
 
-
-    }
-    else
-    {
-        <h5 class="card-title">None at the moment</h5>
-    }
-</div>
 
 
 
 
 @code {
     [Parameter] public string userId { get; set; }
-
-
-
     List<Roles> listRoles;
-
+    List<EmployeeRoles> employeeRoles;
+    //List<string> listUserRole = new List<string>();
     protected override async Task OnInitializedAsync()
     {
-        listRoles = await Task.Run(() => RolesService.GetRoles());
+        listRoles = RolesService.GetRoles();
+        employeeRoles = await RolesService.GetEmployeeRolesById(Convert.ToInt32(userId));
+        foreach(var item in listRoles)
+        {
+            foreach (var item2 in employeeRoles)
+            {
+                if(item2.RoleId == item.Id)
+                {
+                    item.IsSelected = true;
+                    //listUserRole.Add(item.RoleName);
+                }
+            }
+        }
     }
 
     private async Task UpdateEmployeeRole()
     {
-        await RolesService.EditUsersInRole(listRoles,Convert.ToInt32(userId));
-        NavigationManager.NavigateTo("Role/ListRoles");
+        await RolesService.EditUsersInRole(listRoles, Convert.ToInt32(userId));
+        NavigationManager.NavigateTo("Employee/Employee");
     }
 
 
@@ -87,3 +90,4 @@
 
 
 }
+

@@ -4,74 +4,71 @@
 @inject RolesService RolesService
 @inject NavigationManager NavigationManager
 
-
-<h3>ListRoles</h3>
-
-
-<EditForm Model="@role">
-    <DataAnnotationsValidator />
-    <span class="oi oi-plus" aria-hidden="true"></span>Add New Role
-    <div class="form-group">
-        <label>First Name:</label>
+<div class="container">
+    <h1>Создание роли</h1>
+    <EditForm Model="@role">
+        <DataAnnotationsValidator />
         <div class="form-group">
-            <InputText @bind-Value="@role.RoleName" class="form-control" />
-            <ValidationMessage For="@(()=>role.RoleName)" />
+            <label>Название роли:</label>
+            <div class="form-group">
+                <InputText @bind-Value="@role.RoleName" class="form-control" />
+                <ValidationMessage For="@(()=>role.RoleName)" />
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <button type="submit" class="btn btn-success col-md-12" @onclick="@CreateRole">Create Employee</button>
-    </div>
-    <div class="container">
-        <input type="button" class="btn btn-success col-md-12" @onclick="@Cancel" value="Cancel" />
-    </div>
-</EditForm>
-
-
-@if (Roles == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <td>Manage</td>
-                <th>Id</th>
-                <th>Role Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var role in Roles)
-            {
+        <br />
+        <div class="container-fluid">
+            <button type="submit" class="btn btn-success col-md-12" @onclick="@CreateRole">Создать Роль</button>
+        </div>
+        <br />
+        <div class="container-fluid">
+            <input type="button" class="btn btn-success col-md-12" @onclick="@Cancel" value="Отмена" />
+        </div>
+    </EditForm>
+</div>
+<br /><hr />
+<div class="container">
+    <h1>Список ролей</h1><hr />
+    @if (Roles == null)
+    {
+        <p><em>Загрузка...</em></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead class="text-align-center">
                 <tr>
-                    <td>
-                        <div class="dropdown">
-                            <button class="dropbtn">...</button>
-                            <div class="dropdown-content">
-                                <a class="dropdown-item btn btn-primary" href="/Role/EditRole/@role.Id">Edit</a>
-                                <a class="dropdown-item btn btn-primary" href="/Role/detailsRole/@role.Id">Details</a> @*Тут если что остановились*@
-                                @*<a class="dropdown-item btn btn-primary" @onclick="@(()=>RolesService.DeleteEmployee(role))">Delete</a>*@
-                            </div>
-                        </div>
-                    </td>
-                    <td>@role.Id</td>
-                    <td>@role.RoleName</td>
+                    <th>Управление</th>
+                    <th>Id</th>
+                    <th>Название роли</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var role in Roles)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary fa fa-edit" href="/Role/EditRole/@role.Id"></a>
+                            <a class="btn btn-primary fa fa-apple" href="/Role/detailsRole/@role.Id"></a>
+                            <a class="btn btn-primary fa fa-times" @onclick="@(()=>RolesService.DeleteRole(role))"></a>  
+                        </td>
+                        <td>@role.Id</td>
+                        <td>@role.RoleName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
 
 
 @code {
     List<Roles> Roles;
     Roles role = new Roles();
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        Roles = await Task.Run(() => RolesService.GetRoles());
+        Roles =  RolesService.GetRoles();
     }
-
 
     private async Task CreateRole()
     {
@@ -84,3 +81,4 @@ else
     }
 
 }
+

@@ -19,6 +19,12 @@ namespace ToolManagementSystem.Shared.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
             Employees employees = new Employees
             {
                 Id = 1,
@@ -47,7 +53,7 @@ namespace ToolManagementSystem.Shared.Data
             modelBuilder.Entity<EmployeeRoles>().HasOne(er => er.Employe).WithMany(er => er.EmployeeRoles).HasForeignKey(er => er.EmployeeId);
             modelBuilder.Entity<EmployeeRoles>().HasOne(er => er.Role).WithMany(er => er.EmployeeRoles).HasForeignKey(er => er.RoleId);
 
-            modelBuilder.Entity<EmployeeRoles>().HasData( new EmployeeRoles  { EmployeeId = employees.Id, RoleId = roles.Id });
+            modelBuilder.Entity<EmployeeRoles>().HasData( new EmployeeRoles  { EmployeeId = employees.Id, RoleId = roles.Id/*, IsSelected=true*/ });
 
             modelBuilder.Entity<RolesPages>().HasKey(rp => new { rp.RoleId, rp.PagesId });
             modelBuilder.Entity<RolesPages>().HasOne(rp => rp.Roles).WithMany(rp => rp.RolesPages).HasForeignKey(rp=> rp.RoleId);

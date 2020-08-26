@@ -4,62 +4,66 @@
 @inject ToolManagementSystem.Shared.Service.EmployeeService objEmpService
 @using ToolManagementSystem.Shared.Models
 
-<h3>Create new Employee</h3>
-<hr />
-
-<EditForm Model="@employee">
-    <DataAnnotationsValidator />
-    <div class="form-group">
-        <label>First Name:</label>
-        <div class="form-group">
-            <InputText @bind-Value="@employee.FirstName" class="form-control" />
-            <ValidationMessage For="@(()=>employee.FirstName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Patronymic:</label>
-        <div class="form-group">
-            <InputText @bind-Value="@employee.Patronymic" class="form-control" />
-            <ValidationMessage For="@(()=>employee.Patronymic)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Last Name:</label>
-        <InputText @bind-Value="@employee.LastName" class="form-control" />
-        <ValidationMessage For="@(()=>employee.LastName)" />
-
-    </div>
-    <div class="form-group">
-        <label>Birth Date:</label>
-        <div class="form-group">
-            <InputDate @bind-Value="@employee.BirthDate" class="form-control" />
-            <ValidationMessage For="@(()=>employee.BirthDate)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Phone:</label>
-        <InputText @bind-Value="@employee.Phone" class="form-control" />
-        <ValidationMessage For="@(()=>employee.Phone)" />
-    </div>
-    <div class="form-group">
-        <label>UserName:</label>
-        <InputText @bind-Value="@employee.UserName" class="form-control" />
-        <ValidationMessage For="@(()=>employee.UserName)" />
-    </div><div class="form-group">
-              <label>Password:</label>
-        <InputText @bind-Value="@employee.Password" class="form-control" />
-        <ValidationMessage For="@(()=>employee.Password)" />
-    </div>
-
-
 
     <div class="container">
-        <button type="submit" class="btn btn-success col-md-12" @onclick="@CreateEmployee">Create Employee</button>
+        <h3>Создание нового сотрудника</h3>
+        <hr />
+        <EditForm Model="@employee">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Имя:</label>
+                <div class="form-group">
+                    <InputText @bind-Value="@employee.FirstName" class="form-control" />
+                    <ValidationMessage For="@(()=>employee.FirstName)" />
+                </div>
+            </div><br />
+            <div class="form-group">
+                <label>Отчество:</label>
+                <div class="form-group">
+                    <InputText @bind-Value="@employee.Patronymic" class="form-control" />
+                    <ValidationMessage For="@(()=>employee.Patronymic)" />
+                </div>
+            </div><br />
+            <div class="form-group">
+                <label>Фамилия:</label>
+                <InputText @bind-Value="@employee.LastName" class="form-control" />
+                <ValidationMessage For="@(()=>employee.LastName)" />
+
+            </div><br />
+            <div class="form-group">
+                <label>День рождения:</label>
+                <div class="form-group">
+                    <InputDate @bind-Value="@employee.BirthDate" class="form-control" />
+                    <ValidationMessage For="@(()=>employee.BirthDate)" />
+                </div>
+            </div><br />
+            <div class="form-group">
+                <label>Телефон:</label>
+                <InputText @bind-Value="@employee.Phone" class="form-control" />
+                <ValidationMessage For="@(()=>employee.Phone)" />
+            </div><br />
+            <div class="form-group">
+                <label>UserName:</label>
+                <InputText @bind-Value="@employee.UserName" class="form-control" />
+                <ValidationMessage For="@(()=>employee.UserName)" />
+            </div><br />
+            <div class="form-group">
+                <label>Password:</label>
+                <InputText @bind-Value="@employee.Password" class="form-control" />
+                <ValidationMessage For="@(()=>employee.Password)" />
+            </div>
+            <br />
+            <div class="container-fluid">
+                <button type="submit" class="btn btn-success col-12" @onclick="@CreateEmployee">Создать сотрудника</button>
+            </div>
+            <br />
+            <div class="container-fluid">
+                <button type="button" class="btn btn-success col-4 float-right " @onclick="@Cancel">Отмена</button>
+            </div>
+            
+        </EditForm>
     </div>
-    <div class="container">
-        <input type="button" class="btn btn-success col-md-12" @onclick="@Cancel" value="Cancel" />
-    </div>
-</EditForm>
+
 @code {
     Employees employee = new Employees();
     private async Task CreateEmployee()

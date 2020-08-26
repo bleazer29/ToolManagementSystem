@@ -2,67 +2,101 @@
 @using ToolManagementSystem.Shared.Service
 @using ToolManagementSystem.Shared.Models
 @inject EmployeeService EmployeeService
+@inject RolesService RolesService
 
-<h3>List Employee</h3>
 
+<div class="container">
+    <h1>Список сотрудников</h1><hr />
 
-<NavLink ActiveClass="nav-link" href="/Employee/AddEmployee">
-    <span class="oi oi-plus" aria-hidden="true"></span>Add New Employee
-</NavLink>
-
-@if (empl == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Manage</th>
-                <th>FirstName</th>
-                <th>LastName </th>
-                <th>FullName</th>
-                <th>Phone</th>
-                <th>UserName</th>
-                <th>Password</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var employee in empl)
-            {
+    <a class="btn btn-primary col-md-12" href="/Employee/AddEmployee">
+        Добавить нового сотрудника
+    </a>
+    <br /> <hr />
+    @if (empl == null)
+    {<p><em>Загрузка...</em></p> }
+    else
+    {
+        <table class="table">
+            <thead class="text-align-center">
                 <tr>
-
-                    <td>
-                        <div class="dropdown">
-                            <button class="dropbtn">...</button>
-                            <div class="dropdown-content">
-                                <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
-                                <a class="dropdown-item btn btn-primary" href="employee/details/@employee.Id">Details</a>
-                                <a class="dropdown-item btn btn-primary" @onclick="@(()=>EmployeeService.DeleteEmployee(employee))">Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FullName</td>
-                    <td>@employee.Phone</td>
-                    <td>@employee.UserName</td>
-                    <td>@employee.Password</td>
+                    <th>Управление</th>
+                    <th>Имя</th>
+                    <th>Фамилия </th>
+                    <th>ФИО</th>
+                    <th>Телефон</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                    <th>Роли</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var employee in empl)
+                {
+                    <tr>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropbtn">...</button>
+                                <div class="dropdown-content">
+                                    <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
+                                    <a class="dropdown-item btn btn-primary" href="/Role/AssignmentRole/@employee.Id">Assignment Role</a>
+                                    <a class="dropdown-item btn btn-primary" href="/employee/details/@employee.Id">Details</a>
+                                    <a class="dropdown-item btn btn-primary" @onclick="@(()=>EmployeeService.DeleteEmployee(employee))">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>@employee.FirstName</td>
+                        <td>@employee.LastName</td>
+                        <td>@employee.FullName</td>
+                        <td>@employee.Phone</td>
+                        <td>@employee.UserName</td>
+                        <td>@employee.Password</td>
+                        <td class="card-title">
+                            @{
+                                foreach (var item in rolename)
+                                {
+
+                                }
+
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
+</div>
+
 
 
 
 @code {
     List<Employees> empl;
+    List<Roles> roles;
+    List<EmployeeRoles> emp_roles;
+    List<string> rolename;
+
     protected override async Task OnInitializedAsync()
     {
-        empl = await Task.Run(() => EmployeeService.GetEmployee());
+        empl = EmployeeService.GetEmployee();
+        roles = RolesService.GetRoles();
+        //foreach (var employee in empl) //Тут остановился
+        //{
+        //    emp_roles = await Task.Run(() => RolesService.GetEmployeeRolesById(employee.Id));
+        //    foreach (var rol in roles)
+        //    {
+        //        foreach (var er in emp_roles)
+        //        {
+        //            if (rol.Id == er.RoleId)
+        //            {
+        //                rolename.Add(rol.RoleName);
+        //            }
+        //        }
+        //    }
+        //}
     }
+
 }
 
 <style>
@@ -90,7 +124,7 @@ else
     }
 
         .dropdown-content a {
-            color: white;
+            color: black;
             padding: 8px;
             text-decoration: none;
             display: block;

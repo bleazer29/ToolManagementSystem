@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToolManagementSystem.Shared.Data;
 
 namespace ToolManagementSystem.Client.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200825181345_sr3")]
+    partial class sr3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,6 +29,9 @@ namespace ToolManagementSystem.Client.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.HasKey("RoleId", "EmployeeId");
 
                     b.HasIndex("EmployeeId");
@@ -37,7 +42,8 @@ namespace ToolManagementSystem.Client.Migrations
                         new
                         {
                             RoleId = 1,
-                            EmployeeId = 1
+                            EmployeeId = 1,
+                            IsSelected = false
                         });
                 });
 
@@ -90,7 +96,7 @@ namespace ToolManagementSystem.Client.Migrations
                         {
                             Id = 1,
                             Answer = "Admin",
-                            BirthDate = new DateTime(2020, 8, 26, 15, 18, 22, 310, DateTimeKind.Local).AddTicks(5435),
+                            BirthDate = new DateTime(2020, 8, 25, 21, 13, 41, 233, DateTimeKind.Local).AddTicks(226),
                             FirstName = "admin",
                             LastName = "admin",
                             Password = "admin",
@@ -213,13 +219,13 @@ namespace ToolManagementSystem.Client.Migrations
                     b.HasOne("ToolManagementSystem.Shared.Models.Pages", "Pages")
                         .WithMany("RolesPages")
                         .HasForeignKey("PagesId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ToolManagementSystem.Shared.Models.Roles", "Roles")
                         .WithMany("RolesPages")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

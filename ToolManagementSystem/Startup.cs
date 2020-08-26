@@ -26,6 +26,7 @@ namespace ToolManagementSystem
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
             option => option.MigrationsAssembly("ToolManagementSystem.Client")));
 
+            services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient);
 
             services.AddRazorPages();
             services.AddServerSideBlazor();

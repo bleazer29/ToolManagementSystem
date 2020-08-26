@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ToolManagementSystem.Shared.Data;
 using ToolManagementSystem.Shared.Models;
@@ -15,9 +16,9 @@ namespace ToolManagementSystem.Shared.Service
             this.db = db;
         }
 
-        public async Task<List<Employees>> GetEmployee()
+        public List<Employees> GetEmployee()
         {
-            return await db.Employee.ToListAsync();
+            return db.Employee.ToList();
         }
 
         public async Task<string> Create(Employees employees)
@@ -49,11 +50,10 @@ namespace ToolManagementSystem.Shared.Service
             return "Edited!";
         }
 
-        public async Task<string> DeleteEmployee(Employees employees)
+        public async Task DeleteEmployee(Employees employees)
         {
             db.Employee.Remove(employees);
             await db.SaveChangesAsync();
-            return "Deleted";
         }
 
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToolManagementSystem.Shared.Data;
 
 namespace ToolManagementSystem.Client.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200826081242_sr5")]
+    partial class sr5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,7 +92,7 @@ namespace ToolManagementSystem.Client.Migrations
                         {
                             Id = 1,
                             Answer = "Admin",
-                            BirthDate = new DateTime(2020, 8, 26, 15, 18, 22, 310, DateTimeKind.Local).AddTicks(5435),
+                            BirthDate = new DateTime(2020, 8, 26, 11, 12, 39, 32, DateTimeKind.Local).AddTicks(6084),
                             FirstName = "admin",
                             LastName = "admin",
                             Password = "admin",
