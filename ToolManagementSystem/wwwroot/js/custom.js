@@ -95,39 +95,35 @@ function AddClasificationTree(elementName) {
     { "id": "7", "parent": "4", "text": "Тип4", "data": { "title": "t7" } }];
 
     $(elem).jstree({
-        "plugins": ["wholerow", "contextmenu", "search", "table"],
+        "plugins": ["core", "grid"],
         "core": {
             "multiple": false,
             "themes": {
                 "dots": false,
-                "icons": false,
-                "responsive": false
+                "icons": false
             },
             "data": data
         },
-        "table": {
+        "grid": {
             "columns": [
                 {
-                    "header": "ляля тополя",
+                    "header": "Управление",
                     "tree": false,
-                    "value": "title",
+                    "value": "control",
                     "format": function (v) {
-                        return ("<button class='btn btn-primary fa fa-edit' type='button'"
+                        return ("<button class='btn btn-primary mr-1 mt-1 fa fa-edit' type='button'"
                             + "data-toggle='modal' data-target='#editModal'></button>"
-                            + "<button class='btn btn-primary fa fa-times' type='button'"
+                            + "<button class='btn btn-primary ml-1 mt-1 fa fa-times' type='button'"
                             + "data-toggle='modal' data-target='#deleteModal'></button>");
                     },
-                    "width": "30%"
                 },
                 {
                     "header": "Наименование",
                     "tree": true,
                     "value": "title",
-                    "width": "30%"
+                    "width": "90%"
                 },
-            ],
-            "headerContextMenu": "false",
-            "width": "100%"
+            ]
         }
     });
 }

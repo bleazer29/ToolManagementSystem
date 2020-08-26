@@ -515,6 +515,12 @@ th{
     border:none;
 }
 
+jstree-grid-header {
+    background-color: gray;
+    color: white;
+    border: none;
+}
+
 .modal-header {
     background-color: grey;
     color: white;
