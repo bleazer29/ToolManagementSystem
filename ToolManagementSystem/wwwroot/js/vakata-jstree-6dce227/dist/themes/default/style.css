@@ -9,7 +9,8 @@
   list-style-image: none;
 }
 .jstree-node {
-  white-space: nowrap;
+    border: 1px solid #dee2e6;
+    white-space: nowrap;
 }
 .jstree-anchor {
   display: inline-block;
