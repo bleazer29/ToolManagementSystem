@@ -73,8 +73,8 @@
                     Вы действительно хотите удалить запись?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary ">Accept</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
                 </div>
             </div>
         </div>
@@ -124,23 +124,36 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                   
                     <form>
-                        <div class="container-fluid">
-                            <div class="container-fluid">
-                                <div class="row pt-2">
-                                    <div class="col-md-2 pt-1">
-                                        Наименование:
-                                    </div>
-                                    <div class="col pr-0">
-                                        <input type="text" class="form-control" />
-                                    </div>
-                                </div>
+                        <div class="form-group row">
+                            <label for="classificationTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="classificationTitle">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="creationParentDropdownWrapper" class="col col-md-4 col-lg-3 col-form-label mb-2 mb-md-0"> Родитель:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9">
+                                <div id="creationParentDropdownWrapper" class="dropdown">
+                                    <input type="text" class="form-control dropdown-toggle" id="creationParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @onclick="@(() => AddTreeDropdown("creationClassificationTree", "creationDropdown", "creationParentNode"))" readonly />
+                                    <div id="creationDropdown" class="dropdown-menu" aria-labelledby="parent_node">
+                                        <div id="creationClassificationTree">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                       
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary ">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>
@@ -151,18 +164,29 @@
 @code {
     private bool isCaretUp = false;
     public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    private bool ModalCreateFirstOpened = true;
 
     public void ChangeCaret()
     {
         isCaretUp = !isCaretUp;
     }
 
-    private async Task AddTree()
+    //private async Task AddTree()
+    //{
+    //    await jsRuntime.InvokeVoidAsync("AddClasificationTree", "classification-table");
+    //}
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    await AddTree();
+    //}
+
+    public async void AddTreeDropdown(string treeElementName, string wrapperElementName, string textBoxElementName)
     {
-        await jsRuntime.InvokeVoidAsync("AddClasificationTree", "classification-table");
-    }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await AddTree();
+        if(ModalCreateFirstOpened == true)
+        {
+            await jsRuntime.InvokeVoidAsync("AddClasificationTreeDropdown", treeElementName, textBoxElementName);
+            await jsRuntime.InvokeVoidAsync("StopDropdownFromClosing", wrapperElementName);
+            ModalCreateFirstOpened = false;
+        }
     }
 }

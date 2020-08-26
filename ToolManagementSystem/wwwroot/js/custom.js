@@ -294,12 +294,20 @@ function initTooltips() {
     })
 }
 
-function AddClasificationTree(elementName) {
+
+
+function AddClasificationTreeDropdown(elementName, textboxName) {
     var elem = '#' + elementName;
+    var textboxElem = '#' + textboxName;
+
+    $(elem).on("select_node.jstree", function (e, data) {
+        $(textboxElem).val(data.node.text);
+    });
 
     // tree data
     var data;
-    data = [{ "id": "1", "parent": "#", "text": "Вид1", "data": { "title": "t1" } },
+    data = [{ "id": "-1", "parent": "#", "text": "Добавить в корень", "data": { "title": "t-1" } },
+        { "id": "1", "parent": "#", "text": "Вид1", "data": { "title": "t1" } },
     { "id": "2", "parent": "#", "text": "Вид2", "data": { "title": "t2" } },
     { "id": "3", "parent": "#", "text": "Вид3", "data": { "title": "t3" } },
     { "id": "4", "parent": "1", "text": "Тип1", "data": { "title": "t4" } },
@@ -308,41 +316,33 @@ function AddClasificationTree(elementName) {
     { "id": "7", "parent": "4", "text": "Тип4", "data": { "title": "t7" } }];
 
     $(elem).jstree({
-        "plugins": ["wholerow", "contextmenu", "search", "table"],
+        "plugins": ["wholerow", "search"],
         "core": {
             "multiple": false,
             "themes": {
+                "name": "default-grid",
                 "dots": false,
                 "icons": false,
                 "responsive": false
             },
             "data": data
         },
-        "table": {
-            "columns": [
-                {
-                    "width": 50,
-                    "header": "ляля тополя",
-                    "tree": false,
-                    "value": "title",
-                    "format": function (v) {
-                        return ("<button class='btn btn-primary fa fa-edit' type='button'"
-                            + "data-toggle='modal' data-target='#editModal'></button>"
-                            + "<button class='btn btn-primary fa fa-times' type='button'"
-                            + "data-toggle='modal' data-target='#deleteModal'></button>");
-                    }
-                    
-                },
-                {
-                    "width": 50,
-                    "header": "Наименование",
-                    "tree": true,
-                    "value": "title",
-                    
-                },
-            ],
-            "headerContextMenu": "false",
-            "width": "100%"
-        }
+       
     });
+
+   
 }
+
+function StopDropdownFromClosing(dropDownName) {
+    var dropDownElem = '#' + dropDownName;
+   
+
+    $(dropDownElem).on('click', function (event) {
+        // The event won't be propagated up to the document NODE and 
+        // therefore delegated events won't be fired
+        event.stopPropagation();
+    });
+
+   
+}
+

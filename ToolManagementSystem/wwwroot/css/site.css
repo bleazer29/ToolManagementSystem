@@ -381,17 +381,17 @@ main {
 }
 
 .sidebar .navbar-hide-toggler {
-    position: inherit;
+    position: relative;
     margin: 0 auto;
     display: block;
     bottom: 93%;
-    right: 65px;
-    top: 5px;
+   /* right: 65px;
+    top: 5px;*/
     max-height: 40px;
     max-width: 44px;
     min-height: 40px;
     min-width: 44px;
-    margin: 10px;
+  /*  margin: 10px;*/
     
 }
 
@@ -423,6 +423,7 @@ main {
 @media (min-width: 768px) {
     .main-sidebar {
         max-width: 350px;
+        
     }
 }
 
