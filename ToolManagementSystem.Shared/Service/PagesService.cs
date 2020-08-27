@@ -17,15 +17,40 @@ namespace ToolManagementSystem.Shared.Service
             this.db = db;
         }
 
-        public List<Pages> GetPages()
+        //public List<Pages> GetPages()
+        //{
+        //    return db.Page.AsNoTracking().ToList();
+        //}
+
+        public async Task<List<Pages>> GetPagesRolesById(int roleId)
         {
-            return db.Page.AsNoTracking().ToList();
+
+            var pagesRole = await db.RolesPage.AsNoTracking().Where(x => x.RoleId == roleId).ToListAsync();
+            var listPages = await db.Page.AsNoTracking().ToListAsync();
+            for (int i=0;i< listPages.Count;i++)
+            {
+                for (int j=0;j< pagesRole.Count;j++)
+                {
+                    if (pagesRole[j].PagesId == listPages[i].Id)
+                    {
+                        listPages[i].IsSelected = true;
+                    }
+                }
+            }
+            //foreach (var item in listPages)
+            //{
+            //    foreach (var item2 in pagesRole)
+            //    {
+            //        if (item2.PagesId == item.Id)
+            //        {
+            //            item.IsSelected = true;
+            //        }
+            //    }
+            //}
+            return listPages;
         }
 
-        public async Task<List<RolesPages>> GetPagesRolesById(int roleId)
-        {
-            return await db.RolesPage.AsNoTracking().Where(x => x.RoleId == roleId).ToListAsync();
-        }
+
 
         public async Task EditPagesInRole(List<Pages> page, int roleId)
         {

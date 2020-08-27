@@ -37,7 +37,7 @@ namespace ToolManagementSystem.Shared.Service
         public async Task CreateRole(Roles role)
         {
             var singleRole = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
-            if (singleRole != null)  return;
+            if (singleRole != null || role.RoleName==null) return;
             await db.Role.AddAsync(role);
             await db.SaveChangesAsync();
         }

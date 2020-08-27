@@ -47,24 +47,14 @@
     List<RolesPages> pagesRole;
     protected override async Task OnInitializedAsync()
     {
-        listPages = PagesService.GetPages();
-        pagesRole = await PagesService.GetPagesRolesById(Convert.ToInt32(roleId));
-        foreach (var item in listPages)
-        {
-            foreach (var item2 in pagesRole)
-            {
-                if (item2.PagesId == item.Id)
-                {
-                    item.IsSelected = true;
-                }
-            }
-        }
+        listPages = await PagesService.GetPagesRolesById(Convert.ToInt32(roleId));
+        //listPages = PagesService.GetPages();
+        //pagesRole = await PagesService.GetPagesRolesById(Convert.ToInt32(roleId), listPages);
     }
 
 
     private async Task UpdatePagesRole()
     {
-
         await PagesService.EditPagesInRole(listPages, Convert.ToInt32(roleId));
         NavigationManager.NavigateTo("Role/ListRoles");
     }
