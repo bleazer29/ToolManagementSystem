@@ -58,8 +58,10 @@
                 <a class="nav-link" data-toggle="tab" href="#docsTab">Документы</a>
             </li>
         </ul>
-        @* History tab start *@
+        
+        @* Tabcontrol start *@
         <div class="tab-content pl-0 pr-0t">
+            @* History tab start *@
             <div id="historyTab" class="container tab-pane fade">
                 <div class="container">
                     <div class="row mb-3 mt-3">
@@ -207,7 +209,8 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt"></button>
+                                            <button type="button" data-toggle="modal" data-target="#singleControlModal"
+                                             class="btn btn-primary fa fa-file-alt"></button>
                                         </td>
                                         <td class="text-left">Инструмент1</td>
                                         <td class="text-left">1</td>
@@ -217,17 +220,19 @@
                                     </tr>
                                     <tr>
                                         <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt"></button>
+                                            <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                             class="btn btn-primary fa fa-file-alt"></button>
                                         </td>
                                         <td class="text-left">Инструмент2</td>
-                                        <td class="text-left">1</td>
+                                        <td class="text-left">4</td>
                                         <td class="text-left">14622874</td>
                                         <td class="text-left">99874112</td>
                                         <td class="text-left">Вид1 -> Тип3</td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt"></button>
+                                            <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                             class="btn btn-primary fa fa-file-alt"></button>
                                         </td>
                                         <td class="text-left">Инструмент3</td>
                                         <td class="text-left">10</td>
@@ -244,11 +249,11 @@
             </div>
             @* Instrument tab end *@
 
-            @* History tab start *@
+            @* Doc tab start *@
             <div id="docsTab" class="container tab-pane fade">
                 <div class="container">
                     <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
+                        <div class="col-11 pl-0 pr-0">
                             <div class="card w-100">
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
@@ -304,9 +309,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col pt-1 pb-1">
+                            <button type="button" data-toggle="modal" data-target="#addDocModal"
+                                             class="btn btn-primary fa fa-file-upload"></button>
+                        </div>
                     </div>
                     <div class="row">
-                        @*History table start*@
+                        @*Doc table start*@
                         <div class="table-responsive scrollable">
                             <table class="table  table-bordered table-hover">
                                 <thead>
@@ -337,71 +346,278 @@
                                 </tbody>
                             </table>
                         </div>
-                        @*History table end*@
+                        @*Doc table end*@
                     </div>
                 </div>
             </div>
-            @* History tab end *@
+            @* Doc tab end *@
+        </div>
+        @* Tabcontrol end *@
 
-            @* Docs tab start *@
-            <div id="docTab" class="container tab-pane fade">
-                <div class="container">
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
-                            <div class="card w-100">
-                                <div class="card-header pt-0 pb-0">
-                                    <h5 class="pt-2 pb-2">
-                                        Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
-                                        </a>
-                                    </h5>
+        @*Modal add doc start*@
+    <div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Прикрепление документа: WO-00000001/2020</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Наименование документа:
                                 </div>
-                                <div id="collapseOne" class="collapse">
-                                    <form class="m-3">
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />                            
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="file-field">
+                                    <div class="btn btn-primary btn-sm float-left">
+                                        <span>Выберите файл</span>
+                                        <input type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" placeholder="Прикрепите документ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal add doc end*@
+
+        @*Modal control single instruments start*@
+    <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента: Инструмент1</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Куда переместить:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Склад (RFU)</option>
+                                        <option>Ремонт (RP)</option>
+                                        <option>Утиль (Scrap)</option>
+                                    </select>                                
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Комментарий (необязательно):
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal control single instruments end*@
+
+        @*Modal control multiple instruments start*@
+    <div class="modal fade" id="multipleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Куда переместить:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Склад (RFU)</option>
+                                        <option>Ремонт (RP)</option>
+                                        <option>Утиль (Scrap)</option>
+                                    </select>                                
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Комментарий (необязательно):
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            @* Поиск panel start *@
+                            <div class="row mb-3 mt-3">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-2 pt-1">
                                                     Наименование:
                                                 </div>
                                                 <div class="col pr-0">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Серийный номер:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <select class="form-control">
+                                                        <option selected="selected">Активный</option>
+                                                        <option>Неактивный</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Партийный номер:
+                                                </div>
+                                                <div class="col-5 pr-0">
+                                                    <input type="datetime-local" />
+                                                </div>
+                                                <div class="col-5 pr-0">
+                                                    <input type="datetime-local" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Артикул:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Классификация:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary">Найти</button>
+                                                <button class="btn btn-primary fa fa-search"></button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Поиск panel end *@
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Инструменты:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Наименование</th>
+                                                    <th>Серийный номер</th>
+                                                    <th>Партийный номер</th>
+                                                    <th>Артикул</th>
+                                                    <th>Классификация</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        44589625
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        99874112
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        44589625
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        @*Doc table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width="10%"></th>
-                                        <th width="90%">Наименование</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt" />
-                                        </td>
-                                        <td class="text-left"><a href="#">Акт приёмки №0000001</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @*Doc table end*@
-                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
                 </div>
             </div>
-            @* Docs tab end *@
         </div>
+    </div>
+    @*Modal control multiple instruments end*@
     </div>
 </div>
 
