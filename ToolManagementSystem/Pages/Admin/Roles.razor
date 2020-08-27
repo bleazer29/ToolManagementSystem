@@ -1,4 +1,6 @@
 ﻿@page "/Administrative/Roles"
+@inject IJSRuntime jsRuntime
+
 <div class="container">
     <div class="row">
         <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
@@ -6,7 +8,7 @@
         </div>
         <div class="col-lg-1 col-md-2 pr-0 pl-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
-                    data-toggle="modal" data-target="#createModal"></button>
+                    data-toggle="modal" data-target="#createModal"  @onclick="@(() => AddСreationTree("creationRolesTree"))" ></button>
         </div>
     </div>
 </div>
@@ -24,11 +26,19 @@
             </div>
             <div id="collapseOne" class="collapse">
                 <form class="m-3">
-                    <div class="form-group row align-items-center">
-                        <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
-                        <div class="w-100 d-md-none"></div>
-                        <div class="col col-md-8 col-lg-9 mb-2">
-                            <input type="text" class="form-control" id="statusTitle">
+                    <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Наименование:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -44,23 +54,28 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover roles-table">
                         <thead>
-                            <tr>  
+                            <tr>
                                 <th rowspan="2">Управление</th>
                                 <th rowspan="2">Наименование</th>
-                                <th colspan="4">НСИ</th>
-                                <th  colspan="4">Склад</th>
-                                <th  colspan="4">Сервис</th>
-                                <th  colspan="4">Наряды</th>
-                                <th  colspan="4">Админ</th>
-                                <th  colspan="4">Документация</th>
+                                <th>НСИ</th>
+                                <th>Склад</th>
+                                <th>Сервис</th>
+                                <th>Наряды</th>
+                                <th>Админ</th>
+                                <th>Документация</th>
                             </tr>
                             <tr>
                                 @for (int i = 0; i < 6; i++)
                                 {
-                                    <th><i class="fa fas fa-list"></i></th>
-                                    <th><i class="fa fas fa-edit"></i></th>
-                                    <th><i class="fa fas fa-plus"></i></th>
-                                    <th><i class="fa fas fa-trash-alt"></i></th>
+                                    <th class="align-middle">
+                                        <div class="row flex-nowrap p-2 justify-content-center">
+                                            <i class="fa fas fa-list"></i>
+                                            <i class="fa fas fa-edit"></i>
+                                            <i class="fa fas fa-plus"></i>
+                                            <i class="fa fas fa-trash-alt"></i>
+                                        </div>
+                                    </th>
+
                                 }
                             </tr>
                         </thead>
@@ -73,11 +88,18 @@
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
                                 <td class="text-left">Администратор</td>
-                                    @for (int i = 0; i < 24; i++)
-                                    {
-                                        <td class="text-center"><input class="readonly-checkbox" type="checkbox" disabled></td>
-                                    }
-                             
+                                @for (int i = 0; i < 6; i++)
+                                {
+                                    <td class="align-middle">
+                                        <div class="row flex-nowrap p-2 justify-content-center">
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                        </div>
+                                    </td>
+                                }
+
                             </tr>
                             <tr>
                                 <td class="align-middle">
@@ -87,9 +109,16 @@
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
                                 <td class="text-left">Оператор НСИ</td>
-                                @for (int i = 0; i < 24; i++)
+                                @for (int i = 0; i < 6; i++)
                                 {
-                                    <td class="text-center"><input type="checkbox" class="readonly-checkbox" disabled></td>
+                                    <td class="align-middle">
+                                        <div class="row flex-nowrap p-2 justify-content-center">
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                        </div>
+                                    </td>
                                 }
                             </tr>
                             <tr>
@@ -100,9 +129,17 @@
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
                                 <td class="text-left">Оператор Инструментов</td>
-                                @for (int i = 0; i < 24; i++)
+                                @for (int i = 0; i < 6; i++)
                                 {
-                                    <td class="text-center"><input type="checkbox" class="readonly-checkbox" disabled></td>
+                                    <td class="align-middle">
+                                        <div class="row flex-nowrap p-2 justify-content-center">
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                            <input class="readonly-checkbox" type="checkbox" disabled>
+                                        </div>
+                                    </td>
+
                                 }
                             </tr>
                         </tbody>
@@ -127,8 +164,8 @@
                     Вы действительно хотите удалить запись?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary ">Accept</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
                 </div>
             </div>
         </div>
@@ -154,7 +191,7 @@
                                 <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
+                        <div class="form-group align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
@@ -185,21 +222,23 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <label for="Title" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" id="Title">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
+                        <div class="form-group align-items-center">
+                            <label for="creationDropdownWrapper" class="col col-form-label mb-2"> Права доступа:</label>
                             <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                            <div  id="creationDropdownWrapper" class="col col-form-label">
+                                <div id="creationRolesTree">
+
+                                </div>
+                          
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Сохранить</button>
@@ -214,10 +253,20 @@
 @code {
     private bool isCaretUp = false;
     public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    private bool ModalCreateFirstOpened = true;
 
     public void ChangeCaret()
     {
         isCaretUp = !isCaretUp;
+    }
+
+    public async void AddСreationTree(string treeElementName)
+    {
+        if (ModalCreateFirstOpened == true)
+        {
+            await jsRuntime.InvokeVoidAsync("AddRolesTree", treeElementName);
+            ModalCreateFirstOpened = false;
+        }
     }
 }
 

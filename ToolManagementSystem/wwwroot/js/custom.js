@@ -84,7 +84,6 @@ function initTooltips() {
 
 function AddClasificationTree(elementName) {
     var elem = '#' + elementName;
-
     // tree data
     var data;
     data = [{ "id": "1", "parent": "#", "text": "Вид1", "data": { "nodeId": "1" }, "state": { "opened": "true"}},
@@ -180,8 +179,113 @@ function StopDropdownFromClosing(dropDownName) {
     }); 
 }
 
-function AddClassificationEditDropdown(elementName, textboxName, dropDownName, nodeId) {
-    AddClasificationTreeDropdown(elementName, textboxName);
-    StopDropdownFromClosing(dropDownName);
+function DeleteClassificationEditDropdown(elementName) {
+    var elem = '#' + elementName;
+    $(elem).children().remove();
 }
 
+function AddRolesTree(elementName) {
+    var elem = '#' + elementName;
+    var data = [
+        { "id": "12", "parent": "20", "text": "Классификация", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Classification" }, "data": { "nodeId": "12", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "13", "parent": "20", "text": "Атрибуты", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Attributes" }, "data": { "nodeId": "13", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "14", "parent": "20", "text": "Номенклатура", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Nomenclature" }, "data": { "nodeId": "14", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "15", "parent": "21", "text": "Контрагенты", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Counterparties" }, "data": { "nodeId": "15", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "16", "parent": "21", "text": "Скважины", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Wells" }, "data": { "nodeId": "16", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "17", "parent": "7", "text": "Пользователи", "state": { "opened": "true" }, "a_attr": { "href": "/Administrative/Users" }, "data": { "nodeId": "17", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "1", "parent": "#", "text": "НСИ", "state": { "opened": "true", "disabled": "true" }, "data": { "nodeId": "1", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" }, "data": { "nodeId": "2", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true" }, "a_attr": { "href": "/Contracts" }, "data": { "nodeId": "3", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true" }, "a_attr": { "href": "/Orders/" }, "data": { "nodeId": "4", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true" }, "data": { "nodeId": "5", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" }, "data": { "nodeId": "6", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true", "disabled": "true" }, "data": { "nodeId": "7", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true" }, "data": { "nodeId": "8", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true" }, "data": { "nodeId": "9", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Departments" }, "data": { "nodeId": "10", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Statuses" }, "data": { "nodeId": "11", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "18", "parent": "7", "text": "Роли", "state": { "opened": "true" }, "a_attr": { "href": "/Administrative/Roles" }, "data": { "nodeId": "18", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true" }, "data": { "nodeId": "19", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" }, "data": { "nodeId": "20", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" }, "data": { "nodeId": "21", "view": "true", "add": "true", "edit": "true", "delete": "true" } }
+    ]
+
+    $(elem).jstree({
+        "plugins": ["grid", "wholerow", "search"],
+        "core": {
+            "multiple": false,
+            "themes": {
+                "name": "custom-roles-grid",
+                "dots": false,
+                "icons": false
+            },
+            "data": data
+        },
+        "grid": {
+            "columns": [
+                {
+                    "header": "Наименование",
+                    "tree": true,
+                    "value": "title",
+                    "width": "20%" 
+                },
+                {
+                    "header": "Просмотр",
+                    "tree": false,
+                    "value": "view",
+                    "format": function (v) {
+                        var checked = "";
+                        if (v == "true") {
+                            checked="checked='true'"
+                        }
+                        
+                        var res = "<input type='checkbox' " + checked + " > </input>"
+                        return (res);
+                    },
+                },
+                {
+                    "header": "Редактирование",
+                    "tree": false,
+                    "value": "edit",
+                    "format": function (v) {
+                        var checked = "";
+                        if (v == true) {
+                            checked = "checked='true'"
+                        }
+
+                        var res = "<input type='checkbox' " + checked + " > </input>"
+                        return (res);
+                    },
+                },
+                {
+                    "header": "Добавление",
+                    "tree": false,
+                    "value": "add",
+                    "format": function (v) {
+                        var checked = "";
+                        if (v == true) {
+                            checked = "checked='true'"
+                        }
+
+                        var res = "<input type='checkbox' " + checked + " > </input>"
+                        return (res);
+                    },
+                },
+                {
+                    "header": "Удаление",
+                    "tree": false,
+                    "value": "delete",
+                    "format": function (v) {
+                        var checked = "";
+                        if (v == true) {
+                            checked = "checked='true'"
+                        }
+
+                        var res = "<input type='checkbox' " + checked + " > </input>"
+                        return (res);
+                    },
+                }
+            ]
+        }
+    });
+}

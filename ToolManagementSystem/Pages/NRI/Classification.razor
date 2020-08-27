@@ -106,7 +106,7 @@
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9">
                                 <div id="editParentDropdownWrapper" class="dropdown">
-                                    <input type="text" class="form-control dropdown-toggle" id="editParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                                    <input type="text" class="form-control dropdown-toggle" id="editParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly @onclick="@(() => AddEditTreeDropdown("editClassificationTree", "editDropdown", "editParentNode", "id"))"/>
                                     <div id="editDropdown" class="dropdown-menu" aria-labelledby="parent_node">
                                         <div id="editClassificationTree">
 
@@ -196,7 +196,8 @@
 
     public async void AddEditTreeDropdown(string treeElementName, string wrapperElementName, string textBoxElementName, string nodeId)
     {
-
+        //КОСТЫЛЬ
+        await jsRuntime.InvokeVoidAsync("DeleteClassificationEditDropdown", treeElementName);
         await jsRuntime.InvokeVoidAsync("AddClasificationTreeDropdown", treeElementName, textBoxElementName);
         await jsRuntime.InvokeVoidAsync("StopDropdownFromClosing", wrapperElementName);
     }

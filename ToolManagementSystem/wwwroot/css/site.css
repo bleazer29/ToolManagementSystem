@@ -567,11 +567,10 @@ jstree-grid-header {
 }
 
 
-.roles-table th[colspan='4'] {
-    border-left-width: 3px;
-    border-right-width: 3px;
+.roles-table thead i{
+   margin:5px;
 }
 
-.readonly-checkbox{
-    background-color:blueviolet;
+.roles-table tbody input {
+    margin: 5px;
 }
