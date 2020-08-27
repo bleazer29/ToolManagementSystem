@@ -93,8 +93,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        empl = EmployeeService.GetEmployee();
-        roles = RolesService.GetRoles();
+        empl = await  EmployeeService.GetEmployee();
+        roles = await RolesService.GetRoles();
         for(int employee = 0; employee <empl.Count; employee++) 
         {
             emp_roles.Add(await RolesService.GetEmployeeRolesById(empl[employee].Id));

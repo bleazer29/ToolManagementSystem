@@ -16,9 +16,9 @@ namespace ToolManagementSystem.Shared.Service
             this.db = db;
         }
 
-        public List<Employees> GetEmployee()
+        public async Task<List<Employees>> GetEmployee()
         {
-            return db.Employee.ToList();
+            return await db.Employee.ToListAsync();
         }
 
         public async Task Create(Employees employees)

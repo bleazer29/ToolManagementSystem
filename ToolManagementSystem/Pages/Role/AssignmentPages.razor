@@ -44,12 +44,9 @@
 @code {
     [Parameter] public string roleId { get; set; }
     List<Pages> listPages;
-    List<RolesPages> pagesRole;
     protected override async Task OnInitializedAsync()
     {
-        listPages = await PagesService.GetPagesRolesById(Convert.ToInt32(roleId));
-        //listPages = PagesService.GetPages();
-        //pagesRole = await PagesService.GetPagesRolesById(Convert.ToInt32(roleId), listPages);
+        listPages = await PagesService.GetAssignmentPages(Convert.ToInt32(roleId));
     }
 
 

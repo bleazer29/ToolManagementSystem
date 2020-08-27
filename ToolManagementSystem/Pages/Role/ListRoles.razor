@@ -65,9 +65,9 @@
 @code {
     List<Roles> Roles;
     Roles role = new Roles();
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Roles = RolesService.GetRoles();
+        Roles = await RolesService.GetRoles();
     }
 
     private async Task CreateRole()

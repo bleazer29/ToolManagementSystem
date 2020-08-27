@@ -17,14 +17,8 @@ namespace ToolManagementSystem.Shared.Service
             this.db = db;
         }
 
-        //public List<Pages> GetPages()
-        //{
-        //    return db.Page.AsNoTracking().ToList();
-        //}
-
-        public async Task<List<Pages>> GetPagesRolesById(int roleId)
+        public async Task<List<Pages>> GetAssignmentPages(int roleId)
         {
-
             var pagesRole = await db.RolesPage.AsNoTracking().Where(x => x.RoleId == roleId).ToListAsync();
             var listPages = await db.Page.AsNoTracking().ToListAsync();
             for (int i=0;i< listPages.Count;i++)
@@ -37,16 +31,6 @@ namespace ToolManagementSystem.Shared.Service
                     }
                 }
             }
-            //foreach (var item in listPages)
-            //{
-            //    foreach (var item2 in pagesRole)
-            //    {
-            //        if (item2.PagesId == item.Id)
-            //        {
-            //            item.IsSelected = true;
-            //        }
-            //    }
-            //}
             return listPages;
         }
 
@@ -62,12 +46,10 @@ namespace ToolManagementSystem.Shared.Service
                     {
                         RoleId = roleId,
                         PagesId = page[i].Id
-                        //IsSelected = role[i].IsSelected
                     };
 
                     var singleEmployeeRole = db.RolesPage.AsNoTracking().Any(x => x.PagesId == page[i].Id && x.RoleId == roleId);
 
-                    //if (role[i].IsSelected && !db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == userId && x.RoleId == role[i].Id).Any())
                     if (page[i].IsSelected && !singleEmployeeRole)
                     {
                         db.RolesPage.Add(result);

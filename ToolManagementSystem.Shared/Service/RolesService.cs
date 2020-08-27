@@ -5,6 +5,7 @@ using NuGet.Protocol.Core.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ToolManagementSystem.Shared.Data;
 using ToolManagementSystem.Shared.Models;
@@ -20,20 +21,38 @@ namespace ToolManagementSystem.Shared.Service
             this.db = db;
         }
 
-        public List<Roles> GetRoles()
+        public async Task<List<Roles>> GetRoles()
         {
-            return db.Role.AsNoTracking().ToList();
+            return await db.Role.AsNoTracking().ToListAsync();
         }
         public Roles GetRoleById(int id)
         {
             return db.Role.FirstOrDefault(r => r.Id == id);
         }
 
+
+        public async Task<List<Roles>> GetAssignmentRole(int employeeId)
+        {
+            var employeeRoles = await db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == employeeId).ToListAsync();
+            var listRoles = await db.Role.AsNoTracking().ToListAsync();
+            for (int i=0;i< listRoles.Count;i++)
+            {
+                for (int j = 0; j < employeeRoles.Count; j++)
+                {
+                    if (employeeRoles[j].RoleId == listRoles[i].Id)
+                    {
+                        listRoles[i].IsSelected = true;
+                    }
+                }
+            }
+            return listRoles;
+        }
+
         public async Task<List<EmployeeRoles>> GetEmployeeRolesById(int employeeId)
         {
             return await db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == employeeId).ToListAsync();
         }
-        
+
         public async Task CreateRole(Roles role)
         {
             var singleRole = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
@@ -46,7 +65,7 @@ namespace ToolManagementSystem.Shared.Service
         public async Task EditRole(Roles role)
         {
             var singleRoles = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
-            if (singleRoles != null) return;
+            if (singleRoles != null || role.RoleName == null) return;
             db.Role.Update(role);
             await db.SaveChangesAsync();
         }
@@ -84,8 +103,23 @@ namespace ToolManagementSystem.Shared.Service
 
         public async Task DeleteRole(Roles roles)
         {
-            db.Role.Remove(roles);
-            await db.SaveChangesAsync();
+            try
+            {
+                var listRolesPages = db.RolesPage.Where(x => x.RoleId == roles.Id).ToList();
+                if (listRolesPages.Count != 0)
+                {
+                    foreach (var item in listRolesPages)
+                    {
+                        db.RolesPage.Remove(item);
+                    }
+                    await db.SaveChangesAsync();
+                }
+                db.Role.Remove(roles);
+                await db.SaveChangesAsync();
+            }
+            catch{
+                return;
+            }
         }
 
     }

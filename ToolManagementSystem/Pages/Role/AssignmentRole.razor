@@ -41,21 +41,9 @@
 @code {
     [Parameter] public string employeeId { get; set; }
     List<Roles> listRoles;
-    List<EmployeeRoles> employeeRoles;
     protected override async Task OnInitializedAsync()
     {
-        listRoles = RolesService.GetRoles();
-        employeeRoles = await RolesService.GetEmployeeRolesById(Convert.ToInt32(employeeId));
-        foreach(var item in listRoles)
-        {
-            foreach (var item2 in employeeRoles)
-            {
-                if(item2.RoleId == item.Id)
-                {
-                    item.IsSelected = true;
-                }
-            }
-        }
+        listRoles = await RolesService.GetAssignmentRole(Convert.ToInt32(employeeId));
     }
 
     private async Task UpdateEmployeeRole()
