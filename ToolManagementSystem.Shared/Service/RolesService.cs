@@ -32,7 +32,7 @@ namespace ToolManagementSystem.Shared.Service
         public async Task<List<EmployeeRoles>> GetEmployeeRolesById(int employeeId)
         {
             return await db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == employeeId).ToListAsync();
-        } 
+        }
         
         public async Task CreateRole(Roles role)
         {

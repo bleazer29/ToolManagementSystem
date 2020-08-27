@@ -60,9 +60,9 @@ namespace ToolManagementSystem.Shared.Data
             modelBuilder.Entity<RolesPages>().HasOne(rp => rp.Pages).WithMany(rp => rp.RolesPages).HasForeignKey(rp=> rp.PagesId);
 
             modelBuilder.Entity<RolesPages>().HasData(
-                new RolesPages  { PagesId = pages[0].Id, RoleId = roles.Id, IsVisible = true },
-                new RolesPages { PagesId = pages[1].Id, RoleId = roles.Id, IsVisible = true},
-                new RolesPages { PagesId = pages[2].Id, RoleId = roles.Id, IsVisible = true });
+                new RolesPages  { PagesId = pages[0].Id, RoleId = roles.Id/*, IsVisible = true*/ },
+                new RolesPages { PagesId = pages[1].Id, RoleId = roles.Id/*, IsVisible = true*/},
+                new RolesPages { PagesId = pages[2].Id, RoleId = roles.Id/*, IsVisible = true */});
             
 
 

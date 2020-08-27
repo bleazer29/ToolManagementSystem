@@ -10,5 +10,9 @@ namespace ToolManagementSystem.Shared.Models
 
         [NotMapped]
         public IList<RolesPages> RolesPages { get; set; }
+
+        [NotMapped]
+        public bool IsSelected { get; set; }
+
     }
 }

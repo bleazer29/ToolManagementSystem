@@ -1,13 +1,78 @@
 ﻿@page "/Role/AssignmentPages/{roleId}"
+@using ToolManagementSystem.Shared.Service
+@using ToolManagementSystem.Shared.Models
+@*@inject RolesService RolesService*@
+@inject PagesService PagesService
+@inject NavigationManager NavigationManager
 
 
-<h3>AssignmentPages</h3>
+<div class="container">
+    <h1>Назначение страниц для роли</h1>
+    <h2>Добавить или удалить страницы для роли</h2>
+    <br /><hr />
+    <div class="container-fluid">
+        @if (listPages != null)
+        {
+            <EditForm Model="@listPages">
+                @for (int i = 0; i < listPages.Count; i++)
+                {
+                    var local = i;
+                    <div class="custom-control custom-checkbox">
+                        <InputCheckbox @bind-Value="listPages[local].IsSelected" class=" big-checkbox" />
+                        <label class="form-check-label h4" for="@listPages[local].IsSelected">
+                            @listPages[local].NamePage
+                        </label>
+                    </div>
+                    <br />
+                }
+            </EditForm>
+            <div class="container-fluid">
+                <button type="submit" class="btn btn-primary col-6" @onclick="@UpdatePagesRole">Update</button>
+                <button type="button" class="btn btn-primary col-4" @onclick="@Cancel">Cancel</button>
+            </div>
+        }
+        else
+        {
+            <h5 class="card-title">None at the moment</h5>
+        }
+    </div>
+</div>
 
 
 
 
 @code {
     [Parameter] public string roleId { get; set; }
+    List<Pages> listPages;
+    List<RolesPages> pagesRole;
+    protected override async Task OnInitializedAsync()
+    {
+        listPages = PagesService.GetPages();
+        pagesRole = await PagesService.GetPagesRolesById(Convert.ToInt32(roleId));
+        foreach (var item in listPages)
+        {
+            foreach (var item2 in pagesRole)
+            {
+                if (item2.PagesId == item.Id)
+                {
+                    item.IsSelected = true;
+                }
+            }
+        }
+    }
 
+
+    private async Task UpdatePagesRole()
+    {
+
+        await PagesService.EditPagesInRole(listPages, Convert.ToInt32(roleId));
+        NavigationManager.NavigateTo("Role/ListRoles");
+    }
+
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("Role/ListRoles");
+    }
 
 }

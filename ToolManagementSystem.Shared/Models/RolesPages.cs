@@ -10,6 +10,6 @@ namespace ToolManagementSystem.Shared.Models
         public Roles Roles { get; set; }
         public int PagesId { get; set; }
         public Pages Pages { get; set; }
-        public bool IsVisible { get; set; }
+        //public bool IsVisible { get; set; }
     }
 }

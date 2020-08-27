@@ -1,4 +1,4 @@
-﻿@page "/Role/AssignmentRole/{userId}"
+﻿@page "/Role/AssignmentRole/{employeeId}"
 @using ToolManagementSystem.Shared.Service
 @using ToolManagementSystem.Shared.Models
 @inject RolesService RolesService
@@ -38,18 +38,14 @@
     </div>
 
 
-
-
-
 @code {
-    [Parameter] public string userId { get; set; }
+    [Parameter] public string employeeId { get; set; }
     List<Roles> listRoles;
     List<EmployeeRoles> employeeRoles;
-    //List<string> listUserRole = new List<string>();
     protected override async Task OnInitializedAsync()
     {
         listRoles = RolesService.GetRoles();
-        employeeRoles = await RolesService.GetEmployeeRolesById(Convert.ToInt32(userId));
+        employeeRoles = await RolesService.GetEmployeeRolesById(Convert.ToInt32(employeeId));
         foreach(var item in listRoles)
         {
             foreach (var item2 in employeeRoles)
@@ -57,7 +53,6 @@
                 if(item2.RoleId == item.Id)
                 {
                     item.IsSelected = true;
-                    //listUserRole.Add(item.RoleName);
                 }
             }
         }
@@ -65,7 +60,7 @@
 
     private async Task UpdateEmployeeRole()
     {
-        await RolesService.EditUsersInRole(listRoles, Convert.ToInt32(userId));
+        await RolesService.EditUsersInRole(listRoles, Convert.ToInt32(employeeId));
         NavigationManager.NavigateTo("Employee/Employee");
     }
 
