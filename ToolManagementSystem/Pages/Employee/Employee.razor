@@ -32,36 +32,51 @@
             <tbody>
                 @foreach (var employee in empl)
                 {
-                    <tr>
+                <tr>
 
-                        <td>
-                            <div class="dropdown">
-                                <button class="dropbtn">...</button>
-                                <div class="dropdown-content">
-                                    <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
-                                    <a class="dropdown-item btn btn-primary" href="/Role/AssignmentRole/@employee.Id">Assignment Role</a>
-                                    <a class="dropdown-item btn btn-primary" href="/employee/details/@employee.Id">Details</a>
-                                    <a class="dropdown-item btn btn-primary" @onclick="@(()=>EmployeeService.DeleteEmployee(employee))">Delete</a>
-                                </div>
+                    <td>
+                        <div class="dropdown">
+                            <button class="dropbtn">...</button>
+                            <div class="dropdown-content">
+                                <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
+                                <a class="dropdown-item btn btn-primary" href="/Role/AssignmentRole/@employee.Id">Assignment Role</a>
+                                <a class="dropdown-item btn btn-primary" href="/employee/details/@employee.Id">Details</a>
+                                <a class="dropdown-item btn btn-primary" @onclick="@(()=>EmployeeService.DeleteEmployee(employee))">Delete</a>
                             </div>
-                        </td>
-                        <td>@employee.FirstName</td>
-                        <td>@employee.LastName</td>
-                        <td>@employee.FullName</td>
-                        <td>@employee.Phone</td>
-                        <td>@employee.UserName</td>
-                        <td>@employee.Password</td>
-                        <td class="card-title">
-                            @{
-                                foreach (var item in rolename)
+                        </div>
+                    </td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.FullName</td>
+                    <td>@employee.Phone</td>
+                    <td>@employee.UserName</td>
+                    <td>@employee.Password</td>
+                    @if (emp_roles != null)
+                    {
+                <td class="card-title">
+                    @{
+                        foreach (var er in emp_roles)
+                        {
+                            foreach (var item in er)
+                            {
+                                if (item.EmployeeId == employee.Id)
                                 {
-
+                                    foreach (var rol in roles)
+                                    {
+                                        if (rol.Id == item.RoleId)
+                                        {
+                                            @rol.RoleName
+                                        }
+                                    }
                                 }
-
+                                else break;
                             }
+                        }
+                    }
+                </td>
+                     }
 
-                        </td>
-                    </tr>
+                </tr>
                 }
             </tbody>
         </table>
@@ -74,27 +89,17 @@
 @code {
     List<Employees> empl;
     List<Roles> roles;
-    List<EmployeeRoles> emp_roles;
-    List<string> rolename;
+    List<string> rolename = new List<string>();
+     List<List<EmployeeRoles>> emp_roles = new List<List<EmployeeRoles>>();
 
     protected override async Task OnInitializedAsync()
     {
         empl = EmployeeService.GetEmployee();
         roles = RolesService.GetRoles();
-        //foreach (var employee in empl) //Тут остановился
-        //{
-        //    emp_roles = await Task.Run(() => RolesService.GetEmployeeRolesById(employee.Id));
-        //    foreach (var rol in roles)
-        //    {
-        //        foreach (var er in emp_roles)
-        //        {
-        //            if (rol.Id == er.RoleId)
-        //            {
-        //                rolename.Add(rol.RoleName);
-        //            }
-        //        }
-        //    }
-        //}
+        foreach (var employee in empl)
+        {
+            emp_roles.Add(await RolesService.GetEmployeeRolesById(employee.Id));
+        }
     }
 
 }

@@ -29,17 +29,11 @@ namespace ToolManagementSystem.Shared.Service
             return db.Role.FirstOrDefault(r => r.Id == id);
         }
 
-        public async Task<List<EmployeeRoles>> GetEmployeeRolesById(int userId)
+        public async Task<List<EmployeeRoles>> GetEmployeeRolesById(int employeeId)
         {
-            return await db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == userId).ToListAsync();
-        }
-
-        //public Employees GetEmployee(string userId)
-        //{
-        //    return db.Employee.FirstOrDefault(e=>e.Id == Convert.ToInt32(userId));
-        //}
-
-
+            return await db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == employeeId).ToListAsync();
+        } 
+        
         public async Task CreateRole(Roles role)
         {
             var singleRole = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
@@ -82,8 +76,6 @@ namespace ToolManagementSystem.Shared.Service
                     }
                     else continue;
                     await db.SaveChangesAsync();
-
-                    //if (i < (role.Count - 1)) continue;
                     
                 }
             }
