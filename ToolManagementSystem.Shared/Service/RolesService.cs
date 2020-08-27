@@ -27,7 +27,7 @@ namespace ToolManagementSystem.Shared.Service
         }
         public Roles GetRoleById(int id)
         {
-            return db.Role.FirstOrDefault(r => r.Id == id);
+            return  db.Role.FirstOrDefault(r => r.Id == id);
         }
 
 
@@ -55,7 +55,7 @@ namespace ToolManagementSystem.Shared.Service
 
         public async Task CreateRole(Roles role)
         {
-            var singleRole = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
+            var singleRole = await db.Role.AsNoTracking().SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
             if (singleRole != null || role.RoleName==null) return;
             await db.Role.AddAsync(role);
             await db.SaveChangesAsync();
@@ -64,7 +64,7 @@ namespace ToolManagementSystem.Shared.Service
         
         public async Task EditRole(Roles role)
         {
-            var singleRoles = await db.Role.SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
+            var singleRoles = await db.Role.AsNoTracking().SingleOrDefaultAsync(r => r.RoleName == role.RoleName);
             if (singleRoles != null || role.RoleName == null) return;
             db.Role.Update(role);
             await db.SaveChangesAsync();
@@ -79,12 +79,9 @@ namespace ToolManagementSystem.Shared.Service
                     EmployeeRoles result = new EmployeeRoles {
                        EmployeeId = userId,
                        RoleId = role[i].Id
-                       //IsSelected = role[i].IsSelected
                     };
 
                     var singleEmployeeRole = db.EmployeeRole.AsNoTracking().Any(x => x.EmployeeId == userId && x.RoleId == role[i].Id);
-
-                    //if (role[i].IsSelected && !db.EmployeeRole.AsNoTracking().Where(x => x.EmployeeId == userId && x.RoleId == role[i].Id).Any())
                     if (role[i].IsSelected && !singleEmployeeRole)
                     {
                         db.EmployeeRole.Add(result);
@@ -105,7 +102,7 @@ namespace ToolManagementSystem.Shared.Service
         {
             try
             {
-                var listRolesPages = db.RolesPage.Where(x => x.RoleId == roles.Id).ToList();
+                var listRolesPages = db.RolesPage.AsNoTracking().Where(x => x.RoleId == roles.Id).ToList();
                 if (listRolesPages.Count != 0)
                 {
                     foreach (var item in listRolesPages)
@@ -117,8 +114,7 @@ namespace ToolManagementSystem.Shared.Service
                 db.Role.Remove(roles);
                 await db.SaveChangesAsync();
             }
-            catch{
-                return;
+            catch { return;
             }
         }
 

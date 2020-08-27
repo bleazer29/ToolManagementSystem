@@ -18,30 +18,28 @@ namespace ToolManagementSystem.Shared.Service
 
         public async Task<List<Employees>> GetEmployee()
         {
-            return await db.Employee.ToListAsync();
+            return await db.Employee.AsNoTracking().ToListAsync();
         }
 
         public async Task Create(Employees employees)
         {
-            var singleEmployee = await db.Employee.SingleOrDefaultAsync(e=>e.FirstName == employees.FirstName && e.LastName == employees.LastName);
+            var singleEmployee = await db.Employee.AsNoTracking().SingleOrDefaultAsync(e=>e.FirstName == employees.FirstName && e.LastName == employees.LastName);
             if(singleEmployee != null) return;
 
             if (db.Employee.Any(x=>x.UserName == employees.UserName)) return;
-
             await db.Employee.AddAsync(employees);
             await db.SaveChangesAsync();
         }
 
         public async Task<Employees> GetEmployeeById(int id)
         {
-            return await db.Employee.FirstOrDefaultAsync(e => e.Id == id);
+            return await db.Employee.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task EditEmployee(Employees employees)
         {
-            var employee = await db.Employee.SingleOrDefaultAsync(e => e.FirstName == employees.FirstName && e.Patronymic == employees.Patronymic && e.LastName == employees.LastName);
+            var employee = await db.Employee.AsNoTracking().SingleOrDefaultAsync(e => e.FirstName == employees.FirstName && e.Patronymic == employees.Patronymic && e.LastName == employees.LastName);
             if (employee != null) return;
-            if (db.Employee.Any(x => x.UserName == employees.UserName)) return;
             db.Employee.Update(employees);
             await db.SaveChangesAsync();
         }
