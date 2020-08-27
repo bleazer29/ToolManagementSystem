@@ -1,15 +1,15 @@
-﻿@page "/NRI/Attributes"
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
-                <h3>Справочник аттрибутов</h3>
-            </div>
-            <div class="col-lg-1 col-md-2 pr-0 pl-0">
-                <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
-                        data-toggle="modal" data-target="#createModal"></button>
-            </div>
+﻿@page "/Administrative/Roles"
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
+            <h3>Справочник ролей</h3>
+        </div>
+        <div class="col-lg-1 col-md-2 pr-0 pl-0">
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+                    data-toggle="modal" data-target="#createModal"></button>
         </div>
     </div>
+</div>
 
 <div class="container">
     @* Поиск panel start *@
@@ -31,15 +31,7 @@
                             <input type="text" class="form-control" id="statusTitle">
                         </div>
                     </div>
-                    <div class="form-group row align-items-center">
-                        <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
-                        <div class="w-100 d-md-none"></div>
-                        <div class="col col-md-8 col-lg-9 mb-2">
-                            <input type="text" class="form-control" id="unitTitle">
-                        </div>
-                    </div>
                 </form>
-            
             </div>
         </div>
     </div>
@@ -50,12 +42,26 @@
         <div class="container">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover roles-table">
                         <thead>
+                            <tr>  
+                                <th rowspan="2">Управление</th>
+                                <th rowspan="2">Наименование</th>
+                                <th colspan="4">НСИ</th>
+                                <th  colspan="4">Склад</th>
+                                <th  colspan="4">Сервис</th>
+                                <th  colspan="4">Наряды</th>
+                                <th  colspan="4">Админ</th>
+                                <th  colspan="4">Документация</th>
+                            </tr>
                             <tr>
-                                <th style="width:15%;">Управление</th>
-                                <th style="width:42%;">Наименование</th>
-                                <th style="width:43%;">Единица измерения</th>
+                                @for (int i = 0; i < 6; i++)
+                                {
+                                    <th><i class="fa fas fa-list"></i></th>
+                                    <th><i class="fa fas fa-edit"></i></th>
+                                    <th><i class="fa fas fa-plus"></i></th>
+                                    <th><i class="fa fas fa-trash-alt"></i></th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -66,8 +72,12 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">Длина</td>
-                                <td class="text-left">мм</td>
+                                <td class="text-left">Администратор</td>
+                                    @for (int i = 0; i < 24; i++)
+                                    {
+                                        <td class="text-center"><input class="readonly-checkbox" type="checkbox" disabled></td>
+                                    }
+                             
                             </tr>
                             <tr>
                                 <td class="align-middle">
@@ -76,8 +86,11 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">Вес</td>
-                                <td class="text-left">кг</td>
+                                <td class="text-left">Оператор НСИ</td>
+                                @for (int i = 0; i < 24; i++)
+                                {
+                                    <td class="text-center"><input type="checkbox" class="readonly-checkbox" disabled></td>
+                                }
                             </tr>
                             <tr>
                                 <td class="align-middle">
@@ -86,8 +99,11 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">Диаметр</td>
-                                <td class="text-left">мм</td>
+                                <td class="text-left">Оператор Инструментов</td>
+                                @for (int i = 0; i < 24; i++)
+                                {
+                                    <td class="text-center"><input type="checkbox" class="readonly-checkbox" disabled></td>
+                                }
                             </tr>
                         </tbody>
                     </table>
@@ -183,7 +199,7 @@
                             </div>
                         </div>
                     </form>
-                   
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Сохранить</button>

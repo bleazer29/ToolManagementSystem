@@ -381,8 +381,8 @@ main {
 }
 
  .navbar-hide-toggler {
-    position: absolute;
-    margin: 0 auto;
+    position: sticky;
+  /*  margin: 0 auto;*/
     display: block;
     bottom: 93%;
    /* right: 65px;
@@ -391,7 +391,7 @@ main {
     max-width: 44px;
     min-height: 40px;
     min-width: 44px;
-  /*  margin: 10px;*/
+    margin: 10px;
     
 }
 
@@ -564,4 +564,14 @@ jstree-grid-header {
 
 .scrollable{
     overflow-x:auto;
+}
+
+
+.roles-table th[colspan='4'] {
+    border-left-width: 3px;
+    border-right-width: 3px;
+}
+
+.readonly-checkbox{
+    background-color:blueviolet;
 }

@@ -361,12 +361,12 @@
 }
 
     .jstree-default-grid .jstree-disabled.jstree-hovered {
-        background: transparent;
+        background: #e2e3e3;
         box-shadow: none
     }
 
     .jstree-default-grid .jstree-disabled.jstree-clicked {
-        background: #efefef
+        background: transparent;
     }
 
     .jstree-default-grid .jstree-disabled > .jstree-icon {
@@ -400,7 +400,7 @@
 }
 
     .jstree-default-grid.jstree-checkbox-no-clicked > .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered {
-        background: #e2e3e3
+        background: transparent;
     }
 
 .jstree-default-grid > .jstree-striped {
@@ -426,8 +426,8 @@
 }
 
 .jstree-default-grid .jstree-wholerow-clicked {
-    background: silver;
-   /* background: -webkit-linear-gradient(top, silver 0, silver 100%);
+    background: transparent;
+    /* background: -webkit-linear-gradient(top, silver 0, silver 100%);
     background: linear-gradient(to bottom, silver 0, silver 100%)*/
 }
 
@@ -512,11 +512,11 @@
 }
 
     .jstree-default-grid .jstree-disabled.jstree-hovered {
-        background: transparent
+        background: #e2e3e3
     }
 
     .jstree-default-grid .jstree-disabled.jstree-clicked {
-        background: #efefef
+        background: transparent;
     }
 
 .jstree-default-grid .jstree-checkbox {
