@@ -34,11 +34,11 @@ function AddMainMenuTree(elementName) {
                 { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" } },
                 { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true" }, "a_attr": { "href": "/Contracts/" } },
                 { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true" }, "a_attr": { "href": "/Orders/" } },
-                { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true" } },
-                { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" } },
+                { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true" }, "a_attr": { "href": "/Maintenances/" } },
+                { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" }, "a_attr": { "href": "/RepairProcesses/" } },
                 { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true", "disabled": "true" } },
-                { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true" } },
-                { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true" } },
+                { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true" }, "a_attr": { "href": "/Reports/" } },
+                { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true" }, "a_attr": { "href": "/Documents/" } },
                 { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Departments" } },
                 { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Statuses" } },
                 { "id": "12", "parent": "20", "text": "Класификация", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Classification" } },
@@ -53,7 +53,7 @@ function AddMainMenuTree(elementName) {
                 { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } }
             ]
         }
-    }).bind("changed.jstree", function (e, data) {
+    }).on("changed.jstree", function (e, data) {
         if (data.node) {
             document.location = data.node.a_attr.href;
         }
@@ -95,7 +95,7 @@ function AddClasificationTree(elementName) {
     { "id": "7", "parent": "4", "text": "Тип4", "data": { "title": "t7" } }];
 
     $(elem).jstree({
-        "plugins": ["core", "grid"],
+        "plugins": ["wholerow", "grid"],
         "core": {
             "multiple": false,
             "themes": {

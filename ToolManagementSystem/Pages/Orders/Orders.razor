@@ -175,7 +175,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Наименование:
+                                    Номер:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -183,15 +183,135 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Артикул:
+                                    Дата начала:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Расчётная дата конца:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Контракт:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Контракт№00000001</option>
+                                        <option>Контракт№00000002</option>
+                                        <option>Контракт№00000003</option>
+                                        <option>Контракт№00000004</option>
+                                        <option>Контракт№00000005</option>
+                                        <option>Контракт№00000006</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Скважина:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Скважина1</option>
+                                        <option>Скважина2</option>
+                                        <option>Скважина3</option>
+                                        <option>Скважина4</option>
+                                        <option>Скважина5</option>
+                                        <option>Скважина6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Комментарий (необязательно):
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
+                            @* Поиск panel start *@
+                            <div class="row mb-3 mt-3">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse">
+                                            <div class="container-fluid">
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Номер:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Статус:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <select class="form-control">
+                                                            <option selected="selected">Активный</option>
+                                                            <option>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Период:
+                                                    </div>
+                                                    <div class="col-5 pr-0">
+                                                        <input type="datetime-local" />
+                                                    </div>
+                                                    <div class="col-5 pr-0">
+                                                        <input type="datetime-local" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Скважина:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Контракт:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Ответственный:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                    <button class="btn btn-primary fa fa-search"></button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Поиск panel end *@ы
                             <div class="row pt-2">
                                 <div class="col-10 pt-1 pr-0">
-                                    Спецификации:
+                                    Инструменты:
                                 </div>
                                 <div class="col-2 pt-1 pr-0">
                                     <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
@@ -199,35 +319,31 @@
                             </div>
                             <div class="row">
                                 <div class="col pt-1 pr-0">
-
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:10%;"></th>
-                                                    <th style="width:30%;">Наименование</th>
-                                                    <th style="width:30%;">Единица измерения</th>
-                                                    <th style="width:30%;">Значение</th>
+                                                    <th></th>
+                                                    <th>Наименование</th>
+                                                    <th>Серийный номер</th>
+                                                    <th>Партийный номер</th>
+                                                    <th>Артикул</th>
+                                                    <th>Классификация</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
-                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                        <input type="checkbox" class="form-check" />
                                                     </td>
                                                     <td class="text-left">
-                                                        <select class="form-control">
-                                                            <option selected="selected">Длина</option>
-                                                            <option>Ширина</option>
-                                                            <option>Вес</option>
-                                                        </select>
+                                                        123524687
                                                     </td>
                                                     <td class="text-left">
-                                                        мм
+                                                        15963589
                                                     </td>
                                                     <td class="text-left">
-                                                        <input class="form-control" type="number" value="12" />
+                                                        Вид1 -> Тип3
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -261,7 +377,7 @@
                         <div class="container-fluid">
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Наименование:
+                                    Номер:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -269,15 +385,135 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Артикул:
+                                    Дата начала:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Расчётная дата конца:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Контракт:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Контракт№00000001</option>
+                                        <option>Контракт№00000002</option>
+                                        <option>Контракт№00000003</option>
+                                        <option>Контракт№00000004</option>
+                                        <option>Контракт№00000005</option>
+                                        <option>Контракт№00000006</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Скважина:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Скважина1</option>
+                                        <option>Скважина2</option>
+                                        <option>Скважина3</option>
+                                        <option>Скважина4</option>
+                                        <option>Скважина5</option>
+                                        <option>Скважина6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Комментарий (необязательно):
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
+                            @* Поиск panel start *@
+                            <div class="row mb-3 mt-3">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Номер:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Статус:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <select class="form-control">
+                                                        <option selected="selected">Активный</option>
+                                                        <option>Неактивный</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Период:
+                                                </div>
+                                                <div class="col-5 pr-0">
+                                                    <input type="datetime-local" />
+                                                </div>
+                                                <div class="col-5 pr-0">
+                                                    <input type="datetime-local" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Скважина:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Контракт:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Ответственный:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                <button class="btn btn-primary fa fa-search"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Поиск panel end *@
                             <div class="row pt-2">
                                 <div class="col-10 pt-1 pr-0">
-                                    Спецификации:
+                                    Инструменты:
                                 </div>
                                 <div class="col-2 pt-1 pr-0">
                                     <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
@@ -289,30 +525,27 @@
                                         <table class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:10%;"></th>
-                                                    <th style="width:30%;">Наименование</th>
-                                                    <th style="width:30%;">Единица измерения</th>
-                                                    <th style="width:30%;">Значение</th>
+                                                    <th></th>
+                                                    <th>Наименование</th>
+                                                    <th>Серийный номер</th>
+                                                    <th>Партийный номер</th>
+                                                    <th>Артикул</th>
+                                                    <th>Классификация</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
-                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                        <input type="checkbox" class="form-check" />
                                                     </td>
                                                     <td class="text-left">
-                                                        <select class="form-control">
-                                                            <option selected="selected">Длина</option>
-                                                            <option>Ширина</option>
-                                                            <option>Вес</option>
-                                                        </select>
+                                                        123524687
                                                     </td>
                                                     <td class="text-left">
-                                                        мм
+                                                        15963589
                                                     </td>
                                                     <td class="text-left">
-                                                        <input class="form-control" type="number" value="12" />
+                                                        Вид1 -> Тип3
                                                     </td>
                                                 </tr>
                                             </tbody>
