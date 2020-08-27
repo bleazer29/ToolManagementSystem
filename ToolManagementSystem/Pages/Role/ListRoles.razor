@@ -48,7 +48,7 @@
                     <tr>
                         <td>
                             <a class="btn btn-primary fa fa-edit" href="/Role/EditRole/@role.Id"></a>
-                            <a class="btn btn-primary fa fa-apple" href="/Role/detailsRole/@role.Id"></a>
+                            <a class="btn btn-primary fa fa-edit" href="/Role/AssignmentPages/@role.Id"></a>
                             <a class="btn btn-primary fa fa-times" @onclick="@(()=>RolesService.DeleteRole(role))"></a>  
                         </td>
                         <td>@role.Id</td>

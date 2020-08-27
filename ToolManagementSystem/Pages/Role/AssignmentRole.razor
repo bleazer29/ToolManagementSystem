@@ -5,19 +5,6 @@
 @inject NavigationManager NavigationManager
 
 
-    @*<div class="container">
-        <h1>Роли, которые относятся к пользователю @RolesService.GetEmployee(userId).FirstName @RolesService.GetEmployee(userId).LastName </h1>
-        <hr/><br />
-        @{
-            foreach (var item in listUserRole)
-            {
-                <div class="h3">@item</div>
-            }
-        }
-        <br />
-    </div>
-<hr /><br />*@
-
     <div class="container">
         <h1>Назначение ролей</h1>
         <h2>Добавить или удалить роли для пользователя</h2>

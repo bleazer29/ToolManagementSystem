@@ -21,16 +21,15 @@ namespace ToolManagementSystem.Shared.Service
             return db.Employee.ToList();
         }
 
-        public async Task<string> Create(Employees employees)
+        public async Task Create(Employees employees)
         {
             var singleEmployee = await db.Employee.SingleOrDefaultAsync(e=>e.FirstName == employees.FirstName && e.LastName == employees.LastName);
-            if(singleEmployee != null)
-            {
-                return "Failed!";
-            }
+            if(singleEmployee != null) return;
+
+            if (db.Employee.Any(x=>x.UserName == employees.UserName)) return;
+
             await db.Employee.AddAsync(employees);
             await db.SaveChangesAsync();
-            return "Success!";
         }
 
         public async Task<Employees> GetEmployeeById(int id)
@@ -38,16 +37,13 @@ namespace ToolManagementSystem.Shared.Service
             return await db.Employee.FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<string> EditEmployee(Employees employees)
+        public async Task EditEmployee(Employees employees)
         {
             var employee = await db.Employee.SingleOrDefaultAsync(e => e.FirstName == employees.FirstName && e.Patronymic == employees.Patronymic && e.LastName == employees.LastName);
-            if (employee != null)
-            {
-                return "Not edited!";
-            }
+            if (employee != null) return;
+            if (db.Employee.Any(x => x.UserName == employees.UserName)) return;
             db.Employee.Update(employees);
             await db.SaveChangesAsync();
-            return "Edited!";
         }
 
         public async Task DeleteEmployee(Employees employees)
