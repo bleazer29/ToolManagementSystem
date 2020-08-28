@@ -70,11 +70,11 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="collapseOne" class="collapse">
+                                <div id="historySearchCollapse" class="collapse">
                                     <form class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
@@ -152,11 +152,11 @@
                             <div class="card-header pt-0 pb-0">
                                 <h5 class="pt-2 pb-2">
                                     Поиск
-                                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#instrumentSearchCollapse">
                                     </a>
                                 </h5>
                             </div>
-                            <div id="collapseOne" class="collapse">
+                            <div id="instrumentSearchCollapse" class="collapse">
                                 <div class="m-3">
                                     <div class="container-fluid">
                                         <div class="row pt-2">
@@ -275,11 +275,11 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#docsSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="collapseOne" class="collapse">
+                                <div id="docsSearchCollapse" class="collapse">
                                     <form class="m-3">
                                         <div class="container-fluid"> 
                                             <div class="row pt-2">
@@ -486,11 +486,11 @@
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#multipleInstrumentConrtrolSearchCollapse">
                                             </a>
                                         </h5>
                                     </div>
-                                    <div id="collapseOne" class="collapse">
+                                    <div id="multipleInstrumentConrtrolSearchCollapse" class="collapse">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
                                                 <div class="col-md-2 pt-1">
@@ -505,21 +505,15 @@
                                                     Серийный номер:
                                                 </div>
                                                 <div class="col pr-0">
-                                                    <select class="form-control">
-                                                        <option selected="selected">Активный</option>
-                                                        <option>Неактивный</option>
-                                                    </select>
+                                                    <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
                                                 <div class="col-md-2 pt-1">
                                                     Партийный номер:
                                                 </div>
-                                                <div class="col-5 pr-0">
-                                                    <input type="datetime-local" />
-                                                </div>
-                                                <div class="col-5 pr-0">
-                                                    <input type="datetime-local" />
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
