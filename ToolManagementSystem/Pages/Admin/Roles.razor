@@ -69,10 +69,11 @@
                                 {
                                     <th class="align-middle">
                                         <div class="row flex-nowrap p-2 justify-content-center">
-                                            <i class="fa fas fa-list"></i>
+                                            <i class="fa fas fa-eye"></i>
                                             <i class="fa fas fa-edit"></i>
                                             <i class="fa fas fa-plus"></i>
                                             <i class="fa fas fa-trash-alt"></i>
+                                           
                                         </div>
                                     </th>
 
@@ -185,17 +186,20 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <label for="Title" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" id="Title">
                             </div>
                         </div>
                         <div class="form-group align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
+                            <label for="editDropdownWrapper" class="col col-form-label mb-2"> Права доступа:</label>
                             <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                            <div id="editDropdownWrapper" class="col col-form-label">
+                                <div id="editRolesTree">
+
+                                </div>
+
                             </div>
                         </div>
                     </form>
@@ -260,11 +264,20 @@
         isCaretUp = !isCaretUp;
     }
 
+    public async void AddEditTreeDropdown(string treeElementName, string wrapperElementName, string nodeId)
+    {
+        //КОСТЫЛЬ
+        await jsRuntime.InvokeVoidAsync("DeleteRolesEditWrapper", wrapperElementName);
+        await jsRuntime.InvokeVoidAsync("AddRolesTree", treeElementName);
+    }
+
     public async void AddСreationTree(string treeElementName)
     {
         if (ModalCreateFirstOpened == true)
         {
             await jsRuntime.InvokeVoidAsync("AddRolesTree", treeElementName);
+            //КОСТЫЛЬ
+            await jsRuntime.InvokeVoidAsync("AddRolesTree", "editRolesTree");
             ModalCreateFirstOpened = false;
         }
     }

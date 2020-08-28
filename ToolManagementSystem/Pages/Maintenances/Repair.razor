@@ -1,0 +1,358 @@
+﻿@page "/RepairProcesses/"
+<div class="container">
+    <div class="row">
+        <div class="col-12 pl-0 pb-2 pb-md-0">
+            <h3>Ремонт</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    @* Поиск panel start *@
+    <div class="row mb-3 mt-3">
+        <div class="card w-100">
+            <div class="card-header pt-0 pb-0">
+                <h5 class="pt-2 pb-2">
+                    Поиск
+                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse">
+                <form class="m-3">
+                    <div class="container-fluid">
+                        <div class="row pt-2 align-items-center">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Наименование:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2 align-items-center">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Артикул:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2 align-items-center">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Серийный номер:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2 align-items-center">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Партийный номер:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2 align-items-center">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Класификация:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>               
+            </div>
+        </div>
+    </div>
+    @* Поиск panel end *@
+
+    @* Table start *@
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive scrollable">
+                    <table class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Управление</th>
+                                <th>Наименование</th>
+                                <th>Количество</th>
+                                <th>Партийный номер</th>
+                                <th>Артикуль</th>
+                                <th>Классификация</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <button type="button" data-toggle="modal" data-target="#singleControlModal"
+                                            class="btn btn-primary fa fa-file-alt"></button>
+                                </td>
+                                <td class="text-left">Инструмент1</td>
+                                <td class="text-left">1</td>
+                                <td class="text-left">14566433</td>
+                                <td class="text-left">35669874</td>
+                                <td class="text-left">Вид1 -> Тип2</td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">
+                                    <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                            class="btn btn-primary fa fa-file-alt"></button>
+                                </td>
+                                <td class="text-left">Инструмент2</td>
+                                <td class="text-left">4</td>
+                                <td class="text-left">14622874</td>
+                                <td class="text-left">99874112</td>
+                                <td class="text-left">Вид1 -> Тип3</td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">
+                                    <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                            class="btn btn-primary fa fa-file-alt"></button>
+                                </td>
+                                <td class="text-left">Инструмент3</td>
+                                <td class="text-left">10</td>
+                                <td class="text-left">34685986</td>
+                                <td class="text-left">47855478</td>
+                                <td class="text-left">Вид2 -> Тип4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @* Table end *@
+
+    @*Modal control single instruments start*@
+    <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента: Инструмент1</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2 align-items-center">
+                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                    Куда переместить:
+                                </div>
+                                <div class="col pr-0 pl-0 pl-md-1">
+                                    <select class="form-control">
+                                        <option selected>Ожидание сервиса (WS)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2 align-items-center">
+                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                    Комментарий (необязательно):
+                                </div>
+                                <div class="col pr-0 pl-0 pl-md-1">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal control single instruments end*@
+
+    @*Modal control multiple instruments start*@
+    <div class="modal fade" id="multipleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2 align-items-center">
+                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                    Куда переместить:
+                                </div>
+                                <div class="col pr-0 pl-0 pl-md-1">
+                                    <select class="form-control">
+                                        <option selected>Ожидание сервиса (WS)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2 align-items-center">
+                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                    Комментарий (необязательно):
+                                </div>
+                                <div class="col pr-0 pl-0 pl-md-1">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="row pt-2 pl-0">
+                                <div class="col-12 pt-1">
+                                    Инструменты:
+                                </div>
+                            </div>
+                            @* Поиск panel start *@
+                            <div class="row mb-3 mt-3">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2 pl-2 pr-2 align-items-center">
+                                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                                    Наименование:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2 pl-2 pr-2 align-items-center">
+                                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                                    Артикул:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2 pl-2 pr-2 align-items-center">
+                                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                                    Серийный номер:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2 pl-2 pr-2 align-items-center">
+                                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                                    Партийный номер:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2 pl-2 pr-2 align-items-center">
+                                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                                    Класификация:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex flex-row-reverse pt-2 pb-2 pl-2 pr-2">
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Поиск panel end *@
+                            <div class="row ">
+                                <div class="col pt-1 pr-0 pl-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Наименование</th>
+                                                    <th>Серийный номер</th>
+                                                    <th>Партийный номер</th>
+                                                    <th>Артикул</th>
+                                                    <th>Классификация</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        44589625
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        99874112
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        44589625
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal control multiple instruments end*@
+
+</div>
+
+@code {
+    private bool isCaretUp = false;
+    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+
+    public void ChangeCaret()
+    {
+        isCaretUp = !isCaretUp;
+    }
+}
+
