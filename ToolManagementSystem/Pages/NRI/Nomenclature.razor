@@ -1,10 +1,10 @@
 ﻿@page "/NRI/Nomenclature"
 <div class="container">
     <div class="row">
-        <div class="col-11">
+        <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
             <h3>Справочник номенклатуры</h3>
         </div>
-        <div class="col-1 pr-0">
+        <div class="col-lg-1 col-md-2 pr-0 pl-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
                     data-toggle="modal" data-target="#createModal"></button>
         </div>
@@ -18,31 +18,33 @@
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
                     Поиск
-                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#nomenclatureSearchCollapse">
+                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#statusesSearchCollapse">
                     </a>
                 </h5>
             </div>
-            <div id="nomenclatureSearchCollapse" class="collapse">
+            <div id="statusesSearchCollapse" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Наименование:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Артикул:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary fa fa-search"></button>
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -67,7 +69,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-left">
+                                <td class="align-middle">
                                     <button class="btn btn-primary fa fa-edit" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
@@ -118,39 +120,36 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Отмена">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Наименование:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Спецификации:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-4 col-lg-3 mb-2">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
                                 </div>
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Артикул:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-10 pt-1 pr-0">
-                                    Спецификации:
-                                </div>
-                                <div class="col-2 pt-1 pr-0">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col pt-1 pr-0">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <div class="col pt-1">
 
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
@@ -164,7 +163,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-left">   
+                                                    <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
                                                     </td>
                                                     <td class="text-left">
@@ -178,7 +177,7 @@
                                                         мм
                                                     </td>
                                                     <td class="text-left">
-                                                        <input class="form-control" type="number" value="12"/>
+                                                        <input class="form-control" type="number" value="12" />
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -186,13 +185,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
+           
         </div>
     </div>
     @*Modal Edit*@
@@ -209,33 +210,31 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Наименование:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Спецификации:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-4 col-lg-3 mb-2">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
                                 </div>
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Артикул:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-10 pt-1 pr-0">
-                                    Спецификации:
-                                </div>
-                                <div class="col-2 pt-1 pr-0">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col pt-1 pr-0">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <div class="col pt-1">
+
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <thead>
@@ -249,8 +248,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
-                                                                data-toggle="modal" data-target="#editModal"></button>
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
                                                     </td>
                                                     <td class="text-left">
                                                         <select class="form-control">
@@ -276,6 +274,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary ">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>

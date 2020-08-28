@@ -1,10 +1,10 @@
 ﻿@page "/NRI/Counterparties"
 <div class="container">
     <div class="row">
-        <div class="col-11">
+        <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
             <h3>Справочник контрагентов</h3>
         </div>
-        <div class="col-1 pr-0">
+        <div class="col-lg-1 col-md-2 pr-0 pl-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
                     data-toggle="modal" data-target="#createModal"></button>
         </div>
@@ -18,39 +18,41 @@
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
                     Поиск
-                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#counterpartySearchCollapse">
+                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#statusesSearchCollapse">
                     </a>
                 </h5>
             </div>
-            <div id="counterpartySearchCollapse" class="collapse">
+            <div id="statusesSearchCollapse" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Наименование:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 ЕДРПОУ:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Адрес:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary fa fa-search"></button>
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -75,7 +77,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-left">
+                                <td class="align-middle">
                                     <button class="btn btn-primary fa fa-edit" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
@@ -127,36 +129,32 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Наименование:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    ЕДРПОУ:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> ЕДРПОУ:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Адрес:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Адрес:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>
@@ -175,36 +173,32 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Наименование:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    ЕДРПОУ:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> ЕДРПОУ:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Адрес:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Адрес:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>

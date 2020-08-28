@@ -11,192 +11,197 @@
         </div>
     </div>
 
-<div class="container">
-    @* Поиск panel start *@
-    <div class="row mb-3 mt-3">
-        <div class="card w-100">
-            <div class="card-header pt-0 pb-0">
-                <h5 class="pt-2 pb-2">
-                    Поиск
-                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#attributesSearchCollapse">
-                    </a>
-                </h5>
+    <div class="container">
+        @* Поиск panel start *@
+        <div class="row mb-3 mt-3">
+            <div class="card w-100">
+                <div class="card-header pt-0 pb-0">
+                    <h5 class="pt-2 pb-2">
+                        Поиск
+                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#statusesSearchCollapse">
+                        </a>
+                    </h5>
+                </div>
+                <div id="statusesSearchCollapse" class="collapse">
+                    <form class="m-3">
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                    Наименование:
+                                </div>
+                                <div class="col pr-0 pl-0 pl-md-1">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                    Единица измерения:
+                                </div>
+                                <div class="col pr-0 pl-0 pl-md-1">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                <button class="btn btn-primary">
+                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div id="attributesSearchCollapse" class="collapse">
-                <form class="m-3">
-                    <div class="form-group row align-items-center">
-                        <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
-                        <div class="w-100 d-md-none"></div>
-                        <div class="col col-md-8 col-lg-9 mb-2">
-                            <input type="text" class="form-control" id="statusTitle">
-                        </div>
+        </div>
+        @* Поиск panel end *@
+
+        @* Table start *@
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width:15%;">Управление</th>
+                                    <th style="width:42%;">Наименование</th>
+                                    <th style="width:43%;">Единица измерения</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle">
+                                        <button class="btn btn-primary fa fa-edit" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-times" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </td>
+                                    <td class="text-left">Длина</td>
+                                    <td class="text-left">мм</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <button class="btn btn-primary fa fa-edit" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-times" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </td>
+                                    <td class="text-left">Вес</td>
+                                    <td class="text-left">кг</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <button class="btn btn-primary fa fa-edit" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-times" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </td>
+                                    <td class="text-left">Диаметр</td>
+                                    <td class="text-left">мм</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="form-group row align-items-center">
-                        <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
-                        <div class="w-100 d-md-none"></div>
-                        <div class="col col-md-8 col-lg-9 mb-2">
-                            <input type="text" class="form-control" id="unitTitle">
-                        </div>
-                    </div>
-                    <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                        <button class="btn btn-primary">
-                            <span aria-hidden="true" class="fa fa fa-search"></span>
+                </div>
+            </div>
+        </div>
+        @* Table end *@
+
+        @*Modal Delete*@
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                </form>
-            
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary ">Принять</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    @* Поиск panel end *@
+        @*Modal Delete*@
 
-    @* Table start *@
-    <div class="row">
-        <div class="container">
-            <div class="row">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th style="width:15%;">Управление</th>
-                                <th style="width:42%;">Наименование</th>
-                                <th style="width:43%;">Единица измерения</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
-                                </td>
-                                <td class="text-left">Длина</td>
-                                <td class="text-left">мм</td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
-                                </td>
-                                <td class="text-left">Вес</td>
-                                <td class="text-left">кг</td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
-                                </td>
-                                <td class="text-left">Диаметр</td>
-                                <td class="text-left">мм</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        @*Modal Edit*@
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="fa fa fa-times"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="text" class="form-control" id="statusTitle">
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="text" class="form-control" id="unitTitle">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    @* Table end *@
+        @*Modal Edit*@
 
-    @*Modal Delete*@
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @*Modal Delete*@
+        @*Modal Create*@
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="text" class="form-control" id="statusTitle">
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="text" class="form-control" id="unitTitle">
+                                </div>
+                            </div>
+                        </form>
 
-    @*Modal Edit*@
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="fa fa fa-times"></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
-                            </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </div>
                 </div>
             </div>
         </div>
+        @*Modal Create*@
     </div>
-    @*Modal Edit*@
-
-    @*Modal Create*@
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
-                            </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
-                            </div>
-                        </div>
-                    </form>
-                   
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @*Modal Create*@
-</div>
 
 @code {
     private bool isCaretUp = false;
