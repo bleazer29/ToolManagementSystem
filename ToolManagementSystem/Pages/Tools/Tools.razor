@@ -1,15 +1,15 @@
 ﻿@page "/Tools/"
-<div class="container">
-    <div class="row">
-        <div class="col-11">
-            <h3>Склад</h3>
-        </div>
-        <div class="col-1 pr-0">
-            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
-                    data-toggle="modal" data-target="#createModal"></button>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
+                <h3>Склад</h3>
+            </div>
+            <div class="col-lg-1 col-md-2 pr-0 pl-0">
+                <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+                        data-toggle="modal" data-target="#createModal"></button>
+            </div>
         </div>
     </div>
-</div>
 
 <div class="container">
     @* Поиск panel start *@
@@ -26,18 +26,18 @@
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
-                            <div class="col-md-3 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Наименование:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-3 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Статус:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <select class="form-control">
                                     <option selected="selected">Все</option>
                                     <option>RFU</option>
@@ -51,42 +51,45 @@
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-3 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Серийный номер:
                             </div>
-                            <div class="col pr-0">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>  
-                        <div class="row pt-2">
-                            <div class="col-md-3 pt-1">
-                                Партийный номер:
-                            </div>
-                            <div class="col pr-0">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>  
-                        <div class="row pt-2">
-                            <div class="col-md-3 pt-1">
-                                Артикул:
-                            </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
-                            <div class="col-md-3 pt-1">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Партийный номер:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Артикул:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Классификация:
                             </div>
-                            <div class="col pr-0">
+                            <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary fa fa-search"></button>
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
                         </div>
                     </div>
                 </form>
+               
             </div>
         </div>
     </div>
@@ -111,13 +114,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-left">
+                                <td class="align-middle">
                                     <button class="btn btn-primary fa fa-edit" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left"><a href="#">00000001</a></td>
+                                <td class="text-left"><a href="/Tools/Details/1">00000001</a></td>
                                 <td class="text-left">RFU</td>
                                 <td class="text-left">
                                     12345678
@@ -171,61 +174,56 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1">
-                                    Номенклатура:
-                                </div>
-                                <div class="col pr-0">
-                                    <select>
-                                        <option>Номенклатура1</option>
-                                        <option>Номенклатура2</option>
-                                        <option>Номенклатура3</option>
-                                    </select>
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номенклатура:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control">
+                                    <option>Номенклатура1</option>
+                                    <option>Номенклатура2</option>
+                                    <option>Номенклатура3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Класификация:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                @*//DEREVO*@
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Серийный номер:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Партийный номер:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-4 col-lg-3 mb-2">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
                                 </div>
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1">
-                                    Классификация:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1">
-                                    Серийный номер:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1 pr-0">
-                                    Партийный номер:
-                                </div>
-                                <div class="col pt-1 pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1 pr-0">
-                                    Артикул:
-                                </div>
-                                <div class="col pt-1 pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-10 pt-1 pr-0">
-                                    Детали:
-                                </div>
-                                <div class="col-2 pt-1 pr-0">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col pt-1 pr-0">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <div class="col pt-1">
+
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <thead>
@@ -260,6 +258,8 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
+              
+               
             </div>
         </div>
     </div>
@@ -277,61 +277,56 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="container-fluid">
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1">
-                                    Номенклатура:
-                                </div>
-                                <div class="col pr-0">
-                                    <select>
-                                        <option>Номенклатура1</option>
-                                        <option>Номенклатура2</option>
-                                        <option>Номенклатура3</option>
-                                    </select>
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номенклатура:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control">
+                                    <option>Номенклатура1</option>
+                                    <option>Номенклатура2</option>
+                                    <option>Номенклатура3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Класификация:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                @*//DEREVO*@
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Серийный номер:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Партийный номер:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-4 col-lg-3 mb-2">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
                                 </div>
                             </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1">
-                                    Классификация:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1">
-                                    Серийный номер:
-                                </div>
-                                <div class="col pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1 pr-0">
-                                    Партийный номер:
-                                </div>
-                                <div class="col pt-1 pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-2 pt-1 pr-0">
-                                    Артикул:
-                                </div>
-                                <div class="col pt-1 pr-0">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-10 pt-1 pr-0">
-                                    Детали:
-                                </div>
-                                <div class="col-2 pt-1 pr-0">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col pt-1 pr-0">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <div class="col pt-1">
+
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <thead>
@@ -364,8 +359,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
+
             </div>
         </div>
     </div>

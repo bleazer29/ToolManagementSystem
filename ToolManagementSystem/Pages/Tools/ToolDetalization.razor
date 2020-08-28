@@ -49,18 +49,23 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#toolHistoryTab">История инструмента</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#docTab">Документы</a>
+            </li>
         </ul>
-        @* Operating history tab start *@
+       
         <div class="tab-content pl-0 pr-0t">
+            @* Operating history tab start *@
             <div id="operatingHistoryTab" class="container tab-pane active">
                 <div class="container">
+                    @* Operating history search start*@
                     <div class="row mb-3 mt-3">
                         <div class="col pl-0 pr-0">
                             <div class="card w-100">
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolOperatingHistorySearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -68,39 +73,39 @@
                                     <form class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
                                                     Сообщение:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-4">
-                                                    Период
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
+                                                    Период:
                                                 </div>
-                                                <div class="col-1">
-                                                    От:
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control " />
                                                 </div>
-                                                <div class="col-3 form-group">
-                                                    <input class="form-control" type="date" />
-                                                </div>
-                                                <div class="col-1">
-                                                    До:
-                                                </div>
-                                                <div class="col-3  form-group">
-                                                    <input class="form-control" type="date" />
+                                                <div class="w-100 d-md-none "></div>
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control" />
                                                 </div>
                                             </div>
+                                           
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @* Operating history search end*@
                     <div class="row">
                         @* Operating history table start*@
                         <div class="table-responsive scrollable">
@@ -135,6 +140,7 @@
             @* Parts start *@
             <div id="partsTab" class="container tab-pane fade">
                 <div class="container">
+                    @* Parts search start*@
                     <div class="row mb-3 mt-3">
                         <div class="col pl-0 pr-0">
                             <div class="card w-100">
@@ -149,23 +155,26 @@
                                     <form class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
                                                     Номенклатура:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
                                                     Артикул:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
+                                           
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary">Найти</button>
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -173,6 +182,7 @@
                             </div>
                         </div>
                     </div>
+                    @* Parts search end*@
                     <div class="row">
                         @* Parts table start*@
                         <div class="table-responsive scrollable">
@@ -202,6 +212,7 @@
             @* History tab start *@
             <div id="toolHistoryTab" class="container tab-pane fade">
                 <div class="container">
+                    @*History search start*@
                     <div class="row mb-3 mt-3">
                         <div class="col pl-0 pr-0">
                             <div class="card w-100">
@@ -216,56 +227,56 @@
                                     <form class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
                                                     Статус:
                                                 </div>
-                                                <div class="col pr-0">
-                                                        <select class="form-control">
-                                                            <option selected="selected">Все</option>
-                                                            <option>RFU</option>
-                                                            <option>FJ</option>
-                                                            <option>FJ(SB)</option>
-                                                            <option>WS</option>
-                                                            <option>WO</option>
-                                                            <option>RP</option>
-                                                            <option>Scrap</option>
-                                                        </select>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <select class="form-control">
+                                                        <option selected="selected">Все</option>
+                                                        <option>RFU</option>
+                                                        <option>FJ</option>
+                                                        <option>FJ(SB)</option>
+                                                        <option>WS</option>
+                                                        <option>WO</option>
+                                                        <option>RP</option>
+                                                        <option>Scrap</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Наименование:
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
+                                                    Сообщение:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Дата:
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
+                                                    Период:
                                                 </div>
-                                                <div class="col-1">
-                                                    От:
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control " />
                                                 </div>
-                                                <div class="col-3 pr-0">
-                                                    <input type="date" class="form-control" />
-                                                </div>
-                                                <div class="col-1">
-                                                    До:
-                                                </div>
-                                                <div class="col-3 pr-0p">
+                                                <div class="w-100 d-md-none "></div>
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
                                                     <input type="date" class="form-control" />
                                                 </div>
                                             </div>
+
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @*History search end*@
                     <div class="row">
                         @*History table start*@
                         <div class="table-responsive scrollable">
@@ -300,6 +311,7 @@
             @* Docs tab start *@
             <div id="docTab" class="container tab-pane fade">
                 <div class="container">
+                    @*Doc search start*@
                     <div class="row mb-3 mt-3">
                         <div class="col pl-0 pr-0">
                             <div class="card w-100">
@@ -314,22 +326,27 @@
                                     <form class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
                                                     Наименование:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
+                                            
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
+                                 
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @*Doc search end*@
                     <div class="row">
                         @*Doc table start*@
                         <div class="table-responsive scrollable">
@@ -342,7 +359,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-left">
+                                        <td class="align-middle">
                                             <button type="button" class="btn btn-primary fa fa-file-alt" />
                                         </td>
                                         <td class="text-left"><a href="#">Акт приёмки №0000001</a></td>
