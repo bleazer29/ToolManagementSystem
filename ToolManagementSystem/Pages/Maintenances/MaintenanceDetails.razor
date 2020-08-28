@@ -1,0 +1,657 @@
+﻿@page "/Maintenances/Details/{MaintenanceId:int}"
+@inject IJSRuntime jsRunTime
+
+<div class="container">
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <p>Сервисное обслуживание №00000001</p>
+                </div>
+                <div class="col-7">
+                    <p class="float-left">Статус: Активный</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Ответственный:
+                </div>
+                <div class="col-3">
+                    Иванов Иван Иванович
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Дата начала:
+                </div>
+                <div class="col-3">
+                    31.07.2020
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Расчётная дата конца:
+                </div>
+                <div class="col-3">
+                    01.08.2020
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    Фактическая дата конца:
+                </div>
+                <div class="col-3">
+                    -
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid pt-3 pl-0 pr-0">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#instrumentTab">Инструменты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#historyTab">История</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#docsTab">Документы</a>
+            </li>
+        </ul>
+        
+        @* Tabcontrol start *@
+        <div class="tab-content pl-0 pr-0t">
+            @* History tab start *@
+            <div id="historyTab" class="container tab-pane fade">
+                <div class="container">
+                    <div class="row mb-3 mt-3">
+                        <div class="col pl-0 pr-0">
+                            <div class="card w-100">
+                                <div class="card-header pt-0 pb-0">
+                                    <h5 class="pt-2 pb-2">
+                                        Поиск
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse">
+                                    <form class="m-3">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2">
+                                                <div class="col-md-4 pt-1">
+                                                    Сообщение:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-4">
+                                                    Период
+                                                </div>
+                                                <div class="col-1">
+                                                    От:
+                                                </div>
+                                                <div class="col-3 form-group">
+                                                    <input class="form-control" type="date" />
+                                                </div>
+                                                <div class="col-1">
+                                                    До:
+                                                </div>
+                                                <div class="col-3  form-group">
+                                                    <input class="form-control" type="date" />
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                <button class="btn btn-primary fa fa-search"></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @* History table start*@
+                        <div class="table-responsive scrollable">
+                            <table class="table  table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Дата</th>
+                                        <th>Сообщение</th>
+                                        <th>Ответственный</th>
+                                        <th>Комментарий</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">
+                                            23.08.2020
+                                        </td>
+                                        <td class="text-left">WO-00000001/2020 открыт</td>
+                                        <td class="text-left">Иванов Иван Иванович</td>
+                                        <td class="text-left">
+                                            Тестовый комментарий
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @* History table end*@
+                    </div>
+                </div>
+            </div>
+            @* History tab end *@
+
+            @* Instrument tab start *@
+            <div id="instrumentTab" class="container tab-pane active">
+                <div class="container">
+                    @* Поиск panel start *@
+                    <form class="row mb-3 mt-3">
+                        <div class="card w-100">
+                            <div class="card-header pt-0 pb-0">
+                                <h5 class="pt-2 pb-2">
+                                    Поиск
+                                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse">
+                                <div class="m-3">
+                                    <div class="container-fluid">
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Наименование:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Артикул:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Серийный номер:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Партийный номер:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Классификация:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                            <button class="btn btn-primary fa fa-search"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    @* Поиск panel end *@
+                    <div class="row">
+                        @* Instrument table start*@
+                        <div class="table-responsive scrollable">
+                            <table class="table  table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Управление</th>
+                                        <th>Наименование</th>
+                                        <th>Количество</th>
+                                        <th>Партийный номер</th>
+                                        <th>Артикуль</th>
+                                        <th>Классификация</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">
+                                            <button type="button" data-toggle="modal" data-target="#singleControlModal"
+                                                    class="btn btn-primary fa fa-file-alt"></button>
+                                        </td>
+                                        <td class="text-left">Инструмент1</td>
+                                        <td class="text-left">1</td>
+                                        <td class="text-left">14566433</td>
+                                        <td class="text-left">35669874</td>
+                                        <td class="text-left">Вид1 -> Тип2</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">
+                                            <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                    class="btn btn-primary fa fa-file-alt"></button>
+                                        </td>
+                                        <td class="text-left">Инструмент2</td>
+                                        <td class="text-left">4</td>
+                                        <td class="text-left">14622874</td>
+                                        <td class="text-left">99874112</td>
+                                        <td class="text-left">Вид1 -> Тип3</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">
+                                            <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                    class="btn btn-primary fa fa-file-alt"></button>
+                                        </td>
+                                        <td class="text-left">Инструмент3</td>
+                                        <td class="text-left">10</td>
+                                        <td class="text-left">34685986</td>
+                                        <td class="text-left">47855478</td>
+                                        <td class="text-left">Вид2 -> Тип4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @* Instrument table end*@
+                    </div>
+                </div>
+            </div>
+            @* Instrument tab end *@
+
+            @* Doc tab start *@
+            <div id="docsTab" class="container tab-pane fade">
+                <div class="container">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-11 pl-0 pr-0">
+                            <div class="card w-100">
+                                <div class="card-header pt-0 pb-0">
+                                    <h5 class="pt-2 pb-2">
+                                        Поиск
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse">
+                                    <form class="m-3">
+                                        <div class="container-fluid"> 
+                                            <div class="row pt-2">
+                                                <div class="col-md-4 pt-1">
+                                                    Наименование:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-4 pt-1">
+                                                    Дата:
+                                                </div>
+                                                <div class="col-1">
+                                                    От:
+                                                </div>
+                                                <div class="col-3 pr-0">
+                                                    <input type="date" class="form-control" />
+                                                </div>
+                                                <div class="col-1">
+                                                    До:
+                                                </div>
+                                                <div class="col-3 pr-0p">
+                                                    <input type="date" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                <button class="btn btn-primary fa fa-search"></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col pt-1 pb-1">
+                            <button type="button" data-toggle="modal" data-target="#addDocModal"
+                                             class="btn btn-primary fa fa-file-upload"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*Doc table start*@
+                        <div class="table-responsive scrollable">
+                            <table class="table  table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Дата прикрепления</th>
+                                        <th>Документ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">
+                                            31.07.2020
+                                        </td>
+                                        <td class="text-left"><a>Наряд на выполнение работ №00000001</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">
+                                            31.07.2020
+                                        </td>
+                                        <td class="text-left"><a>План-график WO-00000001/2020</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">
+                                            31.07.2020
+                                        </td>
+                                        <td class="text-left"><a>План-фактный анализ трудозатрат WO-00000001/2020</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @*Doc table end*@
+                    </div>
+                </div>
+            </div>
+            @* Doc tab end *@
+        </div>
+        @* Tabcontrol end *@
+
+        @*Modal add doc start*@
+    <div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Прикрепление документа: WO-00000001/2020</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Наименование документа:
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />                            
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="file-field">
+                                    <div class="btn btn-primary btn-sm float-left">
+                                        <span>Выберите файл</span>
+                                        <input type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" placeholder="Прикрепите документ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal add doc end*@
+
+        @*Modal control single instruments start*@
+    <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента: Инструмент1</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Куда переместить:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Склад (RFU)</option>
+                                        <option>Ремонт (RP)</option>
+                                        <option>Утиль (Scrap)</option>
+                                    </select>                                
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Комментарий (необязательно):
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal control single instruments end*@
+
+        @*Modal control multiple instruments start*@
+    <div class="modal fade" id="multipleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Куда переместить:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Склад (RFU)</option>
+                                        <option>Ремонт (RP)</option>
+                                        <option>Утиль (Scrap)</option>
+                                    </select>                                
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
+                                    Комментарий (необязательно):
+                                </div>
+                                <div class="col pr-0">
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            @* Поиск panel start *@
+                            <div class="row mb-3 mt-3">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Наименование:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Серийный номер:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <select class="form-control">
+                                                        <option selected="selected">Активный</option>
+                                                        <option>Неактивный</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Партийный номер:
+                                                </div>
+                                                <div class="col-5 pr-0">
+                                                    <input type="datetime-local" />
+                                                </div>
+                                                <div class="col-5 pr-0">
+                                                    <input type="datetime-local" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Артикул:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-2 pt-1">
+                                                    Классификация:
+                                                </div>
+                                                <div class="col pr-0">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                <button class="btn btn-primary fa fa-search"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Поиск panel end *@
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Инструменты:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Наименование</th>
+                                                    <th>Серийный номер</th>
+                                                    <th>Партийный номер</th>
+                                                    <th>Артикул</th>
+                                                    <th>Классификация</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        44589625
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        99874112
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        44589625
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal control multiple instruments end*@
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int MaintenanceId { get; set; }
+    bool isFirstRender = true;
+
+    private bool isCaretUp = false;
+    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (isFirstRender)
+        {
+            await jsRunTime.InvokeVoidAsync("initDatePicker");
+            await jsRunTime.InvokeVoidAsync("initTooltips");
+        }
+        isFirstRender = false;
+    }
+
+    public void ChangeCaret()
+    {
+        isCaretUp = !isCaretUp;
+    }
+
+    public async Task OnWeekPickerChange()
+    {
+        await jsRunTime.InvokeVoidAsync("dpChange");
+    }
+}

@@ -1,8 +1,8 @@
-﻿@page "/Orders/"
+﻿@page "/Maintenances/"
 <div class="container">
     <div class="row">
         <div class="col-11">
-            <h3>Orders</h3>
+            <h3>Сервисное обслуживание</h3>
         </div>
         <div class="col-1 pr-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
@@ -57,22 +57,6 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-2 pt-1">
-                                Скважина:
-                            </div>
-                            <div class="col pr-0">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
-                                Контракт:
-                            </div>
-                            <div class="col pr-0">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-md-2 pt-1">
                                 Ответственный:
                             </div>
                             <div class="col pr-0">
@@ -103,8 +87,6 @@
                                 <th>Дата начала</th>
                                 <th>Расчётная дата конца</th>
                                 <th>Ответственный</th>
-                                <th>Скважина</th>
-                                <th>Контракт</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,8 +97,8 @@
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left"><a href="#">00000001</a></td>
-                                <td class="text-left">Active</td>
+                                <td class="text-left"><a href="/Maintenances/Details/1">00000001/2020</a></td>
+                                <td class="text-left">Активный</td>
                                 <td class="text-left">
                                     31.07.2020
                                 </td>
@@ -124,10 +106,57 @@
                                     01.08.2020
                                 </td>
                                 <td class="text-left">Иванов Иван Иванович</td>
-                                <td class="text-left">Скважина4</td>
+                            </tr>
+                            <tr>
                                 <td class="text-left">
-                                    00000008
+                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-times" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
+                                <td class="text-left"><a href="/Maintenances/Details/1">00000002/2020</a></td>
+                                <td class="text-left">Активный</td>
+                                <td class="text-left">
+                                    01.08.2020
+                                </td>
+                                <td class="text-left">
+                                    02.08.2020
+                                </td>
+                                <td class="text-left">Иванов Иван Иванович</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-times" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
+                                </td>
+                                <td class="text-left"><a href="/Maintenances/Details/1">00000003/2020</a></td>
+                                <td class="text-left">Активный</td>
+                                <td class="text-left">
+                                    02.08.2020
+                                </td>
+                                <td class="text-left">
+                                    04.08.2020
+                                </td>
+                                <td class="text-left">Иванов Иван Иванович</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">
+                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-times" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
+                                </td>
+                                <td class="text-left"><a href="/Maintenances/Details/1">00000004/2020</a></td>
+                                <td class="text-left">Активный</td>
+                                <td class="text-left">
+                                    04.08.2020
+                                </td>
+                                <td class="text-left">
+                                    06.08.2020
+                                </td>
+                                <td class="text-left">Иванов Иван Иванович</td>
                             </tr>
                         </tbody>
                     </table>
@@ -183,6 +212,17 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
+                                    Статус:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Активынй</option>
+                                        <option>Неактивный</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
                                     Дата начала:
                                 </div>
                                 <div class="col pr-0">
@@ -199,148 +239,10 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Контракт:
-                                </div>
-                                <div class="col pr-0">
-                                    <select class="form-control">
-                                        <option>Контракт№00000001</option>
-                                        <option>Контракт№00000002</option>
-                                        <option>Контракт№00000003</option>
-                                        <option>Контракт№00000004</option>
-                                        <option>Контракт№00000005</option>
-                                        <option>Контракт№00000006</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Скважина:
-                                </div>
-                                <div class="col pr-0">
-                                    <select class="form-control">
-                                        <option>Скважина1</option>
-                                        <option>Скважина2</option>
-                                        <option>Скважина3</option>
-                                        <option>Скважина4</option>
-                                        <option>Скважина5</option>
-                                        <option>Скважина6</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Комментарий (необязательно):
+                                    Ответственный:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
-                                </div>
-                            </div>
-
-                            <div class="row pt-2">
-                                <div class="col-10 pt-1 pr-0">
-                                    Инструменты:
-                                </div>
-                                <div class="col-2 pt-1 pr-0">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
-                                </div>
-                            </div>
-                            @* Поиск panel start *@
-                            <div class="row mb-3 mt-3">
-                                <div class="card w-100">
-                                    <div class="card-header pt-0 pb-0">
-                                        <h5 class="pt-2 pb-2">
-                                            Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
-                                            </a>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseOne" class="collapse">
-                                        <form class="m-3">
-                                            <div class="container-fluid">
-                                                <div class="row pt-2">
-                                                    <div class="col-md-3 pt-1">
-                                                        Наименование:
-                                                    </div>
-                                                    <div class="col pr-0">
-                                                        <input type="text" class="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div class="row pt-2">
-                                                    <div class="col-md-3 pt-1">
-                                                        Статус:
-                                                    </div>
-                                                    <div class="col pr-0">
-                                                        <select class="form-control">
-                                                            <option selected="selected">Активный</option>
-                                                            <option>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row pt-2">
-                                                    <div class="col-md-3 pt-1">
-                                                        Серийный номер:
-                                                    </div>
-                                                    <div class="col pr-0">
-                                                        <input type="text" class="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div class="row pt-2">
-                                                    <div class="col-md-3 pt-1">
-                                                        Партийный номер:
-                                                    </div>
-                                                    <div class="col pr-0">
-                                                        <input type="text" class="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div class="row pt-2">
-                                                    <div class="col-md-3 pt-1">
-                                                        Классификация:
-                                                    </div>
-                                                    <div class="col pr-0">
-                                                        <input type="text" class="form-control" />
-                                                    </div>
-                                                </div>
-                                                <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                    <button class="btn btn-primary fa fa-search"></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            @* Поиск panel end *@
-                            <div class="row">
-                                <div class="col pt-1 pr-0">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Наименование</th>
-                                                    <th>Серийный номер</th>
-                                                    <th>Партийный номер</th>
-                                                    <th>Артикул</th>
-                                                    <th>Классификация</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-left">
-                                                        <input type="checkbox" class="form-check" />
-                                                    </td>
-                                                    <td class="text-left">
-                                                        123524687
-                                                    </td>
-                                                    <td class="text-left">
-                                                        15963589
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Вид1 -> Тип3
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -377,6 +279,17 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
+                                    Статус:
+                                </div>
+                                <div class="col pr-0">
+                                    <select class="form-control">
+                                        <option>Активынй</option>
+                                        <option>Неактивный</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-2 pt-1">
                                     Дата начала:
                                 </div>
                                 <div class="col pr-0">
@@ -393,37 +306,7 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Контракт:
-                                </div>
-                                <div class="col pr-0">
-                                    <select class="form-control">
-                                        <option>Контракт№00000001</option>
-                                        <option>Контракт№00000002</option>
-                                        <option>Контракт№00000003</option>
-                                        <option>Контракт№00000004</option>
-                                        <option>Контракт№00000005</option>
-                                        <option>Контракт№00000006</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Скважина:
-                                </div>
-                                <div class="col pr-0">
-                                    <select class="form-control">
-                                        <option>Скважина1</option>
-                                        <option>Скважина2</option>
-                                        <option>Скважина3</option>
-                                        <option>Скважина4</option>
-                                        <option>Скважина5</option>
-                                        <option>Скважина6</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-2 pt-1">
-                                    Комментарий (необязательно):
+                                    Ответственный:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -440,7 +323,7 @@
                             </div>
                             @* Поиск panel start *@
                             <div class="row mb-3 mt-3">
-                                <div class="card w-100">
+                                <div class="card w-100 ml-3">
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
@@ -449,7 +332,7 @@
                                         </h5>
                                     </div>
                                     <div id="collapseOne" class="collapse">
-                                        <form class="m-3">
+                                        <div class="m-3">
                                             <div class="container-fluid">
                                                 <div class="row pt-2">
                                                     <div class="col-md-3 pt-1">
@@ -459,15 +342,13 @@
                                                         <input type="text" class="form-control" />
                                                     </div>
                                                 </div>
+                                              
                                                 <div class="row pt-2">
                                                     <div class="col-md-3 pt-1">
-                                                        Статус:
+                                                        Артикул:
                                                     </div>
                                                     <div class="col pr-0">
-                                                        <select class="form-control">
-                                                            <option selected="selected">Активный</option>
-                                                            <option>Inactive</option>
-                                                        </select>
+                                                        <input type="text" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="row pt-2">
@@ -498,7 +379,7 @@
                                                     <button class="btn btn-primary fa fa-search"></button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -521,6 +402,32 @@
                                                 <tr>
                                                     <td class="text-left">
                                                         <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Труба 1
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Труба 2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
                                                     </td>
                                                     <td class="text-left">
                                                         123524687
