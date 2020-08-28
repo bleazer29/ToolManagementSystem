@@ -1,15 +1,17 @@
 ﻿@page "/Tools/"
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
-                <h3>Склад</h3>
-            </div>
-            <div class="col-lg-1 col-md-2 pr-0 pl-0">
-                <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
-                        data-toggle="modal" data-target="#createModal"></button>
-            </div>
+@inject IJSRuntime jsRuntime
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
+            <h3>Склад</h3>
+        </div>
+        <div class="col-lg-1 col-md-2 pr-0 pl-0">
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+                    data-toggle="modal" data-target="#createModal"></button>
         </div>
     </div>
+</div>
 
 <div class="container">
     @* Поиск panel start *@
@@ -89,7 +91,7 @@
                         </div>
                     </div>
                 </form>
-               
+
             </div>
         </div>
     </div>
@@ -189,7 +191,14 @@
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Класификация:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                @*//DEREVO*@
+                                <div id="editParentDropdownWrapper" class="dropdown">
+                                    <input type="text" class="form-control dropdown-toggle" id="editParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly @onclick="@(() => AddEditTreeDropdown("editClassificationTree", "editDropdown", "editParentNode", "id"))" />
+                                    <div id="editDropdown" class="dropdown-menu" aria-labelledby="parent_node">
+                                        <div id="editClassificationTree">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -258,8 +267,8 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
-              
-               
+
+
             </div>
         </div>
     </div>
@@ -292,7 +301,14 @@
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Класификация:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                @*//DEREVO*@
+                                <div id="creationParentDropdownWrapper" class="dropdown">
+                                    <input type="text" class="form-control dropdown-toggle" id="creationParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @onclick="@(() => AddСreationTreeDropdown("creationClassificationTree", "creationDropdown", "creationParentNode"))" readonly />
+                                    <div id="creationDropdown" class="dropdown-menu" aria-labelledby="parent_node">
+                                        <div id="creationClassificationTree">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -371,10 +387,29 @@
 @code {
     private bool isCaretUp = false;
     public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    private bool ModalCreateFirstOpened = true;
 
     public void ChangeCaret()
     {
         isCaretUp = !isCaretUp;
+    }
+
+    public async void AddEditTreeDropdown(string treeElementName, string wrapperElementName, string textBoxElementName, string nodeId)
+    {
+        //КОСТЫЛЬ
+        await jsRuntime.InvokeVoidAsync("DeleteClassificationEditDropdown", treeElementName);
+        await jsRuntime.InvokeVoidAsync("AddClasificationTreeDropdown", treeElementName, textBoxElementName);
+        await jsRuntime.InvokeVoidAsync("StopDropdownFromClosing", wrapperElementName);
+    }
+
+    public async void AddСreationTreeDropdown(string treeElementName, string wrapperElementName, string textBoxElementName)
+    {
+        if (ModalCreateFirstOpened == true)
+        {
+            await jsRuntime.InvokeVoidAsync("AddClasificationTreeDropdown", treeElementName, textBoxElementName);
+            await jsRuntime.InvokeVoidAsync("StopDropdownFromClosing", wrapperElementName);
+            ModalCreateFirstOpened = false;
+        }
     }
 }
 
