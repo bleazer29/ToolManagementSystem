@@ -146,52 +146,69 @@
             @* Instrument tab start *@
             <div id="instrumentTab" class="container tab-pane active">
                 <div class="container">
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
-                            <div class="card w-100">
-                                <div class="card-header pt-0 pb-0">
-                                    <h5 class="pt-2 pb-2">
-                                        Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
-                                        </a>
-                                    </h5>
-                                </div>
-                                <div id="collapseOne" class="collapse">
-                                    <form class="m-3">
-                                        <div class="container-fluid">
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Наименование:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
+                    @* Поиск panel start *@
+                    <form class="row mb-3 mt-3">
+                        <div class="card w-100">
+                            <div class="card-header pt-0 pb-0">
+                                <h5 class="pt-2 pb-2">
+                                    Поиск
+                                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse">
+                                <div class="m-3">
+                                    <div class="container-fluid">
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Наименование:
                                             </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Партийный номер:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Артикуль:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
                                             </div>
                                         </div>
-                                    </form>
+
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Артикул:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Серийный номер:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Партийный номер:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-3 pt-1">
+                                                Классификация:
+                                            </div>
+                                            <div class="col pr-0">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                            <button class="btn btn-primary fa fa-search"></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+                    @* Поиск panel end *@
                     <div class="row">
                         @* Instrument table start*@
                         <div class="table-responsive scrollable">
@@ -210,7 +227,7 @@
                                     <tr>
                                         <td class="text-left">
                                             <button type="button" data-toggle="modal" data-target="#singleControlModal"
-                                             class="btn btn-primary fa fa-file-alt"></button>
+                                                    class="btn btn-primary fa fa-file-alt"></button>
                                         </td>
                                         <td class="text-left">Инструмент1</td>
                                         <td class="text-left">1</td>
@@ -221,7 +238,7 @@
                                     <tr>
                                         <td class="text-left">
                                             <button type="button" data-toggle="modal" data-target="#multipleControlModal"
-                                             class="btn btn-primary fa fa-file-alt"></button>
+                                                    class="btn btn-primary fa fa-file-alt"></button>
                                         </td>
                                         <td class="text-left">Инструмент2</td>
                                         <td class="text-left">4</td>
@@ -232,7 +249,7 @@
                                     <tr>
                                         <td class="text-left">
                                             <button type="button" data-toggle="modal" data-target="#multipleControlModal"
-                                             class="btn btn-primary fa fa-file-alt"></button>
+                                                    class="btn btn-primary fa fa-file-alt"></button>
                                         </td>
                                         <td class="text-left">Инструмент3</td>
                                         <td class="text-left">10</td>
@@ -264,18 +281,7 @@
                                 </div>
                                 <div id="collapseOne" class="collapse">
                                     <form class="m-3">
-                                        <div class="container-fluid">
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Статус:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <select class="form-control">
-                                                        <option selected="selected">Активный</option>
-                                                        <option>Неактивный</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                        <div class="container-fluid"> 
                                             <div class="row pt-2">
                                                 <div class="col-md-4 pt-1">
                                                     Наименование:

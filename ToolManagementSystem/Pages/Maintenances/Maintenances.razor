@@ -239,7 +239,7 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Ответсвтенный:
+                                    Ответственный:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
@@ -306,10 +306,142 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-2 pt-1">
-                                    Ответсвтенный:
+                                    Ответственный:
                                 </div>
                                 <div class="col pr-0">
                                     <input type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="row pt-2">
+                                <div class="col-10 pt-1 pr-0">
+                                    Инструменты:
+                                </div>
+                                <div class="col-2 pt-1 pr-0">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-right"></button>
+                                </div>
+                            </div>
+                            @* Поиск panel start *@
+                            <div class="row mb-3 mt-3">
+                                <div class="card w-100 ml-3">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse">
+                                        <div class="m-3">
+                                            <div class="container-fluid">
+                                                <div class="row pt-2">
+                                                    <div class="col-md-3 pt-1">
+                                                        Наименование:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                              
+                                                <div class="row pt-2">
+                                                    <div class="col-md-3 pt-1">
+                                                        Артикул:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-3 pt-1">
+                                                        Серийный номер:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-3 pt-1">
+                                                        Партийный номер:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-3 pt-1">
+                                                        Классификация:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                    <button class="btn btn-primary fa fa-search"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Поиск panel end *@
+                            <div class="row">
+                                <div class="col pt-1 pr-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Наименование</th>
+                                                    <th>Серийный номер</th>
+                                                    <th>Партийный номер</th>
+                                                    <th>Артикул</th>
+                                                    <th>Классификация</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Труба 1
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <input type="checkbox" class="form-check" />
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Труба 2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        123524687
+                                                    </td>
+                                                    <td class="text-left">
+                                                        15963589
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Вид1 -> Тип3
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
