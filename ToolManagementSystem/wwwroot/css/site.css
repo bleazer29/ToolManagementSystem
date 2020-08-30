@@ -574,3 +574,31 @@ jstree-grid-header {
 .roles-table tbody input {
     margin: 5px;
 }
+
+@media (min-width: 768px) {
+    .layout-body {
+        min-width: calc(100% - 75px);
+        max-width: calc(100% - 75px);
+    }
+
+    .sidebar-hide.collapse + .layout-body {
+        min-width: calc(100% - 355px);
+        max-width: calc(100% - 355px);
+    }
+
+    .sidebar-hide {
+        max-width: 70px;
+    }
+
+        .sidebar-hide.collapse {
+            max-width: 0px;
+        }
+}
+
+.description-container span{
+    color: #ce1141;
+}
+
+.description-container img {
+    max-height: 50px;
+}

@@ -55,88 +55,6 @@
         </ul>
        
         <div class="tab-content pl-0 pr-0t">
-            @* Operating history tab start *@
-            <div id="operatingHistoryTab" class="container-fluid tab-pane active">
-                <div class="container-fluid">
-                    @* Operating history search start*@
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
-                            <div class="card w-100">
-                                <div class="card-header pt-0 pb-0">
-                                    <h5 class="pt-2 pb-2">
-                                        Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolOperatingHistorySearchCollapse">
-                                        </a>
-                                    </h5>
-                                </div>
-                                <div id="toolOperatingHistorySearchCollapse" class="collapse">
-                                    <form class="m-3">
-                                        <div class="container-fluid">
-                                            <div class="row pt-2">
-                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
-                                                    Сообщение:
-                                                </div>
-                                                <div class="col pr-0 pl-0 pl-md-1">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
-                                                    Период:
-                                                </div>
-                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
-                                                    <input type="date" class="form-control " />
-                                                </div>
-                                                <div class="w-100 d-md-none "></div>
-                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
-                                                    <input type="date" class="form-control" />
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary">
-                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @* Operating history search end*@
-                    <div class="row">
-                        @* Operating history table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Дата</th>
-                                        <th>Сообщение</th>
-                                        <th>Ответственный</th>
-                                        <th>Комментарий</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            23.08.2020
-                                        </td>
-                                        <td class="text-left">Попал в наряд на работу №00000001</td>
-                                        <td class="text-left">Иванов Иван Иванович</td>
-                                        <td class="text-left">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @* Operating history table end*@
-                    </div>
-                </div>
-            </div>
-            @* Operating history tab end *@
-
             @* Parts start *@
             <div id="partsTab" class="container-fluid tab-pane fade">
                 <div class="container-fluid">
@@ -170,7 +88,7 @@
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
-                                           
+
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
                                                 <button class="btn btn-primary">
                                                     <span aria-hidden="true" class="fa fa fa-search"></span>
@@ -208,6 +126,90 @@
                 </div>
             </div>
             @* Parts tab end *@
+
+
+            @* Operating history tab start *@
+            <div id="operatingHistoryTab" class="container-fluid tab-pane active">
+                <div class="container-fluid">
+                    @* Operating history search start*@
+                    <div class="row mb-3 mt-3">
+                        <div class="col pl-0 pr-0">
+                            <div class="card w-100">
+                                <div class="card-header pt-0 pb-0">
+                                    <h5 class="pt-2 pb-2">
+                                        Поиск
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolOperatingHistorySearchCollapse">
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="toolOperatingHistorySearchCollapse" class="collapse">
+                                    <form class="m-3">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
+                                                    Сообщение:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-3 pt-1 pl-0">
+                                                    Период:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control " />
+                                                </div>
+                                                <div class="w-100 d-md-none "></div>
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* Operating history search end*@
+                    <div class="row">
+                        @* Operating history table start*@
+                        <div class="table-responsive scrollable">
+                            <table class="table  table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Дата</th>
+                                        <th>Сообщение</th>
+                                        <th>Ответственный</th>
+                                        <th>Комментарий</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">
+                                            23.08.2020
+                                        </td>
+                                        <td class="text-left">Попал в наряд на работу №00000001</td>
+                                        <td class="text-left">Иванов Иван Иванович</td>
+                                        <td class="text-left">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @* Operating history table end*@
+                    </div>
+                </div>
+            </div>
+            @* Operating history tab end *@
+
 
             @* History tab start *@
             <div id="toolHistoryTab" class="container-fluid tab-pane fade">
@@ -271,7 +273,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -333,7 +335,7 @@
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
                                                 <button class="btn btn-primary">
                                                     <span aria-hidden="true" class="fa fa fa-search"></span>
@@ -341,7 +343,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                 
+
                                 </div>
                             </div>
                         </div>

@@ -123,7 +123,7 @@ function AddClasificationTree(elementName) {
                     "header": "Наименование",
                     "tree": true,
                     "value": "title",
-                    "width": "90%"
+                    "width": "100%"
                 },
             ]
         }
@@ -227,7 +227,7 @@ function AddRolesTree(elementName) {
                     "header": "Наименование",
                     "tree": true,
                     "value": "title",
-                    "width": "20%"
+                    "width": "50%"
                 },
                 {
                     "header": "Просмотр",
@@ -288,4 +288,40 @@ function AddRolesTree(elementName) {
             ]
         }
     });
+}
+
+
+function AddPartRow(tBodyName, counter) {
+    var tBodyElem = '#' + tBodyName;
+    $(tBodyElem).append(
+        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
+        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+            + "</td >"
+        + "<td class='text-left'><select class='form-control'></select></td>"
+            + "<td class='text-left'></td>"
+            + "</tr>"
+    );
+}
+
+function ClearTable(tBodyName) {
+    var tBodyElem = '#' + tBodyName;
+    $(tBodyElem).empty();
+}
+
+function RemoveTableRow(tBodyName) {
+    var tBodyElem = '#' + tBodyName.substr(0, tBodyName.lastIndexOf("_")) + tBodyName.substr(tBodyName.lastIndexOf("-"));
+    $(tBodyElem).remove();
+}
+
+function AddClassificationRow(tBodyName, counter) {
+    var tBodyElem = '#' + tBodyName;
+    $(tBodyElem).append(
+        "<tr id='classification-row-" + counter + "'><td class= 'text-left'>"
+        + "<button id='classification-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+        + "</td >"
+        + "<td class='text-left'><select class='form-control'></select></td>"
+        + "<td class='text-left'></td>"
+        + "<td class='text-left'><input class='form-control'/></td>"
+        + "</tr>"
+    );
 }

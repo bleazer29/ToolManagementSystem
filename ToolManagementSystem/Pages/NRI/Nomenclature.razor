@@ -1,4 +1,6 @@
 ﻿@page "/NRI/Nomenclature"
+@inject IJSRuntime jsRuntime
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
@@ -185,7 +187,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -193,7 +195,7 @@
                     <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
             </div>
-           
+
         </div>
     </div>
     @*Modal Edit*@
@@ -229,7 +231,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Спецификации:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right" type="button" @onclick="@(() => AddClassificationRow("classificationEditTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
@@ -245,10 +247,10 @@
                                                     <th style="width:30%;">Значение</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="classificationEditTbody">
                                                 <tr>
                                                     <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button" ></button>
                                                     </td>
                                                     <td class="text-left">
                                                         <select class="form-control">
@@ -273,8 +275,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearClassificationTable("classificationEditTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearClassificationTable("classificationEditTbody"))">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -285,6 +287,27 @@
 @code {
     private bool isCaretUp = false;
     public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    private int ClassificationCounter = 0;
+
+    private void IncrementCount()
+    {
+        ClassificationCounter++;
+        //await SessionStorage.SetItem<int>("counter", currentCount);
+    }
+
+    public async void AddClassificationRow(string tbodyName)
+    {
+
+        await jsRuntime.InvokeVoidAsync("AddClassificationRow", tbodyName, ClassificationCounter);
+        IncrementCount();
+    }
+
+    public async void ClearClassificationTable(string tbodyName)
+    {
+
+        await jsRuntime.InvokeVoidAsync("ClearTable", tbodyName);
+        ClassificationCounter = 1;
+    }
 
     public void ChangeCaret()
     {

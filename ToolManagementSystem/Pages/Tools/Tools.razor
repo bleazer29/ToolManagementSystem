@@ -227,7 +227,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right" type="button" @onclick="@(() => AddPartRow("partsEditTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
@@ -242,7 +242,7 @@
                                                     <th style="width:30%;">Артикул</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="partsEditTbody">
                                                 <tr>
                                                     <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"
@@ -264,11 +264,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearPartTable("partsEditTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearPartTable("partsEditTbody"))">Сохранить</button>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -337,7 +335,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right" type="button" @onclick="@(() => AddPartRow("partsCreationTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
@@ -352,7 +350,7 @@
                                                     <th style="width:30%;">Артикул</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="partsCreationTbody">
                                                 <tr>
                                                     <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"
@@ -374,8 +372,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearPartTable("partsCreationTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearPartTable("partsCreationTbody"))">Сохранить</button>
                 </div>
 
             </div>
@@ -388,10 +386,31 @@
     private bool isCaretUp = false;
     public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
     private bool ModalCreateFirstOpened = true;
+    private int PartsCounter = 0;
 
     public void ChangeCaret()
     {
         isCaretUp = !isCaretUp;
+    }
+
+    private void IncrementCount()
+    {
+        PartsCounter++;
+        //await SessionStorage.SetItem<int>("counter", currentCount);
+    }
+
+    public async void AddPartRow(string tbodyName)
+    {
+
+        await jsRuntime.InvokeVoidAsync("AddPartRow", tbodyName, PartsCounter);
+        IncrementCount();
+    }
+
+    public async void ClearPartTable(string tbodyName)
+    {
+
+        await jsRuntime.InvokeVoidAsync("ClearTable", tbodyName);
+        PartsCounter = 1;
     }
 
     public async void AddEditTreeDropdown(string treeElementName, string wrapperElementName, string textBoxElementName, string nodeId)
