@@ -1,14 +1,14 @@
 ﻿@page "/Orders/Details/{OrderId:int}"
 @inject IJSRuntime jsRunTime
 
-<div class="container">
+<div class="container-fluid">
         <div class="card">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-7">
                         <p>Наряд на работу №00000001</p>
                     </div>
-                    <div class="col-7">
+                    <div class="col-5">
                         <p class="float-right">Статус: Активный</p>
                     </div>
                 </div>
@@ -71,312 +71,13 @@
                     <a class="nav-link" data-toggle="tab" href="#docTab">Документы</a>
                 </li>
             </ul>
-            @* Operating time tab start *@
-        <div class="tab-content pl-0 pr-0t">
-            <div id="operatingTab" class="container tab-pane active">
-                <div class="container">
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
-                            <div class="card w-100">
-                                <div class="card-header pt-0 pb-0">
-                                    <h5 class="pt-2 pb-2">
-                                        Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#operatingTimeSearchCollapse">
-                                        </a>
-                                    </h5>
-                                </div>
-                                <div id="operatingTimeSearchCollapse" class="collapse">
-                                    <form class="m-3">
-                                        <div class="container-fluid">
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Наименование:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Статус:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <select class="form-control">
-                                                        <option selected="selected">Активный</option>
-                                                        <option>Неактивный</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-4">
-                                                    Период
-                                                </div>
-                                                <div class="col-1">
-                                                    От:
-                                                </div>
-                                                <div class="col-3 form-group">
-                                                    <input class="form-control" type="date" />
-                                                </div>
-                                                <div class="col-1">
-                                                    До:
-                                                </div>
-                                                <div class="col-3  form-group">
-                                                    <input class="form-control" type="date" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Серийный номер:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Партийный номер:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Артикул:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container pr-0 pl-0 pb-2">
-                            <div class="row">
-                                <div class="col-2 pr-0 pt-1">
-                                    Неделя:
-                                </div>
-                                <div class="col input-group align-items-center pl-0">
-                                    <div id="weekpicker1" @onchange="OnWeekPickerChange"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        @*Operation time table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Статус</th>
-                                        <th>Инструмент</th>
-                                        <th>Серийный номер</th>
-                                        <th>Партийный номер</th>
-                                        <th>Артикул</th>
-                                        <th>Пн</th>
-                                        <th>Вт</th>
-                                        <th>Ср</th>
-                                        <th>Чт</th>
-                                        <th>Пт</th>
-                                        <th class="bg-danger">Сб</th>
-                                        <th class="bg-danger">Вс</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            <input type="checkbox" class="form-check" />
-                                        </td>
-                                        <td class="text-left"><a href="#">FJ</a></td>
-                                        <td class="text-left">00000001</td>
-                                        <td class="text-left">
-                                            12345678
-                                        </td>
-                                        <td class="text-left">
-                                            12345678
-                                        </td>
-                                        <td class="text-left">12345678</td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    8
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    4
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    9
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    5
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-6">
-                                                        <p class="float-right">FJ</p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    3
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-7">
-                                                        <p class="float-right"></p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    0
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="container">
-                                                <div class="row operation-info">
-                                                    <div class="col-7">
-                                                        <p class="float-right"></p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    0
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @*Operation time table end*@
-                    </div>
-                    <div class="row">
-                        <div class="card w-100 mt-2 mb-1">
-                            <div class="card-body">
-                                <form>
-                                    <div class="row pb-1">
-                                        <div class="col-4">
-                                            Период
-                                        </div>
-                                        <div class="col-1">
-                                            От:
-                                        </div>
-                                        <div class="col-3 form-group">
-                                            <input class="form-control" type="date" />
-                                        </div>
-                                        <div class="col-1">
-                                            До:
-                                        </div>
-                                        <div class="col-3  form-group">
-                                            <input class="form-control" type="date" />
-                                        </div>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <div class="col-4">
-                                            Наработка
-                                        </div>
-                                        <div class="col-8">
-                                            <input class="form-control" type="time" />
-                                        </div>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <div class="col-4">
-                                            Комментарий
-                                        </div>
-                                        <div class="col-8">
-                                            <input class="form-control" type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="row pb-1">
-                                        <div class="col">
-                                            <button type="submit" class="btn btn-primary float-right">Добавить</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @* Operating time tab end *@
-
-            @* Instrument tab start *@
-            <div id="instrumentTab" class="container tab-pane fade">
-                <div class="container">
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
+           
+            <div class="tab-content pl-0 pr-0t">
+                @* Operating time tab start *@
+                <div id="operatingTab" class="container-fluid tab-pane active">
+                    <div class="container-fluid">
+                        @* Поиск panel start *@
+                        <form class="row mb-3 mt-3">
                             <div class="card w-100">
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
@@ -386,274 +87,582 @@
                                     </h5>
                                 </div>
                                 <div id="instrumentSearchCollapse" class="collapse">
-                                    <form class="m-3">
+                                    <div class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Статус:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <select class="form-control">
-                                                        <option selected="selected">Active</option>
-                                                        <option>Inactive</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Наименование:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
+
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Серийный номер:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Партийный номер:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Артикул:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Вид:
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Классификация:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        @* Поиск panel end *@
+                        <div class="row">
+                            <div class="container-fluid pr-0 pl-0 pb-2">
+                                <div class="row">
+                                    <div class="col-2 pr-0 pt-1">
+                                        Неделя:
+                                    </div>
+                                    <div class="col input-group align-items-center pl-0">
+                                        <div id="weekpicker1" @onchange="OnWeekPickerChange"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @*Operation time table start*@
+                            <div class="table-responsive scrollable">
+                                <table class="table  table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Статус</th>
+                                            <th>Инструмент</th>
+                                            <th>Серийный номер</th>
+                                            <th>Партийный номер</th>
+                                            <th>Артикул</th>
+                                            <th>Пн</th>
+                                            <th>Вт</th>
+                                            <th>Ср</th>
+                                            <th>Чт</th>
+                                            <th>Пт</th>
+                                            <th class="bg-danger">Сб</th>
+                                            <th class="bg-danger">Вс</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left">
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td class="text-left"><a href="#">FJ</a></td>
+                                            <td class="text-left">00000001</td>
+                                            <td class="text-left">
+                                                12345678
+                                            </td>
+                                            <td class="text-left">
+                                                12345678
+                                            </td>
+                                            <td class="text-left">12345678</td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-6">
+                                                            <p class="float-right">FJ</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        8
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-6">
+                                                            <p class="float-right">FJ</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        4
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-6">
+                                                            <p class="float-right">FJ</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        9
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-6">
+                                                            <p class="float-right">FJ</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        5
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-6">
+                                                            <p class="float-right">FJ</p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        3
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-7">
+                                                            <p class="float-right"></p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        0
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left">
+                                                <div class="container-fluid">
+                                                    <div class="row operation-info">
+                                                        <div class="col-7">
+                                                            <p class="float-right"></p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        0
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @*Operation time table end*@
+                        </div>
+                        <div class="row mb-3">
+                            <div class="card w-100 mt-2 mb-1">
+                                <div class="card-body p-1">
+                                    <form class="m-3">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Период:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control " />
+                                                </div>
+                                                <div class="w-100 d-md-none "></div>
+                                                <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                    <input type="date" class="form-control" />
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                   Наработка:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="number" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Комментарий:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                          
+                                            <div class="row pt-2">
+                                                
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <button type="submit" class="btn btn-primary float-right">Добавить</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        @*Instrument table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Статус</th>
-                                        <th>Кол-во</th>
-                                        <th>Инструмент</th>
-                                        <th>Серийный номер</th>
-                                        <th>Партийный номер</th>
-                                        <th>Артикул</th>
-                                        <th>Классификация</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt" />
-                                        </td>
-                                        <td class="text-left">FJ</td>
-                                        <td class="text-left">1</td>
-                                        <td class="text-left">
-                                            <a href="/Tools/Details/1">
-                                                00000001
-                                            </a>
-                                        </td>
-                                        <td class="text-left">
-                                            12345678
-                                        </td>
-                                        <td class="text-left">12344228</td>
-                                        <td class="text-left">
-                                            187564855
-                                        </td>
-                                        <td class="text-left">
-                                            Вид1->Тип3->Подтип2
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @*Instrument table end*@
-                    </div>
                 </div>
-            </div>
-            @* Instrument tab end *@
+                @* Operating time tab end *@
 
-            @* History tab start *@
-            <div id="historyTab" class="container tab-pane fade">
-                <div class="container">
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
+                @* Instrument tab start *@
+                <div id="instrumentTab" class="container-fluid tab-pane fade">
+                    <div class="container-fluid">
+                        @* Поиск panel start *@
+                        <form class="row mb-3 mt-3">
                             <div class="card w-100">
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#instrumentSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="historySearchCollapse" class="collapse">
-                                    <form class="m-3">
+                                <div id="instrumentSearchCollapse" class="collapse">
+                                    <div class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Наименование:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Статус:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <select class="form-control">
-                                                        <option selected="selected">Активный</option>
-                                                        <option>Неактивный</option>
+                                                        <option selected="selected">Все</option>
+                                                        <option>RFU</option>
+                                                        <option>FJ</option>
+                                                        <option>FJ(SB)</option>
+                                                        <option>WS</option>
+                                                        <option>WO</option>
+                                                        <option>RP</option>
+                                                        <option>Scrap</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Сообщение:
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Серийный номер:
                                                 </div>
-                                                <div class="col pr-0">
+                                                <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Дата:
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Партийный номер:
                                                 </div>
-                                                <div class="col-1">
-                                                    От:
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
                                                 </div>
-                                                <div class="col-3 pr-0">
-                                                    <input type="date" class="form-control" />
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Артикул:
                                                 </div>
-                                                <div class="col-1">
-                                                    До:
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
                                                 </div>
-                                                <div class="col-3 pr-0p">
-                                                    <input type="date" class="form-control" />
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Классификация:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
+                                                <button class="btn btn-primary">
+                                                    <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                </button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        @*History table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width="15%">Дата</th>
-                                        <th width="50%">Сообщение</th>
-                                        <th width="35%">Комментарий</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            31.01.2020
-                                        </td>
-                                        <td class="text-left">Наряд №00000001 открыт</td>
-                                        <td class="text-left">Пользователь1: Тестовый комментарий</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @*History table end*@
-                    </div>
-                </div>
-            </div>
-            @* History tab end *@
+                                    </div>
 
-            @* Docs tab start *@
-            <div id="docTab" class="container tab-pane fade">
-                <div class="container">
-                    <div class="row mb-3 mt-3">
-                        <div class="col pl-0 pr-0">
-                            <div class="card w-100">
-                                <div class="card-header pt-0 pb-0">
-                                    <h5 class="pt-2 pb-2">
-                                        Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#docsSearchCollapse">
-                                        </a>
-                                    </h5>
                                 </div>
-                                <div id="docsSearchCollapse" class="collapse">
-                                    <form class="m-3">
-                                        <div class="container-fluid">
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Наименование:
+                            </div>
+                        </form>
+                        @* Поиск panel end *@
+                        <div class="row">
+                            @* Instrument table start*@
+                            <div class="table-responsive scrollable">
+                                <table class="table  table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Управление</th>
+                                            <th>Наименование</th>
+                                            <th>Количество</th>
+                                            <th>Партийный номер</th>
+                                            <th>Артикул</th>
+                                            <th>Классификация</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#singleControlModal"
+                                                        class="btn btn-primary fa fa-file-alt"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент1</td>
+                                            <td class="text-left">1</td>
+                                            <td class="text-left">14566433</td>
+                                            <td class="text-left">35669874</td>
+                                            <td class="text-left">Вид1 -> Тип2</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-file-alt"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент2</td>
+                                            <td class="text-left">4</td>
+                                            <td class="text-left">14622874</td>
+                                            <td class="text-left">99874112</td>
+                                            <td class="text-left">Вид1 -> Тип3</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-file-alt"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @* Instrument table end*@
+                        </div>
+                    </div>
+                </div>
+                @* Instrument tab end *@
+
+                @* History tab start *@
+                <div id="historyTab" class="container-fluid tab-pane fade">
+                    <div class="container-fluid">
+                        @* History search start*@
+                        <div class="row mb-3 mt-3">
+                            <div class="col pl-0 pr-0">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="historySearchCollapse" class="collapse">
+                                        <form class="m-3">
+                                            <div class="container-fluid">
+                                                <div class="row pt-2">
+                                                    <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                        Сообщение:
+                                                    </div>
+                                                    <div class="col pr-0 pl-0 pl-md-1">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
                                                 </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
+
+                                                <div class="row pt-2">
+                                                    <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                        Период:
+                                                    </div>
+                                                    <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                        <input type="date" class="form-control " />
+                                                    </div>
+                                                    <div class="w-100 d-md-none "></div>
+                                                    <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                        <input type="date" class="form-control" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                    <button class="btn btn-primary">
+                                                        <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div class="row pt-2">
-                                                <div class="col-md-4 pt-1">
-                                                    Ответственный:
-                                                </div>
-                                                <div class="col pr-0">
-                                                    <input type="text" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                                                <button class="btn btn-primary fa fa-search"></button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        @*Doc table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width="10%"></th>   
-                                        <th width="50%">Наименование</th>
-                                        <th width="40%">Автор</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            <button type="button" class="btn btn-primary fa fa-file-alt" />
-                                        </td>
-                                        <td class="text-left"><a href="#">Акт приёмки №0000001</a></td>
-                                        <td class="text-left">Иванов Иван Иванович</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        @* History search end*@
+                        <div class="row">
+                            @*History table start*@
+                            <div class="table-responsive scrollable">
+                                <table class="table  table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="15%">Дата</th>
+                                            <th width="50%">Сообщение</th>
+                                            <th width="35%">Комментарий</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left">
+                                                31.01.2020
+                                            </td>
+                                            <td class="text-left">Наряд №00000001 открыт</td>
+                                            <td class="text-left">Пользователь1: Тестовый комментарий</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @*History table end*@
                         </div>
-                        @*Doc table end*@
                     </div>
                 </div>
+                @* History tab end *@
+
+                @* Docs tab start *@
+                <div id="docTab" class="container-fluid tab-pane fade">
+                    <div class="container-fluid">
+                        @* Doc search start*@
+                        <div class="row mb-3 mt-3">
+                            <div class="col pl-0 pr-0">
+                                <div class="card w-100">
+                                    <div class="card-header pt-0 pb-0">
+                                        <h5 class="pt-2 pb-2">
+                                            Поиск
+                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="historySearchCollapse" class="collapse">
+                                        <form class="m-3">
+                                            <div class="container-fluid">
+                                                <div class="row pt-2">
+                                                    <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                        Наименование:
+                                                    </div>
+                                                    <div class="col pr-0 pl-0 pl-md-1">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row pt-2">
+                                                    <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                        Период:
+                                                    </div>
+                                                    <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                        <input type="date" class="form-control " />
+                                                    </div>
+                                                    <div class="w-100 d-md-none "></div>
+                                                    <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                                        <input type="date" class="form-control" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                    <button class="btn btn-primary">
+                                                        <span aria-hidden="true" class="fa fa fa-search"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @* Doc search end*@
+                        <div class="row">
+                            @*Doc table start*@
+                            <div class="table-responsive scrollable">
+                                <table class="table  table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%"></th>
+                                            <th width="50%">Наименование</th>
+                                            <th width="40%">Автор</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" class="btn btn-primary fa fa-file-alt" />
+                                            </td>
+                                            <td class="text-left"><a href="#">Акт приёмки №0000001</a></td>
+                                            <td class="text-left">Иванов Иван Иванович</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @*Doc table end*@
+                        </div>
+                    </div>
+                </div>
+                @* Docs tab end *@
             </div>
-            @* Docs tab end *@
-        </div>
         </div>
 </div>
 
