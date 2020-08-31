@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using ToolManagementSystem.Shared.Data;
@@ -36,6 +38,26 @@ namespace ToolManagementSystem.Shared.Service
                 }
             }
             return IsSignInOut.isSign;
+        }
+
+
+        public async Task<bool> ResetPassword(string userName, string answer,string password)
+        {
+            var employee = await db.Employee.FirstOrDefaultAsync(x=>x.UserName.Equals(userName));
+            if (employee != null)
+            {
+                if (employee.Answer.Equals(answer))
+                {
+                    if (employee.Password != password)
+                    {
+                        employee.Password = password;
+                        db.Employee.Update(employee);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
 
