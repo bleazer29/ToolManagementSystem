@@ -7,7 +7,7 @@
             <h3>Склад</h3>
         </div>
         <div class="col-lg-1 col-md-2 pr-0 pl-0">
-            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
                     data-toggle="modal" data-target="#createModal"></button>
         </div>
     </div>
@@ -50,6 +50,14 @@
                                     <option>RP</option>
                                     <option>Scrap</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Подразделение:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -108,6 +116,7 @@
                                 <th>Управление</th>
                                 <th>Наименование</th>
                                 <th>Статус</th>
+                                <th>Подразделение</th>
                                 <th>Серийный номер</th>
                                 <th>Партийный номер</th>
                                 <th>Артикул</th>
@@ -117,13 +126,14 @@
                         <tbody>
                             <tr>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Tools/Details/1">00000001</a></td>
                                 <td class="text-left">RFU</td>
+                                <td class="text-left">Подразделение 1</td>
                                 <td class="text-left">
                                     12345678
                                 </td>
@@ -188,6 +198,17 @@
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Подразделение:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control">
+                                    <option>Подразделение1</option>
+                                    <option>Подразделение2</option>
+                                    <option>Подразделение3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Класификация:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
@@ -227,7 +248,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right" type="button" @onclick="@(() => AddPartRow("partsEditTbody"))"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddPartRow("partsEditTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
@@ -296,6 +317,17 @@
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Подразделение:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control">
+                                    <option>Подразделение1</option>
+                                    <option>Подразделение2</option>
+                                    <option>Подразделение3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Класификация:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
@@ -335,7 +367,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right" type="button" @onclick="@(() => AddPartRow("partsCreationTbody"))"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddPartRow("partsCreationTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">

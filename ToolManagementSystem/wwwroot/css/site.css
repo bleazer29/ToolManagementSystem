@@ -602,3 +602,46 @@ jstree-grid-header {
 .description-container img {
     max-height: 50px;
 }
+
+.create-button {
+    background-color: #009877;
+    border-color: #078a6c;
+}
+
+.create-button:hover {
+    background-color: #007057;
+    border-color: #078a6c;
+}
+
+    .create-button::selection {
+        background-color: #007057;
+        border-color: #078a6c;
+    }
+
+.edit-button {
+    background-color: #217a98;
+    border-color: #217a98;
+}
+
+    .edit-button:hover {
+        background-color: #175e75;
+        border-color: #175e75;
+    }
+    .edit-button::selection {
+        background-color: #175e75;
+        border-color: #175e75;
+    }
+
+.transfer-button {
+    background-color: #e56510;
+    border-color: #e56510;
+}
+
+    .transfer-button:hover {
+        background-color: #d44801;
+        border-color: #d44801;
+    }
+transfer-button::selection {
+    background-color: #d44801;
+    border-color: #d44801;
+}

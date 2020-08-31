@@ -113,7 +113,7 @@ function AddClasificationTree(elementName) {
                     "value": "nodeId",
                     "format": function (v) {
 
-                        return ("<button class='btn btn-primary mr-1 fa fa-edit' type='button'"
+                        return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
                             + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "' @onclick='ChangeCaret'></button>"
                             + "<button class='btn btn-primary ml-1 fa fa-times' type='button'"
                             + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");

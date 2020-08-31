@@ -21,9 +21,29 @@
             <div id="mainCollapse" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Период:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                <input type="date" class="form-control " />
+                            </div>
+                            <div class="w-100 d-md-none "></div>
+                            <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
+                                <input type="date" class="form-control" />
+                            </div>
+                        </div>
                         <div class="row pt-2 align-items-center">
                             <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 Наименование:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Подразделение:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
@@ -82,46 +102,58 @@
                         <thead>
                             <tr>
                                 <th>Управление</th>
+                                <th>Дата начала ремонта</th>
+                                <th>Дата конца ремонта</th>
                                 <th>Наименование</th>
                                 <th>Количество</th>
                                 <th>Партийный номер</th>
-                                <th>Артикуль</th>
+                                <th>Артикул</th>
                                 <th>Классификация</th>
+                                <th>Подразделение</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="align-middle">
                                     <button type="button" data-toggle="modal" data-target="#singleControlModal"
-                                            class="btn btn-primary fa fa-file-alt"></button>
+                                            class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
                                 </td>
+                                <td class="text-left">12.05.2020</td>
+                                <td class="text-left">14.05.2020</td>
                                 <td class="text-left">Инструмент1</td>
                                 <td class="text-left">1</td>
                                 <td class="text-left">14566433</td>
                                 <td class="text-left">35669874</td>
                                 <td class="text-left">Вид1 -> Тип2</td>
+                                <td class="text-left">Подразделение1</td>
                             </tr>
                             <tr>
                                 <td class="align-middle">
                                     <button type="button" data-toggle="modal" data-target="#multipleControlModal"
-                                            class="btn btn-primary fa fa-file-alt"></button>
+                                            class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
                                 </td>
+                                <td class="text-left">17.05.2020</td>
+                                <td class="text-left">25.05.2020</td>
                                 <td class="text-left">Инструмент2</td>
                                 <td class="text-left">4</td>
                                 <td class="text-left">14622874</td>
                                 <td class="text-left">99874112</td>
                                 <td class="text-left">Вид1 -> Тип3</td>
+                                <td class="text-left">Подразделение2</td>
                             </tr>
                             <tr>
                                 <td class="align-middle">
                                     <button type="button" data-toggle="modal" data-target="#multipleControlModal"
-                                            class="btn btn-primary fa fa-file-alt"></button>
+                                            class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
                                 </td>
+                                <td class="text-left">17.05.2020</td>
+                                <td class="text-left">25.06.2020</td>
                                 <td class="text-left">Инструмент3</td>
                                 <td class="text-left">10</td>
                                 <td class="text-left">34685986</td>
                                 <td class="text-left">47855478</td>
                                 <td class="text-left">Вид2 -> Тип4</td>
+                                <td class="text-left">Подразделение3</td>
                             </tr>
                         </tbody>
                     </table>
@@ -234,6 +266,14 @@
                                             </div>
                                             <div class="row pt-2 pl-2 pr-2 align-items-center">
                                                 <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                                    Подразделение:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2 pl-2 pr-2 align-items-center">
+                                                <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                                     Артикул:
                                                 </div>
                                                 <div class="col pr-0 pl-0 pl-md-1">
@@ -282,6 +322,7 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>Наименование</th>
+                                                    <th>Подразделение</th>
                                                     <th>Серийный номер</th>
                                                     <th>Партийный номер</th>
                                                     <th>Артикул</th>
@@ -295,6 +336,9 @@
                                                     </td>
                                                     <td class="text-left">
                                                         Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Подразделение1
                                                     </td>
                                                     <td class="text-left">
                                                         123524687
@@ -315,6 +359,9 @@
                                                     </td>
                                                     <td class="text-left">
                                                         Инструмент2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Подразделение1
                                                     </td>
                                                     <td class="text-left">
                                                         99874112

@@ -5,7 +5,7 @@
             <h3>Наряды на работу</h3>
         </div>
         <div class="col-lg-1 col-md-2 pr-0 pl-0">
-            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus" type="button"
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
                     data-toggle="modal" data-target="#createModal"></button>
         </div>
     </div>
@@ -115,7 +115,7 @@
                         <tbody>
                             <tr>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit" type="button"
+                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
@@ -374,6 +374,20 @@
                                                 </div>
                                                 <div class="row pt-2">
                                                     <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                        Подразделение:
+                                                    </div>
+                                                    <div class="col pr-0 pl-0 pl-md-1">
+                                                        <select class="form-control">
+                                                            
+                                                            <option>Подразделение1</option>
+                                                            <option>Подразделение2</option>
+                                                            <option>Подразделение3</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                         Статус:
                                                     </div>
                                                     <div class="col pr-0 pl-0 pl-md-1">
@@ -440,6 +454,7 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>Наименование</th>
+                                                    <th>Подразделение</th>
                                                     <th>Серийный номер</th>
                                                     <th>Партийный номер</th>
                                                     <th>Артикул</th>
@@ -453,6 +468,9 @@
                                                     </td>
                                                     <td class="text-left">
                                                         Труба 1
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Подразделение 1
                                                     </td>
                                                     <td class="text-left">
                                                         123524687
@@ -473,6 +491,9 @@
                                                     </td>
                                                     <td class="text-left">
                                                         Труба 2
+                                                    </td>
+                                                    <td class="text-left">
+                                                        Подразделение 1
                                                     </td>
                                                     <td class="text-left">
                                                         123524687
