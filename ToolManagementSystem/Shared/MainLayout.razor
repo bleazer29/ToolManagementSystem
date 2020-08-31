@@ -1,5 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@page "/Shared/MainLayout"
+@inherits LayoutComponentBase
 @inject IJSRuntime jsRuntime
+@inject NavigationManager NavigationManager
 
 <div class="container-fluid ">
     <div class="status-bar-row row align-items-center">
@@ -10,14 +12,17 @@
             </p>
         </div>
         <div class="col-7">
-            <button class="btn btn-transperent float-right">
+            <button type="button" class="btn btn-transperent float-right" @onclick="SignOut">
                 <i class="fa fas fa-sign-out-alt"></i>
             </button>
-            <button class="btn btn-transperent float-right">
+            <button type="button" class="btn btn-transperent float-right" >
                 <i class="fa fas fa-cog"></i>
             </button>
         </div>
     </div>
+
+
+
     <div class="main-row row">
         <div class="@SideBarCssClass sidebar main-sidebar col-md-4 col-lg-3">
             <NavMenu />
@@ -61,5 +66,11 @@
     private async void GetWindowSize()
     {
         windowSize = await jsRuntime.InvokeAsync<int>("GetWindowInnerSize");
+    }
+
+    private void SignOut()
+    {
+        ToolManagementSystem.Shared.Help.IsSignInOut.isSign = false;
+        NavigationManager.NavigateTo("/");
     }
 }

@@ -1,88 +1,93 @@
 ﻿@page "/Employee/employee"
 @using ToolManagementSystem.Shared.Service
 @using ToolManagementSystem.Shared.Models
+@using ToolManagementSystem.Shared.Help
 @inject EmployeeService EmployeeService
 @inject RolesService RolesService
+@inject NavigationManager NavigationManager
 
+@if (IsSignInOut.isSign)
+{
+    <div class="container">
+        <h1>Список сотрудников</h1><hr />
 
-<div class="container">
-    <h1>Список сотрудников</h1><hr />
-
-    <a class="btn btn-primary col-md-12" href="/Employee/AddEmployee">
-        Добавить нового сотрудника
-    </a>
-    <br /> <hr />
-    @if (empl == null)
-    {<p><em>Загрузка...</em></p> }
-    else
-    {
-        <table class="table">
-            <thead class="text-align-center">
-                <tr>
-                    <th>Управление</th>
-                    <th>Имя</th>
-                    <th>Фамилия </th>
-                    <th>ФИО</th>
-                    <th>Телефон</th>
-                    <th>UserName</th>
-                    <th>Password</th>
-                    <th>Роли</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var employee in empl)
-                {
-                <tr>
-
-                    <td>
-                        <div class="dropdown">
-                            <button class="dropbtn">...</button>
-                            <div class="dropdown-content">
-                                <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
-                                <a class="dropdown-item btn btn-primary" href="/Role/AssignmentRole/@employee.Id">Assignment Role</a>
-                                <a class="dropdown-item btn btn-primary" href="/employee/details/@employee.Id">Details</a>
-                                <a class="dropdown-item btn btn-primary" @onclick="@(()=>EmployeeService.DeleteEmployee(employee))">Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FullName</td>
-                    <td>@employee.Phone</td>
-                    <td>@employee.UserName</td>
-                    <td>@employee.Password</td>
-                    @if (emp_roles != null)
+        <a class="btn btn-primary col-md-12" href="/Employee/AddEmployee">
+            Добавить нового сотрудника
+        </a>
+        <br /> <hr />
+        @if (empl == null)
+        {<p><em>Загрузка...</em></p> }
+        else
+        {
+            <table class="table">
+                <thead class="text-align-center">
+                    <tr>
+                        <th>Управление</th>
+                        <th>Имя</th>
+                        <th>Фамилия </th>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                        <th>UserName</th>
+                        <th>Password</th>
+                        <th>Роли</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in empl)
                     {
-                <td class="card-title">
-                    @{
-                        for (int i = 0; i < emp_roles.Count; i++)
-                        {
-                            for (int j = 0; j < emp_roles[i].Count; j++)
+                        <tr>
+
+                            <td>
+                                <div class="dropdown">
+                                    <button class="dropbtn">...</button>
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-item btn btn-primary" href="/Employee/Edit/@employee.Id">Edit</a>
+                                        <a class="dropdown-item btn btn-primary" href="/Role/AssignmentRole/@employee.Id">Assignment Role</a>
+                                        <a class="dropdown-item btn btn-primary" href="/employee/details/@employee.Id">Details</a>
+                                        <a class="dropdown-item btn btn-primary" @onclick="@(()=>DeleteEmployee(employee))">Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@employee.FirstName</td>
+                            <td>@employee.LastName</td>
+                            <td>@employee.FullName</td>
+                            <td>@employee.Phone</td>
+                            <td>@employee.UserName</td>
+                            <td>@employee.Password</td>
+                            @if (emp_roles != null)
                             {
-                                if (emp_roles[i][j].EmployeeId == employee.Id)
-                                {
-                                    for (int r = 0; r < roles.Count; r++)
-                                    {
-                                        if (roles[r].Id == emp_roles[i][j].RoleId)
+                                <td class="card-title">
+                                    @{
+                                        for (int i = 0; i < emp_roles.Count; i++)
                                         {
-                                            @roles[r].RoleName
+                                            for (int j = 0; j < emp_roles[i].Count; j++)
+                                            {
+                                                if (emp_roles[i][j].EmployeeId == employee.Id)
+                                                {
+                                                    for (int r = 0; r < roles.Count; r++)
+                                                    {
+                                                        if (roles[r].Id == emp_roles[i][j].RoleId)
+                                                        {
+                                                            @roles[r].RoleName
+                                                        }
+                                                    }
+                                                }
+                                                else break;
+                                                <br />
+                                            }
                                         }
                                     }
-                                }
-                                else break;
+                                </td>
                             }
-                        }
+
+                        </tr>
                     }
-                </td>
-                        }
+                </tbody>
+            </table>
+        }
+    </div>
 
-                </tr>
-                }
-            </tbody>
-        </table>
-    }
-</div>
-
+}
 
 
 
@@ -93,12 +98,21 @@
 
     protected override async Task OnInitializedAsync()
     {
-        empl = await  EmployeeService.GetEmployee();
+        empl = await EmployeeService.GetEmployee();
         roles = await RolesService.GetRoles();
-        for(int employee = 0; employee <empl.Count; employee++) 
+        for (int employee = 0; employee < empl.Count; employee++)
         {
             emp_roles.Add(await RolesService.GetEmployeeRolesById(empl[employee].Id));
         }
+    }
+
+
+    private async Task DeleteEmployee(Employees employee)
+    {
+        await EmployeeService.DeleteEmployee(employee);
+        empl = await EmployeeService.GetEmployee();
+        roles = await RolesService.GetRoles();
+        StateHasChanged();
     }
 
 }

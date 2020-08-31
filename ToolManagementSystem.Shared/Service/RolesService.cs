@@ -113,10 +113,12 @@ namespace ToolManagementSystem.Shared.Service
                 }
                 db.Role.Remove(roles);
                 await db.SaveChangesAsync();
+                /////
             }
-            catch { return;
-            }
+            catch { return; }
         }
+
+
 
     }
 }

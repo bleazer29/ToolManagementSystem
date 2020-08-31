@@ -1,5 +1,4 @@
 ﻿@page "/Employee/AddEmployee"
-@*@inject HttpClient Http*@
 @inject NavigationManager NavigationManager
 @inject ToolManagementSystem.Shared.Service.EmployeeService objEmpService
 @using ToolManagementSystem.Shared.Models
@@ -69,7 +68,8 @@
     private async Task CreateEmployee()
     {
         await objEmpService.Create(employee);
-        NavigationManager.NavigateTo("employee/employee");
+        employee = new Employees();
+        NavigationManager.NavigateTo("employee/addemployee");
     }
     public void Cancel()
     {

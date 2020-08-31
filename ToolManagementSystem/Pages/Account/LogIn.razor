@@ -1,0 +1,50 @@
+﻿@inject ToolManagementSystem.Shared.Service.AccountService AccountService
+@using ToolManagementSystem.Shared.Models
+@inject NavigationManager NavigationManager
+@layout LoginLayout
+@page "/"
+
+        <main class="main-login">
+            <div class="login-heading">
+                <h1>
+                    <img src="images/Weatherford_logo.png" class="img-fluid">
+                    Weatherford
+                </h1>
+                <h2>Авторизация в системе</h2>
+            </div>
+            <div class="form-pos login-form-pos">
+                <EditForm method="POST" Model="Employee">
+                    <div class="form-group">
+                        <label class="control-label">Логин</label>
+                        <InputText @bind-Value="@Employee.UserName" class="form-control" />
+                        <div class="invalid-feedback">text</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Password">Пароль</label>
+                        <InputText @bind-Value="@Employee.Password" class="form-control" />
+                        <div class="invalid-feedback">text</div>
+                    </div>
+                    <div class="main-login__columns">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Запомнить</label>
+                        </div>
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary center mt-1"  @onclick="@SignIn">Войти</button>
+                </EditForm>
+            </div>
+        </main>
+
+@code{ 
+    public Employees Employee { get; set; } = new Employees();
+    public bool isSignIn { get; set; }
+
+    public async Task SignIn()
+    {
+        if (await AccountService.SignIn(Employee.UserName, Employee.Password)) NavigationManager.NavigateTo("/Employee/Employee");
+
+    }
+
+
+}
