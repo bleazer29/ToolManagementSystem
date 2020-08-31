@@ -18,7 +18,7 @@
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
                     Поиск
-                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#orderSearchCollapse">
+                    <a class="card-link float-right fa @CaretMain fa-lg" @onclick='()=>ChangeCaret("Main")' data-toggle="collapse" href="#orderSearchCollapse">
                     </a>
                 </h5>
             </div>
@@ -357,7 +357,7 @@
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolsSearchCollapse">
+                                            <a class="card-link float-right fa @CaretCreation fa-lg" @onclick='()=>ChangeCaret("Creation")' data-toggle="collapse" href="#toolsSearchCollapse">
                                             </a>
                                         </h5>
                                     </div>
@@ -507,12 +507,22 @@
 </div>
 
 @code {
-    private bool isCaretUp = false;
-    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    public bool isCaretMainUp = false;
+    public bool isCaretCreationUp = false;
+    public string CaretMain => isCaretMainUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretCreation => isCaretCreationUp ? "fa-caret-down" : "fa-caret-up";
 
-    public void ChangeCaret()
+    public void ChangeCaret(string elem)
     {
-        isCaretUp = !isCaretUp;
+        switch (elem)
+        {
+            case "Main":
+                isCaretMainUp = !isCaretMainUp;
+                break;
+            case "Creation":
+                isCaretCreationUp = !isCaretCreationUp;
+                break;
+        }
     }
 }
 

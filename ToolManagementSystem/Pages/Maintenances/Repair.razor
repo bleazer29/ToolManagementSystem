@@ -14,11 +14,11 @@
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
                     Поиск
-                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                    <a class="card-link float-right fa @CaretMain fa-lg" @onclick='()=>ChangeCaret("Main")' data-toggle="collapse" href="#mainCollapse">
                     </a>
                 </h5>
             </div>
-            <div id="collapseOne" class="collapse">
+            <div id="mainCollapse" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2 align-items-center">
@@ -218,11 +218,11 @@
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#collapseOne">
+                                            <a class="card-link float-right fa @CaretTransfer fa-lg" @onclick='()=>ChangeCaret("Transfer")' data-toggle="collapse" href="#transferCollapse">
                                             </a>
                                         </h5>
                                     </div>
-                                    <div id="collapseOne" class="collapse">
+                                    <div id="transferCollapse" class="collapse">
                                         <div class="container-fluid">
                                             <div class="row pt-2 pl-2 pr-2 align-items-center">
                                                 <div class="col-md-4 col-lg-3 pt-1 pl-0">
@@ -349,12 +349,22 @@
 </div>
 
 @code {
-    private bool isCaretUp = false;
-    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    public bool isCaretMainUp = false;
+    public bool isCaretTransferUp = false;
+    public string CaretMain => isCaretMainUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretTransfer => isCaretTransferUp ? "fa-caret-down" : "fa-caret-up";
 
-    public void ChangeCaret()
+    public void ChangeCaret(string elem)
     {
-        isCaretUp = !isCaretUp;
+        switch (elem)
+        {
+            case "Main":
+                isCaretMainUp = !isCaretMainUp;
+                break;
+            case "Transfer":
+                isCaretTransferUp = !isCaretTransferUp;
+                break;
+        }
     }
 }
 

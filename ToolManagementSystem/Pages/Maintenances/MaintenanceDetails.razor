@@ -71,7 +71,7 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                        <a class="card-link float-right fa @CaretHistory fa-lg" @onclick='()=>ChangeCaret("History")' data-toggle="collapse" href="#historySearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -155,7 +155,7 @@
                             <div class="card-header pt-0 pb-0">
                                 <h5 class="pt-2 pb-2">
                                     Поиск
-                                    <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#instrumentSearchCollapse">
+                                    <a class="card-link float-right fa @CaretTools fa-lg" @onclick='()=>ChangeCaret("Tools")' data-toggle="collapse" href="#instrumentSearchCollapse">
                                     </a>
                                 </h5>
                             </div>
@@ -282,11 +282,11 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                        <a class="card-link float-right fa @CaretDocs fa-lg" @onclick='()=>ChangeCaret("Docs")' data-toggle="collapse" href="#docsSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="historySearchCollapse" class="collapse">
+                                <div id="docsSearchCollapse" class="collapse">
                                     <form class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
@@ -366,7 +366,7 @@
         </div>
         @* Tabcontrol end *@
 
-        @*Modal add doc start*@
+    @*Modal add doc start*@
     <div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -410,7 +410,7 @@
     </div>
     @*Modal add doc end*@
 
-        @*Modal control single instruments start*@
+    @*Modal control single instruments start*@
     <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -455,7 +455,7 @@
     </div>
     @*Modal control single instruments end*@
 
-        @*Modal control multiple instruments start*@
+    @*Modal control multiple instruments start*@
     <div class="modal fade" id="multipleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -501,7 +501,7 @@
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#multipleInstrumentConrtrolSearchCollapse">
+                                            <a class="card-link float-right fa @CaretTransferTools fa-lg" @onclick='()=>ChangeCaret("Transfer")' data-toggle="collapse" href="#multipleInstrumentConrtrolSearchCollapse">
                                             </a>
                                         </h5>
                                     </div>
@@ -634,8 +634,14 @@
     public int MaintenanceId { get; set; }
     bool isFirstRender = true;
 
-    private bool isCaretUp = false;
-    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    public bool isCaretHistoryUp = false;
+    public bool isCaretDocsUp = false;
+    public bool isCaretToolsUp = false;
+    public bool isCaretTransferToolsUp = false;
+    public string CaretHistory => isCaretHistoryUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretDocs => isCaretDocsUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretTools => isCaretToolsUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretTransferTools => isCaretTransferToolsUp ? "fa-caret-down" : "fa-caret-up";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -647,9 +653,24 @@
         isFirstRender = false;
     }
 
-    public void ChangeCaret()
+    public void ChangeCaret(string elem)
     {
-        isCaretUp = !isCaretUp;
+        switch (elem)
+        {
+            case "History":
+                isCaretHistoryUp = !isCaretHistoryUp;
+                break;
+            case "Docs":
+                isCaretDocsUp = !isCaretDocsUp;
+                break;
+            case "Tools":
+                isCaretToolsUp = !isCaretToolsUp;
+                break;
+            case "Transfer":
+                isCaretTransferToolsUp = !isCaretTransferToolsUp;
+                break;
+
+        }
     }
 
     public async Task OnWeekPickerChange()

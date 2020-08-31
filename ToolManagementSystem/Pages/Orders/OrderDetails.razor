@@ -1,7 +1,7 @@
 ﻿@page "/Orders/Details/{OrderId:int}"
 @inject IJSRuntime jsRunTime
 
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="card">
             <div class="container-fluid">
                 <div class="row">
@@ -71,7 +71,7 @@
                     <a class="nav-link" data-toggle="tab" href="#docTab">Документы</a>
                 </li>
             </ul>
-           
+
             <div class="tab-content pl-0 pr-0t">
                 @* Operating time tab start *@
                 <div id="operatingTab" class="container-fluid tab-pane active">
@@ -82,11 +82,11 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#instrumentSearchCollapse">
+                                        <a class="card-link float-right fa @CaretWorkHistory fa-lg" @onclick='()=>ChangeCaret("WorkHistory")' data-toggle="collapse" href="#workInstrumentSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="instrumentSearchCollapse" class="collapse">
+                                <div id="workInstrumentSearchCollapse" class="collapse">
                                     <div class="m-3">
                                         <div class="container-fluid">
                                             <div class="row pt-2">
@@ -450,10 +450,10 @@
                                                     <input type="date" class="form-control" />
                                                 </div>
                                             </div>
-                                           
+
                                             <div class="row pt-2">
                                                 <div class="col-md-5 col-lg-4 pt-1 pl-0">
-                                                   Наработка:
+                                                    Наработка:
                                                 </div>
                                                 <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="number" class="form-control" />
@@ -468,16 +468,16 @@
                                                     <input type="text" class="form-control" />
                                                 </div>
                                             </div>
-                                          
+
                                             <div class="row pt-2">
-                                                
+
                                                 <div class="col pr-0 pl-0 pl-md-1">
                                                     <button type="submit" class="btn btn-primary float-right">Добавить</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -494,7 +494,7 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#instrumentSearchCollapse">
+                                        <a class="card-link float-right fa @CaretTools fa-lg" @onclick='()=>ChangeCaret("Tools")' data-toggle="collapse" href="#instrumentSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -637,7 +637,7 @@
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                            <a class="card-link float-right fa @CaretHistory fa-lg" @onclick='()=>ChangeCaret("History")' data-toggle="collapse" href="#historySearchCollapse">
                                             </a>
                                         </h5>
                                     </div>
@@ -718,11 +718,11 @@
                                     <div class="card-header pt-0 pb-0">
                                         <h5 class="pt-2 pb-2">
                                             Поиск
-                                            <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#historySearchCollapse">
+                                            <a class="card-link float-right fa @CaretDocs fa-lg" @onclick='()=>ChangeCaret("Docs")' data-toggle="collapse" href="#docsSearchCollapse">
                                             </a>
                                         </h5>
                                     </div>
-                                    <div id="historySearchCollapse" class="collapse">
+                                    <div id="docsSearchCollapse" class="collapse">
                                         <form class="m-3">
                                             <div class="container-fluid">
                                                 <div class="row pt-2">
@@ -790,15 +790,240 @@
                 @* Docs tab end *@
             </div>
         </div>
-</div>
+        @*Modal control single instruments start*@
+        <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента: Инструмент1</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="container-fluid">
+                                <div class="row pt-2">
+                                    <div class="col-md-2 pt-1">
+                                        Куда переместить:
+                                    </div>
+                                    <div class="col pr-0">
+                                        <select class="form-control">
+                                            <option>Склад (RFU)</option>
+                                            <option>Ремонт (RP)</option>
+                                            <option>Утиль (Scrap)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-md-2 pt-1">
+                                        Комментарий (необязательно):
+                                    </div>
+                                    <div class="col pr-0">
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary ">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Modal control single instruments end*@
+
+        @*Modal control multiple instruments start*@
+        <div class="modal fade" id="multipleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="container-fluid">
+                                <div class="row pt-2">
+                                    <div class="col-md-2 pt-1">
+                                        Куда переместить:
+                                    </div>
+                                    <div class="col pr-0">
+                                        <select class="form-control">
+                                            <option>Склад (RFU)</option>
+                                            <option>Ремонт (RP)</option>
+                                            <option>Утиль (Scrap)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-md-2 pt-1">
+                                        Комментарий (необязательно):
+                                    </div>
+                                    <div class="col pr-0">
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row pt-2">
+                                    <div class="col pt-1 pr-0">
+                                        Инструменты:
+                                    </div>
+
+                                </div>
+                                @* Поиск panel start *@
+                                <div class="row mb-3 mt-3">
+                                    <div class="card w-100 ml-3">
+                                        <div class="card-header pt-0 pb-0">
+                                            <h5 class="pt-2 pb-2">
+                                                Поиск
+                                                <a class="card-link float-right fa @CaretTransferTools fa-lg" @onclick='()=>ChangeCaret("Transfer")' data-toggle="collapse" href="#multipleInstrumentConrtrolSearchCollapse">
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="multipleInstrumentConrtrolSearchCollapse" class="collapse">
+                                            <div class="container-fluid">
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Наименование:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Серийный номер:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Партийный номер:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Артикул:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-2">
+                                                    <div class="col-md-2 pt-1">
+                                                        Классификация:
+                                                    </div>
+                                                    <div class="col pr-0">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                                                    <button class="btn btn-primary fa fa-search"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @* Поиск panel end *@
+                                <div class="row">
+                                    <div class="col pt-1 pr-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Наименование</th>
+                                                        <th>Серийный номер</th>
+                                                        <th>Партийный номер</th>
+                                                        <th>Артикул</th>
+                                                        <th>Классификация</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">
+                                                            <input type="checkbox" class="form-check" />
+                                                        </td>
+                                                        <td class="text-left">
+                                                            Инструмент2
+                                                        </td>
+                                                        <td class="text-left">
+                                                            123524687
+                                                        </td>
+                                                        <td class="text-left">
+                                                            15963589
+                                                        </td>
+                                                        <td class="text-left">
+                                                            44589625
+                                                        </td>
+                                                        <td class="text-left">
+                                                            Вид1 -> Тип3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">
+                                                            <input type="checkbox" class="form-check" />
+                                                        </td>
+                                                        <td class="text-left">
+                                                            Инструмент2
+                                                        </td>
+                                                        <td class="text-left">
+                                                            99874112
+                                                        </td>
+                                                        <td class="text-left">
+                                                            15963589
+                                                        </td>
+                                                        <td class="text-left">
+                                                            44589625
+                                                        </td>
+                                                        <td class="text-left">
+                                                            Вид1 -> Тип3
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary ">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Modal control multiple instruments end*@
+
+    </div>
 
 @code {
     [Parameter]
     public int OrderId { get; set; }
     bool isFirstRender = true;
 
-    private bool isCaretUp = false;
-    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    public bool isCaretHistoryUp = false;
+    public bool isCaretWorkHistoryUp = false;
+    public bool isCaretDocsUp = false;
+    public bool isCaretToolsUp = false;
+    public bool isCaretTransferToolsUp = false;
+    public string CaretHistory => isCaretHistoryUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretWorkHistory => isCaretHistoryUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretDocs => isCaretDocsUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretTools => isCaretToolsUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretTransferTools => isCaretTransferToolsUp ? "fa-caret-down" : "fa-caret-up";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -810,9 +1035,27 @@
         isFirstRender = false;
     }
 
-    public void ChangeCaret()
+    public void ChangeCaret(string elem)
     {
-        isCaretUp = !isCaretUp;
+        switch (elem)
+        {
+            case "History":
+                isCaretHistoryUp = !isCaretHistoryUp;
+                break;
+            case "WorkHistory":
+                isCaretWorkHistoryUp = !isCaretWorkHistoryUp;
+                break;
+            case "Docs":
+                isCaretDocsUp = !isCaretDocsUp;
+                break;
+            case "Tools":
+                isCaretToolsUp = !isCaretToolsUp;
+                break;
+            case "Transfer":
+                isCaretTransferToolsUp = !isCaretTransferToolsUp;
+                break;
+
+        }
     }
 
     public async Task OnWeekPickerChange()

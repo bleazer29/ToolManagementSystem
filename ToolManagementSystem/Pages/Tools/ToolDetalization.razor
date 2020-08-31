@@ -56,7 +56,7 @@
        
         <div class="tab-content pl-0 pr-0t">
             @* Parts start *@
-            <div id="partsTab" class="container-fluid tab-pane fade">
+            <div id="partsTab" class="container-fluid tab-pane active">
                 <div class="container-fluid">
                     @* Parts search start*@
                     <div class="row mb-3 mt-3">
@@ -65,7 +65,7 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolPartsSearchCollapse">
+                                        <a class="card-link float-right fa @CaretParts fa-lg" @onclick='()=>ChangeCaret("Parts")'  data-toggle="collapse" href="#toolPartsSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -129,7 +129,7 @@
 
 
             @* Operating history tab start *@
-            <div id="operatingHistoryTab" class="container-fluid tab-pane active">
+            <div id="operatingHistoryTab" class="container-fluid tab-pane fade">
                 <div class="container-fluid">
                     @* Operating history search start*@
                     <div class="row mb-3 mt-3">
@@ -138,7 +138,7 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolOperatingHistorySearchCollapse">
+                                        <a class="card-link float-right fa @CaretWorkHistoryTool fa-lg" @onclick='()=>ChangeCaret("WorkHistory")' data-toggle="collapse" href="#toolOperatingHistorySearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -221,7 +221,7 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#toolHistorySearchCollapse">
+                                        <a class="card-link float-right fa @CaretHistory fa-lg" @onclick='()=>ChangeCaret("History")' data-toggle="collapse" href="#toolHistorySearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -320,7 +320,7 @@
                                 <div class="card-header pt-0 pb-0">
                                     <h5 class="pt-2 pb-2">
                                         Поиск
-                                        <a class="card-link float-right fa @Caret fa-lg" @onclick="ChangeCaret" data-toggle="collapse" href="#docsSearchCollapse">
+                                        <a class="card-link float-right fa @CaretDocs fa-lg" @onclick='()=>ChangeCaret("Docs")' data-toggle="collapse" href="#docsSearchCollapse">
                                         </a>
                                     </h5>
                                 </div>
@@ -384,8 +384,15 @@
 
     bool isFirstRender = true;
 
-    private bool isCaretUp = false;
-    public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    public bool isCaretHistoryUp = false;
+    public bool isCaretDocsUp = false;
+    public bool isCaretPartsUp = false;
+    public bool isCaretWorkHistoryUp = false;
+    public string CaretHistory => isCaretHistoryUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretDocs => isCaretDocsUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretParts => isCaretPartsUp ? "fa-caret-down" : "fa-caret-up";
+    public string CaretWorkHistoryTool => isCaretWorkHistoryUp ? "fa-caret-down" : "fa-caret-up";
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -397,9 +404,23 @@
         isFirstRender = false;
     }
 
-    public void ChangeCaret()
+    public void ChangeCaret(string elem)
     {
-        isCaretUp = !isCaretUp;
+        switch (elem)
+        {
+            case "History":
+                isCaretHistoryUp = !isCaretHistoryUp;
+                break;
+            case "Docs":
+                isCaretDocsUp = !isCaretDocsUp;
+                break;
+            case "Parts":
+                isCaretPartsUp = !isCaretPartsUp;
+                break;
+            case "WorkHistory":
+                isCaretWorkHistoryUp = !isCaretWorkHistoryUp;
+                break;
+        }
     }
 
     public async Task OnWeekPickerChange()
