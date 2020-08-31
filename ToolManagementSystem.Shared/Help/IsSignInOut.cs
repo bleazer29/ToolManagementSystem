@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToolManagementSystem.Shared.Help
+﻿namespace ToolManagementSystem.Shared.Help
 {
     public static class IsSignInOut
     {
         public static bool isSign { get; set; }
+        public static string userName { get; set; }
 
     }
 }

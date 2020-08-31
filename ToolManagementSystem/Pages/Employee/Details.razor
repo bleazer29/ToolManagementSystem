@@ -3,48 +3,52 @@
 @inject ToolManagementSystem.Shared.Service.EmployeeService objEmpService
 @using ToolManagementSystem.Shared.Models
 
-<h3>Details</h3>
-@if (employee == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <div>
-        <h4>Employee</h4>
-        <hr />
-        <div class="container">
-            <dl class="row">
-                <dt class="col-sm-5">Id</dt>
-                <dd class="col-sm-7">@employee.Id </dd>
-                <dt class="col-sm-5">FirstName</dt>
-                <dd class="col-sm-7">@employee.FirstName</dd>
-                <dt class="col-sm-5">LastName</dt>
-                <dd class="col-sm-7">@employee.LastName</dd>
-                <dt class="col-sm-5">Patronymic</dt>
-                <dd class="col-sm-7">@employee.Patronymic</dd>
-                <dt class="col-sm-5">FullName</dt>
-                <dd class="col-sm-7">@employee.FullName</dd>
-                <dt class="col-sm-5">BirthDate</dt>
-                <dd class="col-sm-7">@employee.BirthDate</dd>
-                <dt class="col-sm-5">Phone</dt>
-                <dd class="col-sm-7">@employee.Phone</dd> 
-                <dt class="col-sm-5">UserName</dt>
-                <dd class="col-sm-7">@employee.UserName</dd>
-                <dt class="col-sm-5">Password</dt>
-                <dd class="col-sm-7">@employee.Password</dd>
-                <dt class="col-sm-5">Question</dt>
-                <dd class="col-sm-7">@employee.Question</dd>
-                <dt class="col-sm-5">Answer</dt>
-                <dd class="col-sm-7">@employee.Answer</dd>
-            </dl>
+
+    <h3>Подробнее о сотруднике</h3>
+    @if (employee == null)
+    {
+        <p><em>Загрузка...</em></p>
+    }
+    else
+    {
+        <div>
+            <h4>Сотрудник</h4>
+            <hr />
+            <div class="container">
+                <dl class="row">
+                    <dt class="col-sm-5">Id</dt>
+                    <dd class="col-sm-7">@employee.Id </dd>
+                    <dt class="col-sm-5">Имя</dt>
+                    <dd class="col-sm-7">@employee.FirstName</dd>
+                    <dt class="col-sm-5">Отчество</dt>
+                    <dd class="col-sm-7">@employee.Patronymic</dd>
+                    <dt class="col-sm-5">Фамилия</dt>
+                    <dd class="col-sm-7">@employee.LastName</dd>
+                    <dt class="col-sm-5">ФИО</dt>
+                    <dd class="col-sm-7">@employee.FullName</dd>
+                    <dt class="col-sm-5">День рождение</dt>
+                    <dd class="col-sm-7">@employee.BirthDate</dd>
+                    <dt class="col-sm-5">Телефон</dt>
+                    <dd class="col-sm-7">@employee.Phone</dd>
+                    <dt class="col-sm-5">UserName</dt>
+                    <dd class="col-sm-7">@employee.UserName</dd>
+                    <dt class="col-sm-5">Password</dt>
+                    <dd class="col-sm-7">@employee.Password</dd>
+                    <dt class="col-sm-5">Вопрос</dt>
+                    <dd class="col-sm-7">@employee.Question</dd>
+                    <dt class="col-sm-5">Ответ</dt>
+                    <dd class="col-sm-7">@employee.Answer</dd>
+                </dl>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <a class="dropdown-item btn btn-primary" href="employee/edit/@employee.Id">Edit date employee</a>
-        <a class="btn btn-primary" href="employee/employee">Back to List</a>
-    </div>
-}
+        <div class="container">
+            <a class="dropdown-item btn btn-primary" href="employee/edit/@employee.Id">Редактировать данные о сотруднике</a>
+            <a class="btn btn-primary" href="employee/employee">Вернуться к списку</a>
+        </div>
+    }
+
+
+
 
 @code {
     [Parameter] public string Id { get; set; }

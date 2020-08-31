@@ -23,9 +23,18 @@ namespace ToolManagementSystem.Shared.Service
             var list = await db.Employee.ToListAsync();
             for(int i = 0; i < list.Count; i++)
             {
-                IsSignInOut.isSign = list[i].UserName == userName && list[i].Password == password ? true : false;
+                if (list[i].UserName == userName && list[i].Password == password)
+                {
+                    IsSignInOut.isSign = true;
+                    IsSignInOut.userName = list[i].UserName;
+                    break;
+                }
+                else
+                {
+                    IsSignInOut.isSign = false;
+                    IsSignInOut.userName = "";
+                }
             }
-
             return IsSignInOut.isSign;
         }
 

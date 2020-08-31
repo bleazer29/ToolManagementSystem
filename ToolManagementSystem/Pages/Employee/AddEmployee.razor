@@ -59,9 +59,10 @@
             <div class="container-fluid">
                 <button type="button" class="btn btn-success col-4 float-right " @onclick="@Cancel">Отмена</button>
             </div>
-            
+
         </EditForm>
     </div>
+
 
 @code {
     Employees employee = new Employees();
@@ -71,7 +72,8 @@
         employee = new Employees();
         NavigationManager.NavigateTo("employee/addemployee");
     }
-    public void Cancel()
+
+    private void Cancel()
     {
         NavigationManager.NavigateTo("employee/employee");
     }

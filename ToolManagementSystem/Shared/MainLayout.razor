@@ -2,44 +2,46 @@
 @inherits LayoutComponentBase
 @inject IJSRuntime jsRuntime
 @inject NavigationManager NavigationManager
+@using ToolManagementSystem.Shared.Help
 
-<div class="container-fluid ">
-    <div class="status-bar-row row align-items-center">
-        <div class="col-5 ">
-            <p class="mb-0">
-                <i class="fa fas fa-user"></i>
-                <span>User1@gmail.com!</span>
-            </p>
+@if (IsSignInOut.isSign)
+{
+    <div class="container-fluid ">
+        <div class="status-bar-row row align-items-center">
+            <div class="col-5 ">
+                <p class="mb-0">
+                    <i class="fa fas fa-user"></i>
+                    <span>@IsSignInOut.userName</span>
+                </p>
+            </div>
+            <div class="col-7">
+                <button type="button" class="btn btn-transperent float-right" @onclick="SignOut">
+                    <i class="fa fas fa-sign-out-alt"></i>
+                </button>
+                <button type="button" class="btn btn-transperent float-right">
+                    <i class="fa fas fa-cog"></i>
+                </button>
+            </div>
         </div>
-        <div class="col-7">
-            <button type="button" class="btn btn-transperent float-right" @onclick="SignOut">
-                <i class="fa fas fa-sign-out-alt"></i>
-            </button>
-            <button type="button" class="btn btn-transperent float-right" >
-                <i class="fa fas fa-cog"></i>
-            </button>
+        <div class="main-row row">
+            <div class="@SideBarCssClass sidebar main-sidebar col-md-4 col-lg-3">
+                <NavMenu />
+                <button class="btn btn-primary @SideBarCssClass navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
+                    <i class="fa-arrow-left fas fa"></i>
+                </button>
+            </div>
+            <div class="@OpenSideBarButtonCssClass sidebar col-md-1 sidebar-hide text-center">
+                <button id="sidebarShowBtn" class="btn btn-primary mt-3 sidebar-hide" @onclick="ToggleOpenSideBarButton">
+                    <i class="fa-arrow-right fas fa"></i>
+                </button>
+            </div>
+            <div class="@BodyColCssClass col pt-3 layout-body">
+                @Body
+            </div>
         </div>
     </div>
 
-
-
-    <div class="main-row row">
-        <div class="@SideBarCssClass sidebar main-sidebar col-md-4 col-lg-3">
-            <NavMenu />
-            <button class="btn btn-primary @SideBarCssClass navbar-hide-toggler float-right" @onclick="ToggleHideSideBarButton">
-                <i class="fa-arrow-left fas fa"></i>
-            </button>
-        </div>
-        <div class="@OpenSideBarButtonCssClass sidebar col-md-1 sidebar-hide text-center">
-            <button id="sidebarShowBtn" class="btn btn-primary mt-3 sidebar-hide" @onclick="ToggleOpenSideBarButton">
-                <i class="fa-arrow-right fas fa"></i>
-            </button>
-        </div>
-        <div class="@BodyColCssClass col pt-3 layout-body">
-            @Body
-        </div>
-    </div>
-</div>
+}
 
 @code {
     private int windowSize = 0;

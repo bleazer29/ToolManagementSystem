@@ -14,15 +14,16 @@
             </div>
             <div class="form-pos login-form-pos">
                 <EditForm method="POST" Model="Employee">
+                    <DataAnnotationsValidator />
                     <div class="form-group">
                         <label class="control-label">Логин</label>
                         <InputText @bind-Value="@Employee.UserName" class="form-control" />
-                        <div class="invalid-feedback">text</div>
+                        <ValidationMessage For="@(()=>Employee.UserName)" />
                     </div>
                     <div class="form-group">
                         <label class="control-label" asp-for="Password">Пароль</label>
                         <InputText @bind-Value="@Employee.Password" class="form-control" />
-                        <div class="invalid-feedback">text</div>
+                        <ValidationMessage For="@(()=>Employee.Password)" />
                     </div>
                     <div class="main-login__columns">
                         <div class="custom-control custom-checkbox">
@@ -31,19 +32,18 @@
                         </div>
                         <a href="#">Забыли пароль?</a>
                     </div>
-                    <button type="submit" class="btn btn-primary center mt-1"  @onclick="@SignIn">Войти</button>
+                    <button type="submit" class="btn btn-primary center mt-1" @onclick="@SignIn">Войти</button>
                 </EditForm>
             </div>
         </main>
 
-@code{ 
+@code
+{ 
     public Employees Employee { get; set; } = new Employees();
-    public bool isSignIn { get; set; }
 
     public async Task SignIn()
     {
         if (await AccountService.SignIn(Employee.UserName, Employee.Password)) NavigationManager.NavigateTo("/Employee/Employee");
-
     }
 
 

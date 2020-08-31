@@ -1,13 +1,11 @@
 ﻿@page "/Employee/employee"
 @using ToolManagementSystem.Shared.Service
 @using ToolManagementSystem.Shared.Models
-@using ToolManagementSystem.Shared.Help
 @inject EmployeeService EmployeeService
 @inject RolesService RolesService
 @inject NavigationManager NavigationManager
 
-@if (IsSignInOut.isSign)
-{
+
     <div class="container">
         <h1>Список сотрудников</h1><hr />
 
@@ -87,7 +85,7 @@
         }
     </div>
 
-}
+
 
 
 
