@@ -604,46 +604,46 @@ jstree-grid-header {
 }
 
 .create-button {
-    background-color: #009877;
-    border-color: #078a6c;
+    background-color: #009877 !important;
+    border-color: #078a6c !important;
 }
 
-.create-button:hover {
-    background-color: #007057;
-    border-color: #078a6c;
-}
+    .create-button:hover {
+        background-color: #007057 !important;
+        border-color: #078a6c !important;
+    }
 
-    .create-button::selection {
-        background-color: #007057;
-        border-color: #078a6c;
+    .create-button:active {
+        background-color: #007057 !important;
+        border-color: #078a6c !important;
     }
 
 .edit-button {
-    background-color: #217a98;
-    border-color: #217a98;
+    background-color: #217a98 !important;
+    border-color: #217a98 !important;
 }
 
     .edit-button:hover {
-        background-color: #175e75;
-        border-color: #175e75;
+        background-color: #175e75 !important;
+        border-color: #175e75 !important;
     }
-    .edit-button::selection {
-        background-color: #175e75;
-        border-color: #175e75;
+    .edit-button:active {
+        background-color: #175e75 !important;
+        border-color: #175e75 !important;
     }
 
 .transfer-button {
-    background-color: #e56510;
-    border-color: #e56510;
+    background-color: #e56510 !important;
+    border-color: #e56510 !important;
 }
 
     .transfer-button:hover {
-        background-color: #d44801;
-        border-color: #d44801;
+        background-color: #d44801 !important;
+        border-color: #d44801 !important;
     }
-transfer-button::selection {
-    background-color: #d44801;
-    border-color: #d44801;
+transfer-button:active {
+    background-color: #d44801 !important;
+    border-color: #d44801 !important;
 }
 
 .jf-state {

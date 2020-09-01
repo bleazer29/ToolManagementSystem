@@ -113,6 +113,23 @@
                                             </div>
                                             <div class="row pt-2">
                                                 <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                    Статус:
+                                                </div>
+                                                <div class="col pr-0 pl-0 pl-md-1">
+                                                    <select class="form-control">
+                                                        <option selected="selected">Все</option>
+                                                        <option>RFU</option>
+                                                        <option>JF</option>
+                                                        <option>JF(SB)</option>
+                                                        <option>WS</option>
+                                                        <option>WO</option>
+                                                        <option>RP</option>
+                                                        <option>Scrap</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-2">
+                                                <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Серийный номер:
                                                 </div>
                                                 <div class="col pr-0 pl-0 pl-md-1">
@@ -671,6 +688,7 @@
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="row pt-2">
                                                 <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                     Статус:
@@ -741,6 +759,7 @@
                                         <tr>
                                             <th>Управление</th>
                                             <th>Наименование</th>
+                                            <th>Статус</th>
                                             <th>Подразделение</th>
                                             <th>Количество</th>
                                             <th>Партийный номер</th>
@@ -756,6 +775,7 @@
                                                         class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
                                             </td>
                                             <td class="text-left">Инструмент1</td>
+                                            <td class="text-left">JF</td>
                                             <td class="text-left">Подразделение1</td>
                                             <td class="text-left">1</td>
                                             <td class="text-left">14566433</td>
@@ -772,6 +792,7 @@
                                                         class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
                                             </td>
                                             <td class="text-left">Инструмент2</td>
+                                            <td class="text-left">JF</td>
                                             <td class="text-left">Подразделение1</td>
                                             <td class="text-left">4</td>
                                             <td class="text-left">14622874</td>
@@ -788,6 +809,7 @@
                                                         class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
                                             </td>
                                             <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
                                             <td class="text-left">Подразделение1</td>
                                             <td class="text-left">10</td>
                                             <td class="text-left">34685986</td>
@@ -988,25 +1010,18 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="container-fluid">
-                                <div class="row pt-2">
-                                    <div class="col-md-2 pt-1">
-                                        Наименование документа:
-                                    </div>
-                                    <div class="col pr-0">
-                                        <input type="text" class="form-control" />
-                                    </div>
+                            <div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col mb-2">
+                                    <input type="text" class="form-control" />
                                 </div>
-                                <div class="row pt-2">
-                                    <div class="file-field">
-                                        <div class="btn btn-primary btn-sm float-left">
-                                            <span>Выберите файл</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="Прикрепите документ">
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Выберите файл:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col mb-2">
+                                    <input type="file" class="form-control-file" />
                                 </div>
                             </div>
                         </form>
