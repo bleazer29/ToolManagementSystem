@@ -645,3 +645,15 @@ transfer-button::selection {
     background-color: #d44801;
     border-color: #d44801;
 }
+
+.jf-state {
+    background-color: #99e093;
+}
+
+.jf-sb-state {
+    background-color: #fbc78e;
+}
+
+.error-text{
+    color: #ce1141;
+}

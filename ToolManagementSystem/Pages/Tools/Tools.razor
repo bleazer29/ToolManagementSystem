@@ -43,8 +43,8 @@
                                 <select class="form-control">
                                     <option selected="selected">Все</option>
                                     <option>RFU</option>
-                                    <option>FJ</option>
-                                    <option>FJ(SB)</option>
+                                    <option>JF</option>
+                                    <option>JF(SB)</option>
                                     <option>WS</option>
                                     <option>WO</option>
                                     <option>RP</option>
@@ -121,6 +121,7 @@
                                 <th>Партийный номер</th>
                                 <th>Артикул</th>
                                 <th>Классификация</th>
+                                <th>Время работы (за цикл)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,6 +143,33 @@
                                 </td>
                                 <td class="text-left">12345678</td>
                                 <td class="text-left">Вид1 -> Тип2 -> Подтип4</td>
+                                <td class="text-left">
+                                    <div class="row m-auto"><p>01:34</p></div>
+                                    <div class="row m-auto">Время до ремонта: 5:46</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">
+                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-times" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
+                                </td>
+                                <td class="text-left"><a href="/Tools/Details/1">00000001</a></td>
+                                <td class="text-left">RFU</td>
+                                <td class="text-left">Подразделение 1</td>
+                                <td class="text-left">
+                                    12345678
+                                </td>
+                                <td class="text-left">
+                                    12345678
+                                </td>
+                                <td class="text-left">12345678</td>
+                                <td class="text-left">Вид1 -> Тип2 -> Подтип4</td>
+                                <td class="text-left error-text">
+                                    <div class="row m-auto"><p>01:34</p></div>
+                                    <div class="row  m-auto">Требуется ремонт! Переработка: 5:46</div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
