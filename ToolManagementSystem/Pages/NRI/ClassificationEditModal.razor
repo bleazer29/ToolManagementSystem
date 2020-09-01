@@ -1,0 +1,57 @@
+﻿@inject IJSRuntime jsRuntime
+
+@*Modal Edit*@
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group row">
+                        <label for="classificationTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                        <div class="w-100 d-md-none"></div>
+                        <div class="col col-md-8 col-lg-9 mb-2">
+                            <input type="text" class="form-control" id="classificationTitle">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="editParentDropdownWrapper" class="col col-md-4 col-lg-3 col-form-label mb-2 mb-md-0"> Родитель:</label>
+                        <div class="w-100 d-md-none"></div>
+                        <div class="col col-md-8 col-lg-9">
+                            <div id="editParentDropdownWrapper" class="dropdown">
+                                <input type="text" class="form-control dropdown-toggle" id="editParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly @onclick="@(() => AddEditTreeDropdown("editClassificationTree", "editDropdown", "editParentNode", "id"))" />
+                                <div id="editDropdown" class="dropdown-menu" aria-labelledby="parent_node">
+                                    <div id="editClassificationTree">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary ">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*Modal Edit*@
+
+@code {
+    public async void AddEditTreeDropdown(string treeElementName, string wrapperElementName, string textBoxElementName, string nodeId)
+    {
+        await jsRuntime.InvokeVoidAsync("DeleteClassificationEditDropdown", treeElementName);
+        await jsRuntime.InvokeVoidAsync("AddClasificationTreeDropdown", treeElementName, textBoxElementName);
+        await jsRuntime.InvokeVoidAsync("StopDropdownFromClosing", wrapperElementName);
+    }
+}

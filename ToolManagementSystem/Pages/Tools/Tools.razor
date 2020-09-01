@@ -131,6 +131,7 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-comment transfer-button" type="button" data-toggle="modal" data-target="#addCommentModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Tools/Details/1">00000001</a></td>
                                 <td class="text-left">RFU</td>
@@ -154,6 +155,8 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-comment transfer-button" type="button" data-toggle="modal" data-target="#addCommentModal"></button>
+
                                 </td>
                                 <td class="text-left"><a href="/Tools/Details/1">00000001</a></td>
                                 <td class="text-left">RFU</td>
@@ -214,6 +217,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номенклатура:</label>
                             <div class="w-100 d-md-none"></div>
@@ -334,6 +344,13 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номенклатура:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
@@ -440,6 +457,38 @@
         </div>
     </div>
     @*Modal Create*@
+
+    @*Modal add comment*@
+    <div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление комментария</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Комментарий:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                      
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*Modal add comment*@
 </div>
 
 @code {

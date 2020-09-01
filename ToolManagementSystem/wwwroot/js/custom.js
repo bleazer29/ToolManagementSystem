@@ -82,8 +82,10 @@ function initTooltips() {
     })
 }
 
-function AddClasificationTree(elementName) {
+function AddClasificationTree(elementName, dotnetModelHelper) {
     var elem = '#' + elementName;
+   
+
     // tree data
     var data;
     data = [{ "id": "1", "parent": "#", "text": "Вид1", "data": { "nodeId": "1" }, "state": { "opened": "true" } },
@@ -114,7 +116,7 @@ function AddClasificationTree(elementName) {
                     "format": function (v) {
 
                         return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
-                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "' @onclick='ChangeCaret'></button>"
+                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "' @onclick='ShowModal(" + dotnetModelHelper + ")'></button>"
                             + "<button class='btn btn-primary ml-1 fa fa-times' type='button'"
                             + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");
                     },
@@ -128,6 +130,10 @@ function AddClasificationTree(elementName) {
             ]
         }
     });
+}
+
+function ShowModal(dotnetModelHelper) {
+    dotnetHelper.invokeMethodAsync('SayHello')
 }
 
 function AddClasificationTreeDropdown(elementName, textboxName) {
