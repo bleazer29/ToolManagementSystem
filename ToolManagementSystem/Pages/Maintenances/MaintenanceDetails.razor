@@ -286,6 +286,11 @@
             @* Doc tab start *@
             <div id="docsTab" class="container-fluid tab-pane fade">
                 <div class="container-fluid">
+                    <div class="row mt-3">
+                        <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
+                                data-toggle="modal" data-target="#addDocModal"></button>
+                    </div>
+
                     @* Doc search start*@
                     <div class="row mb-3 mt-3">
                         <div class="col pl-0 pr-0">
@@ -336,41 +341,33 @@
                         </div>
                     </div>
                     @* Doc search end*@
-                   
-                    <div class="row">
-                        @*Doc table start*@
-                        <div class="table-responsive scrollable">
-                            <table class="table  table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Дата прикрепления</th>
-                                        <th>Документ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">
-                                            31.07.2020
-                                        </td>
-                                        <td class="text-left"><a>Наряд на выполнение работ №00000001</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">
-                                            31.07.2020
-                                        </td>
-                                        <td class="text-left"><a>План-график WO-00000001/2020</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left">
-                                            31.07.2020
-                                        </td>
-                                        <td class="text-left"><a>План-фактный анализ трудозатрат WO-00000001/2020</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        @*Doc table end*@
+
+                <div class="row">
+                    @*Doc table start*@
+                    <div class="table-responsive scrollable">
+                        <table class="table  table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="10%"></th>
+                                    <th width="15%">Дата</th>
+                                    <th width="35%">Наименование</th>
+                                    <th width="40%">Автор</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle">
+                                        <button type="button" class="btn btn-primary fa fa-file-alt" />
+                                    </td>
+                                    <td class="text-left">12.05.2020</td>
+                                    <td class="text-left"><a href="#">Акт приёмки №0000001</a></td>
+                                    <td class="text-left">Иванов Иван Иванович</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    @*Doc table end*@
+                </div>
                 </div>
             </div>
             @* Doc tab end *@

@@ -325,3 +325,15 @@ function AddClassificationRow(tBodyName, counter) {
         + "</tr>"
     );
 }
+
+function AddRolesRow(tBodyName, counter) {
+    var tBodyElem = '#' + tBodyName;
+    $(tBodyElem).append(
+        "<tr id='role-row-" + counter + "'><td class= 'text-left'>"
+        + "<button id='role-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+        + "</td >"
+        + "<td class='text-left'><select class='form-control'></select></td>"
+        + "</tr>"
+    );
+}
+

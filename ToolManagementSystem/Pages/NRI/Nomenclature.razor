@@ -147,7 +147,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Спецификации:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddClassificationRow("classificationEditTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
@@ -163,7 +163,7 @@
                                                     <th style="width:30%;">Значение</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="classificationEditTbody">
                                                 <tr>
                                                     <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
@@ -191,8 +191,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearClassificationTable("classificationEditTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearClassificationTable("classificationEditTbody"))">Сохранить</button>
                 </div>
             </div>
 
@@ -231,7 +231,7 @@
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Спецификации:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddClassificationRow("classificationEditTbody"))"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddClassificationRow("classificationCreationTbody"))"></button>
                                 </div>
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
@@ -247,7 +247,7 @@
                                                     <th style="width:30%;">Значение</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="classificationEditTbody">
+                                            <tbody id="classificationCreationTbody">
                                                 <tr>
                                                     <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button" ></button>
@@ -275,13 +275,15 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearClassificationTable("classificationEditTbody"))">Отмена</button>
-                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearClassificationTable("classificationEditTbody"))">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearClassificationTable("classificationCreationTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearClassificationTable("classificationCreationTbody"))">Сохранить</button>
                 </div>
             </div>
         </div>
     </div>
     @*Modal Create*@
+
+   
 </div>
 
 @code {

@@ -1,4 +1,6 @@
 ﻿@page "/Administrative/Users"
+@inject IJSRuntime jsRuntime
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
@@ -25,6 +27,14 @@
             <div id="collapseOne" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-4 col-lg-3 pt-1 pl-0">
+                                Подразделение:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
                         <div class="row pt-2">
                             <div class="col-md-4 col-lg-3 pt-1 pl-0">
                                 ФИО:
@@ -56,7 +66,7 @@
                         </div>
                     </div>
                 </form>
-              
+
             </div>
         </div>
     </div>
@@ -73,6 +83,7 @@
                                 <th style="width:15%;">Управление</th>
                                 <th style="width:25%;">Логин</th>
                                 <th style="width:20%;">ФИО</th>
+                                <th style="width:15%;">Подразделение</th>
                                 <th style="width:20%;">Роли</th>
                             </tr>
                         </thead>
@@ -88,6 +99,7 @@
                                 </td>
                                 <td class="text-left">Admin@ia.ua</td>
                                 <td class="text-left">Иванов Иван Иванович</td>
+                                <td class="text-left">Подразделение 1</td>
                                 <td class="text-left">Адмиистратор <br /> Оператор НСИ <br /> Оператор инструмента</td>
                             </tr>
                         </tbody>
@@ -175,12 +187,22 @@
                                 <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Подразделение:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control">
+                                    <option>Подразделение 1</option>
+                                    <option>Подразделение 2</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="row align-items-center pl-3 pr-3">
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Роли:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddRolesRow("rolesCreationTbody"))"></button>
                                 </div>
                             </div>
 
@@ -194,7 +216,7 @@
                                                     <th style="width:90%;">Наименование</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="rolesCreationTbody">
                                                 <tr>
                                                     <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
@@ -214,15 +236,13 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearRolesTable("rolesCreationTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearRolesTable("rolesCreationTbody"))">Сохранить</button>
                 </div>
-                
-                
             </div>
         </div>
     </div>
@@ -246,7 +266,7 @@
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" id="statusTitle">
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> ФИО:</label>
                             <div class="w-100 d-md-none"></div>
@@ -254,12 +274,22 @@
                                 <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Подразделение:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control">
+                                    <option>Подразделение 1</option>
+                                    <option>Подразделение 2</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="row align-items-center pl-3 pr-3">
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Роли:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right"></button>
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddRolesRow("rolesEditTbody"))"></button>
                                 </div>
                             </div>
 
@@ -273,7 +303,7 @@
                                                     <th style="width:90%;">Наименование</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="rolesEditTbody">
                                                 <tr>
                                                     <td class="text-left">
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
@@ -297,8 +327,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(() => ClearRolesTable("rolesEditTbody"))">Отмена</button>
+                    <button type="button" class="btn btn-primary" @onclick="@(() => ClearRolesTable("rolesEditTbody"))">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -309,6 +339,27 @@
 @code {
     private bool isCaretUp = false;
     public string Caret => isCaretUp ? "fa-caret-down" : "fa-caret-up";
+    private int RolesCounter = 0;
+
+    private void IncrementCount()
+    {
+        RolesCounter++;
+        //await SessionStorage.SetItem<int>("counter", currentCount);
+    }
+
+    public async void AddRolesRow(string tbodyName)
+    {
+
+        await jsRuntime.InvokeVoidAsync("AddRolesRow", tbodyName, RolesCounter);
+        IncrementCount();
+    }
+
+    public async void ClearRolesTable(string tbodyName)
+    {
+
+        await jsRuntime.InvokeVoidAsync("ClearTable", tbodyName);
+        RolesCounter = 1;
+    }
 
     public void ChangeCaret()
     {
