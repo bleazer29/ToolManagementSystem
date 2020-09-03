@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </form>
-           
+
             </div>
         </div>
     </div>
@@ -115,6 +115,7 @@
                                 <th>Статус</th>
                                 <th>Дата начала</th>
                                 <th>Расчётная дата конца</th>
+                                <th>Фактическая дата конца</th>
                                 <th>Ответственный</th>
                                 <th>Скважина</th>
                                 <th>Контракт</th>
@@ -128,6 +129,8 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
+                                            data-toggle="modal" data-target="#closeOrderModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Orders/Details/1">00000001</a></td>
 
@@ -137,6 +140,9 @@
                                 </td>
                                 <td class="text-left">
                                     01.08.2020
+                                </td>
+                                <td class="text-left">
+                                    -
                                 </td>
                                 <td class="text-left">Иванов Иван Иванович</td>
                                 <td class="text-left">Скважина4</td>
@@ -155,6 +161,28 @@
         </div>
     </div>
     @* Table end *@
+
+    @*Modal CloseOrder*@
+    <div class="modal fade" id="closeOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Закрытие наряда на работу</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите закрыть наряд на работу?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal CloseOrder*@
 
     @*Modal Delete*@
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -197,16 +225,16 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col mb-2">
-                                <select class="form-control">
-                                    <option>Активный</option>
-                                    <option>Неактивный</option>
-                                </select>
-                            </div>
-                        </div>
+                        @*<div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col mb-2">
+                                    <select class="form-control">
+                                        <option>Активный</option>
+                                        <option>Неактивный</option>
+                                    </select>
+                                </div>
+                            </div>*@
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Дата начала:</label>
                             <div class="w-100 d-md-none"></div>
@@ -264,7 +292,7 @@
                             </div>
                         </div>
                     </form>
-                   
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
@@ -294,16 +322,16 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col mb-2">
-                                <select class="form-control">
-                                    <option>Активный</option>
-                                    <option>Неактивный</option>
-                                </select>
-                            </div>
-                        </div>
+                        @*<div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col mb-2">
+                                    <select class="form-control">
+                                        <option>Активный</option>
+                                        <option>Неактивный</option>
+                                    </select>
+                                </div>
+                            </div>*@
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Дата начала:</label>
                             <div class="w-100 d-md-none"></div>
@@ -323,6 +351,17 @@
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
                                 <input type="date" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Контрагент:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col mb-2">
+                                <select class="form-control">
+                                    <option>Контрагент1</option>
+                                    <option>Контрагент2</option>
+                                    <option>Контрагент3</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -391,31 +430,31 @@
                                                     </div>
                                                     <div class="col pr-0 pl-0 pl-md-1">
                                                         <select class="form-control">
-                                                            
+
                                                             <option>Подразделение1</option>
                                                             <option>Подразделение2</option>
                                                             <option>Подразделение3</option>
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="row pt-2">
-                                                    <div class="col-md-5 col-lg-4 pt-1 pl-0">
-                                                        Статус:
-                                                    </div>
-                                                    <div class="col pr-0 pl-0 pl-md-1">
-                                                        <select class="form-control">
-                                                            <option selected="selected">Все</option>
-                                                            <option>RFU</option>
-                                                            <option>JF</option>
-                                                            <option>JF(SB)</option>
-                                                            <option>WS</option>
-                                                            <option>WO</option>
-                                                            <option>RP</option>
-                                                            <option>Scrap</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                @*<div class="row pt-2">
+                                                        <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                                            Статус:
+                                                        </div>
+                                                        <div class="col pr-0 pl-0 pl-md-1">
+                                                            <select class="form-control">
+                                                                <option selected="selected">Все</option>
+                                                                <option>RFU</option>
+                                                                <option>JF</option>
+                                                                <option>JF(SB)</option>
+                                                                <option>WS</option>
+                                                                <option>WO</option>
+                                                                <option>RP</option>
+                                                                <option>Scrap</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>*@
                                                 <div class="row pt-2">
                                                     <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                                         Серийный номер:
@@ -472,6 +511,7 @@
                                                     <th>Партийный номер</th>
                                                     <th>Артикул</th>
                                                     <th>Классификация</th>
+                                                    <th>Время работы (за цикл)</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -497,6 +537,10 @@
                                                     <td class="text-left">
                                                         Вид1 -> Тип3
                                                     </td>
+                                                    <td class="text-left">
+                                                        <div class="row m-auto"><p>00:00</p></div>
+                                                        <div class="row m-auto">Время до ремонта: 5:46</div>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">
@@ -519,6 +563,10 @@
                                                     </td>
                                                     <td class="text-left">
                                                         Вид1 -> Тип3
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <div class="row m-auto"><p>00:00</p></div>
+                                                        <div class="row m-auto">Время до ремонта: 5:46</div>
                                                     </td>
                                                 </tr>
                                             </tbody>

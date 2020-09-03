@@ -606,6 +606,7 @@ jstree-grid-header {
 .create-button {
     background-color: #009877 !important;
     border-color: #078a6c !important;
+    font-size:small
 }
 
     .create-button:hover {
@@ -621,6 +622,7 @@ jstree-grid-header {
 .edit-button {
     background-color: #217a98 !important;
     border-color: #217a98 !important;
+    font-size: small
 }
 
     .edit-button:hover {
@@ -635,6 +637,7 @@ jstree-grid-header {
 .transfer-button {
     background-color: #e56510 !important;
     border-color: #e56510 !important;
+    font-size: small
 }
 
     .transfer-button:hover {
@@ -644,6 +647,10 @@ jstree-grid-header {
 transfer-button:active {
     background-color: #d44801 !important;
     border-color: #d44801 !important;
+}
+
+.delete-button {
+    font-size: small
 }
 
 .jf-state {
@@ -656,4 +663,18 @@ transfer-button:active {
 
 .error-text{
     color: #ce1141;
+}
+
+.css-numbered-rows {
+    counter-reset: serial-number; /* Set the serial number counter to 0 */
+}
+
+.css-numbered-rows td:first-child:before {
+    counter-increment: serial-number; /* Increment the serial number counter */
+    content: counter(serial-number); /* Display the counter */
+}
+
+.table td, .table th {
+    padding: .5rem;
+   
 }

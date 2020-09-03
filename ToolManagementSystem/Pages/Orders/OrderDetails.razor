@@ -54,6 +54,20 @@
                         Иванов Иван Иванович
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-4">
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-3">
+                        Контрагент:
+                    </div>
+                    <div class="col-3">
+                        Контрагент1
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container-fluid pt-3 pl-0 pr-0">
@@ -342,7 +356,7 @@
                                             <td class="text-left jf-state">JF</td>
                                             <td class="text-left">
                                                 <div class="row m-auto"><a href="/Tools/Details/1">0000002</a></div>
-                                                <div class="row m-auto">Время до ремонта: 5:46</div>                                                
+                                                <div class="row m-auto">Время до ремонта: 5:46</div>
                                             </td>
                                             <td class="text-left">
                                                 12345678
@@ -794,7 +808,7 @@
                                             <td class="text-left">Инструмент2</td>
                                             <td class="text-left">JF</td>
                                             <td class="text-left">Подразделение1</td>
-                                            <td class="text-left">4</td>
+                                            <td class="text-left">1</td>
                                             <td class="text-left">14622874</td>
                                             <td class="text-left">99874112</td>
                                             <td class="text-left">Вид1 -> Тип3</td>
@@ -816,8 +830,8 @@
                                             <td class="text-left">47855478</td>
                                             <td class="text-left">Вид2 -> Тип4</td>
                                             <td class="text-left error-text">
-                                                <div class="row m-auto"><p>01:34</p></div>
-                                                <div class="row  m-auto">Требуется ремонт! Переработка: 5:46</div>
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -883,28 +897,32 @@
                         </div>
                         @* History search end*@
                         <div class="row">
-                            @*History table start*@
+                            @* History table start*@
                             <div class="table-responsive scrollable">
                                 <table class="table  table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th width="15%">Дата</th>
-                                            <th width="50%">Сообщение</th>
-                                            <th width="35%">Комментарий</th>
+                                            <th>Дата</th>
+                                            <th>Сообщение</th>
+                                            <th>Ответственный</th>
+                                            <th>Комментарий</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td class="text-left">
-                                                31.01.2020
+                                                23.08.2020
                                             </td>
-                                            <td class="text-left">Наряд №00000001 открыт</td>
-                                            <td class="text-left">Пользователь1: Тестовый комментарий</td>
+                                            <td class="text-left">Наряд на работу 000001 открыт</td>
+                                            <td class="text-left">Иванов Иван Иванович</td>
+                                            <td class="text-left">
+                                                Тестовый комментарий
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            @*History table end*@
+                            @* History table end*@
                         </div>
                     </div>
                 </div>
@@ -998,42 +1016,7 @@
                 @* Docs tab end *@
             </div>
         </div>
-        @*Modal add doc start*@
-        <div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Прикрепление документа:</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group row align-items-center">
-                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Выберите файл:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="file" class="form-control-file" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="button" class="btn btn-primary ">Сохранить</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @*Modal add doc end*@
+
 
         @*Modal control single instruments start*@
         <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1054,9 +1037,8 @@
                                     </div>
                                     <div class="col pr-0">
                                         <select class="form-control">
-                                            <option>Склад (RFU)</option>
-                                            <option>Ремонт (RP)</option>
-                                            <option>Утиль (Scrap)</option>
+                                            <option>Ожидание сервиса (WS)</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -1099,9 +1081,7 @@
                                     </div>
                                     <div class="col pr-0">
                                         <select class="form-control">
-                                            <option>Склад (RFU)</option>
-                                            <option>Ремонт (RP)</option>
-                                            <option>Утиль (Scrap)</option>
+                                            <option>Ожидание сервиса (WS)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1192,6 +1172,7 @@
                                                         <th>Партийный номер</th>
                                                         <th>Артикул</th>
                                                         <th>Классификация</th>
+                                                        <th>Время работы (за цикл)</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -1214,6 +1195,10 @@
                                                         <td class="text-left">
                                                             Вид1 -> Тип3
                                                         </td>
+                                                        <td class="text-left error-text">
+
+                                                            <div class="row  m-auto">Требуется ремонт! Переработка: 5:46</div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-left">
@@ -1233,6 +1218,10 @@
                                                         </td>
                                                         <td class="text-left">
                                                             Вид1 -> Тип3
+                                                        </td>
+                                                        <td class="text-left">
+                                                            <div class="row m-auto"><p>01:34</p></div>
+                                                            <div class="row m-auto">Время до ремонта: 5:46</div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -1264,25 +1253,18 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="container-fluid">
-                                <div class="row pt-2">
-                                    <div class="col-md-2 pt-1">
-                                        Наименование документа:
-                                    </div>
-                                    <div class="col pr-0">
-                                        <input type="text" class="form-control" />
-                                    </div>
+                            <div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2">  Наименование:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col mb-2">
+                                    <input type="text" class="form-control" />
                                 </div>
-                                <div class="row pt-2">
-                                    <div class="file-field">
-                                        <div class="btn btn-primary btn-sm float-left">
-                                            <span>Выберите файл</span>
-                                            <input type="file">
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="Прикрепите документ">
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Выберите файл:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col mb-2">
+                                    <input type="file" class="form-control-file" />
                                 </div>
                             </div>
                         </form>

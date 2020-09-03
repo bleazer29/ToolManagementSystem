@@ -60,29 +60,33 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover css-numbered-rows">
                         <thead>
                             <tr>
-                                <th style="width:15%;">Управление</th>
-                                <th style="width:25%;">Наименование</th>
-                                <th style="width:20%;">Артикул</th>
-                                <th style="width:40%;">Спецификации</th>
+                                <th>#</th>
+                                <th>Наименование</th>
+                                <th>Артикул</th>
+                                <th>Спецификации</th>
+                                <th>Максимальное время работы</th>
+                                <th>Управление</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
-                                </td>
+
                                 <td class="text-left">Наименование1</td>
                                 <td class="text-left">12345678</td>
                                 <td class="text-left">
                                     Длина - 1 <br />
                                     Ширина - 2 <br />
                                     Вес - 3 <br />
+                                </td>
+                                <td class="text-left">02:30</td>
+                                <td class="align-middle">
+                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                            data-toggle="modal" data-target="#editModal"></button>
+                                    <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                            data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -137,6 +141,13 @@
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Максимальное время работы:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" id="unitTitle">
@@ -226,6 +237,13 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Максимальное время работы:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="row align-items-center pl-3 pr-3">
                                 <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Спецификации:</label>
@@ -241,6 +259,7 @@
                                         <table class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th style="width:10%;"></th>
                                                     <th style="width:30%;">Наименование</th>
                                                     <th style="width:30%;">Единица измерения</th>
@@ -249,8 +268,9 @@
                                             </thead>
                                             <tbody id="classificationCreationTbody">
                                                 <tr>
+                                                    <td class="text-left"></td>
                                                     <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button" ></button>
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
                                                     </td>
                                                     <td class="text-left">
                                                         <select class="form-control">

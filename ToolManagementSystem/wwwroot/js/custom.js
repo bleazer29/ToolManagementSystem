@@ -32,8 +32,8 @@ function AddMainMenuTree(elementName) {
             },
             'data': [
                 { "id": "1", "parent": "#", "text": "НСИ", "state": { "opened": "true", "disabled": "true" } },
-                { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" } },
                 { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true" }, "a_attr": { "href": "/Contracts" } },
+                { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" } },
                 { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true" }, "a_attr": { "href": "/Orders/" } },
                 { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true" }, "a_attr": { "href": "/Maintenances/" } },
                 { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" }, "a_attr": { "href": "/RepairProcesses/" } },
@@ -92,7 +92,7 @@ function AddClasificationTree(elementName) {
     { "id": "4", "parent": "1", "text": "Тип1", "data": { "nodeId": "4" }, "state": { "opened": "true" } },
     { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" }, "state": { "opened": "true" } },
     { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" }, "state": { "opened": "true" } },
-    { "id": "7", "parent": "4", "text": "Тип4", "data": { "nodeId": "7" }, "state": { "opened": "true" } }];
+    { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" }, "state": { "opened": "true" } }];
 
     $(elem).jstree({
         "plugins": ["grid", "wholerow", "search"],
@@ -149,7 +149,7 @@ function AddClasificationTreeDropdown(elementName, textboxName) {
         { "id": "4", "parent": "1", "text": "Тип1", "data": { "nodeId": "4" } },
         { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" } },
         { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" } },
-        { "id": "7", "parent": "4", "text": "Тип4", "data": { "nodeId": "7" } }];
+        { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" } }];
 
     $(elem).jstree({
         "plugins": ["wholerow", "search"],
@@ -235,7 +235,7 @@ function AddRolesTree(elementName) {
                     "value": "view",
                     "format": function (v) {
                         var checked = "";
-                        if (v == "true") {
+                        if (v == true) {
                             checked = "checked='true'"
                         }
 
@@ -319,7 +319,7 @@ function AddClassificationRow(tBodyName, counter) {
         "<tr id='classification-row-" + counter + "'><td class= 'text-left'>"
         + "<button id='classification-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
         + "</td >"
-        + "<td class='text-left'><select class='form-control'></select></td>"
+        + "<td class='text-left'><select class='form-control'><option selected = 'selected'> Длина</option><option>Ширина</option><option>Вес</option></select></td>"
         + "<td class='text-left'></td>"
         + "<td class='text-left'><input class='form-control'/></td>"
         + "</tr>"

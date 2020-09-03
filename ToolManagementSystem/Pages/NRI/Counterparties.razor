@@ -66,26 +66,28 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover css-numbered-rows">
                         <thead>
                             <tr>
-                                <th style="width:15%;">Управление</th>
-                                <th style="width:25%;">ЕДРПОУ</th>
-                                <th style="width:20%;">Наименование</th>
-                                <th style="width:40%;">Адрес</th>
+                                <th style="width:5%">#</th>
+                                <th style="width:20%">ЕДРПОУ</th>
+                                <th style="width:30%">Наименование</th>
+                                <th style="width:30%">Адрес</th>
+                                <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td></td>
+                                <td class="text-left">ООО "Контрагент1"</td>
+                                <td class="text-left">12345678</td>
+                                <td class="text-left">г.Киев 10600, ул.Пушкина д.18 А кв.12</td>
                                 <td class="align-middle">
                                     <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                             data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
+                                    <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
                                 </td>
-                                <td class="text-left">ООО "Рога и копыта"</td>
-                                <td class="text-left">12345678</td>
-                                <td class="text-left">г.Киев 10600, ул.Пушкина д.18 А кв.12</td>
                             </tr>
                         </tbody>
                     </table>

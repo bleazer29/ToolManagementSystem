@@ -58,44 +58,50 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover css-numbered-rows">
                             <thead>
                                 <tr>
-                                    <th style="width:15%;">Управление</th>
-                                    <th style="width:42%;">Наименование</th>
-                                    <th style="width:43%;">Единица измерения</th>
+                                    <th style="width:5%">#</th>
+                                    <th style="width:50%">Наименование</th>
+                                    <th style="width:40%">Единица измерения</th>
+                                    <th style="width:15%">Управление</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="align-middle">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-times" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </td>
+                                    <td></td>
                                     <td class="text-left">Длина</td>
                                     <td class="text-left">мм</td>
-                                </tr>
-                                <tr>
                                     <td class="align-middle">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                 data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-times" type="button"
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
                                                 data-toggle="modal" data-target="#deleteModal"></button>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+
                                     <td class="text-left">Вес</td>
                                     <td class="text-left">кг</td>
-                                </tr>
-                                <tr>
                                     <td class="align-middle">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                 data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-times" type="button"
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
                                                 data-toggle="modal" data-target="#deleteModal"></button>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+
                                     <td class="text-left">Диаметр</td>
                                     <td class="text-left">мм</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

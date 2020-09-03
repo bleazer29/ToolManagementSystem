@@ -64,14 +64,14 @@
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
-                       
+
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
                             <button class="btn btn-primary">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
                     </div>
-                </form>              
+                </form>
             </div>
         </div>
     </div>
@@ -101,6 +101,8 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
+                                            data-toggle="modal" data-target="#closeWorkOrderModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Maintenances/Details/1">00000001/2020</a></td>
                                 <td class="text-left">Активный</td>
@@ -121,6 +123,8 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
+                                            data-toggle="modal" data-target="#closeWorkOrderModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Maintenances/Details/1">00000002/2020</a></td>
                                 <td class="text-left">Активный</td>
@@ -141,6 +145,8 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
+                                            data-toggle="modal" data-target="#closeWorkOrderModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Maintenances/Details/1">00000003/2020</a></td>
                                 <td class="text-left">Активный</td>
@@ -161,6 +167,8 @@
                                             data-toggle="modal" data-target="#editModal"></button>
                                     <button class="btn btn-primary fa fa-times" type="button"
                                             data-toggle="modal" data-target="#deleteModal"></button>
+                                    <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
+                                            data-toggle="modal" data-target="#closeWorkOrderModal"></button>
                                 </td>
                                 <td class="text-left"><a href="/Maintenances/Details/1">00000004/2020</a></td>
                                 <td class="text-left">Активный</td>
@@ -171,7 +179,7 @@
                                     06.08.2020
                                 </td>
                                 <td class="text-left">
-                                   -
+                                    -
                                 </td>
                                 <td class="text-left">Иванов Иван Иванович</td>
                             </tr>
@@ -218,14 +226,14 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Номер:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="text" class="form-control" id="unitTitle">
-                                </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Номер:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
                             </div>
-                            <div class="form-group row align-items-center">
+                        </div>
+                        @*<div class="form-group row align-items-center">
                                 <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col mb-2">
@@ -235,36 +243,36 @@
 
                                     </select>
                                 </div>
+                            </div>*@
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Дата начала:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col mb-2">
+                                <input type="date" class="form-control" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Дата начала:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="date" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Рассчётная дата конца:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col mb-2">
+                                <input type="date" class="form-control" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Рассчётная дата конца:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="date" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Фактическая дата конца:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col mb-2">
+                                <input type="date" class="form-control" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Фактическая дата конца:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="date" class="form-control" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Ответственный:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Ответственный:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col mb-2">
-                                    <input type="text" class="form-control" id="unitTitle">
-                                </div>
-                            </div>
-                        
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -295,17 +303,17 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col  mb-2">
-                                <select class="form-control">
-                                    <option>Активный</option>
-                                    <option>Неактивный</option>
+                        @*<div class="form-group row align-items-center">
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col  mb-2">
+                                    <select class="form-control">
+                                        <option>Активный</option>
+                                        <option>Неактивный</option>
 
-                                </select>
-                            </div>
-                        </div>
+                                    </select>
+                                </div>
+                            </div>*@
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Дата начала:</label>
                             <div class="w-100 d-md-none"></div>
@@ -486,12 +494,35 @@
                     <button type="button" class="btn btn-primary">Сохранить</button>
                 </div>
 
-               
-                
+
+
             </div>
         </div>
     </div>
     @*Modal Create*@
+
+    @*Modal CloseWorkOrder*@
+    <div class="modal fade" id="closeWorkOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Закрытие сервисного обслуживания</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите закрыть сервисное обслуживание?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal CloseWorkOrder*@
+
 </div>
 
 @code {

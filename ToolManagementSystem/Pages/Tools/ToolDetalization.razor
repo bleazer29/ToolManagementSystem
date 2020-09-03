@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-7">
-                        <p>Инструмент №00000001</p>
+                        <p>Инструмент1</p>
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
@@ -49,7 +49,7 @@
                         Время работы (за цикл):
                     </div>
                     <div class="col-5">
-                        01.05
+                        01:05
                     </div>
                 </div>
                 <div class="row">
@@ -57,7 +57,7 @@
                         Время работы (общее):
                     </div>
                     <div class="col-5">
-                        01.05
+                        01:05
                     </div>
                 </div>
                 <div class="row">
@@ -65,7 +65,7 @@
                         Максимальное время работы:
                     </div>
                     <div class="col-5">
-                        01.05
+                        01:05
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#partsTab">Детали</a>
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#operatingHistoryTab">История наработки</a>
-                </li>
+                </li>*@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#toolHistoryTab">История инструмента</a>
                 </li>
@@ -161,10 +161,10 @@
 
 
                 @* Operating history tab start *@
-                <div id="operatingHistoryTab" class="container-fluid tab-pane fade">
-                    <div class="container-fluid">
+                @*<div id="operatingHistoryTab" class="container-fluid tab-pane fade">
+                    <div class="container-fluid">*@
                         @* Operating history search start*@
-                        <div class="row mb-3 mt-3">
+                        @*<div class="row mb-3 mt-3">
                             <div class="col pl-0 pr-0">
                                 <div class="card w-100">
                                     <div class="card-header pt-0 pb-0">
@@ -209,11 +209,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         @* Operating history search end*@
-                        <div class="row">
+                        @*<div class="row">*@
                             @* Operating history table start*@
-                            <div class="table-responsive scrollable">
+                            @*<div class="table-responsive scrollable">
                                 <table class="table  table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -235,11 +235,11 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>*@
                             @* Operating history table end*@
-                        </div>
+                        @*</div>
                     </div>
-                </div>
+                </div>*@
                 @* Operating history tab end *@
 
 
@@ -417,7 +417,7 @@
                                             <button type="button" class="btn btn-primary fa fa-file-alt" />
                                         </td>
                                         <td class="text-left">12.05.2020</td>
-                                        <td class="text-left"><a href="#">Акт приёмки №0000001</a></td>
+                                        <td class="text-left"><a href="#">Паспорт инструмента</a></td>
                                         <td class="text-left">Иванов Иван Иванович</td>
                                     </tr>
                                 </tbody>
@@ -443,7 +443,7 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row align-items-center">
-                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Статус:</label>
+                                <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Наименование:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col mb-2">
                                     <input type="text" class="form-control" />
