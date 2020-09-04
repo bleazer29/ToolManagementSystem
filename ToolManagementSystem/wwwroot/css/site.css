@@ -606,7 +606,9 @@ jstree-grid-header {
 .create-button {
     background-color: #009877 !important;
     border-color: #078a6c !important;
-    font-size:small
+    font-size: small;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
     .create-button:hover {
@@ -622,7 +624,9 @@ jstree-grid-header {
 .edit-button {
     background-color: #217a98 !important;
     border-color: #217a98 !important;
-    font-size: small
+    font-size: small;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
     .edit-button:hover {
@@ -637,7 +641,9 @@ jstree-grid-header {
 .transfer-button {
     background-color: #e56510 !important;
     border-color: #e56510 !important;
-    font-size: small
+    font-size: small;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
     .transfer-button:hover {
@@ -650,7 +656,9 @@ transfer-button:active {
 }
 
 .delete-button {
-    font-size: small
+    font-size: small;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .jf-state {
@@ -674,7 +682,44 @@ transfer-button:active {
     content: counter(serial-number); /* Display the counter */
 }
 
+.css-tree-numbered-rows {
+    counter-reset: tree-serial-number; /* Set the serial number counter to 0 */
+}
+
+    .css-tree-numbered-rows .tree-col-num:before {
+        counter-increment: tree-serial-number; /* Increment the serial number counter */
+        content: counter(tree-serial-number); /* Display the counter */
+    }
+
 .table td, .table th {
     padding: .5rem;
    
 }
+
+.table-control-buttons-row {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    margin:auto;
+    justify-content:center;
+}
+
+.nri-table td{
+    text-align:left;
+}
+
+.operating-time-table{
+    text-wrap:none;
+}
+
+.operating-time-table tbody tr {
+    max-height: 30px;
+}
+
+.jstree-grid-cell-root-classification-table{
+    padding:10px!important;
+}
+
+    .jstree-grid-cell-root-classification-table.jstree-grid-col-0{
+        height:49px;
+    }

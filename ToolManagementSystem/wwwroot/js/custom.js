@@ -93,7 +93,7 @@ function AddClasificationTree(elementName) {
     { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" }, "state": { "opened": "true" } },
     { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" }, "state": { "opened": "true" } },
     { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" }, "state": { "opened": "true" } }];
-
+    var i = 0;
     $(elem).jstree({
         "plugins": ["grid", "wholerow", "search"],
         "core": {
@@ -108,16 +108,10 @@ function AddClasificationTree(elementName) {
         "grid": {
             "columns": [
                 {
-                    "header": "Управление",
+                    "header": "#",
                     "tree": false,
-                    "value": "nodeId",
-                    "format": function (v) {
-
-                        return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
-                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "' @onclick='ChangeCaret'></button>"
-                            + "<button class='btn btn-primary ml-1 fa fa-times' type='button'"
-                            + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");
-                    },
+                    "cellClass": "tree-col-num",
+                    "value": "",
                 },
                 {
                     "header": "Наименование",
@@ -125,6 +119,20 @@ function AddClasificationTree(elementName) {
                     "value": "title",
                     "width": "100%"
                 },
+                {
+                    "header": "Управление",
+                    "tree": false,
+                    "cellClass": "jstree-grid-buttons-cell",
+                    "value": "nodeId",
+
+                    "format": function (v) {
+
+                        return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
+                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "' @onclick='ChangeCaret'></button>"
+                            + "<button class='btn btn-primary ml-1 fa fa-trash-alt delete-button' type='button'"
+                            + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");
+                    },
+                }
             ]
         }
     });
@@ -290,18 +298,17 @@ function AddRolesTree(elementName) {
     });
 }
 
-
-function AddPartRow(tBodyName, counter) {
-    var tBodyElem = '#' + tBodyName;
-    $(tBodyElem).append(
-        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
-        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
-            + "</td >"
-        + "<td class='text-left'><select class='form-control'></select></td>"
-            + "<td class='text-left'></td>"
-            + "</tr>"
-    );
-}
+//function AddPartRow(tBodyName, counter) {
+//    var tBodyElem = '#' + tBodyName;
+//    $(tBodyElem).append(
+//        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
+//        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+//            + "</td >"
+//        + "<td class='text-left'><select class='form-control'></select></td>"
+//            + "<td class='text-left'></td>"
+//            + "</tr>"
+//    );
+//}
 
 function ClearTable(tBodyName) {
     var tBodyElem = '#' + tBodyName;
@@ -316,7 +323,7 @@ function RemoveTableRow(tBodyName) {
 function AddClassificationRow(tBodyName, counter) {
     var tBodyElem = '#' + tBodyName;
     $(tBodyElem).append(
-        "<tr id='classification-row-" + counter + "'><td class= 'text-left'>"
+        "<tr id='classification-row-" + counter + "'><td class= 'text-left'></td><td class= 'text-left'>"
         + "<button id='classification-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
         + "</td >"
         + "<td class='text-left'><select class='form-control'><option selected = 'selected'> Длина</option><option>Ширина</option><option>Вес</option></select></td>"
@@ -329,11 +336,17 @@ function AddClassificationRow(tBodyName, counter) {
 function AddRolesRow(tBodyName, counter) {
     var tBodyElem = '#' + tBodyName;
     $(tBodyElem).append(
-        "<tr id='role-row-" + counter + "'><td class= 'text-left'>"
+        "<tr id='role-row-" + counter + "'><td class= 'text-left'></td><td class= 'text-left'>"
         + "<button id='role-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
         + "</td >"
         + "<td class='text-left'><select class='form-control'></select></td>"
         + "</tr>"
     );
+}
+
+function test () {
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
 }
 

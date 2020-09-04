@@ -74,7 +74,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover css-numbered-rows">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table">
                         <thead>
                             <tr>
                                 <th style="width:5%;">#</th>
@@ -87,16 +87,18 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-left"></td>
-                                <td class="text-left">Скважина1</td>
-                                <td class="text-left">№00000001</td>
-                                <td class="text-left">ООО "Weatherford"</td>
-                                <td class="text-left">Украина, г.Запорожье, ул.Дудыкина 48А</td>
+                                <td></td>
+                                <td>Скважина1</td>
+                                <td>№00000001</td>
+                                <td>ООО "Weatherford"</td>
+                                <td>Украина, г.Запорожье, ул.Дудыкина 48А</td>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -109,7 +111,7 @@
 
     @*Modal Delete*@
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
@@ -131,7 +133,7 @@
 
     @*Modal Edit*@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
@@ -186,7 +188,7 @@
 
     @*Modal Create*@
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>

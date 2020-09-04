@@ -432,15 +432,15 @@
 }
 
 .jstree-default-grid .jstree-node {
-    min-height: 62px;
-    line-height: 62px;
+    min-height: 49px;
+    line-height: 49px;
     margin-left: 24px;
     min-width: 24px
 }
 
 .jstree-default-grid .jstree-anchor {
-    line-height: 62px;
-    height: 62px
+    line-height: 49px;
+    height: 49px
 }
 
 .jstree-default-grid .jstree-icon {
@@ -462,7 +462,7 @@
 }
 
 .jstree-default-grid .jstree-wholerow {
-    height: 61px;
+    height: 49px;
     border-bottom: solid 2px #e2e3e3;
 }
 

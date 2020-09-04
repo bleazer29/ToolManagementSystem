@@ -70,7 +70,7 @@
                         </div>
                         <div class="row pt-2">
                             <div class="col-md-4 col-lg-3 pt-1 pl-0">
-                                Партийный номер:
+                                Заказной номер:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
@@ -110,69 +110,76 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover css-numbered-rows">
                         <thead>
                             <tr>
-                                <th>Управление</th>
+                                <th>#</th>
                                 <th>Наименование</th>
-                                <th>Статус</th>
-                                <th>Подразделение</th>
                                 <th>Серийный номер</th>
-                                <th>Партийный номер</th>
+                                <th>Статус</th>
+                                <th>Время работы (за цикл)</th>
+                                <th>Подразделение</th>
+                                <th>Заказной номер</th>
                                 <th>Артикул</th>
                                 <th>Классификация</th>
-                                <th>Время работы (за цикл)</th>
+                                <th>Управление</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
-                                    <button class="btn btn-primary fa fa-comment transfer-button" type="button"
-                                            data-toggle="modal" data-target="#commentModal"></button>
-                                </td>
-                                <td class="text-left"><a href="/Tools/Details/1">Оборудование1</a></td>
-                                <td class="text-left">RFU</td>
-                                <td class="text-left">Подразделение 1</td>
-                                <td class="text-left">
+                                <td></td>
+                                <td><a href="/Tools/Details/1">Оборудование1</a></td>
+                                <td>
                                     12345678
                                 </td>
-                                <td class="text-left">
-                                    12345678
-                                </td>
-                                <td class="text-left">12345678</td>
-                                <td class="text-left">Вид1 -> Тип2 -> Подтип4</td>
-                                <td class="text-left">
+                                <td>RFU</td>
+                                <td>
                                     <div class="row m-auto"><p>01:34</p></div>
                                     <div class="row m-auto">Время до ремонта: 5:46</div>
                                 </td>
+                                <td>Подразделение 1</td>
+                                <td>
+                                    12345678
+                                </td>
+                                <td>12345678</td>
+                                <td>Вид1 -> Тип2 -> Подтип4</td>
+                                <td class="align-middle">
+                                    <div class="row flex-nowrap m-auto">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                        <button class="btn btn-primary fa fa-comment transfer-button" type="button"
+                                                data-toggle="modal" data-target="#commentModal"></button>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
+                                <td></td>
+                                <td><a href="/Tools/Details/1">Оборудование2</a></td>
+                                <td>
+                                    12345678
+                                </td>
+                                <td>RFU</td>
+                                <td>
+                                    <div class="row m-auto">Требуется ремонт! Переработка: 5:46</div>
+                                </td>
+                                <td>Подразделение 2</td>
+                                <td>
+                                    12345678
+                                </td>
+                                <td>12345678</td>
+                                <td>Вид1 -> Тип2 -> Подтип4</td>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-times" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
-                                    <button class="btn btn-primary fa fa-comment transfer-button" type="button"
-                                            data-toggle="modal" data-target="#commentModal"></button>
-                                </td>
-                                <td class="text-left"><a href="/Tools/Details/1">Оборудование2</a></td>
-                                <td class="text-left">RFU</td>
-                                <td class="text-left">Подразделение 1</td>
-                                <td class="text-left">
-                                    12345678
-                                </td>
-                                <td class="text-left">
-                                    12345678
-                                </td>
-                                <td class="text-left">12345678</td>
-                                <td class="text-left">Вид1 -> Тип2 -> Подтип4</td>
-                                <td class="text-left error-text">
-                                    <div class="row m-auto"><p>01:34</p></div>
-                                    <div class="row  m-auto">Требуется ремонт! Переработка: 5:46</div>
+                                    <div class="row flex-nowrap m-auto">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                        <button class="btn btn-primary fa fa-comment transfer-button" type="button"
+                                                data-toggle="modal" data-target="#commentModal"></button>
+                                    </div>
+
                                 </td>
                             </tr>
                         </tbody>
@@ -186,7 +193,7 @@
 
     @*Modal Delete*@
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
@@ -208,7 +215,7 @@
 
     @*Modal Edit*@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
@@ -218,6 +225,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номенклатура:</label>
                             <div class="w-100 d-md-none"></div>
@@ -262,7 +276,7 @@
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Партийный номер:</label>
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Заказной номер:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" id="unitTitle">
@@ -275,7 +289,7 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                      
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -289,7 +303,7 @@
 
     @*Modal Create*@
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
@@ -299,6 +313,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номенклатура:</label>
                             <div class="w-100 d-md-none"></div>
@@ -343,7 +364,7 @@
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Партийный номер:</label>
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Заказной номер:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" id="unitTitle">
@@ -356,7 +377,7 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                       
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -369,9 +390,9 @@
     </div>
     @*Modal Create*@
 
-    @*Modal add doc start*@
+    @*Modal add comment start*@
     <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Добавление комментария</h5>
@@ -385,10 +406,10 @@
                             <label for="statusTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Комментарий:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <input type="text" class="form-control" />
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                             </div>
                         </div>
-                       
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -398,7 +419,7 @@
             </div>
         </div>
     </div>
-    @*Modal add doc end*@
+    @*Modal add comment end*@
 </div>
 
 @code {

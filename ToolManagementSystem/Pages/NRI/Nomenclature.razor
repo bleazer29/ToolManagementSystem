@@ -60,33 +60,35 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover css-numbered-rows">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Наименование</th>
-                                <th>Артикул</th>
-                                <th>Спецификации</th>
-                                <th>Максимальное время работы</th>
-                                <th>Управление</th>
+                                <th style="width:5%">#</th>
+                                <th style="width:25%">Наименование</th>
+                                <th style="width:15%">Артикул</th>
+                                <th style="width:30%">Спецификации</th>
+                                <th style="width:10%">Максимальное время работы</th>
+                                <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-left"></td>
-                                <td class="text-left">Наименование1</td>
-                                <td class="text-left">12345678</td>
-                                <td class="text-left">
+                                <td></td>
+                                <td>Наименование1</td>
+                                <td>12345678</td>
+                                <td>
                                     Длина - 1 <br />
                                     Ширина - 2 <br />
                                     Вес - 3 <br />
                                 </td>
-                                <td class="text-left">02:30</td>
+                                <td>02:30</td>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                            data-toggle="modal" data-target="#editModal"></button>
-                                    <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                            data-toggle="modal" data-target="#deleteModal"></button>
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -100,7 +102,7 @@
 
     @*Modal Delete*@
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
@@ -122,7 +124,7 @@
 
     @*Modal Edit*@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
@@ -165,10 +167,11 @@
                                 <div class="col pt-1">
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
+                                        <table class="table table-bordered table-hover css-numbered-rows">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:10%;"></th>
+                                                    <th style="width:5%;"></th>
+                                                    <th style="width:5%;"></th>
                                                     <th style="width:30%;">Наименование</th>
                                                     <th style="width:30%;">Единица измерения</th>
                                                     <th style="width:30%;">Значение</th>
@@ -176,20 +179,21 @@
                                             </thead>
                                             <tbody id="classificationEditTbody">
                                                 <tr>
-                                                    <td class="text-left">
+                                                    <td> </td>
+                                                    <td>
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td>
                                                         <select class="form-control">
                                                             <option selected="selected">Длина</option>
                                                             <option>Ширина</option>
                                                             <option>Вес</option>
                                                         </select>
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td>
                                                         мм
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td>
                                                         <input class="form-control" type="number" value="12" />
                                                     </td>
                                                 </tr>
@@ -213,7 +217,7 @@
 
     @*Modal Create*@
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
@@ -256,11 +260,11 @@
                                 <div class="col pt-1">
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
+                                        <table class="table table-bordered table-hover css-numbered-rows">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th style="width:10%;"></th>
+                                                    <th style="width:5%;">#</th>
+                                                    <th style="width:5%;"></th>
                                                     <th style="width:30%;">Наименование</th>
                                                     <th style="width:30%;">Единица измерения</th>
                                                     <th style="width:30%;">Значение</th>
@@ -268,21 +272,21 @@
                                             </thead>
                                             <tbody id="classificationCreationTbody">
                                                 <tr>
-                                                    <td class="text-left"></td>
-                                                    <td class="text-left">
+                                                    <td></td>
+                                                    <td>
                                                         <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td>
                                                         <select class="form-control">
                                                             <option selected="selected">Длина</option>
                                                             <option>Ширина</option>
                                                             <option>Вес</option>
                                                         </select>
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td>
                                                         мм
                                                     </td>
-                                                    <td class="text-left">
+                                                    <td>
                                                         <input class="form-control" type="number" value="12" />
                                                     </td>
                                                 </tr>

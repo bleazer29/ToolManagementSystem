@@ -51,7 +51,7 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div id="classification-table" class="w-100">
+                <div id="classification-table" class="w-100 css-tree-numbered-rows">
 
                 </div>
             </div>
@@ -61,7 +61,7 @@
 
     @*Modal Delete*@
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
@@ -83,7 +83,7 @@
 
     @*Modal Edit*@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
@@ -130,7 +130,7 @@
 
     @*Modal Create*@
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
@@ -154,7 +154,7 @@
                                 <div id="creationParentDropdownWrapper" class="dropdown">
                                     <input type="text" class="form-control dropdown-toggle" id="creationParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @onclick="@(() => AddСreationTreeDropdown("creationClassificationTree", "creationDropdown", "creationParentNode"))" readonly />
                                     <div id="creationDropdown" class="dropdown-menu" aria-labelledby="parent_node">
-                                        <div id="creationClassificationTree">
+                                        <div id="creationClassificationTree ">
 
                                         </div>
                                     </div>

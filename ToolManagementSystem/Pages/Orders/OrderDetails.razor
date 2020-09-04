@@ -152,7 +152,7 @@
                                             </div>
                                             <div class="row pt-2">
                                                 <div class="col-md-5 col-lg-4 pt-1 pl-0">
-                                                    Партийный номер:
+                                                    Заказной номер:
                                                 </div>
                                                 <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
@@ -201,14 +201,14 @@
                         <div class="row">
                             @*Operation time table start*@
                             <div class="table-responsive scrollable">
-                                <table class="table  table-bordered table-hover">
+                                <table class="table  table-bordered table-hover operating-time-table">
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Статус</th>
-                                            <th>Инструмент</th>
+                                            <th style="width:5%">Статус</th>
+                                            <th style="width:20%">Инструмент</th>
                                             <th>Серийный номер</th>
-                                            <th>Партийный номер</th>
+                                            <th>Заказной номер</th>
                                             <th>Артикул</th>
                                             <th>Пн</th>
                                             <th>Вт</th>
@@ -227,7 +227,7 @@
                                             <td class="text-left jf-state">JF</td>
                                             <td class="text-left">
                                                 <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
-                                                <div class="row m-auto">Время до ремонта: 5:46</div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
                                             </td>
                                             <td class="text-left">
                                                 12345678
@@ -240,28 +240,24 @@
                                                 <div class="container-fluid">
                                                     <div class="row operation-info">
                                                         <div class="col-6">
-                                                            <p class="float-right">JF</p>
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
-                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="row">
-                                                        8
+                                                        <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">8</a>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-left jf-state">
+                                            <td class="text-left jf-state" data-toggle="popover" title="Popover title" data-trigger="click" data-content="And here's some amazing content. It's very engaging. Right?">
+                                                
+                                                
                                                 <div class="container-fluid">
                                                     <div class="row operation-info">
                                                         <div class="col-6">
-                                                            <p class="float-right">JF</p>
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
-                                                        </div>
+                                                       
                                                     </div>
                                                     <div class="row">
                                                         4
@@ -272,12 +268,9 @@
                                                 <div class="container-fluid">
                                                     <div class="row operation-info">
                                                         <div class="col-6">
-                                                            <p class="float-right">JF</p>
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
-                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="row">
                                                         9
@@ -288,12 +281,9 @@
                                                 <div class="container-fluid">
                                                     <div class="row operation-info">
                                                         <div class="col-6">
-                                                            <p class="float-right">JF</p>
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
-                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="row">
                                                         5
@@ -301,31 +291,29 @@
                                                 </div>
                                             </td>
                                             <td class="text-left jf-state">
-                                                <div class="container-fluid">
-                                                    <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
+                                                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+                                                    <div class="container-fluid">
+                                                        <div class="row operation-info">
+                                                            <div class="col-6">
+                                                                <p class="float-right mb-1">JF</p>
+                                                            </div>
+
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="row">
+                                                            3
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        3
-                                                    </div>
-                                                </div>
+                                                  
+                                                
+                                               
                                             </td>
                                             <td class="text-left">
                                                 <div class="container-fluid">
                                                     <div class="row operation-info">
                                                         <div class="col-7">
-                                                            <p class="float-right"></p>
+                                                            <p class="float-right mb-1"></p>
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
-                                                        </div>
+                                                       
                                                     </div>
                                                     <div class="row">
                                                         -
@@ -336,12 +324,9 @@
                                                 <div class="container-fluid">
                                                     <div class="row operation-info">
                                                         <div class="col-7">
-                                                            <p class="float-right"></p>
+                                                            <p class="float-right mb-1"></p>
                                                         </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
-                                                        </div>
+                                                       
                                                     </div>
                                                     <div class="row">
                                                         -
@@ -356,7 +341,7 @@
                                             <td class="text-left jf-state">JF</td>
                                             <td class="text-left">
                                                 <div class="row m-auto"><a href="/Tools/Details/1">0000002</a></div>
-                                                <div class="row m-auto">Время до ремонта: 5:46</div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
                                             </td>
                                             <td class="text-left">
                                                 12345678
@@ -485,7 +470,7 @@
                                             <td class="text-left jf-sb-state">JF (SB)</td>
                                             <td class="text-left">
                                                 <div class="row m-auto"><a href="/Tools/Details/1">0000003</a></div>
-                                                <div class="row m-auto">Время до ремонта: 5:46</div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
                                             </td>
                                             <td class="text-left">
                                                 12345678
@@ -730,7 +715,7 @@
                                             </div>
                                             <div class="row pt-2">
                                                 <div class="col-md-5 col-lg-4 pt-1 pl-0">
-                                                    Партийный номер:
+                                                    Заказной номер:
                                                 </div>
                                                 <div class="col pr-0 pl-0 pl-md-1">
                                                     <input type="text" class="form-control" />
@@ -776,7 +761,7 @@
                                             <th>Статус</th>
                                             <th>Подразделение</th>
                                             <th>Количество</th>
-                                            <th>Партийный номер</th>
+                                            <th>Заказной номер</th>
                                             <th>Артикул</th>
                                             <th>Классификация</th>
                                             <th>Время работы (за цикл)</th>
@@ -815,6 +800,125 @@
                                             <td class="text-left">
                                                 <div class="row m-auto"><p>01:34</p></div>
                                                 <div class="row m-auto">Время до ремонта: 5:46</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <button type="button" data-toggle="modal" data-target="#multipleControlModal"
+                                                        class="btn btn-primary fa fa-exchange-alt transfer-button"></button>
+                                            </td>
+                                            <td class="text-left">Инструмент3</td>
+                                            <td class="text-left">JF (SB)</td>
+                                            <td class="text-left">Подразделение1</td>
+                                            <td class="text-left">10</td>
+                                            <td class="text-left">34685986</td>
+                                            <td class="text-left">47855478</td>
+                                            <td class="text-left">Вид2 -> Тип4</td>
+                                            <td class="text-left error-text">
+
+                                                <div class="row  m-auto">Требуется ремонт!</div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1020,7 +1124,7 @@
 
         @*Modal control single instruments start*@
         <div class="modal fade" id="singleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента: Инструмент1</h5>
@@ -1064,7 +1168,7 @@
 
         @*Modal control multiple instruments start*@
         <div class="modal fade" id="multipleControlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Перемещение инструмента</h5>
@@ -1130,7 +1234,7 @@
                                                 </div>
                                                 <div class="row pt-2">
                                                     <div class="col-md-2 pt-1">
-                                                        Партийный номер:
+                                                        Заказной номер:
                                                     </div>
                                                     <div class="col pr-0">
                                                         <input type="text" class="form-control" />
@@ -1169,7 +1273,7 @@
                                                         <th></th>
                                                         <th>Наименование</th>
                                                         <th>Серийный номер</th>
-                                                        <th>Партийный номер</th>
+                                                        <th>Заказной номер</th>
                                                         <th>Артикул</th>
                                                         <th>Классификация</th>
                                                         <th>Время работы (за цикл)</th>
@@ -1243,7 +1347,7 @@
 
         @*Modal add doc start*@
         <div class="modal fade" id="addDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Прикрепление документа</h5>
