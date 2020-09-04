@@ -33,7 +33,7 @@ function AddMainMenuTree(elementName) {
             'data': [
                 { "id": "1", "parent": "#", "text": "НСИ", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "3", "parent": "#", "text": "Контракты", "state": { "opened": "true" }, "a_attr": { "href": "/Contracts" } },
-                { "id": "2", "parent": "#", "text": "Склад", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" } },
+                { "id": "2", "parent": "#", "text": "Управление инструментами", "state": { "opened": "true" }, "a_attr": { "href": "/Tools/" } },
                 { "id": "4", "parent": "#", "text": "Наряды на работу", "state": { "opened": "true" }, "a_attr": { "href": "/Orders/" } },
                 { "id": "5", "parent": "#", "text": "Сервисное обслуживание", "state": { "opened": "true" }, "a_attr": { "href": "/Maintenances/" } },
                 { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" }, "a_attr": { "href": "/RepairProcesses/" } },

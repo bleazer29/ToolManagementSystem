@@ -275,45 +275,7 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row align-items-center pl-3 pr-3">
-                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddPartRow("partsEditTbody"))"></button>
-                                </div>
-                            </div>
-                            <div class="row align-items-center pl-3 pr-3">
-                                <div class="col pt-1">
-
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:10%;"></th>
-                                                    <th style="width:30%;">Наименование</th>
-                                                    <th style="width:30%;">Артикул</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="partsEditTbody">
-                                                <tr>
-                                                    <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
-                                                                data-toggle="modal" data-target="#editModal"></button>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Номенклатура1
-                                                    </td>
-                                                    <td class="text-left">
-                                                        12345678
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -394,45 +356,7 @@
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row align-items-center pl-3 pr-3">
-                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Детали:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-4 col-lg-3 mb-2">
-                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" @onclick="@(() => AddPartRow("partsCreationTbody"))"></button>
-                                </div>
-                            </div>
-                            <div class="row align-items-center pl-3 pr-3">
-                                <div class="col pt-1">
-
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:10%;"></th>
-                                                    <th style="width:30%;">Наименование</th>
-                                                    <th style="width:30%;">Артикул</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="partsCreationTbody">
-                                                <tr>
-                                                    <td class="text-left">
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"
-                                                                data-toggle="modal" data-target="#editModal"></button>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Номенклатура1
-                                                    </td>
-                                                    <td class="text-left">
-                                                        12345678
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </form>
                 </div>
                 <div class="modal-footer">
