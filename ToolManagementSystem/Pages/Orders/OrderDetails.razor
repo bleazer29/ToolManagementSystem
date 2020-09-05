@@ -245,7 +245,8 @@
                                                         
                                                     </div>
                                                     <div class="row">
-                                                        <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">8</a>
+                                                        <a  data-toggle="popover" title="Popover Header" data-html="true">8</a>
+                                                        <div id="test" class="d-none popup-content">gyujygjyg</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -1405,6 +1406,7 @@
         {
             await jsRunTime.InvokeVoidAsync("initDatePicker");
             await jsRunTime.InvokeVoidAsync("initTooltips");
+            await jsRunTime.InvokeVoidAsync("test");
         }
         isFirstRender = false;
     }

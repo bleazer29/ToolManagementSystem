@@ -346,7 +346,11 @@ function AddRolesRow(tBodyName, counter) {
 
 function test () {
     $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="popover"]').popover({
+            "content": function () {
+                return $(this).next(".popup-content").html();
+            }
+        });
     });
 }
 
