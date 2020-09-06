@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ToolManagementSystem</title>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/js/vakata-jstree-6dce227/dist/themes/default/style.min.css" />
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/js/vakata-jstree-6dce227/dist/themes/default-grid/style.min.css" />
+    <link rel="stylesheet" href="/js/vakata-jstree-6dce227/dist/themes/custom-roles-grid/style.min.css">
+    <link rel="stylesheet" href="/js/vakata-jstree-6dce227/dist/themes/default-dark/style.min.css" />
+</head>
+<body>
+    <header>
+        <div class="status-bar-row row align-items-center">
+            <div class="col-12 col-sm-5">
+                <p class="mb-0 ml-3">
+                    <i class="fa fas fa-user"></i>
+                    <span>User1@gmail.com!</span>
+                </p>
+            </div>
+            <div class="w-100 d-sm-none"></div>
+            <div class="col-12 col-sm-7">
+                <a class="btn btn-transperent float-md-right w-auto" href="/">
+                    <i class="fa fas fa-sign-out-alt"></i>
+                </a>
+                <a class="btn btn-transperent float-md-right w-auto" href="/ChangePassword">
+                    <i class="fa fas fa-cog"></i>
+                </a>
+            </div>
+
+        </div>
+    </header>
+    <div class="container-fluid ">
+        <div class="main-row row justify-content-between">
+            <div class="SideBarCssClass sidebar main-sidebar col-md-4 col-lg-3">
+                <div class="top-row pl-4 pr-0 navbar navbar-dark">
+                    <a class="navbar-brand" href="/Index">
+                        <img src="/images/Weatherford_logo.png" class="img-fluid">
+                        TMS
+                    </a>
+
+                    <button class="navbar-toggler" onclick="ToggleNavMenu()">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <div class="tree-container" onclick="ToggleNavMenu()">
+                    <div id="menuTreeView" name="menuTreeView">
+
+                    </div>
+                </div>
+                <button class="btn btn-primary SideBarCssClass navbar-hide-toggler float-right" onclick="ToggleHideSideBarButton()">
+                    <i class="fa-arrow-left fas fa"></i>
+                </button>
+            </div>
+            <div class="OpenSideBarButtonCssClass col-md-1 sidebar sidebar-hide text-center collapse">
+                <button id="sidebarShowBtn" class="btn btn-primary mt-3 sidebar-hide" onclick="ToggleOpenSideBarButton()">
+                    <i class="fa-arrow-right fas fa"></i>
+                </button>
+            </div>
+            <div class="BodyColCssClass col pt-3 layout-body col-md-8 col-lg-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="/js/vakata-jstree-6dce227/dist/jstree.min.js"></script>
+    <script src="/js/jstreegrid.js"></script>
+    <script src="/js/custom.js"></script>
+    <script type="text/javascript" src="~/moment/moment.js"></script>
+    <script type="text/javascript" src="~/moment/locale/ru.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-weekpicker.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+
+    <script type="text/javascript">
+        var collapseNavMenu = true;
+        var collapseSideMenu = false;
+
+        window.onload = function () {
+            AddMainMenuTree("menuTreeView");
+            addResizeEvent();
+        };
+        
+        function ToggleNavMenu() {
+            collapseNavMenu = !collapseNavMenu;
+            if (collapseNavMenu == true) {
+                $(".tree-container").addClass("collapse")
+            }
+            else {
+                $(".tree-container").removeClass("collapse")
+            }
+        };
+
+        function ToggleHideSideBarButton() {
+            collapseSideMenu = true;
+                $(".SideBarCssClass").addClass("collapse");
+                $(".OpenSideBarButtonCssClass").removeClass("collapse");
+                $(".BodyColCssClass").removeClass("col-md-8 col-lg-9");
+                $(".BodyColCssClass").addClass("col-md-11");  
+        };
+
+        function ToggleOpenSideBarButton() {
+            collapseSideMenu = false;
+           
+            $(".SideBarCssClass").removeClass("collapse");
+            $(".OpenSideBarButtonCssClass").addClass("collapse");
+            $(".BodyColCssClass").addClass("col-md-8 col-lg-9");
+            $(".BodyColCssClass").removeClass("col-md-11");
+            
+        };
+    </script>

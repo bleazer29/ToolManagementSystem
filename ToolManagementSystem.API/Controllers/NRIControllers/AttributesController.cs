@@ -13,39 +13,39 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
     {
         // GET: api/NRI/Attributes
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetAttributes()
         {
-            Console.WriteLine("Called Attributes Get method");
+            Console.WriteLine("Called GetAttributes() method");
             return new string[] { "value1", "value2" };
         }
 
         // GET api/NRI/Attributes/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetAttribute(int id)
         {
-            Console.WriteLine("Called Attributes Get(id) method");
+            Console.WriteLine("Called GetAttribute(id) method");
             return "value";
         }
 
         // POST api/NRI/Attributes
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void AddAttribute([FromBody] string value)
         {
-            Console.WriteLine("Called Attributes Post(obj) method");
+            Console.WriteLine("Called AddAttribute(obj) method");
         }
 
         // PUT api/NRI/Attributes/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void EditAttribute(int id, [FromBody] string value)
         {
-            Console.WriteLine("Called Attributes Put(id, obj) method");
+            Console.WriteLine("Called EditAttribute(id, obj) method");
         }
 
         // DELETE api/NRI/Attributes/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteAttribute(int id)
         {
-            Console.WriteLine("Called Delete(id) method");
+            Console.WriteLine("Called DeleteAttribute(id) method");
         }
 
     }

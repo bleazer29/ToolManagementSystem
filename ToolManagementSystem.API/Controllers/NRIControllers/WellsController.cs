@@ -13,39 +13,39 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
     { 
         // GET: api/NRI/Wells
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetWells()
         {
-            Console.WriteLine("Called Wells Get method");
+            Console.WriteLine("Called GetWells() method");
             return new string[] { "value1", "value2" };
         }
 
         // GET api/NRI/Wells/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetWell(int id)
         {
-            Console.WriteLine("Called Wells Get(id) method");
+            Console.WriteLine("Called GetWell(id) method");
             return "value";
         }
 
         // POST api/NRI/Wells
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void AddWell([FromBody] string value)
         {
-            Console.WriteLine("Called Wells Post(obj) method");
+            Console.WriteLine("Called AddWell(obj) method");
         }
 
         // PUT api/NRI/Wells/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void EditWell(int id, [FromBody] string value)
         {
-            Console.WriteLine("Called Wells Put(id, obj) method");
+            Console.WriteLine("Called EditWell(id, obj) method");
         }
 
         // DELETE api/NRI/Wells/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteWell(int id)
         {
-            Console.WriteLine("Called Delete(id) method");
+            Console.WriteLine("Called DeleteWell(id) method");
         }
 
     }

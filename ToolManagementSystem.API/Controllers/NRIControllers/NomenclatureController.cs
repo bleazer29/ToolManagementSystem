@@ -14,39 +14,39 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
     {
         // GET: api/NRI/Nomenclature
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetNomenclature()
         {
-            Console.WriteLine("Called Nomenclature Get method");
+            Console.WriteLine("Called GetNomenclature() method");
             return new string[] { "value1", "value2" };
         }
 
         // GET api/NRI/Nomenclature/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetNomenclature(int id)
         {
-            Console.WriteLine("Called Nomenclature Get(id) method");
+            Console.WriteLine("Called GetNomenclature(id) method");
             return "value";
         }
 
         // POST api/NRI/Nomenclature
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void AddNomenclature([FromBody] string value)
         {
-            Console.WriteLine("Called Nomenclature Post(obj) method");
+            Console.WriteLine("Called AddNomenclature(obj) method");
         }
 
         // PUT api/NRI/Nomenclature/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void EditNomenclature(int id, [FromBody] string value)
         {
-            Console.WriteLine("Called Nomenclature Put(id, obj) method");
+            Console.WriteLine("Called EditNomenclature(id, obj) method");
         }
 
         // DELETE api/NRI/Nomenclature/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteNomenclature(int id)
         {
-            Console.WriteLine("Called Delete(id) method");
+            Console.WriteLine("Called DeleteNomenclature(id) method");
         }
     }
 }

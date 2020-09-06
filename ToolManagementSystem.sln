@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolManagementSystem.Client", "ToolManagementSystem\ToolManagementSystem.Client.csproj", "{293431D4-0CA5-4E1D-9FF4-E4A1F2D2811E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolManagementSystem.API", "ToolManagementSystem.API\ToolManagementSystem.API.csproj", "{625A8AC8-75C3-40F7-9ABE-9A25AD1B9E34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolManagementSystem.Shared", "ToolManagementSystem.Shared\ToolManagementSystem.Shared.csproj", "{4CFEECF6-ABAF-4D98-BE25-1EE3460232D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolManagementSystem.Client", "ToolManagementSystem.Client\ToolManagementSystem.Client.csproj", "{D1821B22-2078-412A-96CF-19841BE28F04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{293431D4-0CA5-4E1D-9FF4-E4A1F2D2811E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{293431D4-0CA5-4E1D-9FF4-E4A1F2D2811E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{293431D4-0CA5-4E1D-9FF4-E4A1F2D2811E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{293431D4-0CA5-4E1D-9FF4-E4A1F2D2811E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{625A8AC8-75C3-40F7-9ABE-9A25AD1B9E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{625A8AC8-75C3-40F7-9ABE-9A25AD1B9E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{625A8AC8-75C3-40F7-9ABE-9A25AD1B9E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{4CFEECF6-ABAF-4D98-BE25-1EE3460232D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CFEECF6-ABAF-4D98-BE25-1EE3460232D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CFEECF6-ABAF-4D98-BE25-1EE3460232D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1821B22-2078-412A-96CF-19841BE28F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1821B22-2078-412A-96CF-19841BE28F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1821B22-2078-412A-96CF-19841BE28F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1821B22-2078-412A-96CF-19841BE28F04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

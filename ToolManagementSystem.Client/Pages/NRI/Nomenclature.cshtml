@@ -1,0 +1,365 @@
+﻿@page "/NRI/Nomenclature"
+@model WebApplication1.Pages.NRI.NomenclatureModel
+@{
+    ViewData["Title"] = "Nomenclature";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
+            <h3>Справочник номенклатуры</h3>
+        </div>
+        <div class="col-lg-1 col-md-2 pr-0 pl-0">
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
+                    data-toggle="modal" data-target="#createModal"></button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    @* Поиск panel start *@
+    <div class="row mb-3 mt-3">
+        <div class="card w-100">
+            <div class="card-header pt-0 pb-0">
+                <h5 class="pt-2 pb-2">
+                    Поиск
+                    <a class="card-link float-right fa Caret fa-caret-down fa-lg" onclick="ChangeCaret()" data-toggle="collapse" href="#statusesSearchCollapse">
+                    </a>
+                </h5>
+            </div>
+            <div id="statusesSearchCollapse" class="collapse">
+                <form class="m-3">
+                    <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                Наименование:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                Артикул:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @* Поиск panel end *@
+
+    @* Table start *@
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th style="width:5%">#</th>
+                                <th style="width:25%">Наименование</th>
+                                <th style="width:15%">Артикул</th>
+                                <th style="width:30%">Атрибуты</th>
+                                <th style="width:10%">Максимальное время работы</th>
+                                <th style="width:15%">Управление</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>Наименование1</td>
+                                <td>12345678</td>
+                                <td>
+                                    Длина - 1 <br />
+                                    Ширина - 2 <br />
+                                    Вес - 3 <br />
+                                </td>
+                                <td>02:30</td>
+                                <td class="align-middle">
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @* Table end *@
+
+    @*Modal Delete*@
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Отмена">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Delete*@
+
+    @*Modal Edit*@
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa fa-times"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Максимальное время работы:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Атрибуты:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-4 col-lg-3 mb-2">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" onclick="AddClassificationRow('classificationEditTbody')"></button>
+                                </div>
+                            </div>
+                            <div class="row align-items-center pl-3 pr-3">
+                                <div class="col pt-1">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover css-numbered-rows text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:5%;"></th>
+                                                    <th style="width:30%;">Наименование</th>
+                                                    <th style="width:25%;">Единица измерения</th>
+                                                    <th style="width:30%;">Значение</th>
+                                                    <th style="width:10%;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="classificationEditTbody">
+                                                <tr>
+                                                    <td> </td>
+
+                                                    <td>
+                                                        <select class="form-control">
+                                                            <option selected="selected">Длина</option>
+                                                            <option>Ширина</option>
+                                                            <option>Вес</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        мм
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" type="number" value="12" />
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationEditTbody')">Отмена</button>
+                    <button type="button" class="btn btn-primary" onclick="ClearClassificationTable('classificationEditTbody')">Сохранить</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*Modal Edit*@
+
+    @*Modal Create*@
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Отмена">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row align-items-center">
+                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="statusTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Максимальное время работы:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="unitTitle">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row align-items-center pl-3 pr-3">
+                                <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Атрибуты:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-4 col-lg-3 mb-2">
+                                    <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" onclick="AddClassificationRow('classificationCreationTbody')"></button>
+                                </div>
+                            </div>
+                            <div class="row align-items-center pl-3 pr-3">
+                                <div class="col pt-1">
+                                    <div class="table-responsive ">
+                                        <table class="table table-bordered table-hover css-numbered-rows text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:5%;">#</th>
+                                                    <th style="width:30%;">Наименование</th>
+                                                    <th style="width:25%;">Единица измерения</th>
+                                                    <th style="width:30%;">Значение</th>
+                                                    <th style="width:10%;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="classificationCreationTbody">
+                                                <tr>
+                                                    <td></td>
+
+                                                    <td>
+                                                        <select class="form-control">
+                                                            <option selected="selected">Длина</option>
+                                                            <option>Ширина</option>
+                                                            <option>Вес</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        мм
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" type="number" value="12" />
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationCreationTbody')">Отмена</button>
+                    <button type="button" class="btn btn-primary" onclick="ClearClassificationTable('classificationCreationTbody')">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Create*@
+
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var isCaretUp = false;
+        var AttributeCounter = 0;
+
+        function ChangeCaret() {
+            isCaretUp = !isCaretUp;
+            if (isCaretUp == true) {
+                $(".Caret").removeClass("fa-caret-down");
+                $(".Caret").addClass("fa-caret-up");
+            }
+            else {
+                $(".Caret").removeClass("fa-caret-up");
+                $(".Caret").addClass("fa-caret-down");
+            }
+
+        };
+
+        function IncrementCount() {
+            AttributeCounter++;
+        };
+
+        function AddClassificationRow(tBodyName) {           
+            var tBodyElem = '#' + tBodyName;
+            $(tBodyElem).append(
+                "<tr id='classification-row-" + AttributeCounter + "'><td class= 'text-left'></td>"
+                + "<td class='text-left'><select class='form-control'><option selected = 'selected'> Длина</option><option>Ширина</option><option>Вес</option></select></td>"
+                + "<td class='text-left'></td>"
+                + "<td class='text-left'><input class='form-control'/></td>"
+                + "<td class= 'text-left'>"
+                + "<button id='classification-row_button-" + AttributeCounter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+                + "</td >"
+                + "</tr>"
+            );
+            IncrementCount();
+        };
+
+        function ClearClassificationTable(tBodyName) {
+            ClearTable(tBodyName);
+            AttributeCounter = 1;
+        };
+
+    </script>
+}
+
+
+
+
+

@@ -1,0 +1,91 @@
+﻿@page
+@model WebApplication1.Pages.Admin.UserEditModalModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row align-items-center">
+                        <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Логин:</label>
+                        <div class="w-100 d-md-none"></div>
+                        <div class="col col-md-8 col-lg-9 mb-2">
+                            <input type="text" class="form-control" id="statusTitle" value="@Model.test">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> ФИО:</label>
+                        <div class="w-100 d-md-none"></div>
+                        <div class="col col-md-8 col-lg-9 mb-2">
+                            <input type="text" class="form-control" id="statusTitle">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Подразделение:</label>
+                        <div class="w-100 d-md-none"></div>
+                        <div class="col col-md-8 col-lg-9 mb-2">
+                            <select class="form-control">
+                                <option>Подразделение 1</option>
+                                <option>Подразделение 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row align-items-center pl-3 pr-3">
+                            <label for="unitTitle" class="col col-md-8 col-lg-9 col-form-label mb-2"> Роли:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-4 col-lg-3 mb-2">
+                                <button class="btn btn-primary w-100 fa fa-plus float-md-right create-button" type="button" onclick="AddRolesRow('rolesEditTbody')"></button>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center pl-3 pr-3">
+                            <div class="col pt-1">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover css-numbered-rows">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:5%;">#</th>
+                                                <th style="width:90%;">Наименование</th>
+                                                <th style="width:10%;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rolesCreationTbody">
+                                            <tr>
+                                                <td></td>
+
+                                                <td>
+                                                    <select class="form-control">
+                                                        <option selected="selected">Администратор</option>
+                                                        <option>Оператор НСИ</option>
+                                                        <option>Оператор инструмента</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearRolesTable('rolesEditTbody')">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="ClearRolesTable('rolesEditTbody')">Сохранить</button>
+            </div>
+        </div>
+    </div>

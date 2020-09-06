@@ -1,0 +1,214 @@
+﻿@page "/NRI/Departments"
+@model WebApplication1.Pages.NRI.DepartmentsModel
+@{
+    ViewData["Title"] = "Departments";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
+            <h3>Справочник подразделений</h3>
+        </div>
+        <div class="col-lg-1 col-md-2 pr-0 pl-0">
+            <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
+                    data-toggle="modal" data-target="#createModal"></button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    @* Поиск panel start *@
+    <div class="row mb-3 mt-3">
+        <div class="card w-100">
+            <div class="card-header pt-0 pb-0">
+                <h5 class="pt-2 pb-2">
+                    Поиск
+                    <a class="card-link float-right fa Caret fa-caret-down fa-lg" onclick="ChangeCaret()" data-toggle="collapse" href="#departmentSearchCollapse">
+                    </a>
+                </h5>
+            </div>
+            <div id="departmentSearchCollapse" class="collapse">
+                <form class="m-3">
+                    <div class="container-fluid">
+                        <div class="row pt-2">
+                            <div class="col-md-5 col-lg-4 pt-1 pl-0">
+                                Наименование:
+                            </div>
+                            <div class="col pr-0 pl-0 pl-md-1">
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row-reverse pt-2 pb-2">
+                            <button class="btn btn-primary">
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @* Поиск panel end *@
+
+    @* Table start *@
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th style="width:5%">#</th>
+                                <th style="width:80%">Наименование</th>
+                                <th style="width:15%">Управление</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>Новое подразделение</td>
+                                <td class="table-control-buttons-row">
+                                    <div class="row flex-nowrap m-auto">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Тестовое подразделение</td>
+                                <td class="align-middle">
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Подразделение 1</td>
+                                <td class="align-middle">
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Table end *@
+
+    @*Modal Delete*@
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Принять</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Delete*@
+
+    @*Modal Edit*@
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирование записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa fa-times"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="departmentTitle">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Edit*@
+
+    @*Modal Create*@
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Создание новой записи</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" id="departmentTitle">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Modal Create*@
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var isCaretUp = false;
+
+        function ChangeCaret() {
+            isCaretUp = !isCaretUp;
+            if (isCaretUp == true) {
+                $(".Caret").removeClass("fa-caret-down");
+                $(".Caret").addClass("fa-caret-up");
+            }
+            else {
+                $(".Caret").removeClass("fa-caret-up");
+                $(".Caret").addClass("fa-caret-down");
+            }
+        };
+
+    </script>
+}
+
+
