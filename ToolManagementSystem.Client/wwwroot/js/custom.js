@@ -67,7 +67,7 @@ function GetWindowInnerSize() {
 
 function addResizeEvent() {
     window.addEventListener('resize', function () {
-        if (this.document.documentElement.clientWidth < 780) {
+        if (this.document.documentElement.clientWidth < 767) {
             $('#sidebarShowBtn').click();
             if ($('.tree-container').hasClass('collapse') == false) {
                 $('.tree-container').addClass('collapse');
@@ -343,14 +343,3 @@ function RemoveTableRow(tBodyName) {
 //        + "</tr>"
 //    );
 //}
-
-//function test () {
-//    $(document).ready(function () {
-//        $('[data-toggle="popover"]').popover({
-//            "content": function () {
-//                return $(this).next(".popup-content").html();
-//            }
-//        });
-//    });
-//}
-
