@@ -718,9 +718,20 @@ table td {
     justify-content:center;
 }
 
+.operating-time-table-scroll {
+    max-height: 650px;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+}
 
-.operating-time-table{
-    text-wrap:none;
+
+.operating-time-table {
+    white-space: nowrap !important;
+    font-size: small;  
+}
+
+.operating-time-table th {
+    width:auto;
 }
 
 .operating-time-table tbody tr {
@@ -741,4 +752,9 @@ table td {
 
 .modal-body .table-responsive {
     max-height: 350px !important;
+}
+
+.popover {
+    white-space:nowrap!important;
+    min-width:350px;
 }

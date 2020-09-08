@@ -1,13 +1,15 @@
-﻿@page "/NRI/Attributes"
-@model WebApplication1.Pages.NRI.AttributesModel
+﻿@page "/NRI/Units"
+@model ToolManagementSystem.Client.Pages.NRI.UnitsModel
 @{
-    ViewData["Title"] = "Attributes";
+    ViewData["Title"] = "Units";
 }
+
+
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
-            <h3>Справочник атрибутов</h3>
+            <h3>Справочник единиц измерения</h3>
         </div>
         <div class="col-lg-1 col-md-2 pr-0 pl-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
@@ -23,11 +25,11 @@
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
                     Поиск
-                    <a class="card-link float-right fa Caret fa-caret-down fa-lg" onclick="ChangeCaret()" data-toggle="collapse" href="#statusesSearchCollapse">
+                    <a class="card-link float-right fa Caret fa-caret-down fa-lg" onclick="ChangeCaret()" data-toggle="collapse" href="#departmentSearchCollapse">
                     </a>
                 </h5>
             </div>
-            <div id="statusesSearchCollapse" class="collapse">
+            <div id="departmentSearchCollapse" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
@@ -38,14 +40,6 @@
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
-                        @*<div class="row pt-2">
-                            <div class="col-md-5 col-lg-4 pt-1 pl-0">
-                                Единица измерения:
-                            </div>
-                            <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>*@
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
                             <button class="btn btn-primary">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
@@ -67,33 +61,16 @@
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:85%">Наименование</th>
-                                @*<th style="width:30%">Единица измерения</th>*@
+                                <th style="width:80%">Наименование</th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td></td>
-                                <td>Длина</td>
-                                @*<td>мм</td>*@
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-
-                                <td>Вес</td>
-                                @*<td>кг</td>*@
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
+                                <td>см</td>
+                                <td class="table-control-buttons-row">
+                                    <div class="row flex-nowrap m-auto">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                 data-toggle="modal" data-target="#editModal"></button>
                                         <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
@@ -103,9 +80,19 @@
                             </tr>
                             <tr>
                                 <td></td>
-
-                                <td>Диаметр</td>
-                                @*<td>мм</td>*@
+                                <td>м</td>
+                                <td class="align-middle">
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>куб.м</td>
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
@@ -157,20 +144,13 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                        <div class="form-group row">
+                            <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" id="departmentTitle">
                             </div>
                         </div>
-                        @*<div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
-                            </div>
-                        </div>*@
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -194,26 +174,18 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                        <div class="form-group row">
+                            <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" id="departmentTitle">
                             </div>
                         </div>
-                        @*<div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
-                            </div>
-                        </div>*@
                     </form>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -235,8 +207,11 @@
                 $(".Caret").removeClass("fa-caret-up");
                 $(".Caret").addClass("fa-caret-down");
             }
-        }; 
+        };
+
     </script>
 }
+
+
 
 

@@ -6,7 +6,7 @@
 
 
     <div class="container-fluid">
-        <div class="card">
+        <div class="card p-3">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-7">
@@ -204,14 +204,14 @@
                         </div>
                         <div class="row">
                             @*Operation time table start*@
-                            <div class="table-responsive scrollable">
-                                <table class="table  table-bordered table-hover operating-time-table text-nowrap css-numbered-rows-col-2">
+                            <div class="table-responsive operating-time-table-scroll">
+                                <table class="table table-bordered table-hover operating-time-table text-nowrap css-numbered-rows-col-2">
                                     <thead>
                                         <tr>
                                             <th></th>
                                             <th>#</th>
-                                            <th style="width:5%">Статус</th>
-                                            <th style="width:20%">Инструмент</th>
+                                            <th>Статус</th>
+                                            <th>Инструмент</th>
                                             <th>Серийный номер</th>
                                             <th>Заказной номер</th>
                                             <th>Артикул</th>
@@ -245,137 +245,99 @@
                                             <td class="jf-state">
                                                 <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-12">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
                                                             <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
                                                     <div class="row">8</div>
                                                 </div>
-                                                
-                                                    <form id="tetst" class='popup-content'>
-                                                        <div class="form-group row align-items-center">
-                                                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Наработка:</label>
-                                                            <div class="w-100 d-md-none"></div>
-                                                            <div class="col mb-2">
-                                                                <input type="text" class="form-control" id="unitTitle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row align-items-center">
-                                                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Комментарий:</label>
-                                                            <div class="w-100 d-md-none"></div>
-                                                            <div class="col mb-2">
-                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
+                                                        <div class="col-12 m-0">
                                                             <p class="float-right mb-1">JF</p>
                                                         </div>
-
                                                     </div>
-                                                    <div class="row">
-                                                        4
-                                                    </div>
+                                                    <div class="row">3</div>
                                                 </div>
-                                                <div class="d-none popup-content">
-                                                    <form>
-                                                        <div class="form-group row align-items-center">
-                                                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Наработка:</label>
-                                                            <div class="w-100 d-md-none"></div>
-                                                            <div class="col mb-2">
-                                                                <input type="text" class="form-control" id="unitTitle">
-                                                            </div>
-                                                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Комментарий:</label>
-                                                            <div class="w-100 d-md-none"></div>
-                                                            <div class="col mb-2">
-                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
+                                                        <div class="col-12 m-0">
                                                             <p class="float-right mb-1">JF</p>
                                                         </div>
-
                                                     </div>
-                                                    <div class="row">
-                                                        9
-                                                    </div>
+                                                    <div class="row">8</div>
                                                 </div>
-                                            </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
-                                                    <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right mb-1">JF</p>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row">
-                                                        5
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class=" jf-state">
-                                                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-                                                <div class="container-fluid">
-                                                    <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right mb-1">JF</p>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row">
-                                                        3
-                                                    </div>
-                                                </div>
-
-
-
-                                            </td>
-                                            <td>
-                                                <div class="container-fluid">
-                                                    <div class="row operation-info">
-                                                        <div class="col-7">
-                                                            <p class="float-right mb-1"></p>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="row">
-                                                        -
-                                                    </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="container-fluid">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-7">
-                                                            <p class="float-right mb-1"></p>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
                                                         </div>
-
                                                     </div>
-                                                    <div class="row">
-                                                        -
-                                                    </div>
+                                                    <div class="row">-</div>
                                                 </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="form-check" />
                                             </td>
-                                            <td class=" jf-state">JF</td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
                                             <td>
-                                                <div class="row m-auto"><a href="/Tools/Details/1">0000002</a></div>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
                                                 <div class="row m-auto">До ремонта: 5:46</div>
                                             </td>
                                             <td>
@@ -385,126 +347,102 @@
                                                 12345678
                                             </td>
                                             <td>12345678</td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        8
-                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        4
-                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
-                                                    <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        9
-                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        5
-                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        3
-                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="container-fluid">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-7">
-                                                            <p class="float-right"></p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        -
-                                                    </div>
+                                                    <div class="row">-</div>
                                                 </div>
+
                                             </td>
                                             <td>
-                                                <div class="container-fluid">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-7">
-                                                            <p class="float-right"></p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        -
-                                                    </div>
+                                                    <div class="row">-</div>
                                                 </div>
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="form-check" />
                                             </td>
-                                            <td class=" jf-sb-state">JF (SB)</td>
+                                            <td> </td>
+                                            <td class="jf-state">JF</td>
                                             <td>
-                                                <div class="row m-auto"><a href="/Tools/Details/1">0000003</a></div>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
                                                 <div class="row m-auto">До ремонта: 5:46</div>
                                             </td>
                                             <td>
@@ -514,117 +452,1037 @@
                                                 12345678
                                             </td>
                                             <td>12345678</td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        8
-                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        4
-                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-state">
-                                                <div class="container-fluid">
-                                                    <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        9
-                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-sb-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF (SB)</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        0
-                                                    </div>
+                                                    <div class="row">3</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
-                                            <td class=" jf-sb-state">
-                                                <div class="container-fluid">
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-6">
-                                                            <p class="float-right">JF (SB)</p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        0
-                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="container-fluid">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-7">
-                                                            <p class="float-right"></p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        -
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
                                                     </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="container-fluid">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
                                                     <div class="row operation-info">
-                                                        <div class="col-7">
-                                                            <p class="float-right"></p>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary fa fa-comment fa-xs" data-toggle="tooltip" data-placement="top" title="Comment">
-                                                            </button>
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        -
-                                                    </div>
+                                                    <div class="row">-</div>
                                                 </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-state">JF</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">3</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-state">JF</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">3</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-state">JF</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">3</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check" />
+                                            </td>
+                                            <td> </td>
+                                            <td class="jf-sb-state">JF (SB)</td>
+                                            <td>
+                                                <div class="row m-auto"><a href="/Tools/Details/1">0000001</a></div>
+                                                <div class="row m-auto">До ремонта: 5:46</div>
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>12345678</td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">4</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">55</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info ">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">8</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td class="jf-sb-state">
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">JF (SB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">0</div>
+                                                </div>
+                                                <div class="popup-content d-none">
+                                                    @await Html.PartialAsync("~/Pages/Orders/OperatingTimePartial.cshtml")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="container-fluid" data-toggle="popover" title="Наработка" data-html="true" data-trigger="click">
+                                                    <div class="row operation-info">
+                                                        <div class="col-12 m-0">
+                                                            <p class="float-right mb-1">-</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">-</div>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1353,6 +2211,8 @@
             initDatePicker();
             initTooltips();
             $('[data-toggle="popover"]').popover({
+                "sanitize": false, 
+                "html": true,
                 "content": function () {
                     return $(this).next(".popup-content").html();
                 }

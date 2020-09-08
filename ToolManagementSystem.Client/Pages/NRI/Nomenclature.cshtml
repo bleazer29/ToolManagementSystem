@@ -192,7 +192,11 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        мм
+                                                        <select class="form-control">
+                                                            <option selected="selected">м</option>
+                                                            <option>см</option>
+                                                            <option>кг</option>
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <input class="form-control" type="number" value="12" />
@@ -285,7 +289,11 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        мм
+                                                        <select class="form-control">
+                                                            <option selected="selected">м</option>
+                                                            <option>см</option>
+                                                            <option>кг</option>
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <input class="form-control" type="number" value="12" />
@@ -341,7 +349,7 @@
             $(tBodyElem).append(
                 "<tr id='classification-row-" + AttributeCounter + "'><td class= 'text-left'></td>"
                 + "<td class='text-left'><select class='form-control'><option selected = 'selected'> Длина</option><option>Ширина</option><option>Вес</option></select></td>"
-                + "<td class='text-left'></td>"
+                + "<td class='text-left'><select class='form-control'><option selected = 'selected'> м</option><option>см</option><option>кг</option></select></td>"
                 + "<td class='text-left'><input class='form-control'/></td>"
                 + "<td class= 'text-left'>"
                 + "<button id='classification-row_button-" + AttributeCounter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
