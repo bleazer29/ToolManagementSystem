@@ -31,6 +31,7 @@ namespace ToolManagementSystem.Shared.Models
         public virtual Department Department { get; set; }
         public virtual Nomenclature Nomenclature { get; set; }
         public virtual ToolClassification ToolClassification { get; set; }
+        public virtual ToolStatus ToolStatus { get; set; }
         public virtual ICollection<OrderTool> OrderTool { get; set; }
         public virtual ICollection<ToolDocument> ToolDocument { get; set; }
         public virtual ICollection<ToolHistory> ToolHistory { get; set; }

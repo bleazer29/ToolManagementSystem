@@ -65,8 +65,10 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 ToolStatus status = db.ToolStatus.Single(x => x.ToolStatusId == id);
-                status = value;
-                db.ToolStatus.Add(status);
+                if (status != null)
+                {
+                    status.Name = value.Name;
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

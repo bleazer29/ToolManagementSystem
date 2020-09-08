@@ -76,7 +76,12 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 Counterparty counterparty = db.Counterparty.Single(x => x.CounterpartyId == id);
-                counterparty = value;
+                if(counterparty != null)
+                {
+                    counterparty.Name = value.Name;
+                    counterparty.Address = value.Address;
+                    counterparty.Edrpou = value.Edrpou;
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

@@ -76,7 +76,12 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 Well well = db.Well.Single(x => x.WellId == id);
-                well = value;
+                if(well != null)
+                {
+                    well.Name = value.Name;
+                    well.Address = value.Address;
+                    well.CounterpartyId = value.CounterpartyId;
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

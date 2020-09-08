@@ -64,7 +64,10 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 Department department = db.Department.Single(x => x.DepartmentId == id);
-                department = value;
+                if(department != null)
+                {
+                    department.Name = value.Name;
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

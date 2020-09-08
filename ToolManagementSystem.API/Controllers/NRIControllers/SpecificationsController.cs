@@ -55,7 +55,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // POST api/NRI/Specifications
         [HttpPost]
-        public void AddSpecifications([FromBody] Specification value)
+        public void AddSpecification([FromBody] Specification value)
         {
             try
             {
@@ -77,7 +77,14 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 Specification specification = db.Specification.Single(x => x.SpecificationId == id);
-                specification = value;
+                if(specification != null)
+                {
+                    specification.Name = value.Name;
+                    if(value.SpecificationUnit.Count > 0)
+                    {
+                        specification.SpecificationUnit = value.SpecificationUnit;
+                    }
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

@@ -81,7 +81,15 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 Nomenclature nomenclature = db.Nomenclature.Single(x => x.NomenclatureId == id);
-                nomenclature = value;
+                if(nomenclature != null)
+                {
+                    nomenclature.Name = value.Name;
+                    nomenclature.VendorCode = value.VendorCode;
+                    if (value.NomenclatureSpecificationUnit.Count > 0)
+                    {
+                        nomenclature.NomenclatureSpecificationUnit = value.NomenclatureSpecificationUnit;
+                    }
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

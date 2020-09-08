@@ -63,7 +63,12 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 ToolClassification classification = db.ToolClassification.Single(x => x.ToolClassificationId == id);
-                classification = value;
+                if(classification != null)
+                {
+                    classification.Name = value.Name;
+                    classification.ToolClassificationId = value.ToolClassificationId;
+                    classification.ParentToolClassificationId = value.ParentToolClassificationId;
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

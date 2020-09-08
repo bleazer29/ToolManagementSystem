@@ -42,6 +42,7 @@ namespace ToolManagementSystem.Shared.Models
         public virtual DbSet<ToolClassification> ToolClassification { get; set; }
         public virtual DbSet<ToolDocument> ToolDocument { get; set; }
         public virtual DbSet<ToolHistory> ToolHistory { get; set; }
+        public virtual DbSet<ToolStatus> ToolStatus { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
@@ -507,6 +508,11 @@ namespace ToolManagementSystem.Shared.Models
                     .WithMany(p => p.Tool)
                     .HasForeignKey(d => d.ToolClassificationId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.ToolStatus)
+                    .WithMany(p => p.Tool)
+                    .HasForeignKey(d => d.ToolStatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<ToolClassification>(entity =>
@@ -561,6 +567,21 @@ namespace ToolManagementSystem.Shared.Models
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
+            modelBuilder.Entity<ToolStatus>(entity =>
+            {
+                entity.Property(e => e.ToolStatusId).ValueGeneratedNever();
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsFixedLength();
+            });
+
             modelBuilder.Entity<Unit>(entity =>
             {
                 entity.Property(e => e.UnitId).ValueGeneratedNever();
@@ -572,9 +593,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_User");
-
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.Property(e => e.Fio)
