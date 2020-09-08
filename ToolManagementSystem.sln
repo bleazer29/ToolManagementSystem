@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolManagementSystem.API", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolManagementSystem.Shared", "ToolManagementSystem.Shared\ToolManagementSystem.Shared.csproj", "{4CFEECF6-ABAF-4D98-BE25-1EE3460232D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolManagementSystem.Client", "ToolManagementSystem.Client\ToolManagementSystem.Client.csproj", "{D1821B22-2078-412A-96CF-19841BE28F04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolManagementSystem.Client", "ToolManagementSystem.Client\ToolManagementSystem.Client.csproj", "{D1821B22-2078-412A-96CF-19841BE28F04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
