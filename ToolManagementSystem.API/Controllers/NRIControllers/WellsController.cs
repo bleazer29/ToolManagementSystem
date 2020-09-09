@@ -22,27 +22,29 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Wells
         [HttpGet]
-        public List<Well> GetWells(string name, string address)
+        public async Task<List<Well>> GetWells(string name, string address)
         {
             List<Well> wells = new List<Well>();
-            wells = db.Well.Include(x => x.CounterpartyId).ToList();
+            wells = await db.Well
+                .Include(x => x.CounterpartyId)
+                .ToListAsync();
             if (string.IsNullOrEmpty(name) == false)
             {
                 wells = wells.Where(x => x.Name == name).ToList();
             }
-            // if (string.IsNullOrEmpty(address) == false)
-            //{
-            //   wells = wells.Where(x => x.Address == address).ToList();
-            //}
+            if (string.IsNullOrEmpty(address) == false)
+            {
+                wells = wells.Where(x => x.Address == address).ToList();
+            }
             return wells;
         }
 
         // GET api/NRI/Wells/5
         [HttpGet("{id}")]
-        public Well GetWell(int id)
+        public async Task<Well> GetWell(int id)
         {
             try { 
-            Well well = db.Well.Single(x => x.WellId == id);
+            Well well = await db.Well.SingleAsync(x => x.WellId == id);
             return well;
             }
             catch (Exception ex)
@@ -54,14 +56,14 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // POST api/NRI/Wells
         [HttpPost]
-        public void AddWell([FromBody] Well value)
+        public async Task AddWell([FromBody] Well value)
         {
             try
             {
                 Well well = new Well();
                 well = value;
-                db.Well.Add(well);
-                db.SaveChanges();
+                await db.Well.AddAsync(well);
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -71,18 +73,18 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // PUT api/NRI/Wells/5
         [HttpPut("{id}")]
-        public void EditWell(int id, [FromBody] Well value)
+        public async Task EditWell(int id, [FromBody] Well value)
         {
             try
             {
-                Well well = db.Well.Single(x => x.WellId == id);
+                Well well = await db.Well.SingleAsync(x => x.WellId == id);
                 if(well != null)
                 {
                     well.Name = value.Name;
                     well.Address = value.Address;
                     well.CounterpartyId = value.CounterpartyId;
                 }
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -92,13 +94,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // DELETE api/NRI/Wells/5
         [HttpDelete("{id}")]
-        public void DeleteWell(int id)
+        public async Task DeleteWell(int id)
         {
             try
             {
-                Well well = db.Well.Single(x => x.WellId == id);
+                Well well = await db.Well.SingleAsync(x => x.WellId == id);
                 db.Well.Remove(well);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {

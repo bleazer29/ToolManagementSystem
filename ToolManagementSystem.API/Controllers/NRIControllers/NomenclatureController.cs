@@ -23,15 +23,15 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Nomenclature
         [HttpGet]
-        public List<Nomenclature> GetNomenclature(string name, string vendorCode)
+        public async Task<List<Nomenclature>> GetNomenclature(string name, string vendorCode)
         {
-            List<Nomenclature> nomenclature = db.Nomenclature
+            List<Nomenclature> nomenclature = await db.Nomenclature
                 .Include(x => x.NomenclatureSpecificationUnit)
                     .ThenInclude(x => x.SpecificationUnit)
                         .ThenInclude(x => x.Specification)
                     .ThenInclude(x => x.SpecificationUnit)
                         .ThenInclude(x => x.Unit)
-                .ToList();
+                .ToListAsync();
             if (string.IsNullOrEmpty(name))
             {
                 nomenclature = nomenclature.Where(x => x.Name == name).ToList();
@@ -45,28 +45,28 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET api/NRI/Nomenclature/5
         [HttpGet("{id}")]
-        public Nomenclature GetNomenclature(int id)
+        public async Task<Nomenclature> GetNomenclature(int id)
         {
-            Nomenclature nomenclature = db.Nomenclature
+            Nomenclature nomenclature = await db.Nomenclature
                    .Include(x => x.NomenclatureSpecificationUnit)
                        .ThenInclude(x => x.SpecificationUnit)
                            .ThenInclude(x => x.Specification)
                        .ThenInclude(x => x.SpecificationUnit)
                            .ThenInclude(x => x.Unit)
-                   .Single(x => x.NomenclatureId == id);
+                   .SingleAsync(x => x.NomenclatureId == id);
             return nomenclature;
         }
 
         // POST api/NRI/Nomenclature
         [HttpPost]
-        public void AddNomenclature([FromBody] Nomenclature value)
+        public async Task AddNomenclature([FromBody] Nomenclature value)
         {
             try
             {
                 Nomenclature nomenclature = new Nomenclature();
                 nomenclature = value;
-                db.Nomenclature.Add(nomenclature);
-                db.SaveChanges();
+                await db.Nomenclature.AddAsync(nomenclature);
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -76,11 +76,11 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // PUT api/NRI/Nomenclature/5
         [HttpPut("{id}")]
-        public void EditNomenclature(int id, [FromBody] Nomenclature value)
+        public async Task EditNomenclature(int id, [FromBody] Nomenclature value)
         {
             try
             {
-                Nomenclature nomenclature = db.Nomenclature.Single(x => x.NomenclatureId == id);
+                Nomenclature nomenclature = await db.Nomenclature.SingleAsync(x => x.NomenclatureId == id);
                 if(nomenclature != null)
                 {
                     nomenclature.Name = value.Name;
@@ -90,7 +90,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                         nomenclature.NomenclatureSpecificationUnit = value.NomenclatureSpecificationUnit;
                     }
                 }
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -100,13 +100,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // DELETE api/NRI/Nomenclature/5
         [HttpDelete("{id}")]
-        public void DeleteNomenclature(int id)
+        public async Task DeleteNomenclature(int id)
         {
             try
             {
-                Nomenclature nomenclature = db.Nomenclature.Single(x => x.NomenclatureId == id);
+                Nomenclature nomenclature = await db.Nomenclature.SingleAsync(x => x.NomenclatureId == id);
                 db.Nomenclature.Remove(nomenclature);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {

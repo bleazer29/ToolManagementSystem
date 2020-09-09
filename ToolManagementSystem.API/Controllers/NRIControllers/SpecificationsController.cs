@@ -24,12 +24,12 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         // GET: api/NRI/SpecificationUnits
         [Route("api/NRI/SpecificationUnits")]
         [HttpGet]
-        public List<SpecificationUnit> GetSpecificationUnits(string name, string unit)
+        public async Task<List<SpecificationUnit>> GetSpecificationUnits(string name, string unit)
         {
-            List<SpecificationUnit> specifications = db.SpecificationUnit
+            List<SpecificationUnit> specifications = await db.SpecificationUnit
                 .Include(x => x.Specification)
                 .Include(x => x.Unit)
-                .ToList();
+                .ToListAsync();
             if (string.IsNullOrEmpty(name))
             {
                 specifications = specifications.Where(x => x.Specification.Name == name).ToList();
@@ -43,9 +43,9 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET api/NRI/Specifications/5
         [HttpGet]
-        public List<Specification> GetSpecifications(string name)
+        public async Task<List<Specification>> GetSpecifications(string name)
         {
-            List<Specification> specifications = db.Specification.ToList();
+            List<Specification> specifications = await db.Specification.ToListAsync();
             if (string.IsNullOrEmpty(name))
             {
                 specifications = specifications.Where(x => x.Name == name).ToList();
@@ -55,14 +55,14 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // POST api/NRI/Specifications
         [HttpPost]
-        public void AddSpecification([FromBody] Specification value)
+        public async Task AddSpecification([FromBody] Specification value)
         {
             try
             {
                 Specification specification = new Specification();
                 specification = value;
-                db.Specification.Add(specification);
-                db.SaveChanges();
+                await db.Specification.AddAsync(specification);
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -72,11 +72,11 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // PUT api/NRI/Specifications/5
         [HttpPut("{id}")]
-        public void EditSpecifications(int id, [FromBody] Specification value)
+        public async Task EditSpecifications(int id, [FromBody] Specification value)
         {
             try
             {
-                Specification specification = db.Specification.Single(x => x.SpecificationId == id);
+                Specification specification = await db.Specification.SingleAsync(x => x.SpecificationId == id);
                 if(specification != null)
                 {
                     specification.Name = value.Name;
@@ -95,13 +95,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // DELETE api/NRI/Specifications/5
         [HttpDelete("{id}")]
-        public void DeleteSpecifications(int id)
+        public async Task DeleteSpecifications(int id)
         {
             try
             {
                 Specification specification = db.Specification.Single(x => x.SpecificationId == id);
                 db.Specification.Remove(specification);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
