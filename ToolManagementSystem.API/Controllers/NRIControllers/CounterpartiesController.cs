@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
-using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -23,17 +22,17 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Counterparties
         [HttpGet]
-        public async Task<List<Counterparty>> GetCounterparties([FromBody] CounterpartyFilterRequest request)
+        public async Task<List<Counterparty>> GetCounterparties(string name, string edrpou)
         {
             List<Counterparty> counterparties = new List<Counterparty>();
             counterparties = await db.Counterparty.ToListAsync();
-            if (string.IsNullOrEmpty(request.Name) == false)
+            if (string.IsNullOrEmpty(name) == false)
             {
-                counterparties = counterparties.Where(x => x.Name == request.Name).ToList();
+                counterparties = counterparties.Where(x => x.Name == name).ToList();
             }
-            if (string.IsNullOrEmpty(request.EDRPOU) == false)
+            if (string.IsNullOrEmpty(edrpou) == false)
             {
-                counterparties = counterparties.Where(x => x.Edrpou == request.EDRPOU).ToList();
+                counterparties = counterparties.Where(x => x.Edrpou == edrpou).ToList();
             }
             return counterparties;
         }

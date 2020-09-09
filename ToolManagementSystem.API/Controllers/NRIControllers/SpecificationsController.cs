@@ -24,19 +24,19 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         //SpecificationUnit - specifications with measurement units
         // GET: api/NRI/Specifications/SpecificationUnits
         [HttpGet("SpecificationUnits")]
-        public async Task<List<SpecificationUnit>> GetSpecificationUnits([FromBody] SpecificationFilterRequest request)
+        public async Task<List<SpecificationUnit>> GetSpecificationUnits(string name, string unit)
         {
             List<SpecificationUnit> specifications = await db.SpecificationUnit
                 .Include(x => x.Specification)
                 .Include(x => x.Unit)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(request.Name))
+            if (string.IsNullOrEmpty(name))
             {
-                specifications = specifications.Where(x => x.Specification.Name == request.Name).ToList();
+                specifications = specifications.Where(x => x.Specification.Name == name).ToList();
             }
-            if (string.IsNullOrEmpty(request.Unit))
+            if (string.IsNullOrEmpty(unit))
             {
-                specifications = specifications.Where(x => x.Unit.Name == request.Unit).ToList();
+                specifications = specifications.Where(x => x.Unit.Name == unit).ToList();
             }
             return specifications;
         }
