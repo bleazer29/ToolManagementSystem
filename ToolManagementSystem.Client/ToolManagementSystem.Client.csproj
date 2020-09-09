@@ -19,4 +19,9 @@
     <ProjectReference Include="..\ToolManagementSystem.Shared\ToolManagementSystem.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ToolManagementSystem.API\ToolManagementSystem.API.csproj" />
+    <ProjectReference Include="..\ToolManagementSystem.Shared\ToolManagementSystem.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

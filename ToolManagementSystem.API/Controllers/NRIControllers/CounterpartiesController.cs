@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -21,28 +23,28 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Counterparties
         [HttpGet]
-        public List<Counterparty> GetCounterparties(string name, string EDRPOU)
+        public async Task<List<Counterparty>> GetCounterparties([FromBody] CounterpartyFilterRequest request)
         {
             List<Counterparty> counterparties = new List<Counterparty>();
-            counterparties = db.Counterparty.ToList();
-            if (string.IsNullOrEmpty(name) == false)
+            counterparties = await db.Counterparty.ToListAsync();
+            if (string.IsNullOrEmpty(request.Name) == false)
             {
-                counterparties = counterparties.Where(x => x.Name == name).ToList();
+                counterparties = counterparties.Where(x => x.Name == request.Name).ToList();
             }
-            if (string.IsNullOrEmpty(EDRPOU) == false)
+            if (string.IsNullOrEmpty(request.EDRPOU) == false)
             {
-                counterparties = counterparties.Where(x => x.Edrpou == EDRPOU).ToList();
+                counterparties = counterparties.Where(x => x.Edrpou == request.EDRPOU).ToList();
             }
             return counterparties;
         }
 
         // GET api/NRI/Counterparties/5
         [HttpGet("{id}")]
-        public Counterparty GetCounterparty(int id)
+        public async Task<Counterparty> GetCounterparty(int id)
         {
             try
             {
-                Counterparty counterparty = db.Counterparty.Single(x => x.CounterpartyId == id);
+                Counterparty counterparty = await db.Counterparty.SingleAsync(x => x.CounterpartyId == id);
                 return counterparty;
             }
             catch (Exception ex)
@@ -54,14 +56,12 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // POST api/NRI/Counterparties
         [HttpPost]
-        public void AddCounterparty([FromBody] Counterparty value)
+        public async Task AddCounterparty([FromBody] Counterparty value)
         {
             try
             {
-                Counterparty counterparty = new Counterparty();
-                counterparty = value;
-                db.Counterparty.Add(counterparty);
-                db.SaveChanges();
+                await db.Counterparty.AddAsync(value);
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -71,18 +71,18 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // PUT api/NRI/Counterparties/5
         [HttpPut("{id}")]
-        public void EditCounterparty(int id, [FromBody] Counterparty value)
+        public async Task EditCounterparty(int id, [FromBody] Counterparty value)
         {
             try
             {
-                Counterparty counterparty = db.Counterparty.Single(x => x.CounterpartyId == id);
+                Counterparty counterparty = await db.Counterparty.SingleAsync(x => x.CounterpartyId == id);
                 if(counterparty != null)
                 {
                     counterparty.Name = value.Name;
                     counterparty.Address = value.Address;
                     counterparty.Edrpou = value.Edrpou;
                 }
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -92,13 +92,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // DELETE api/NRI/Counterparties/5
         [HttpDelete("{id}")]
-        public void DeleteCounterparty(int id)
+        public async Task DeleteCounterparty(int id)
         {
             try
             {
-                Counterparty counterparty = db.Counterparty.Single(x => x.CounterpartyId == id);
+                Counterparty counterparty = await db.Counterparty.SingleAsync(x => x.CounterpartyId == id);
                 db.Counterparty.Remove(counterparty);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {

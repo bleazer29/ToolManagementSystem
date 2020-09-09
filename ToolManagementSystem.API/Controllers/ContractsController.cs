@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers
 {
@@ -11,41 +13,84 @@ namespace ToolManagementSystem.API.Controllers
     [ApiController]
     public class ContractsController : ControllerBase
     {
+        private readonly TMSdbContext db;
+
+        public ContractsController(TMSdbContext context)
+        {
+            db = context;
+        }
+
         // GET: api/Contracts
         [HttpGet]
-        public IEnumerable<string> GetContracts()
+        public async Task<List<Contract>> GetContracts(string number)
         {
-            Console.WriteLine("Called GetContracts() method");
-            return new string[] { "value1", "value2" };
+            List<Contract> contracts = await db.Contract
+                .Include(x => x.Counterparty)
+                .ToListAsync();
+            if (string.IsNullOrEmpty(number))
+            {
+                contracts = contracts.Where(x => x.Name == number).ToList();
+            }
+            return contracts;
         }
 
         // GET api/Contracts/5
         [HttpGet("{id}")]
-        public string GetContract(int id)
+        public async Task<Contract> GetContract(int id)
         {
-            Console.WriteLine("Called GetContract(id) method");
-            return "value";
+            Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
+            return contract;
         }
 
         // POST api/Contracts
         [HttpPost]
-        public void AddContract([FromBody] string value)
+        public async Task AddContract([FromBody] Contract value)
         {
-            Console.WriteLine("Called Contracts Post(obj) method");
+            try
+            {
+                await db.Contract.AddAsync(value);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         // PUT api/Contracts/5
         [HttpPut("{id}")]
-        public void EditContract(int id, [FromBody] string value)
+        public async Task EditContract(int id, [FromBody] Contract value)
         {
-            Console.WriteLine("Called EditContract(id, obj) method");
+            try
+            {
+                Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
+                if(contract != null)
+                {
+                    contract.Name = value.Name;
+                    contract.CounterpartyId = value.CounterpartyId;
+                }
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         // DELETE api/Contracts/5
         [HttpDelete("{id}")]
-        public void DeleteContract(int id)
+        public async Task DeleteContract(int id)
         {
-            Console.WriteLine("Called DeleteContract(id) method");
+            try
+            {
+                Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
+                db.Contract.Remove(contract);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

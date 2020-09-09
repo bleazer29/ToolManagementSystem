@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -21,31 +22,30 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         //SpecificationUnit - specifications with measurement units
-        // GET: api/NRI/SpecificationUnits
-        [Route("api/NRI/SpecificationUnits")]
-        [HttpGet]
-        public List<SpecificationUnit> GetSpecificationUnits(string name, string unit)
+        // GET: api/NRI/Specifications/SpecificationUnits
+        [HttpGet("SpecificationUnits")]
+        public async Task<List<SpecificationUnit>> GetSpecificationUnits([FromBody] SpecificationFilterRequest request)
         {
-            List<SpecificationUnit> specifications = db.SpecificationUnit
+            List<SpecificationUnit> specifications = await db.SpecificationUnit
                 .Include(x => x.Specification)
                 .Include(x => x.Unit)
-                .ToList();
-            if (string.IsNullOrEmpty(name))
+                .ToListAsync();
+            if (string.IsNullOrEmpty(request.Name))
             {
-                specifications = specifications.Where(x => x.Specification.Name == name).ToList();
+                specifications = specifications.Where(x => x.Specification.Name == request.Name).ToList();
             }
-            if (string.IsNullOrEmpty(unit))
+            if (string.IsNullOrEmpty(request.Unit))
             {
-                specifications = specifications.Where(x => x.Unit.Name == unit).ToList();
+                specifications = specifications.Where(x => x.Unit.Name == request.Unit).ToList();
             }
             return specifications;
         }
 
-        // GET api/NRI/Specifications/5
+        // GET api/NRI/Specifications/
         [HttpGet]
-        public List<Specification> GetSpecifications(string name)
+        public async Task<List<Specification>> GetSpecifications(string name)
         {
-            List<Specification> specifications = db.Specification.ToList();
+            List<Specification> specifications = await db.Specification.ToListAsync();
             if (string.IsNullOrEmpty(name))
             {
                 specifications = specifications.Where(x => x.Name == name).ToList();
@@ -55,14 +55,12 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // POST api/NRI/Specifications
         [HttpPost]
-        public void AddSpecification([FromBody] Specification value)
+        public async Task AddSpecification([FromBody] Specification value)
         {
             try
             {
-                Specification specification = new Specification();
-                specification = value;
-                db.Specification.Add(specification);
-                db.SaveChanges();
+                await db.Specification.AddAsync(value);
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -72,11 +70,11 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // PUT api/NRI/Specifications/5
         [HttpPut("{id}")]
-        public void EditSpecifications(int id, [FromBody] Specification value)
+        public async Task EditSpecifications(int id, [FromBody] Specification value)
         {
             try
             {
-                Specification specification = db.Specification.Single(x => x.SpecificationId == id);
+                Specification specification = await db.Specification.SingleAsync(x => x.SpecificationId == id);
                 if(specification != null)
                 {
                     specification.Name = value.Name;
@@ -95,13 +93,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // DELETE api/NRI/Specifications/5
         [HttpDelete("{id}")]
-        public void DeleteSpecifications(int id)
+        public async Task DeleteSpecifications(int id)
         {
             try
             {
                 Specification specification = db.Specification.Single(x => x.SpecificationId == id);
                 db.Specification.Remove(specification);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception ex)
             {
