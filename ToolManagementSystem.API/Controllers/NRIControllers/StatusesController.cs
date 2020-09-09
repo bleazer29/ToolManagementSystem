@@ -4,48 +4,93 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
+
     [Route("api/NRI/Statuses")]
     [ApiController]
     public class StatusesController : ControllerBase
     {
+        private readonly TMSdbContext db;
+
+        public StatusesController(TMSdbContext context)
+        {
+            db = context;
+        }
+
         // GET: api/NRI/Statuses
         [HttpGet]
-        public IEnumerable<string> GetStatuses()
+        public List<ToolStatus> GetStatuses(string name)
         {
-            Console.WriteLine("Called GetStatuses() method");
-            return new string[] { "value1", "value2" };
+            List<ToolStatus> statuses = new List<ToolStatus>();
+            statuses = db.ToolStatus.ToList();
+            if (string.IsNullOrEmpty(name) == false)
+            {
+                statuses = statuses.Where(x => x.Name == name).ToList();
+            }
+            return statuses;
         }
 
         // GET api/NRI/Statuses/5
         [HttpGet("{id}")]
-        public string GetStatus(int id)
+        public ToolStatus GetStatus(int id)
         {
-            Console.WriteLine("Called GetStatus(id) method");
-            return "value";
+            ToolStatus status = db.ToolStatus.Single(x => x.ToolStatusId == id);
+            return status;
         }
 
         // POST api/NRI/Statuses
         [HttpPost]
-        public void AddStatus([FromBody] string value)
+        public void AddStatus([FromBody] ToolStatus value)
         {
-            Console.WriteLine("Called AddStatus(obj) method");
+            try
+            {
+                ToolStatus status = new ToolStatus();
+                status = value;
+                db.ToolStatus.Add(status);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         // PUT api/NRI/Statuses/5
         [HttpPut("{id}")]
-        public void EditStatus(int id, [FromBody] string value)
+        public void EditStatus(int id, [FromBody] ToolStatus value)
         {
-            Console.WriteLine("Called EditStatus(id, obj) method");
+            try
+            {
+                ToolStatus status = db.ToolStatus.Single(x => x.ToolStatusId == id);
+                if (status != null)
+                {
+                    status.Name = value.Name;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         // DELETE api/NRI/Statuses/5
         [HttpDelete("{id}")]
         public void DeleteStatus(int id)
         {
-            Console.WriteLine("Called DeleteStatus(id) method");
+            try
+            {
+                ToolStatus status = db.ToolStatus.Single(x => x.ToolStatusId == id);
+                db.ToolStatus.Remove(status);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
