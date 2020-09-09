@@ -38,7 +38,7 @@ namespace ToolManagementSystem.API.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Login failed \n" + ex.Message);
+                Console.WriteLine("Login failed User`s login is: {0}, pass: {1} \n" + ex.Message, request.Login, request.Password);
             }
             return new User() { UserId = -1 };
         }

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
-using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -23,19 +22,19 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Wells
         [HttpGet]
-        public async Task<List<Well>> GetWells([FromBody] WellFilterRequest request)
+        public async Task<List<Well>> GetWells(string name, string address)
         {
             List<Well> wells = new List<Well>();
             wells = await db.Well
                 .Include(x => x.CounterpartyId)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(request.Name) == false)
+            if (string.IsNullOrEmpty(name) == false)
             {
-                wells = wells.Where(x => x.Name == request.Name).ToList();
+                wells = wells.Where(x => x.Name == name).ToList();
             }
-            if (string.IsNullOrEmpty(request.Address) == false)
+            if (string.IsNullOrEmpty(address) == false)
             {
-                wells = wells.Where(x => x.Address == request.Address).ToList();
+                wells = wells.Where(x => x.Address == address).ToList();
             }
             return wells;
         }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
-using ToolManagementSystem.Shared.RequestModels.NRI;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,7 +23,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Nomenclature
         [HttpGet]
-        public async Task<List<Nomenclature>> GetNomenclature([FromBody] NomenclatureFilterRequest request)
+        public async Task<List<Nomenclature>> GetNomenclature(string name, string vendorCode)
         {
             List<Nomenclature> nomenclature = await db.Nomenclature
                 .Include(x => x.NomenclatureSpecificationUnit)
@@ -33,13 +32,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     .ThenInclude(x => x.SpecificationUnit)
                         .ThenInclude(x => x.Unit)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(request.Name))
+            if (string.IsNullOrEmpty(name))
             {
-                nomenclature = nomenclature.Where(x => x.Name == request.Name).ToList();
+                nomenclature = nomenclature.Where(x => x.Name == name).ToList();
             }
-            if (string.IsNullOrEmpty(request.VendorCode))
+            if (string.IsNullOrEmpty(vendorCode))
             {
-                nomenclature = nomenclature.Where(x => x.VendorCode == request.VendorCode).ToList();
+                nomenclature = nomenclature.Where(x => x.VendorCode == vendorCode).ToList();
             }
             return nomenclature;
         }

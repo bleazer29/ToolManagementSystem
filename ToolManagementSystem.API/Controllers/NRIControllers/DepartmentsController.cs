@@ -43,22 +43,24 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // POST api/NRI/Departments
         [HttpPost]
-        public async Task AddDepartment([FromBody] Department value)
+        public async Task<Department> AddDepartment([FromBody] Department value)
         {
             try
             {
                 await db.Department.AddAsync(value);
                 await db.SaveChangesAsync();
+                return await db.Department.SingleAsync(x => x.Name == value.Name);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            return new Department() { DepartmentId = -1 };
         }
 
         // PUT api/NRI/Departments/5
         [HttpPut("{id}")]
-        public async Task EditDepartment(int id, [FromBody] Department value)
+        public async Task<Department> EditDepartment(int id, [FromBody] Department value)
         {
             try
             {
@@ -68,11 +70,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     department.Name = value.Name;
                 }
                 await db.SaveChangesAsync();
+                return department;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            return new Department() { DepartmentId = -1 };
         }
 
         // DELETE api/NRI/Departments/5
