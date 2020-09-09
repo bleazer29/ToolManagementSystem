@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApplication1.Pages.NRI
+namespace ToolManagmentSystem.Client.Pages.NRI
 {
     public class ClassificationModel : PageModel
     {
