@@ -2214,6 +2214,7 @@
                 "sanitize": false, 
                 "html": true,
                 "content": function () {
+                    $(".popover").popover('hide');
                     return $(this).next(".popup-content").html();
                 }
             });

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
-using ToolManagementSystem.Shared.RequestModels.NRI;
+
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {

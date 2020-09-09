@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ToolManagementSystem.Shared.Models;
 using ToolManagementSystem.API;
 using ToolManagementSystem.Client;
-using ToolManagementSystem.Client.Requests;
+using ToolManagementSystem.Client.Managers.NRI;
 using System.Net.Http;
 using Newtonsoft.Json;
 
@@ -20,13 +20,12 @@ namespace ToolManagementSystem.Client.Pages.NRI
         [BindProperty]
         public Department NewDepartment { get; set; } = new Department();
 
-        
+        [BindProperty]
+        public string NewDepartment { get; set; } = new Department();
 
         public void OnGet()
         {
-
-            Departments = GetDepartmentsAsync().Result;
-
+            Departments = DepartmentsManager.GetDepartmentsAsync();
         }
 
        

@@ -7,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ToolManagementSystem.Shared.Models;
 
-namespace ToolManagementSystem.Client.Requesters.NRI
+namespace ToolManagementSystem.Client.Managers.NRI
 {
     public class DepartmentsManager
     {
-        public string apiControllerName { get; set; } = "NRI/Departments";
+        static string apiControllerName { get; set; } = "NRI/Departments";
 
-        async Task<List<Department>> GetDepartmentsAsync(string filterByName)
+        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName)
         {
             List<Department> departments = null;
             HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
@@ -26,7 +26,7 @@ namespace ToolManagementSystem.Client.Requesters.NRI
             return departments;
         }
 
-        async Task<Department> GetDepartmentAsync(int id)
+        public async static Task<Department> GetDepartmentAsync(int id)
         {
             Department department = null;
             HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
@@ -39,7 +39,7 @@ namespace ToolManagementSystem.Client.Requesters.NRI
             return department;
         }
 
-        async Task<Department> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<Department> CreateDepartmentAsync(Department newDepartment)
         {
             Department resultDepartment = null;
             StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
@@ -53,13 +53,13 @@ namespace ToolManagementSystem.Client.Requesters.NRI
             return resultDepartment;
         }
 
-        async Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
         {
             var response = await CustomHttpClient.GetClientInstance().DeleteAsync(apiControllerName + "/" + id);
             return response.StatusCode;
         }
 
-        async Task<Department> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<Department> UpdateDepartmentAsync(Department newDepartment)
         {
             Department resultDepartment = null;
             StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
