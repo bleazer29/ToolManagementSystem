@@ -48,9 +48,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                ToolStatus status = new ToolStatus();
-                status = value;
-                await db.ToolStatus.AddAsync(status);
+                await db.ToolStatus.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)

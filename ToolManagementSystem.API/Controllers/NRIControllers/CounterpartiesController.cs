@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -22,17 +23,17 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Counterparties
         [HttpGet]
-        public async Task<List<Counterparty>> GetCounterparties(string name, string EDRPOU)
+        public async Task<List<Counterparty>> GetCounterparties([FromBody] CounterpartyFilterRequest request)
         {
             List<Counterparty> counterparties = new List<Counterparty>();
             counterparties = await db.Counterparty.ToListAsync();
-            if (string.IsNullOrEmpty(name) == false)
+            if (string.IsNullOrEmpty(request.Name) == false)
             {
-                counterparties = counterparties.Where(x => x.Name == name).ToList();
+                counterparties = counterparties.Where(x => x.Name == request.Name).ToList();
             }
-            if (string.IsNullOrEmpty(EDRPOU) == false)
+            if (string.IsNullOrEmpty(request.EDRPOU) == false)
             {
-                counterparties = counterparties.Where(x => x.Edrpou == EDRPOU).ToList();
+                counterparties = counterparties.Where(x => x.Edrpou == request.EDRPOU).ToList();
             }
             return counterparties;
         }
@@ -59,9 +60,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                Counterparty counterparty = new Counterparty();
-                counterparty = value;
-                await db.Counterparty.AddAsync(counterparty);
+                await db.Counterparty.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)

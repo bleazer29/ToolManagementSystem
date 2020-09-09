@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -21,27 +22,26 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         //SpecificationUnit - specifications with measurement units
-        // GET: api/NRI/SpecificationUnits
-        [Route("api/NRI/SpecificationUnits")]
-        [HttpGet]
-        public async Task<List<SpecificationUnit>> GetSpecificationUnits(string name, string unit)
+        // GET: api/NRI/Specifications/SpecificationUnits
+        [HttpGet("SpecificationUnits")]
+        public async Task<List<SpecificationUnit>> GetSpecificationUnits([FromBody] SpecificationFilterRequest request)
         {
             List<SpecificationUnit> specifications = await db.SpecificationUnit
                 .Include(x => x.Specification)
                 .Include(x => x.Unit)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(request.Name))
             {
-                specifications = specifications.Where(x => x.Specification.Name == name).ToList();
+                specifications = specifications.Where(x => x.Specification.Name == request.Name).ToList();
             }
-            if (string.IsNullOrEmpty(unit))
+            if (string.IsNullOrEmpty(request.Unit))
             {
-                specifications = specifications.Where(x => x.Unit.Name == unit).ToList();
+                specifications = specifications.Where(x => x.Unit.Name == request.Unit).ToList();
             }
             return specifications;
         }
 
-        // GET api/NRI/Specifications/5
+        // GET api/NRI/Specifications/
         [HttpGet]
         public async Task<List<Specification>> GetSpecifications(string name)
         {
@@ -59,9 +59,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                Specification specification = new Specification();
-                specification = value;
-                await db.Specification.AddAsync(specification);
+                await db.Specification.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)

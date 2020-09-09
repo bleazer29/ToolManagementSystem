@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels;
 
 namespace ToolManagementSystem.API.Controllers
 {
@@ -20,16 +21,16 @@ namespace ToolManagementSystem.API.Controllers
             db = context;
         }
 
-        // GET: api/Accounts
-        [HttpGet]
-        public async Task<User> Login([FromBody] string login, [FromBody] string pass)
+        // GET: api/Accounts/Login
+        [HttpGet("Login")]
+        public async Task<User> Login([FromBody] LoginRequest request)
         {
             try
             {
                 User user = await db.User
                     .Include(x => x.UserRoleUser)
                         .ThenInclude(x => x.Role)
-                    .SingleAsync(x => x.Login == login && x.Password == pass);
+                    .SingleAsync(x => x.Login == request.Login && x.Password == request.Password);
                 if(user != null)
                 {
                     return user;

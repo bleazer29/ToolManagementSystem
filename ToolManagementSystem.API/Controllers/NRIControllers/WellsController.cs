@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels.NRI;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
@@ -22,19 +23,19 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Wells
         [HttpGet]
-        public async Task<List<Well>> GetWells(string name, string address)
+        public async Task<List<Well>> GetWells([FromBody] WellFilterRequest request)
         {
             List<Well> wells = new List<Well>();
             wells = await db.Well
                 .Include(x => x.CounterpartyId)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(name) == false)
+            if (string.IsNullOrEmpty(request.Name) == false)
             {
-                wells = wells.Where(x => x.Name == name).ToList();
+                wells = wells.Where(x => x.Name == request.Name).ToList();
             }
-            if (string.IsNullOrEmpty(address) == false)
+            if (string.IsNullOrEmpty(request.Address) == false)
             {
-                wells = wells.Where(x => x.Address == address).ToList();
+                wells = wells.Where(x => x.Address == request.Address).ToList();
             }
             return wells;
         }
@@ -60,9 +61,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                Well well = new Well();
-                well = value;
-                await db.Well.AddAsync(well);
+                await db.Well.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)

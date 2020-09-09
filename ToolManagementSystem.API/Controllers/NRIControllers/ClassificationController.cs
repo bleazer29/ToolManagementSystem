@@ -46,9 +46,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                ToolClassification classification = new ToolClassification();
-                classification = value;
-                await db.ToolClassification.AddAsync(classification);
+                await db.ToolClassification.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)

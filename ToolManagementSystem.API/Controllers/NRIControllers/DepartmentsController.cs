@@ -47,9 +47,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                Department department = new Department();
-                department = value;
-                await db.Department.AddAsync(department);
+                await db.Department.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)

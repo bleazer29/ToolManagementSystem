@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.Shared.RequestModels.NRI;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,7 +24,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Nomenclature
         [HttpGet]
-        public async Task<List<Nomenclature>> GetNomenclature(string name, string vendorCode)
+        public async Task<List<Nomenclature>> GetNomenclature([FromBody] NomenclatureFilterRequest request)
         {
             List<Nomenclature> nomenclature = await db.Nomenclature
                 .Include(x => x.NomenclatureSpecificationUnit)
@@ -32,13 +33,13 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     .ThenInclude(x => x.SpecificationUnit)
                         .ThenInclude(x => x.Unit)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(request.Name))
             {
-                nomenclature = nomenclature.Where(x => x.Name == name).ToList();
+                nomenclature = nomenclature.Where(x => x.Name == request.Name).ToList();
             }
-            if (string.IsNullOrEmpty(vendorCode))
+            if (string.IsNullOrEmpty(request.VendorCode))
             {
-                nomenclature = nomenclature.Where(x => x.VendorCode == vendorCode).ToList();
+                nomenclature = nomenclature.Where(x => x.VendorCode == request.VendorCode).ToList();
             }
             return nomenclature;
         }
@@ -63,9 +64,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                Nomenclature nomenclature = new Nomenclature();
-                nomenclature = value;
-                await db.Nomenclature.AddAsync(nomenclature);
+                await db.Nomenclature.AddAsync(value);
                 await db.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -87,7 +86,10 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     nomenclature.VendorCode = value.VendorCode;
                     if (value.NomenclatureSpecificationUnit.Count > 0)
                     {
-                        nomenclature.NomenclatureSpecificationUnit = value.NomenclatureSpecificationUnit;
+                        foreach(var specUnit in value.NomenclatureSpecificationUnit)
+                        {
+                            specUnit.NomenclatureId = id;
+                        }
                     }
                 }
                 await db.SaveChangesAsync();
