@@ -22,42 +22,60 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Classification
         [HttpGet]
-        public async Task<List<ToolClassification>> GetClassifications(string name)
+        public async Task<IActionResult> GetClassifications(string name)
         {
-            List<ToolClassification> classifications = await db.ToolClassification.ToListAsync();
-            if (string.IsNullOrEmpty(name))
+            try
             {
-                classifications = classifications.Where(x => x.Name == name).ToList();
+                List<ToolClassification> classifications = await db.ToolClassification.ToListAsync();
+                if (string.IsNullOrEmpty(name))
+                {
+                    classifications = classifications.Where(x => x.Name == name).ToList();
+                }
+                return Ok(classifications);
             }
-            return classifications;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // GET api/NRI/Classification/5
         [HttpGet("{id}")]
-        public async Task<ToolClassification> GetClassification(int id)
+        public async Task<IActionResult> GetClassification(int id)
         {
-            ToolClassification classification = await db.ToolClassification.SingleAsync(x => x.ToolClassificationId == id);
-            return classification;
+            try
+            {
+                ToolClassification classification = await db.ToolClassification.SingleAsync(x => x.ToolClassificationId == id);
+                return Ok(classification);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // POST api/NRI/Classification
         [HttpPost]
-        public async Task AddClassification([FromBody] ToolClassification value)
+        public async Task<IActionResult> AddClassification([FromBody] ToolClassification value)
         {
             try
             {
                 await db.ToolClassification.AddAsync(value);
                 await db.SaveChangesAsync();
+                return Ok(await db.ToolClassification.SingleAsync(x => x.Name == value.Name));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // PUT api/NRI/Classification/5
         [HttpPut("{id}")]
-        public async Task EditClassification(int id, [FromBody] ToolClassification value)
+        public async Task<IActionResult> EditClassification(int id, [FromBody] ToolClassification value)
         {
             try
             {
@@ -69,26 +87,30 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     classification.ParentToolClassificationId = value.ParentToolClassificationId;
                 }
                 await db.SaveChangesAsync();
+                return Ok(classification);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // DELETE api/NRI/Classification/5
         [HttpDelete("{id}")]
-        public async Task DeleteClassification(int id)
+        public async Task<IActionResult> DeleteClassification(int id)
         {
             try
             {
                 ToolClassification classification = await db.ToolClassification.SingleAsync(x => x.ToolClassificationId == id);
                 db.ToolClassification.Remove(classification);
                 await db.SaveChangesAsync();
+                return Ok();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
     }

@@ -23,7 +23,7 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/Accounts/Login
         [HttpGet("Login")]
-        public async Task<User> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             try
             {
@@ -33,14 +33,14 @@ namespace ToolManagementSystem.API.Controllers
                     .SingleAsync(x => x.Login == request.Login && x.Password == request.Password);
                 if(user != null)
                 {
-                    return user;
+                    return Ok(user);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Login failed User`s login is: {0}, pass: {1} \n" + ex.Message, request.Login, request.Password);
             }
-            return new User() { UserId = -1 };
+            return BadRequest();
         }
     }
 }

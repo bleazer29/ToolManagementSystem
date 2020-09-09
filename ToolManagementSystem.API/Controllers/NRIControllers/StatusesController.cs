@@ -23,43 +23,61 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Statuses
         [HttpGet]
-        public async Task<List<ToolStatus>> GetStatuses(string name)
+        public async Task<IActionResult> GetStatuses(string name)
         {
-            List<ToolStatus> statuses = new List<ToolStatus>();
-            statuses = await db.ToolStatus.ToListAsync();
-            if (string.IsNullOrEmpty(name) == false)
+            try
             {
-                statuses = statuses.Where(x => x.Name == name).ToList();
+                List<ToolStatus> statuses = new List<ToolStatus>();
+                statuses = await db.ToolStatus.ToListAsync();
+                if (string.IsNullOrEmpty(name) == false)
+                {
+                    statuses = statuses.Where(x => x.Name == name).ToList();
+                }
+                return Ok(statuses);
             }
-            return statuses;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // GET api/NRI/Statuses/5
         [HttpGet("{id}")]
-        public async Task<ToolStatus> GetStatus(int id)
+        public async Task<IActionResult> GetStatus(int id)
         {
-            ToolStatus status = await db.ToolStatus.SingleAsync(x => x.ToolStatusId == id);
-            return status;
+            try
+            {
+                ToolStatus status = await db.ToolStatus.SingleAsync(x => x.ToolStatusId == id);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // POST api/NRI/Statuses
         [HttpPost]
-        public async Task AddStatus([FromBody] ToolStatus value)
+        public async Task<IActionResult> AddStatus([FromBody] ToolStatus value)
         {
             try
             {
                 await db.ToolStatus.AddAsync(value);
                 await db.SaveChangesAsync();
+                return Ok(await db.ToolStatus.SingleAsync(x => x.Name == value.Name));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // PUT api/NRI/Statuses/5
         [HttpPut("{id}")]
-        public async Task EditStatus(int id, [FromBody] ToolStatus value)
+        public async Task<IActionResult> EditStatus(int id, [FromBody] ToolStatus value)
         {
             try
             {
@@ -69,26 +87,30 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     status.Name = value.Name;
                 }
                 await db.SaveChangesAsync();
+                return Ok(status);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // DELETE api/NRI/Statuses/5
         [HttpDelete("{id}")]
-        public async Task DeleteStatus(int id)
+        public async Task<IActionResult> DeleteStatus(int id)
         {
             try
             {
                 ToolStatus status = await db.ToolStatus.SingleAsync(x => x.ToolStatusId == id);
                 db.ToolStatus.Remove(status);
                 await db.SaveChangesAsync();
+                return Ok();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
     }

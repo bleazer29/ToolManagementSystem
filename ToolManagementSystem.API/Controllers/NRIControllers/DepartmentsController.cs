@@ -22,45 +22,61 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Departments
         [HttpGet]
-        public async Task<List<Department>> GetDepartments(string name)
+        public async Task<IActionResult> GetDepartments(string name)
         {
-            List<Department> departments = new List<Department>();
-            departments = await db.Department.ToListAsync();
-            if(string.IsNullOrEmpty(name) == false)
+            try
             {
-                departments = departments.Where(x => x.Name == name).ToList();
+                List<Department> departments = new List<Department>();
+                departments = await db.Department.ToListAsync();
+                if (string.IsNullOrEmpty(name) == false)
+                {
+                    departments = departments.Where(x => x.Name == name).ToList();
+                }
+                return Ok(departments);
             }
-            return departments;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // GET api/NRI/Departments/5
         [HttpGet("{id}")]
-        public async Task<Department> GetDepartment(int id)
+        public async Task<IActionResult> GetDepartment(int id)
         {
-            Department department = await db.Department.SingleAsync(x => x.DepartmentId == id);
-            return department;
+            try
+            {
+                Department department = await db.Department.SingleAsync(x => x.DepartmentId == id);
+                return Ok(department);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // POST api/NRI/Departments
         [HttpPost]
-        public async Task<Department> AddDepartment([FromBody] Department value)
+        public async Task<IActionResult> AddDepartment([FromBody] Department value)
         {
             try
             {
                 await db.Department.AddAsync(value);
                 await db.SaveChangesAsync();
-                return await db.Department.SingleAsync(x => x.Name == value.Name);
+                return Ok(await db.Department.SingleAsync(x => x.Name == value.Name));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
-            return new Department() { DepartmentId = -1 };
         }
 
         // PUT api/NRI/Departments/5
         [HttpPut("{id}")]
-        public async Task<Department> EditDepartment(int id, [FromBody] Department value)
+        public async Task<IActionResult> EditDepartment(int id, [FromBody] Department value)
         {
             try
             {
@@ -70,28 +86,30 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     department.Name = value.Name;
                 }
                 await db.SaveChangesAsync();
-                return department;
+                return Ok(department);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
-            return new Department() { DepartmentId = -1 };
         }
 
         // DELETE api/NRI/Departments/5
         [HttpDelete("{id}")]
-        public async Task DeleteDepartment(int id)
+        public async Task<IActionResult> DeleteDepartment(int id)
         {
             try
             {
                 Department department = await db.Department.SingleAsync(x => x.DepartmentId == id);
                 db.Department.Remove(department);
                 await db.SaveChangesAsync();
+                return Ok();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
     }

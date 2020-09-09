@@ -22,56 +22,67 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Wells
         [HttpGet]
-        public async Task<List<Well>> GetWells(string name, string address)
+        public async Task<IActionResult> GetWells(string name, string address)
         {
-            List<Well> wells = new List<Well>();
-            wells = await db.Well
-                .Include(x => x.CounterpartyId)
-                .ToListAsync();
-            if (string.IsNullOrEmpty(name) == false)
+            try
             {
-                wells = wells.Where(x => x.Name == name).ToList();
-            }
-            if (string.IsNullOrEmpty(address) == false)
-            {
-                wells = wells.Where(x => x.Address == address).ToList();
-            }
-            return wells;
-        }
-
-        // GET api/NRI/Wells/5
-        [HttpGet("{id}")]
-        public async Task<Well> GetWell(int id)
-        {
-            try { 
-            Well well = await db.Well.SingleAsync(x => x.WellId == id);
-            return well;
+                List<Well> wells = new List<Well>();
+                wells = await db.Well
+                    .Include(x => x.CounterpartyId)
+                    .ToListAsync();
+                if (string.IsNullOrEmpty(name) == false)
+                {
+                    wells = wells.Where(x => x.Name == name).ToList();
+                }
+                if (string.IsNullOrEmpty(address) == false)
+                {
+                    wells = wells.Where(x => x.Address == address).ToList();
+                }
+                return Ok(wells);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new Well() { WellId = -1 };
+                return BadRequest();
+            }
+        }
+
+        // GET api/NRI/Wells/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWell(int id)
+        {
+            try 
+            { 
+            Well well = await db.Well.SingleAsync(x => x.WellId == id);
+            return Ok(well);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // POST api/NRI/Wells
         [HttpPost]
-        public async Task AddWell([FromBody] Well value)
+        public async Task<IActionResult> AddWell([FromBody] Well value)
         {
             try
             {
                 await db.Well.AddAsync(value);
                 await db.SaveChangesAsync();
+                return Ok(await db.Well.SingleAsync(x => x.Name == value.Name));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // PUT api/NRI/Wells/5
         [HttpPut("{id}")]
-        public async Task EditWell(int id, [FromBody] Well value)
+        public async Task<IActionResult> EditWell(int id, [FromBody] Well value)
         {
             try
             {
@@ -83,26 +94,30 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     well.CounterpartyId = value.CounterpartyId;
                 }
                 await db.SaveChangesAsync();
+                return Ok(well);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // DELETE api/NRI/Wells/5
         [HttpDelete("{id}")]
-        public async Task DeleteWell(int id)
+        public async Task<IActionResult> DeleteWell(int id)
         {
             try
             {
                 Well well = await db.Well.SingleAsync(x => x.WellId == id);
                 db.Well.Remove(well);
                 await db.SaveChangesAsync();
+                return Ok();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 

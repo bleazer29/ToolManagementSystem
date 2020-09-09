@@ -22,44 +22,62 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/Contracts
         [HttpGet]
-        public async Task<List<Contract>> GetContracts(string number)
+        public async Task<IActionResult> GetContracts(string number)
         {
-            List<Contract> contracts = await db.Contract
-                .Include(x => x.Counterparty)
-                .ToListAsync();
-            if (string.IsNullOrEmpty(number))
+            try
             {
-                contracts = contracts.Where(x => x.Name == number).ToList();
+                List<Contract> contracts = await db.Contract
+                    .Include(x => x.Counterparty)
+                    .ToListAsync();
+                if (string.IsNullOrEmpty(number))
+                {
+                    contracts = contracts.Where(x => x.Name == number).ToList();
+                }
+                return Ok(contracts);
             }
-            return contracts;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // GET api/Contracts/5
         [HttpGet("{id}")]
-        public async Task<Contract> GetContract(int id)
+        public async Task<IActionResult> GetContract(int id)
         {
-            Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
-            return contract;
+            try
+            {
+                Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
+                return Ok(contract);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // POST api/Contracts
         [HttpPost]
-        public async Task AddContract([FromBody] Contract value)
+        public async Task<IActionResult> AddContract([FromBody] Contract value)
         {
             try
             {
                 await db.Contract.AddAsync(value);
                 await db.SaveChangesAsync();
+                return Ok(await db.Contract.SingleAsync(x => x.Name == value.Name));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // PUT api/Contracts/5
         [HttpPut("{id}")]
-        public async Task EditContract(int id, [FromBody] Contract value)
+        public async Task<IActionResult> EditContract(int id, [FromBody] Contract value)
         {
             try
             {
@@ -70,26 +88,30 @@ namespace ToolManagementSystem.API.Controllers
                     contract.CounterpartyId = value.CounterpartyId;
                 }
                 await db.SaveChangesAsync();
+                return Ok(contract);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
 
         // DELETE api/Contracts/5
         [HttpDelete("{id}")]
-        public async Task DeleteContract(int id)
+        public async Task<IActionResult> DeleteContract(int id)
         {
             try
             {
                 Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
                 db.Contract.Remove(contract);
                 await db.SaveChangesAsync();
+                return Ok();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
         }
     }
