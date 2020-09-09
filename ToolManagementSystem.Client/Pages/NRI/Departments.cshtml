@@ -1,5 +1,5 @@
 ﻿@page "/NRI/Departments"
-@model ToolManagmentSystem.Client.Pages.NRI.DepartmentsModel
+@model ToolManagementSystem.Client.Pages.NRI.DepartmentsModel
 @{
     ViewData["Title"] = "Departments";
 }
@@ -65,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model.Departments != null)
+                            @if (Model.Departments.Count > 0)
                             {
                                 foreach (Department department in Model.Departments)
                                 {
@@ -159,7 +159,7 @@
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="departmentTitle">
+                                <input type="text" class="form-control" asp-for="NewDepartment.Name">
                             </div>
                         </div>
                     </form>

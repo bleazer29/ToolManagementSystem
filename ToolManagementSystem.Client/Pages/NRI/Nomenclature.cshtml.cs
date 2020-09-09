@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ToolManagmentSystem.Client.Pages.NRI
+namespace ToolManagementSystem.Client.Pages.NRI
 {
     public class NomenclatureModel : PageModel
     {

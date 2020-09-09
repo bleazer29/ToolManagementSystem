@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ToolManagmentSystem.Client.Pages
+namespace ToolManagementSystem.Client.Pages
 {
     public class LoginModel : PageModel
     {

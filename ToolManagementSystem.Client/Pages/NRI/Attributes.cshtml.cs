@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ToolManagementSystem.Client;
 
-namespace ToolManagmentSystem.Client.Pages.NRI
+namespace ToolManagementSystem.Client.Pages.NRI
 {
     public class AttributesModel : PageModel
     {

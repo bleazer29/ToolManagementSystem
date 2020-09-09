@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ToolManagmentSystem.Client.Pages.Maintenances
+namespace ToolManagementSystem.Client.Pages.Maintenances
 {
     public class RepairsModel : PageModel
     {
