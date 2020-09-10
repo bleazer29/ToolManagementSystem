@@ -27,9 +27,13 @@ namespace ToolManagementSystem.Client.Pages.NRI
         [BindProperty]
         public string FilterByName { get; set; }
 
-        public void OnGet()
+        [BindProperty]
+        public int DeleteDepartmentId { get; set; }
+
+        public IActionResult OnGet()
         {
             Departments = DepartmentsManager.GetDepartmentsAsync(FilterByName).Result;
+            return Page();
         }
 
         public void OnGetDepartment(int id)
@@ -44,31 +48,34 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public IActionResult OnPostDepartment()
         {
             Department temp = DepartmentsManager.CreateDepartmentAsync(NewDepartment).Result;
-            if (temp.DepartmentId == -1)
+            if(temp != null)
             {
-                //do something
+                DepartmentsManager.CreateDepartmentAsync(temp);
             }
-            return Page();
+            return OnGet();
         }
 
-        public IActionResult OnPostDelete(int id)
+        public IActionResult OnPostDelete()
         {
-            HttpStatusCode temp = DepartmentsManager.DeleteDepartmentAsync(id).Result;
+            HttpStatusCode temp = DepartmentsManager.DeleteDepartmentAsync(DeleteDepartmentId).Result;
             if (temp != HttpStatusCode.OK)
             {
                 //do something
             }
-            return Page();
+            return OnGet();
         }
 
         public IActionResult OnPostUpdate()
         {
-            Department temp = DepartmentsManager.UpdateDepartmentAsync(NewDepartment).Result;
-            if (temp.DepartmentId == -1)
+            Department temp = DepartmentsManager.UpdateDepartmentAsync(EditDepartment).Result;
+            if(temp != null)
             {
-                //do something
+                if (temp.DepartmentId == -1)
+                {
+                    //do something
+                }
             }
-            return Page();
+            return OnGet();
         }
 
 

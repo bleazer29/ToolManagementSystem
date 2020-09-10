@@ -73,9 +73,9 @@
                     <td class="table-control-buttons-row">
                         <div class="row flex-nowrap m-auto">
                             <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                    data-toggle="modal" data-target="#editModal" asp-page-handler="Department" asp-route-id="@department.DepartmentId"></button>
+                                    data-toggle="modal" data-target="#editModal"  data-departmentid="@department.DepartmentId"></button>
                             <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                    data-toggle="modal" data-target="#deleteModal"></button>
+                                    data-toggle="modal" data-target="#deleteModal" data-departmentid="@department.DepartmentId"></button>
                         </div>
                     </td>
                 </tr>}
@@ -98,13 +98,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteDepartmentId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -120,21 +123,22 @@
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
                         <div class="form-group row">
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" asp-for="EditDepartment.Name">
+                                <input type="hidden" class="form-control" asp-for="EditDepartment.DepartmentId">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -178,26 +182,24 @@
     <script type="text/javascript">var isCaretUp = false;
         var pagedList = "#departmentsTable";
 
+        $(".delete-button").click(function () {
+            var departmentId = $(this).data('departmentid');
+            $('#DeleteDepartmentId').val(departmentId);
+        });
+
+        $('.edit-button').click(function () {
+            var departmentId = $(this).data('departmentid');
+            hubConnection.invoke('GetEditedDepartment', departmentId);
+        });
+
         const hubConnection = new signalR.HubConnectionBuilder()
             .withUrl("/data")
             .build();
 
-        hubConnection.on("ReceiveNewDepartment", function (data) {
+        hubConnection.on("recieveEditedDepartment", function (data) {
             var json = JSON.parse(data);
-                $(pagedList + " tbody").append(
-                    "<tr>"
-                    + "<td></td>"
-                    + "<td>" + json.Name + "</td>"
-                    + "<td class='table-control-buttons-row'>"
-                    + "<div class='row flex-nowrap m-auto'>"
-                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
-                    + "data-toggle='modal' data-target='#editModal'></button>"
-                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
-                    + "data-toggle='modal' data-target='#deleteModal'></button>"
-                    + "</div>"
-                    + "</td>"
-                    + "</tr>"
-                );
+            $('#EditDepartment_Name').val(json.Name);
+            $('#EditDepartment_DepartmentId').val(json.DepartmentId);
         });
 
         hubConnection.start();
@@ -212,7 +214,9 @@
                 $(".Caret").removeClass("fa-caret-up");
                 $(".Caret").addClass("fa-caret-down");
             }
-        };</script>
+        };
+
+    </script>
 }
 
 
