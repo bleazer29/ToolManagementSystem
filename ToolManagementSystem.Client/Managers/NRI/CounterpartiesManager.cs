@@ -13,23 +13,23 @@ namespace ToolManagementSystem.Client.Managers.NRI
     {
         static string apiControllerName { get; set; } = "NRI/Counterparties";
 
-        public async static Task<List<Counterparty>> GetCounterpartiesAsync(string filterByName, string filterByAddress, string filterbyEDRPOU)
+        public async static Task<List<Counterparty>> GetCounterpartiesAsync(string filterByName, string filterByEDRPOU, string filterByAddress)
         {
             List<Counterparty> counterparties = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName + "&edrpou=" + filterbyEDRPOU);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName+"&edrpou="+ filterByEDRPOU+ "&address=" + filterByAddress);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    counterparties = new List<Counterparty>();
                     counterparties = JsonConvert.DeserializeObject<List<Counterparty>>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
+
             return counterparties;
         }
 
@@ -42,7 +42,6 @@ namespace ToolManagementSystem.Client.Managers.NRI
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    counterparty = new Counterparty();
                     counterparty = JsonConvert.DeserializeObject<Counterparty>(apiResponse);
                 }
             }
@@ -53,39 +52,60 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return counterparty;
         }
 
-        public async static Task<Counterparty> CreateCreateAsync(Counterparty newCounterparty)
+        public async static Task<Counterparty> CreateCounterpartyAsync(Counterparty newCounterparty)
         {
             Counterparty resultCounterparty = null;
-           
-            StringContent content = new StringContent(JsonConvert.SerializeObject(newCounterparty), Encoding.UTF8, "application/json");
-            var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                resultCounterparty = new Counterparty();
-                resultCounterparty = JsonConvert.DeserializeObject<Counterparty>(apiResponse);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newCounterparty), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    resultCounterparty = JsonConvert.DeserializeObject<Counterparty>(apiResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
             return resultCounterparty;
         }
 
-        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteCounterpartyAsync(int id)
         {
-            var response = await CustomHttpClient.GetClientInstance().DeleteAsync(apiControllerName + "/" + id);
-            return response.StatusCode;
+            try
+            {
+                var response = await CustomHttpClient.GetClientInstance().DeleteAsync(apiControllerName + "/" + id);
+                return response.StatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<Department> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<Counterparty> UpdateCounterpartyAsync(Counterparty newCounterparty)
         {
-            Department resultDepartment = null;
-            StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-            var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/?id=" + newDepartment.DepartmentId, content);
-            if (response.IsSuccessStatusCode)
+            Counterparty resultCounterparty = null;
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                resultDepartment = new Department();
-                resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newCounterparty), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newCounterparty.CounterpartyId, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    resultCounterparty = JsonConvert.DeserializeObject<Counterparty>(apiResponse);
+                }
             }
-            return resultDepartment;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return resultCounterparty;
         }
+
     }
 }
+

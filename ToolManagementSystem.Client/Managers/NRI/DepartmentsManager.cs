@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,59 +17,92 @@ namespace ToolManagementSystem.Client.Managers.NRI
         public async static Task<List<Department>> GetDepartmentsAsync(string filterByName)
         {
             List<Department> departments = null;
-            HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                departments = new List<Department>();
-                departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
             return departments;
         }
 
         public async static Task<Department> GetDepartmentAsync(int id)
         {
             Department department = null;
-            HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                department = new Department();
-                department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }          
             return department;
         }
 
         public async static Task<Department> CreateDepartmentAsync(Department newDepartment)
         {
             Department resultDepartment = null;
-            StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-            var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                resultDepartment = new Department();
-                resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
             return resultDepartment;
         }
 
         public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
         {
-            var response = await CustomHttpClient.GetClientInstance().DeleteAsync(apiControllerName + "/" + id);
-            return response.StatusCode;
+            try
+            {
+                var response = await CustomHttpClient.GetClientInstance().DeleteAsync(apiControllerName + "/" + id);
+                return response.StatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return System.Net.HttpStatusCode.BadRequest;
         }
 
         public async static Task<Department> UpdateDepartmentAsync(Department newDepartment)
         {
             Department resultDepartment = null;
-            StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-            var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/"+ newDepartment.DepartmentId, content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                resultDepartment = new Department();
-                resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
             return resultDepartment;
         }

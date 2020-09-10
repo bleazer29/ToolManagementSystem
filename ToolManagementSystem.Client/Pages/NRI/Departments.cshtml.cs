@@ -30,52 +30,41 @@ namespace ToolManagementSystem.Client.Pages.NRI
         [BindProperty]
         public int DeleteDepartmentId { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            Departments = DepartmentsManager.GetDepartmentsAsync(FilterByName).Result;
+            Departments = await DepartmentsManager.GetDepartmentsAsync(FilterByName);
             return Page();
         }
 
-        public void OnGetDepartment(int id)
+        public async Task<IActionResult> OnPostDepartment()
         {
-            EditDepartment = DepartmentsManager.GetDepartmentAsync(id).Result;
-            if (EditDepartment.DepartmentId == -1)
+            Department temp = await DepartmentsManager.CreateDepartmentAsync(NewDepartment);
+            if(temp == null)
             {
                 //do something
+               
             }
+            return RedirectToPage("Departments");
         }
 
-        public IActionResult OnPostDepartment()
+        public async Task<IActionResult> OnPostDelete()
         {
-            Department temp = DepartmentsManager.CreateDepartmentAsync(NewDepartment).Result;
-            if(temp != null)
-            {
-                DepartmentsManager.CreateDepartmentAsync(temp);
-            }
-            return OnGet();
-        }
-
-        public IActionResult OnPostDelete()
-        {
-            HttpStatusCode temp = DepartmentsManager.DeleteDepartmentAsync(DeleteDepartmentId).Result;
+            HttpStatusCode temp = await DepartmentsManager.DeleteDepartmentAsync(DeleteDepartmentId);
             if (temp != HttpStatusCode.OK)
             {
                 //do something
             }
-            return OnGet();
+            return RedirectToPage("Departments");
         }
 
-        public IActionResult OnPostUpdate()
+        public async Task<IActionResult> OnPostUpdate()
         {
-            Department temp = DepartmentsManager.UpdateDepartmentAsync(EditDepartment).Result;
-            if(temp != null)
+            Department temp = await DepartmentsManager.UpdateDepartmentAsync(EditDepartment);
+            if (temp == null)
             {
-                if (temp.DepartmentId == -1)
-                {
-                    //do something
-                }
+                //do something
             }
-            return OnGet();
+            return RedirectToPage("Departments");
         }
 
 

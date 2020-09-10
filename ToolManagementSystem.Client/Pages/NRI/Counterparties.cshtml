@@ -29,14 +29,14 @@
                 </h5>
             </div>
             <div id="statusesSearchCollapse" class="collapse">
-                <form class="m-3">
+                <form class="m-3" method="get">
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="FilterByName" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -44,7 +44,7 @@
                                 ЕДРПОУ:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="FilterByEDRPOU" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -52,11 +52,11 @@
                                 Адрес:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="FilterByAddress" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary  search-button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -71,7 +71,7 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
+                <div class="table-responsive" id="paged-list">
                     <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
@@ -83,20 +83,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td>ООО "Контрагент1"</td>
-                                <td>12345678</td>
-                                <td>г.Киев 10600, ул.Пушкина д.18 А кв.12</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @if (Model.Counterparties != null && Model.Counterparties.Count > 0)
+                            {
+                                foreach (Counterparty counterparty in Model.Counterparties)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@counterparty.Name</td>
+                                        <td>@counterparty.Edrpou</td>
+                                        <td>@counterparty.Address</td>
+                                        <td class="align-middle">
+                                            <div class="table-control-buttons-row">
+                                                <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                        data-toggle="modal" data-target="#editModal" data-counterpartyid="@counterparty.CounterpartyId"></button>
+                                                <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                        data-toggle="modal" data-target="#deleteModal" data-counterpartyid="@counterparty.CounterpartyId"></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
+
                         </tbody>
                     </table>
                 </div>
@@ -115,13 +123,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteCounterpartyId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>  
             </div>
         </div>
     </div>
@@ -137,35 +148,36 @@
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" asp-for="EditCounterparty.Name">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> ЕДРПОУ:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="EditCounterparty.Edrpou">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Адрес:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="EditCounterparty.Address">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+                        <input type="hidden" class="form-control" asp-for="EditCounterparty.CounterpartyId">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -181,35 +193,37 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" asp-for="NewCounterparty.Name">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> ЕДРПОУ:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="NewCounterparty.Edrpou">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Адрес:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="NewCounterparty.Address">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Counterparty">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -219,6 +233,7 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
+        var pagedList = "#counterpartiesTable";
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
@@ -232,6 +247,31 @@
             }
         };
 
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        hubConnection.on("recieveEditedCounterparty", function (data) {
+            var json = JSON.parse(data);
+            $('#EditCounterparty_Name').val(json.Name);
+            $('#EditCounterparty_Edrpou').val(json.Edrpou);
+            $('#EditCounterparty_Address').val(json.Address);
+            $('#EditCounterparty_CounterpartyId').val(json.CounterpartyId);
+        });
+
+        hubConnection.start();
+
+        $(".delete-button").click(function () {
+            var counterpartyId = $(this).data('counterpartyid');
+            $('#DeleteCounterpartyId').val(counterpartyId);
+        });
+
+        $('.edit-button').click(function () {
+            var counterpartyId = $(this).data('counterpartyid');
+            hubConnection.invoke('GetEditedCounterparty', counterpartyId);
+        });
+
+        
     </script>
 }
 

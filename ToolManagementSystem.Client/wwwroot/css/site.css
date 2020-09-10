@@ -758,3 +758,13 @@ table td {
     white-space:nowrap!important;
     min-width:350px;
 }
+
+.simple-pagination-page-numbers{
+    text-align:center;
+}
+
+.simple-pagination-page-numbers > * {
+    margin: 5px;
+    font-size:larger;
+    font-weight: bold;
+}

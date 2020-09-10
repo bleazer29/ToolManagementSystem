@@ -321,6 +321,18 @@ function RemoveTableRow(tBodyName) {
     $(tBodyElem).remove();
 }
 
+function GenList(listElem, itemsPerPage) {
+    $(listElem).simplePagination({
+        items_per_page: itemsPerPage,
+        number_of_visible_page_numbers: 5,
+        first_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-double-left'></i></div>",
+        previous_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-left'></i></div>",
+        next_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-right'></i></div>",
+        last_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-double-right'></i></div>"
+    });
+}
+
+
 //function AddClassificationRow(tBodyName, counter) {
 //    var tBodyElem = '#' + tBodyName;
 //    $(tBodyElem).append(

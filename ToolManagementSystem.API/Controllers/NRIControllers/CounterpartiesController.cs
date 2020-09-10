@@ -22,7 +22,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Counterparties
         [HttpGet]
-        public async Task<IActionResult> GetCounterparties(string name, string edrpou)
+        public async Task<IActionResult> GetCounterparties(string name, string edrpou, string address)
         {
             try
             {
@@ -35,6 +35,10 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 if (string.IsNullOrEmpty(edrpou) == false)
                 {
                     counterparties = counterparties.Where(x => x.Edrpou == edrpou).ToList();
+                }
+                if (string.IsNullOrEmpty(address) == false)
+                {
+                    counterparties = counterparties.Where(x => x.Address == address).ToList();
                 }
                 return Ok(counterparties);
             }
