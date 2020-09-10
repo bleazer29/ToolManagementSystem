@@ -10,7 +10,7 @@ namespace ToolManagementSystem.Shared.Models
             ReportHistory = new HashSet<ReportHistory>();
         }
 
-        public long ReportId { get; set; }
+        public int ReportId { get; set; }
         public string Name { get; set; }
         public string FillePath { get; set; }
 

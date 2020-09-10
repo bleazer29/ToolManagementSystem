@@ -37,7 +37,6 @@ namespace ToolManagementSystem.Shared.Models
         public virtual DbSet<RolePermission> RolePermission { get; set; }
         public virtual DbSet<RolePermissionRight> RolePermissionRight { get; set; }
         public virtual DbSet<Specification> Specification { get; set; }
-        public virtual DbSet<SpecificationUnit> SpecificationUnit { get; set; }
         public virtual DbSet<Tool> Tool { get; set; }
         public virtual DbSet<ToolClassification> ToolClassification { get; set; }
         public virtual DbSet<ToolDocument> ToolDocument { get; set; }
@@ -58,7 +57,7 @@ namespace ToolManagementSystem.Shared.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TMSdb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source = (localdb)\\mssqllocaldb; Initial Catalog = TMSdb; Integrated Security = True;");
             }
         }
 
@@ -66,8 +65,6 @@ namespace ToolManagementSystem.Shared.Models
         {
             modelBuilder.Entity<Contract>(entity =>
             {
-                entity.Property(e => e.ContractId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -79,8 +76,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Counterparty>(entity =>
             {
-                entity.Property(e => e.CounterpartyId).ValueGeneratedNever();
-
                 entity.Property(e => e.Address).HasMaxLength(250);
 
                 entity.Property(e => e.Edrpou)
@@ -94,8 +89,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Cycle>(entity =>
             {
-                entity.Property(e => e.CycleId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -108,8 +101,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<CycleItem>(entity =>
             {
-                entity.Property(e => e.CycleItemId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Cycle)
                     .WithMany(p => p.CycleItem)
                     .HasForeignKey(d => d.CycleId)
@@ -118,8 +109,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Department>(entity =>
             {
-                entity.Property(e => e.DepartmentId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -127,8 +116,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Document>(entity =>
             {
-                entity.Property(e => e.DocumentId).ValueGeneratedNever();
-
                 entity.Property(e => e.FileExtension)
                     .IsRequired()
                     .HasMaxLength(20)
@@ -152,8 +139,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Nomenclature>(entity =>
             {
-                entity.Property(e => e.NomenclatureId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -165,23 +150,24 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<NomenclatureSpecificationUnit>(entity =>
             {
-                entity.Property(e => e.NomenclatureSpecificationUnitId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Nomenclature)
                     .WithMany(p => p.NomenclatureSpecificationUnit)
                     .HasForeignKey(d => d.NomenclatureId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(d => d.SpecificationUnit)
+                entity.HasOne(d => d.Specification)
                     .WithMany(p => p.NomenclatureSpecificationUnit)
-                    .HasForeignKey(d => d.SpecificationUnitId)
+                    .HasForeignKey(d => d.SpecificationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Unit)
+                    .WithMany(p => p.NomenclatureSpecificationUnit)
+                    .HasForeignKey(d => d.UnitId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.OrderId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(150);
@@ -219,8 +205,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<OrderDocument>(entity =>
             {
-                entity.Property(e => e.OrderDocumentId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Document)
                     .WithMany(p => p.OrderDocument)
                     .HasForeignKey(d => d.DocumentId)
@@ -234,8 +218,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<OrderHistory>(entity =>
             {
-                entity.Property(e => e.OrderHistoryId).ValueGeneratedNever();
-
                 entity.Property(e => e.Message)
                     .IsRequired()
                     .HasMaxLength(250)
@@ -259,8 +241,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<OrderStatus>(entity =>
             {
-                entity.Property(e => e.OrderStatusId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(150);
@@ -268,8 +248,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<OrderTool>(entity =>
             {
-                entity.Property(e => e.OrderToolId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderTool)
                     .HasForeignKey(d => d.OrderId)
@@ -283,8 +261,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<OrderToolOperatingTime>(entity =>
             {
-                entity.Property(e => e.OrderToolOperatingTimeId).ValueGeneratedNever();
-
                 entity.Property(e => e.Commentary).HasMaxLength(250);
 
                 entity.HasOne(d => d.Creator)
@@ -301,8 +277,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Permission>(entity =>
             {
-                entity.Property(e => e.PermissionId).ValueGeneratedNever();
-
                 entity.Property(e => e.Alias).HasMaxLength(250);
 
                 entity.Property(e => e.Name)
@@ -321,8 +295,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Report>(entity =>
             {
-                entity.Property(e => e.ReportId).ValueGeneratedNever();
-
                 entity.Property(e => e.FillePath)
                     .IsRequired()
                     .HasMaxLength(250)
@@ -336,8 +308,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<ReportHistory>(entity =>
             {
-                entity.Property(e => e.ReportHistoryId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250)
@@ -356,8 +326,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Right>(entity =>
             {
-                entity.Property(e => e.RightId).ValueGeneratedNever();
-
                 entity.Property(e => e.Alias)
                     .HasMaxLength(250)
                     .IsFixedLength();
@@ -370,8 +338,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.Property(e => e.RoleId).ValueGeneratedNever();
-
                 entity.Property(e => e.Alias).HasMaxLength(250);
 
                 entity.Property(e => e.Name)
@@ -390,8 +356,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<RolePermission>(entity =>
             {
-                entity.Property(e => e.RolePermissionId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Creator)
                     .WithMany(p => p.RolePermissionCreator)
                     .HasForeignKey(d => d.CreatorId)
@@ -418,8 +382,6 @@ namespace ToolManagementSystem.Shared.Models
             {
                 entity.HasKey(e => e.RoleRightPermission);
 
-                entity.Property(e => e.RoleRightPermission).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Creator)
                     .WithMany(p => p.RolePermissionRightCreator)
                     .HasForeignKey(d => d.CreatorId)
@@ -444,32 +406,13 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Specification>(entity =>
             {
-                entity.Property(e => e.SpecificationId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
             });
 
-            modelBuilder.Entity<SpecificationUnit>(entity =>
-            {
-                entity.Property(e => e.SpecificationUnitId).ValueGeneratedNever();
-
-                entity.HasOne(d => d.Specification)
-                    .WithMany(p => p.SpecificationUnit)
-                    .HasForeignKey(d => d.SpecificationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Unit)
-                    .WithMany(p => p.SpecificationUnit)
-                    .HasForeignKey(d => d.UnitId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
             modelBuilder.Entity<Tool>(entity =>
             {
-                entity.Property(e => e.ToolId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250)
@@ -517,8 +460,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<ToolClassification>(entity =>
             {
-                entity.Property(e => e.ToolClassificationId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -530,8 +471,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<ToolDocument>(entity =>
             {
-                entity.Property(e => e.ToolDocumentId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Document)
                     .WithMany(p => p.ToolDocument)
                     .HasForeignKey(d => d.DocumentId)
@@ -545,8 +484,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<ToolHistory>(entity =>
             {
-                entity.Property(e => e.ToolHistoryId).ValueGeneratedNever();
-
                 entity.Property(e => e.Commentary)
                     .HasMaxLength(250)
                     .IsFixedLength();
@@ -569,8 +506,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<ToolStatus>(entity =>
             {
-                entity.Property(e => e.ToolStatusId).ValueGeneratedNever();
-
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(250)
@@ -584,8 +519,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Unit>(entity =>
             {
-                entity.Property(e => e.UnitId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -593,8 +526,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId).ValueGeneratedNever();
-
                 entity.Property(e => e.Fio)
                     .IsRequired()
                     .HasColumnName("FIO")
@@ -625,8 +556,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<UserRole>(entity =>
             {
-                entity.Property(e => e.UserRoleId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Creator)
                     .WithMany(p => p.UserRoleCreator)
                     .HasForeignKey(d => d.CreatorId)
@@ -650,8 +579,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<Well>(entity =>
             {
-                entity.Property(e => e.WellId).ValueGeneratedNever();
-
                 entity.Property(e => e.Address).HasMaxLength(250);
 
                 entity.Property(e => e.Name)
@@ -665,8 +592,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<WorkOrder>(entity =>
             {
-                entity.Property(e => e.WorkOrderId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(150);
@@ -689,8 +614,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<WorkOrderDocument>(entity =>
             {
-                entity.Property(e => e.WorkOrderDocumentId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Document)
                     .WithMany(p => p.WorkOrderDocument)
                     .HasForeignKey(d => d.DocumentId)
@@ -704,8 +627,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<WorkOrderHistory>(entity =>
             {
-                entity.Property(e => e.WorkOrderHistoryId).ValueGeneratedNever();
-
                 entity.Property(e => e.Message)
                     .IsRequired()
                     .HasMaxLength(250)
@@ -729,8 +650,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<WorkOrderStatus>(entity =>
             {
-                entity.Property(e => e.WorkOrderStatusId).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(150);
@@ -738,8 +657,6 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<WorkOrderTool>(entity =>
             {
-                entity.Property(e => e.WorkOrderToolId).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Tool)
                     .WithMany(p => p.WorkOrderTool)
                     .HasForeignKey(d => d.ToolId)

@@ -7,12 +7,12 @@ namespace ToolManagementSystem.Shared.Models
     {
         public Specification()
         {
-            SpecificationUnit = new HashSet<SpecificationUnit>();
+            NomenclatureSpecificationUnit = new HashSet<NomenclatureSpecificationUnit>();
         }
 
-        public long SpecificationId { get; set; }
+        public int SpecificationId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<SpecificationUnit> SpecificationUnit { get; set; }
+        public virtual ICollection<NomenclatureSpecificationUnit> NomenclatureSpecificationUnit { get; set; }
     }
 }

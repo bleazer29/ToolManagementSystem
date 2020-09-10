@@ -11,7 +11,7 @@ namespace ToolManagementSystem.Shared.Models
             User = new HashSet<User>();
         }
 
-        public long DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Tool> Tool { get; set; }

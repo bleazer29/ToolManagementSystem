@@ -20,34 +20,6 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             db = context;
         }
 
-        //SpecificationUnit - specifications with measurement units
-        // GET: api/NRI/Specifications/SpecificationUnits
-        [HttpGet("SpecificationUnits")]
-        public async Task<IActionResult> GetSpecificationUnits(string name, string unit)
-        {
-            try
-            {
-                List<SpecificationUnit> specifications = await db.SpecificationUnit
-                    .Include(x => x.Specification)
-                    .Include(x => x.Unit)
-                    .ToListAsync();
-                if (string.IsNullOrEmpty(name))
-                {
-                    specifications = specifications.Where(x => x.Specification.Name == name).ToList();
-                }
-                if (string.IsNullOrEmpty(unit))
-                {
-                    specifications = specifications.Where(x => x.Unit.Name == unit).ToList();
-                }
-                return Ok(specifications);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return BadRequest();
-            }
-        }
-
         // GET api/NRI/Specifications/
         [HttpGet]
         public async Task<IActionResult> GetSpecifications(string name)
@@ -95,10 +67,6 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 if(specification != null)
                 {
                     specification.Name = value.Name;
-                    if(value.SpecificationUnit.Count > 0)
-                    {
-                        specification.SpecificationUnit = value.SpecificationUnit;
-                    }
                 }
                 await db.SaveChangesAsync();
                 return Ok(specification);

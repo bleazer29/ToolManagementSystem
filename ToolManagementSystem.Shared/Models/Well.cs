@@ -10,9 +10,9 @@ namespace ToolManagementSystem.Shared.Models
             Order = new HashSet<Order>();
         }
 
-        public long WellId { get; set; }
+        public int WellId { get; set; }
         public string Name { get; set; }
-        public long? CounterpartyId { get; set; }
+        public int? CounterpartyId { get; set; }
         public string Address { get; set; }
 
         public virtual Counterparty Counterparty { get; set; }

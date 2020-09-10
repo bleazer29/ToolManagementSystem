@@ -10,13 +10,13 @@ namespace ToolManagementSystem.Shared.Models
             RolePermissionRight = new HashSet<RolePermissionRight>();
         }
 
-        public long RolePermissionId { get; set; }
-        public long RoleId { get; set; }
-        public long PermissionId { get; set; }
+        public int RolePermissionId { get; set; }
+        public int RoleId { get; set; }
+        public int PermissionId { get; set; }
         public DateTime CreationDate { get; set; }
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime? LastUpdate { get; set; }
-        public long? LastUpdatorId { get; set; }
+        public int? LastUpdatorId { get; set; }
 
         public virtual User Creator { get; set; }
         public virtual User LastUpdator { get; set; }

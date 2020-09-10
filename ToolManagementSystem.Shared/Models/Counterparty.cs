@@ -12,7 +12,7 @@ namespace ToolManagementSystem.Shared.Models
             Well = new HashSet<Well>();
         }
 
-        public long CounterpartyId { get; set; }
+        public int CounterpartyId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Edrpou { get; set; }

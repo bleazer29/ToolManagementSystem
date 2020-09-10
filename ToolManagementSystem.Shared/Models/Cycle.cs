@@ -11,9 +11,9 @@ namespace ToolManagementSystem.Shared.Models
             Tool = new HashSet<Tool>();
         }
 
-        public long CycleId { get; set; }
+        public int CycleId { get; set; }
         public string Name { get; set; }
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreationDate { get; set; }
 
         public virtual User Creator { get; set; }

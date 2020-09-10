@@ -11,7 +11,7 @@ namespace ToolManagementSystem.Shared.Models
             OrderHistory = new HashSet<OrderHistory>();
         }
 
-        public long OrderStatusId { get; set; }
+        public int OrderStatusId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Order> Order { get; set; }

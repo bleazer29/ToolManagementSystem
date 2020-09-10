@@ -11,7 +11,7 @@ namespace ToolManagementSystem.Shared.Models
             WorkOrderHistory = new HashSet<WorkOrderHistory>();
         }
 
-        public long WorkOrderStatusId { get; set; }
+        public int WorkOrderStatusId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<WorkOrder> WorkOrder { get; set; }

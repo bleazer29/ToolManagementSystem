@@ -5,9 +5,9 @@ namespace ToolManagementSystem.Shared.Models
 {
     public partial class WorkOrderTool
     {
-        public long WorkOrderToolId { get; set; }
-        public long WorkOrderId { get; set; }
-        public long ToolId { get; set; }
+        public int WorkOrderToolId { get; set; }
+        public int WorkOrderId { get; set; }
+        public int ToolId { get; set; }
         public DateTime ArrivedDate { get; set; }
         public DateTime? LeftDate { get; set; }
 

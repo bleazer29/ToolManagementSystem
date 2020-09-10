@@ -27,9 +27,8 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             List<Nomenclature> nomenclature = await db.Nomenclature
                 .Include(x => x.NomenclatureSpecificationUnit)
-                    .ThenInclude(x => x.SpecificationUnit)
                         .ThenInclude(x => x.Specification)
-                    .ThenInclude(x => x.SpecificationUnit)
+                       .Include(x => x.NomenclatureSpecificationUnit)
                         .ThenInclude(x => x.Unit)
                 .ToListAsync();
             if (string.IsNullOrEmpty(name))
@@ -51,9 +50,8 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 Nomenclature nomenclature = await db.Nomenclature
                        .Include(x => x.NomenclatureSpecificationUnit)
-                           .ThenInclude(x => x.SpecificationUnit)
                                .ThenInclude(x => x.Specification)
-                           .ThenInclude(x => x.SpecificationUnit)
+                       .Include(x => x.NomenclatureSpecificationUnit)
                                .ThenInclude(x => x.Unit)
                        .SingleAsync(x => x.NomenclatureId == id);
                 return Ok(nomenclature);

@@ -12,11 +12,11 @@ namespace ToolManagementSystem.Shared.Models
             WorkOrderDocument = new HashSet<WorkOrderDocument>();
         }
 
-        public long DocumentId { get; set; }
+        public int DocumentId { get; set; }
         public string Name { get; set; }
         public string FilePath { get; set; }
         public string FileExtension { get; set; }
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreationDate { get; set; }
 
         public virtual User Creator { get; set; }

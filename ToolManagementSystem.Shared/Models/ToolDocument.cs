@@ -5,9 +5,9 @@ namespace ToolManagementSystem.Shared.Models
 {
     public partial class ToolDocument
     {
-        public long ToolDocumentId { get; set; }
-        public long ToolId { get; set; }
-        public long DocumentId { get; set; }
+        public int ToolDocumentId { get; set; }
+        public int ToolId { get; set; }
+        public int DocumentId { get; set; }
 
         public virtual Document Document { get; set; }
         public virtual Tool Tool { get; set; }

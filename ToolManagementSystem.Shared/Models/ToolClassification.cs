@@ -11,9 +11,9 @@ namespace ToolManagementSystem.Shared.Models
             Tool = new HashSet<Tool>();
         }
 
-        public long ToolClassificationId { get; set; }
+        public int ToolClassificationId { get; set; }
         public string Name { get; set; }
-        public long? ParentToolClassificationId { get; set; }
+        public int? ParentToolClassificationId { get; set; }
 
         public virtual ToolClassification ParentToolClassification { get; set; }
         public virtual ICollection<ToolClassification> InverseParentToolClassification { get; set; }

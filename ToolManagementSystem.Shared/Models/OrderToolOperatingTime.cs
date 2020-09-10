@@ -5,12 +5,12 @@ namespace ToolManagementSystem.Shared.Models
 {
     public partial class OrderToolOperatingTime
     {
-        public long OrderToolOperatingTimeId { get; set; }
-        public long OrderToolId { get; set; }
-        public long ToolStatusId { get; set; }
+        public int OrderToolOperatingTimeId { get; set; }
+        public int OrderToolId { get; set; }
+        public int ToolStatusId { get; set; }
         public string Commentary { get; set; }
         public long OperatingTime { get; set; }
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime CreationDate { get; set; }
 
         public virtual User Creator { get; set; }

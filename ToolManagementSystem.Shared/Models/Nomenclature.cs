@@ -11,7 +11,7 @@ namespace ToolManagementSystem.Shared.Models
             Tool = new HashSet<Tool>();
         }
 
-        public long NomenclatureId { get; set; }
+        public int NomenclatureId { get; set; }
         public string Name { get; set; }
         public string VendorCode { get; set; }
         public long MaxOperatingTime { get; set; }

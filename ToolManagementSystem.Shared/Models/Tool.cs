@@ -13,19 +13,19 @@ namespace ToolManagementSystem.Shared.Models
             WorkOrderTool = new HashSet<WorkOrderTool>();
         }
 
-        public long ToolId { get; set; }
+        public int ToolId { get; set; }
         public string Name { get; set; }
-        public long NomenclatureId { get; set; }
-        public long DepartmentId { get; set; }
+        public int NomenclatureId { get; set; }
+        public int DepartmentId { get; set; }
         public string SerialNum { get; set; }
         public string PartNum { get; set; }
         public string VendorNum { get; set; }
-        public long ToolStatusId { get; set; }
+        public int ToolStatusId { get; set; }
         public long MaxOperatingTime { get; set; }
         public long TotalOperatingTime { get; set; }
         public long CycleOperatingTime { get; set; }
-        public long CycleId { get; set; }
-        public long ToolClassificationId { get; set; }
+        public int CycleId { get; set; }
+        public int ToolClassificationId { get; set; }
 
         public virtual Cycle Cycle { get; set; }
         public virtual Department Department { get; set; }

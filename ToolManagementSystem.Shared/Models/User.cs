@@ -31,15 +31,15 @@ namespace ToolManagementSystem.Shared.Models
             WorkOrderResponsibleUser = new HashSet<WorkOrder>();
         }
 
-        public long UserId { get; set; }
+        public int UserId { get; set; }
         public string Fio { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public long? DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
         public DateTime CreationDate { get; set; }
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime? LastUpdate { get; set; }
-        public long? LastUpdatorId { get; set; }
+        public int? LastUpdatorId { get; set; }
 
         public virtual User Creator { get; set; }
         public virtual Department Department { get; set; }

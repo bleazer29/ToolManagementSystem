@@ -12,17 +12,17 @@ namespace ToolManagementSystem.Shared.Models
             OrderTool = new HashSet<OrderTool>();
         }
 
-        public long OrderId { get; set; }
-        public long ContractId { get; set; }
-        public long WellId { get; set; }
-        public long CounterpartyId { get; set; }
+        public int OrderId { get; set; }
+        public int ContractId { get; set; }
+        public int WellId { get; set; }
+        public int CounterpartyId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime EstimatedEndDate { get; set; }
-        public long CreatorId { get; set; }
-        public long OrderStatusId { get; set; }
+        public int CreatorId { get; set; }
+        public int OrderStatusId { get; set; }
         public string Name { get; set; }
-        public long? ResponsibleUserId { get; set; }
+        public int? ResponsibleUserId { get; set; }
 
         public virtual Contract Contract { get; set; }
         public virtual Counterparty Counterparty { get; set; }

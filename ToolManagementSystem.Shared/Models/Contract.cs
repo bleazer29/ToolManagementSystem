@@ -10,11 +10,11 @@ namespace ToolManagementSystem.Shared.Models
             Order = new HashSet<Order>();
         }
 
-        public long ContractId { get; set; }
+        public int ContractId { get; set; }
         public string Name { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
-        public long? CounterpartyId { get; set; }
+        public int? CounterpartyId { get; set; }
 
         public virtual Counterparty Counterparty { get; set; }
         public virtual ICollection<Order> Order { get; set; }

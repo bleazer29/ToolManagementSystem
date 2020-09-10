@@ -11,13 +11,13 @@ namespace ToolManagementSystem.Shared.Models
             UserRole = new HashSet<UserRole>();
         }
 
-        public long RoleId { get; set; }
+        public int RoleId { get; set; }
         public string Name { get; set; }
         public string Alias { get; set; }
         public DateTime CreationDate { get; set; }
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public DateTime? LastUpdate { get; set; }
-        public long? LastUpdatorId { get; set; }
+        public int? LastUpdatorId { get; set; }
 
         public virtual User Creator { get; set; }
         public virtual User LastUpdator { get; set; }

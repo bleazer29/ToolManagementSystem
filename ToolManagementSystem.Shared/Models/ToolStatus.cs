@@ -10,7 +10,7 @@ namespace ToolManagementSystem.Shared.Models
             Tool = new HashSet<Tool>();
         }
 
-        public long ToolStatusId { get; set; }
+        public int ToolStatusId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

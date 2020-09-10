@@ -10,7 +10,7 @@ namespace ToolManagementSystem.Shared.Models
             RolePermissionRight = new HashSet<RolePermissionRight>();
         }
 
-        public long RightId { get; set; }
+        public int RightId { get; set; }
         public string Name { get; set; }
         public string Alias { get; set; }
 
