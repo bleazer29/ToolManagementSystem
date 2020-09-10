@@ -63,7 +63,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
         {
             Department resultDepartment = null;
             StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-            var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/?id="+ newDepartment.DepartmentId, content);
+            var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/"+ newDepartment.DepartmentId, content);
             if (response.IsSuccessStatusCode)
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
