@@ -1,8 +1,6 @@
 ﻿@page "/NRI/Departments"
-@model WebApplication1.Pages.NRI.DepartmentsModel
-@{
-    ViewData["Title"] = "Departments";
-}
+@model ToolManagementSystem.Client.Pages.NRI.DepartmentsModel
+@{ ViewData["Title"] = "Departments"; }
 
 
 <div class="container-fluid">
@@ -56,7 +54,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap" id="departmentsTable">
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
@@ -65,42 +63,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td>Новое подразделение</td>
-                                <td class="table-control-buttons-row">
-                                    <div class="row flex-nowrap m-auto">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Тестовое подразделение</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Подразделение 1</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @if (Model.Departments != null && Model.Departments.Count > 0)
+                            {
+                                foreach (Department department in Model.Departments)
+                                {
+                <tr>
+                    <td></td>
+                    <td>@department.Name</td>
+                    <td class="table-control-buttons-row">
+                        <div class="row flex-nowrap m-auto">
+                            <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                    data-toggle="modal" data-target="#editModal" asp-page-handler="Department" asp-route-id="@department.DepartmentId"></button>
+                            <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                    data-toggle="modal" data-target="#deleteModal"></button>
+                        </div>
+                    </td>
+                </tr>}
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -124,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
+                    <button type="button" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
                 </div>
             </div>
         </div>
@@ -147,14 +126,14 @@
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="departmentTitle">
+                                <input type="text" class="form-control" asp-for="EditDepartment.Name">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -171,21 +150,24 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="POST">
+                    <div class="modal-body">
+
                         <div class="form-group row">
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="departmentTitle">
+                                <input type="text" class="form-control" asp-for="NewDepartment.Name">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Department">Сохранить</button>
+                    </div>
+                </form>
+               
             </div>
         </div>
     </div>
@@ -193,8 +175,32 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript">
-        var isCaretUp = false;
+    <script type="text/javascript">var isCaretUp = false;
+        var pagedList = "#departmentsTable";
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        hubConnection.on("ReceiveNewDepartment", function (data) {
+            var json = JSON.parse(data);
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json.Name + "</td>"
+                    + "<td class='table-control-buttons-row'>"
+                    + "<div class='row flex-nowrap m-auto'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+        });
+
+        hubConnection.start();
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
@@ -206,9 +212,7 @@
                 $(".Caret").removeClass("fa-caret-up");
                 $(".Caret").addClass("fa-caret-down");
             }
-        };
-
-    </script>
+        };</script>
 }
 
 

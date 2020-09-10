@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ToolManagementSystem.Client.Pages.NRI
+namespace ToolManagementSystem.Client.Pages.Tools
 {
-    public class WellsModel : PageModel
+    public class ToolsModel : PageModel
     {
         public void OnGet()
         {

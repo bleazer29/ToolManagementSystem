@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ToolManagementSystem.Client.Pages.NRI
+namespace ToolManagementSystem.Client.Pages.Orders
 {
-    public class WellsModel : PageModel
+    public class OperatingTimePartialModel : PageModel
     {
         public void OnGet()
         {

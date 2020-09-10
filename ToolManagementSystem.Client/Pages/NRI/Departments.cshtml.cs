@@ -4,14 +4,73 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ToolManagementSystem.Shared.Models;
+using ToolManagementSystem.API;
+using ToolManagementSystem.Client;
+using ToolManagementSystem.Client.Managers.NRI;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net;
 
-namespace WebApplication1.Pages.NRI
+namespace ToolManagementSystem.Client.Pages.NRI
 {
-    public class DepartmentsModel : PageModel
+    public class DepartmentsModel: PageModel
     {
+        public List<Department> Departments { get; set; } = new List<Department>();
+
+        [BindProperty]
+        public Department NewDepartment { get; set; } = new Department();
+
+        [BindProperty]
+        public Department EditDepartment { get; set; } = new Department();
+
+        [BindProperty]
+        public string FilterByName { get; set; }
+
         public void OnGet()
         {
-
+            Departments = DepartmentsManager.GetDepartmentsAsync(FilterByName).Result;
         }
+
+        public void OnGetDepartment(int id)
+        {
+            EditDepartment = DepartmentsManager.GetDepartmentAsync(id).Result;
+            if (EditDepartment.DepartmentId == -1)
+            {
+                //do something
+            }
+        }
+
+        public IActionResult OnPostDepartment()
+        {
+            Department temp = DepartmentsManager.CreateDepartmentAsync(NewDepartment).Result;
+            if (temp.DepartmentId == -1)
+            {
+                //do something
+            }
+            return Page();
+        }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            HttpStatusCode temp = DepartmentsManager.DeleteDepartmentAsync(id).Result;
+            if (temp != HttpStatusCode.OK)
+            {
+                //do something
+            }
+            return Page();
+        }
+
+        public IActionResult OnPostUpdate()
+        {
+            Department temp = DepartmentsManager.UpdateDepartmentAsync(NewDepartment).Result;
+            if (temp.DepartmentId == -1)
+            {
+                //do something
+            }
+            return Page();
+        }
+
+
     }
 }

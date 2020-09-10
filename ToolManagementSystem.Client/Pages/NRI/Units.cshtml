@@ -1,13 +1,15 @@
-﻿@page "/Administrative/Roles"
-@model ToolManagementSystem.Client.Pages.Admin.RolesModel
+﻿@page "/NRI/Units"
+@model ToolManagementSystem.Client.Pages.NRI.UnitsModel
 @{
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Units";
 }
+
+
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-11 col-md-10 pl-0 pb-2 pb-md-0">
-            <h3>Справочник ролей</h3>
+            <h3>Справочник единиц измерения</h3>
         </div>
         <div class="col-lg-1 col-md-2 pr-0 pl-0">
             <button class="btn btn-primary w-100 pt-2 pb-2 fa fa-plus create-button" type="button"
@@ -23,11 +25,11 @@
             <div class="card-header pt-0 pb-0">
                 <h5 class="pt-2 pb-2">
                     Поиск
-                    <a class="card-link float-right fa fa-caret-down Caret fa-lg" onclick="ChangeCaret()" data-toggle="collapse" href="#collapseOne">
+                    <a class="card-link float-right fa Caret fa-caret-down fa-lg" onclick="ChangeCaret()" data-toggle="collapse" href="#departmentSearchCollapse">
                     </a>
                 </h5>
             </div>
-            <div id="collapseOne" class="collapse">
+            <div id="departmentSearchCollapse" class="collapse">
                 <form class="m-3">
                     <div class="container-fluid">
                         <div class="row pt-2">
@@ -55,52 +57,21 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover roles-table css-numbered-rows text-nowrap">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
-                                <th rowspan="2" style="width:5%">#</th>
-                                <th rowspan="2">Наименование</th>
-                                <th>НСИ</th>
-                                <th>Склад</th>
-                                <th>Наряды</th>
-                                <th>Сервис</th>
-                                <th>Ремонт</th>
-                                <th>Админ</th>
-                                <th>Документация</th>
-                                <th rowspan="2" style="width:15%">Управление</th>
-                            </tr>
-                            <tr>
-                                @for (int i = 0; i < 7; i++)
-                                {
-                                    <th class="align-middle">
-                                        <div class="row flex-nowrap p-2 justify-content-center">
-                                            <i class="fa fas fa-eye"></i>
-                                            <i class="fa fas fa-edit"></i>
-                                            <i class="fa fas fa-plus"></i>
-                                            <i class="fa fas fa-trash-alt"></i>
-                                        </div>
-                                    </th>
-                                }
+                                <th style="width:5%">#</th>
+                                <th style="width:80%">Наименование</th>
+                                <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td></td>
-                                <td>Администратор</td>
-                                @for (int i = 0; i < 7; i++)
-                                {
-                                    <td class="align-middle">
-                                        <div class="row flex-nowrap p-2 justify-content-center">
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                        </div>
-                                    </td>
-                                }
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button table-edit-button" type="button"
+                                <td>см</td>
+                                <td class="table-control-buttons-row">
+                                    <div class="row flex-nowrap m-auto">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                 data-toggle="modal" data-target="#editModal"></button>
                                         <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
                                                 data-toggle="modal" data-target="#deleteModal"></button>
@@ -109,21 +80,10 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>Оператор НСИ</td>
-                                @for (int i = 0; i < 7; i++)
-                                {
-                                    <td class="align-middle">
-                                        <div class="row flex-nowrap p-2 justify-content-center">
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                        </div>
-                                    </td>
-                                }
+                                <td>м</td>
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button table-edit-button" type="button"
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                 data-toggle="modal" data-target="#editModal"></button>
                                         <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
                                                 data-toggle="modal" data-target="#deleteModal"></button>
@@ -132,21 +92,10 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>Оператор наработки</td>
-                                @for (int i = 0; i < 7; i++)
-                                {
-                                    <td class="align-middle">
-                                        <div class="row flex-nowrap p-2 justify-content-center">
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                            <input class="readonly-checkbox" type="checkbox" disabled>
-                                        </div>
-                                    </td>
-                                }
+                                <td>куб.м</td>
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button table-edit-button" type="button"
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                 data-toggle="modal" data-target="#editModal"></button>
                                         <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
                                                 data-toggle="modal" data-target="#deleteModal"></button>
@@ -195,21 +144,11 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row align-items-center">
-                            <label for="Title" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                        <div class="form-group row">
+                            <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="Title">
-                            </div>
-                        </div>
-                        <div class="form-group align-items-center">
-                            <label for="editDropdownWrapper" class="col col-form-label mb-2"> Права доступа:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div id="editDropdownWrapper" class="col col-form-label">
-                                <div id="editRolesTree">
-
-                                </div>
-
+                                <input type="text" class="form-control" id="departmentTitle">
                             </div>
                         </div>
                     </form>
@@ -235,28 +174,18 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row align-items-center">
-                            <label for="Title" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
+                        <div class="form-group row">
+                            <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="Title">
-                            </div>
-                        </div>
-                        <div class="form-group align-items-center">
-                            <label for="creationDropdownWrapper" class="col col-form-label mb-2"> Права доступа:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div id="creationDropdownWrapper" class="col col-form-label">
-                                <div id="creationRolesTree">
-
-                                </div>
-
+                                <input type="text" class="form-control" id="departmentTitle">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-primary ">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -266,7 +195,7 @@
 
 @section Scripts {
     <script type="text/javascript">
-         var isCaretUp = false;     
+        var isCaretUp = false;
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
@@ -280,11 +209,6 @@
             }
         };
 
-        $(document).ready(function () {
-            AddRolesTree("creationRolesTree");
-            //КОСТЫЛЬ
-            AddRolesTree("editRolesTree");           
-        });
     </script>
 }
 

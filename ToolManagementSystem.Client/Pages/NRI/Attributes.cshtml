@@ -1,5 +1,5 @@
 ﻿@page "/NRI/Attributes"
-@model WebApplication1.Pages.NRI.AttributesModel
+@model ToolManagementSystem.Client.Pages.NRI.AttributesModel
 @{
     ViewData["Title"] = "Attributes";
 }
@@ -38,14 +38,14 @@
                                 <input type="text" class="form-control" />
                             </div>
                         </div>
-                        <div class="row pt-2">
+                        @*<div class="row pt-2">
                             <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                 Единица измерения:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
-                        </div>
+                        </div>*@
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
                             <button class="btn btn-primary">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
@@ -67,8 +67,8 @@
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:60%">Наименование</th>
-                                <th style="width:30%">Единица измерения</th>
+                                <th style="width:85%">Наименование</th>
+                                @*<th style="width:30%">Единица измерения</th>*@
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
@@ -76,7 +76,7 @@
                             <tr>
                                 <td></td>
                                 <td>Длина</td>
-                                <td>мм</td>
+                                @*<td>мм</td>*@
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
@@ -91,7 +91,7 @@
                                 <td></td>
 
                                 <td>Вес</td>
-                                <td>кг</td>
+                                @*<td>кг</td>*@
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
@@ -105,7 +105,7 @@
                                 <td></td>
 
                                 <td>Диаметр</td>
-                                <td>мм</td>
+                                @*<td>мм</td>*@
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
@@ -164,13 +164,13 @@
                                 <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
+                        @*<div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
-                        </div>
+                        </div>*@
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -201,13 +201,13 @@
                                 <input type="text" class="form-control" id="statusTitle">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
+                        @*<div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Единица измерения:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" id="unitTitle">
                             </div>
-                        </div>
+                        </div>*@
                     </form>
 
                 </div>

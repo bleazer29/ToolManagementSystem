@@ -51,7 +51,8 @@ function AddMainMenuTree(elementName) {
                 { "id": "18", "parent": "7", "text": "Роли", "state": { "opened": "true" }, "a_attr": { "href": "/Administrative/Roles" } },
                 { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" } },
-                { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } }
+                { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } },
+                { "id": "22", "parent": "20", "text": "Единицы измерения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Units" }  }
             ]
         }
     }).on("changed.jstree", function (e, data) {
@@ -67,7 +68,7 @@ function GetWindowInnerSize() {
 
 function addResizeEvent() {
     window.addEventListener('resize', function () {
-        if (this.document.documentElement.clientWidth < 780) {
+        if (this.document.documentElement.clientWidth < 767) {
             $('#sidebarShowBtn').click();
             if ($('.tree-container').hasClass('collapse') == false) {
                 $('.tree-container').addClass('collapse');
@@ -128,7 +129,7 @@ function AddClasificationTree(elementName) {
                     "format": function (v) {
 
                         return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
-                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "></button>"
+                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "'></button>"
                             + "<button class='btn btn-primary ml-1 fa fa-trash-alt delete-button' type='button'"
                             + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");
                     },
@@ -343,14 +344,3 @@ function RemoveTableRow(tBodyName) {
 //        + "</tr>"
 //    );
 //}
-
-//function test () {
-//    $(document).ready(function () {
-//        $('[data-toggle="popover"]').popover({
-//            "content": function () {
-//                return $(this).next(".popup-content").html();
-//            }
-//        });
-//    });
-//}
-

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ToolManagementSystem.Client.Pages.NRI
 {
-    public class WellsModel : PageModel
+    public class EditDepartmentModalModel : PageModel
     {
         public void OnGet()
         {
