@@ -10,6 +10,7 @@ using ToolManagementSystem.Client;
 using ToolManagementSystem.Client.Managers.NRI;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace ToolManagementSystem.Client.Pages.NRI
 {
@@ -21,28 +22,54 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public Department NewDepartment { get; set; } = new Department();
 
         [BindProperty]
-        public string NewDepartment { get; set; } = new Department();
+        public Department EditDepartment { get; set; } = new Department();
+
+        [BindProperty]
+        public string FilterByName { get; set; }
 
         public void OnGet()
         {
-            Departments = DepartmentsManager.GetDepartmentsAsync();
+            Departments = DepartmentsManager.GetDepartmentsAsync(FilterByName).Result;
         }
 
-       
+        public void OnGetDepartment(int id)
+        {
+            EditDepartment = DepartmentsManager.GetDepartmentAsync(id).Result;
+            if (EditDepartment.DepartmentId == -1)
+            {
+                //do something
+            }
+        }
 
+        public IActionResult OnPostDepartment()
+        {
+            Department temp = DepartmentsManager.CreateDepartmentAsync(NewDepartment).Result;
+            if (temp.DepartmentId == -1)
+            {
+                //do something
+            }
+            return Page();
+        }
 
-        //async Task<List<Department>> PostDepartment()
-        //{
-        //    List<Department> departments = null;
-        //    HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        string apiResponse = await response.Content.ReadAsStringAsync();
-        //        departments = new List<Department>();
-        //        departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
-        //    }
-        //    return departments;
-        //}
+        public IActionResult OnPostDelete(int id)
+        {
+            HttpStatusCode temp = DepartmentsManager.DeleteDepartmentAsync(id).Result;
+            if (temp != HttpStatusCode.OK)
+            {
+                //do something
+            }
+            return Page();
+        }
+
+        public IActionResult OnPostUpdate()
+        {
+            Department temp = DepartmentsManager.UpdateDepartmentAsync(NewDepartment).Result;
+            if (temp.DepartmentId == -1)
+            {
+                //do something
+            }
+            return Page();
+        }
 
 
     }
