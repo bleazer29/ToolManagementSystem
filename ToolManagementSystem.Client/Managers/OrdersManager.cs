@@ -7,22 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using ToolManagementSystem.Shared.Models;
 
-namespace ToolManagementSystem.Client.Managers.NRI
+namespace ToolManagementSystem.Client.Managers
 {
     public class OrdersManager
     {
-        static string apiControllerName { get; set; } = "NRI/Departments";
+        static string apiControllerName { get; set; } = "NRI/Orders";
 
-        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName)
+        public async static Task<List<Order>> GetOrdersAsync(string filterByName, string filterByState, string filterByDateFrom, string filterByDateTo, string filterByWell, string filterByContract, string filterByCounterparty, string filterByResponsible)
         {
-            List<Department> departments = null;
+            List<Order> orders = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                    orders = JsonConvert.DeserializeObject<List<Order>>(apiResponse);
                 }
             }
             catch (Exception ex)
@@ -30,33 +30,33 @@ namespace ToolManagementSystem.Client.Managers.NRI
                 Console.WriteLine(ex.Message);
             }
 
-            return departments;
+            return orders;
         }
 
-        public async static Task<Department> GetDepartmentAsync(int id)
+        public async static Task<Order> GetOrderAsync(int id)
         {
-            Department department = null;
+            Order order = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                    order = JsonConvert.DeserializeObject<Order>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            return department;
+            return order;
         }
 
-        public async static Task<System.Net.HttpStatusCode> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> CreateOrderAsync(Order newOrder)
         {
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newOrder), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
                 return response.StatusCode;
             }
@@ -67,7 +67,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteOrderAsync(int id)
         {
             try
             {
@@ -81,13 +81,13 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> UpdateOrderAsync(Order newOrder)
         {
 
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newOrder), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newOrder.OrderId, content);
                 return response.StatusCode;
             }
             catch (Exception ex)

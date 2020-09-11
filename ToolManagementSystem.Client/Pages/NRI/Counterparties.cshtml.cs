@@ -32,7 +32,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Counterparties = await CounterpartiesManager.GetCounterpartiesAsync(filterByName, filterByEDRPOU, filterByAddress);
+            Counterparties = await CounterpartiesManager.GetCounterpartiesAsync(filterByName, filterByEDRPOU, filterByAddress, "Name", true);
             Counterparties = Counterparties.OrderBy(x => x.Name).ToList();
             return Page();
         }

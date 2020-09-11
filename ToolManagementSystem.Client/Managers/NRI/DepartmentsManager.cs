@@ -14,7 +14,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
     {
         static string apiControllerName { get; set; } = "NRI/Departments";
 
-        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName)
+        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName, string sortField, bool isAscendingSort)
         {
             List<Department> departments = null;
             try
@@ -24,6 +24,20 @@ namespace ToolManagementSystem.Client.Managers.NRI
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                    if (isAscendingSort)
+                    {
+                        if (sortField == "Name")
+                        {
+                            departments = departments.OrderBy(x => x.Name).ToList();
+                        }
+                    }
+                    else
+                    {
+                        if (sortField == "Name")
+                        {
+                            departments = departments.OrderByDescending(x => x.Name).ToList();
+                        }
+                    }
                 }
             }
             catch (Exception ex)

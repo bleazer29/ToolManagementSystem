@@ -32,7 +32,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Departments = await DepartmentsManager.GetDepartmentsAsync(FilterByName);
+            Departments = await DepartmentsManager.GetDepartmentsAsync(FilterByName, "Name", true);
             Departments = Departments.OrderBy(x => x.Name).ToList();
             return Page();
         }
