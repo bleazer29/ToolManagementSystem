@@ -28,7 +28,8 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<IActionResult> GetOrders()
+        public async Task<IActionResult> GetOrders(string name, string status, 
+            DateTime startDate, DateTime endDate, string wellId, string counterparty, string responsible, string contract)
         {
             try
             {
@@ -38,6 +39,7 @@ namespace ToolManagementSystem.API.Controllers
                     .Include(x => x.ResponsibleUser)
                     .Include(x => x.Well)
                     .ToListAsync();
+                FilterOrders(orders, name, status, startDate, endDate, wellId, counterparty, responsible, contract);
                 return Ok(orders);
             }
             catch (Exception ex)
@@ -46,6 +48,63 @@ namespace ToolManagementSystem.API.Controllers
                 return BadRequest();
             }
         }
+
+        public List<Order> FilterOrders(List<Order> orders, string name, string status,
+            DateTime startDate, DateTime endDate, string wellId, string counterparty, string responsible, string contract)
+        {
+            orders = FilterOrdersByStringParams(orders, name, status, wellId, counterparty, responsible, contract);
+            orders = FilterOrdersByDate(orders, startDate, endDate);
+            return orders;
+        }
+
+        public List<Order> FilterOrdersByStringParams(List<Order> orders, string name, string status,
+            string wellId, string counterparty, string responsible, string contract)
+        {
+
+            if (string.IsNullOrEmpty(name) == false)
+            {
+                orders = orders.Where(x => x.Name.Contains(name)).ToList();
+            }
+            if (string.IsNullOrEmpty(status) == false)
+            {
+                orders = orders.Where(x => x.OrderStatus != null && x.OrderStatus.Name.Contains(status)).ToList();
+            }
+            if (string.IsNullOrEmpty(wellId) == false)
+            {
+                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(wellId)).ToList();
+            }
+            if (string.IsNullOrEmpty(counterparty) == false)
+            {
+                orders = orders.Where(x => x.Counterparty != null && x.Counterparty.Name.Contains(counterparty)).ToList();
+            }
+            if (string.IsNullOrEmpty(responsible) == false)
+            {
+                orders = orders.Where(x => x.ResponsibleUser != null && x.ResponsibleUser.Fio.Contains(responsible)).ToList();
+            }
+            if (string.IsNullOrEmpty(contract) == false)
+            {
+                orders = orders.Where(x => x.Contract != null && x.Contract.Name.Contains(contract)).ToList();
+            }
+            return orders;
+        }
+
+        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime startDate, DateTime endDate)
+        {
+            if (startDate != null)
+            {
+                orders = orders.Where(x => x.StartDate >= startDate
+                || x.EndDate >= startDate
+                || x.EstimatedEndDate >= startDate).ToList();
+            }
+            if (endDate != null)
+            {
+                orders = orders.Where(x => x.StartDate >= endDate
+                || x.EndDate >= endDate
+                || x.EstimatedEndDate >= endDate).ToList();
+            }
+            return orders;
+        }
+
 
         // GET api/Orders/5
         [HttpGet("{id}")]
