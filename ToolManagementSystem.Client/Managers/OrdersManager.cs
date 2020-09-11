@@ -13,16 +13,94 @@ namespace ToolManagementSystem.Client.Managers
     {
         static string apiControllerName { get; set; } = "NRI/Orders";
 
-        public async static Task<List<Order>> GetOrdersAsync(string filterByName, string filterByState, string filterByDateFrom, string filterByDateTo, string filterByWell, string filterByContract, string filterByCounterparty, string filterByResponsible)
+        public async static Task<List<Order>> GetOrdersAsync(string filterByName, string filterByState, DateTime filterByDateFrom, DateTime filterByDateTo, string filterByWell, string filterByContract, string filterByCounterparty, string filterByResponsible, string sortField, bool isAscendingSort)
         {
             List<Order> orders = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName +"&status=" + filterByState + "&startDate=" + filterByDateFrom + "&endDate=" + filterByDateTo + "&well=" + filterByWell + "&counterparty=" + filterByCounterparty + "&responsible=" + filterByResponsible + "&contract=" + filterByContract);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     orders = JsonConvert.DeserializeObject<List<Order>>(apiResponse);
+                    if (isAscendingSort)
+                    {
+                        if (sortField == "Name")
+                        {
+                            orders = orders.OrderBy(x => x.Name).ToList();
+                        }
+                        else if (sortField == "State")
+                        {
+                            orders = orders.OrderBy(x => x.OrderStatus).ToList();
+                        }
+                        else if (sortField == "FromDate")
+                        {
+                            orders = orders.OrderBy(x => x.StartDate).ToList();
+                        }
+                        else if (sortField == "ToDateEstimated")
+                        {
+                            orders = orders.OrderBy(x => x.EstimatedEndDate).ToList();
+                        }
+                        else if (sortField == "ToDate")
+                        {
+                            orders = orders.OrderBy(x => x.EndDate).ToList();
+                        }
+                        else if (sortField == "Responsible")
+                        {
+                            orders = orders.OrderBy(x => x.ResponsibleUser.Fio).ToList();
+                        }
+                        else if (sortField == "Counterparty")
+                        {
+                            orders = orders.OrderBy(x => x.Counterparty.Name).ToList();
+                        }
+                        else if (sortField == "Contract")
+                        {
+                            orders = orders.OrderBy(x => x.Contract.Name).ToList();
+                        }
+                        else if (sortField == "Well")
+                        {
+                            orders = orders.OrderBy(x => x.Well.Name).ToList();
+                        }
+                    }
+                    else
+                    {
+                        if (sortField == "Name")
+                        {
+                            orders = orders.OrderByDescending(x => x.Name).ToList();
+                        }
+                        else if (sortField == "State")
+                        {
+                            orders = orders.OrderByDescending(x => x.OrderStatus).ToList();
+                        }
+                        else if (sortField == "FromDate")
+                        {
+                            orders = orders.OrderByDescending(x => x.StartDate).ToList();
+                        }
+                        else if (sortField == "ToDateEstimated")
+                        {
+                            orders = orders.OrderByDescending(x => x.EstimatedEndDate).ToList();
+                        }
+                        else if (sortField == "ToDate")
+                        {
+                            orders = orders.OrderByDescending(x => x.EndDate).ToList();
+                        }
+                        else if (sortField == "Responsible")
+                        {
+                            orders = orders.OrderByDescending(x => x.ResponsibleUser.Fio).ToList();
+                        }
+                        else if (sortField == "Counterparty")
+                        {
+                            orders = orders.OrderByDescending(x => x.Counterparty.Name).ToList();
+                        }
+                        else if (sortField == "Contract")
+                        {
+                            orders = orders.OrderByDescending(x => x.Contract.Name).ToList();
+                        }
+                        else if (sortField == "Well")
+                        {
+                            orders = orders.OrderBy(x => x.Well.Name).ToList();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
