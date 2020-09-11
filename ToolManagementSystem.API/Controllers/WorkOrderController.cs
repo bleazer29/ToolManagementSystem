@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ToolManagementSystem.API.Helpers;
 using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers
@@ -14,10 +15,12 @@ namespace ToolManagementSystem.API.Controllers
     public class WorkOrderController : ControllerBase
     {
         private readonly TMSdbContext db;
+        private HistoryWriter HistoryWriter;
 
         public WorkOrderController(TMSdbContext context)
         {
             db = context;
+            HistoryWriter = new HistoryWriter();
         }
 
         // GET: api/WorkOrders
@@ -95,85 +98,10 @@ namespace ToolManagementSystem.API.Controllers
             }
         }
 
-        // POST api/WorkOrders/5/Tools/1
-        [HttpPost("{id}/Tools/{toolId}")]
-        public async Task<IActionResult> AddOperatingTime(int id, int toolId, DateTime date,
-            long operatingTime, [FromBody] string comment)
-        {
-            try
-            {
-                WorkOrder workOrder = await db.WorkOrder.SingleAsync(x => x.WorkOrderId == id);
-                if (workOrder != null)
-                {
-                    OrderToolOperatingTime orderToolOperatingTime = await db.OrderToolOperatingTime
-                        .Include(x => x.OrderTool)
-                        .SingleAsync(x => x.CreationDate == date && x.OrderTool.OrderId == id && x.OrderTool.ToolId == toolId);
-                    if (orderToolOperatingTime == null)
-                    {
-                        OrderToolOperatingTime newOrderToolOperatingTime = 
-                            await CreateNewOrderToolOperatingTime(id, toolId, operatingTime, date, comment);
-                        if(newOrderToolOperatingTime != null)
-                        {
-                            return Ok();
-                        }
-                    }
-                    else
-                    {
-                        if(operatingTime > 0)
-                        {
-                            orderToolOperatingTime.OperatingTime = operatingTime;
-                        }
-                        if (string.IsNullOrEmpty(comment))
-                        {
-                            orderToolOperatingTime.Commentary = comment;
-                        }
-                        await db.SaveChangesAsync();
-                        return Ok();
-                    }
-                }
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return BadRequest();
-            }
-        }
-        
-        public async Task<OrderToolOperatingTime> CreateNewOrderToolOperatingTime(int orderId, int toolId, long operatingTime, DateTime date, string comment)
-        {
-            try
-            {
-                OrderToolOperatingTime newOrderToolOperatingTime = new OrderToolOperatingTime();
-                if (operatingTime > 0)
-                {
-                    newOrderToolOperatingTime.OperatingTime = operatingTime;
-                }
-                else
-                {
-                    throw new ArgumentException("Invalid operating time");
-                }
-                OrderTool tool = await db.OrderTool.SingleAsync(x => x.ToolId == toolId && x.OrderId == orderId);
-                newOrderToolOperatingTime.OrderToolId = tool.OrderToolId;
-                newOrderToolOperatingTime.CreationDate = date;
-                if (string.IsNullOrEmpty(comment))
-                {
-                    newOrderToolOperatingTime.Commentary = comment;
-                }
-                await db.AddAsync(newOrderToolOperatingTime);
-                await db.SaveChangesAsync();
-                return newOrderToolOperatingTime;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
 
         // PUT api/WorkOrders/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditWorkOrder(int id, [FromBody] WorkOrder value)
+        public async Task<IActionResult> EditWorkOrder(int id, int userId, [FromBody] WorkOrder value)
         {
             try
             {
@@ -190,8 +118,41 @@ namespace ToolManagementSystem.API.Controllers
                     workOrder.ResponsibleUserId = value.ResponsibleUserId;
                     workOrder.EstimatedEndDate = value.EstimatedEndDate;
                 }
+                string historyMessage = "WO-" + workOrder.Name + " был отредактирован";
+                await HistoryWriter.WriteWorkOrderHistory(id, userId, historyMessage);
                 await db.SaveChangesAsync();
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("{id}/Tools/{toolId}")]
+        public async Task<IActionResult> RemoveToolFromWorkOrder(int workOrderId, int userId, int toolId, int statusId, [FromBody] string comment)
+        {
+            try
+            {
+                WorkOrderTool workOrderTool = await db.WorkOrderTool
+                    .Include(x => x.Tool)
+                    .Include(x => x.WorkOrder)
+                    .SingleAsync(x => x.WorkOrderId == workOrderId && x.ToolId == toolId);
+                if(workOrderTool != null)
+                {
+                    db.WorkOrderTool.Remove(workOrderTool);
+                    Tool tool = await db.Tool
+                        .Include(x => x.ToolStatus)
+                        .SingleAsync(x => x.ToolId == toolId);
+                    ToolStatus status = await db.ToolStatus.SingleAsync(x => x.ToolStatusId == statusId);
+                    tool.ToolStatusId = statusId;
+                    string workOrderHistoryMessage = "Инструмент " + tool.Name + "перенесён из сервиса в статус" + status.Name;
+                    string toolHistoryMessage = "Инструмент изменил статус с " + tool.ToolStatus.Name + " на " + status.Name;
+                    await HistoryWriter.WriteWorkOrderHistory(workOrderId, userId, workOrderHistoryMessage);
+                    await HistoryWriter.WriteToolHistory(toolId, userId, statusId, toolHistoryMessage, comment: null);
+                }
+                return NotFound();
             }
             catch (Exception ex)
             {
