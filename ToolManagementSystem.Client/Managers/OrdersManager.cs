@@ -18,7 +18,8 @@ namespace ToolManagementSystem.Client.Managers
             List<Order> orders = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName +"&status=" + filterByState + "&startDate=" + filterByDateFrom + "&endDate=" + filterByDateTo + "&well=" + filterByWell + "&counterparty=" + filterByCounterparty + "&responsible=" + filterByResponsible + "&contract=" + filterByContract);
+            
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName +"&status=" + filterByState + "&startDate=" + filterByDateFrom.ToString("yyyy-MM-dd") + "&endDate=" + filterByDateTo.ToString("yyyy-MM-dd") + "&well=" + filterByWell + "&counterparty=" + filterByCounterparty + "&responsible=" + filterByResponsible + "&contract=" + filterByContract);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

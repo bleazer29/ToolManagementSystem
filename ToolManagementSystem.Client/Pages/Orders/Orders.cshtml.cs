@@ -26,7 +26,6 @@ namespace ToolManagementSystem.Client.Pages.Orders
         public async Task<IActionResult> OnGet()
         {
             Orders = await OrdersManager.GetOrdersAsync("", "", DateTime.MinValue, DateTime.MaxValue, "", "", "", "", "Name", true);
-            Orders = Orders.OrderBy(x => x.Name).ToList();
             return Page();
         }
     }
