@@ -1,5 +1,5 @@
 ﻿
-$(".simple-pagination-navigation-disabled").addClass("disabled");
+
 
 var weekpicker;
 

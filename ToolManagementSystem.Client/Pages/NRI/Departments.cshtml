@@ -58,8 +58,10 @@
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:80%">
-                                <a data-sortFieldName="Name" class="current-sort">Наименование <span><i class="fa fas fa-sort-down"></i></span></a>
+                                <th style="width:80%" class="sort-asc">
+                                    <a href="#" data-sort="Name">
+                                        Наименование 
+                                    </a>
                                 </th>
                                 <th style="width:15%">Управление</th>
                             </tr>
@@ -198,37 +200,47 @@
         var itemsOnPage = 5;
         var isAscendingSort = true;
         GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+       
+
 
         $(pagedList + " th a").click(function (e) {
             e.preventDefault();
-            $(".current-sort").children("span").children("i").removeClass("fa-sort-up", "fa-sort-down");
-            $(".current-sort").removeClass("current-sort");
-            isAscendingSort = !isAscendingSort;
-            if (isAscendingSort == true) {
-                $(this).children("span").children("i").removeClass("fa-sort-down");
-                $(this).children("span").children("i").addClass("fa-sort-up");
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
             }
             else {
-                $(this).children("span").children("i").removeClass("fa-sort-up");
-                $(this).children("span").children("i").addClass("fa-sort-down");
+                isAscendingSort = true;
             }
-            $(this).addClass("current-sort");
-            sortField = $(this).data("sortfieldname");
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
             hubConnection.invoke('GetDepartments', filterByNameStr, sortField, isAscendingSort);
         });
 
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var departmentId = $(this).data('departmentid');
+                $('#DeleteDepartmentId').val(departmentId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var departmentId = $(this).data('departmentid');
+                hubConnection.invoke('GetEditedDepartment', departmentId);
+            });
+        };
+
         $('#filterByName').change(function () {
             filterByNameStr = $("#filterByName").val();
-        });
-
-        $(".delete-button").click(function () {
-            var departmentId = $(this).data('departmentid');
-            $('#DeleteDepartmentId').val(departmentId);
-        });
-
-        $('.edit-button').click(function () {
-            var departmentId = $(this).data('departmentid');
-            hubConnection.invoke('GetEditedDepartment', departmentId);
         });
 
         $('#search-button').click(function () {
@@ -266,6 +278,8 @@
                 );
             }
             GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
             });
 
         hubConnection.start();

@@ -774,10 +774,6 @@ th > a:hover{
     text-decoration: underline!important;
 }
 
-simple-pagination-navigation-disabled:first-child{
-
-}
-
 .sort-asc a:after,
 .sort-desc a:after {
     content: "";
@@ -807,4 +803,35 @@ simple-pagination-navigation-disabled:first-child{
     content: "\f160";
 }
 
+th a{
+    color:white!important;
+}
 
+.simple-pagination-navigation-disabled {
+    color: grey;
+    cursor: default;
+    text-decoration:none;
+}
+
+    .simple-pagination-navigation-disabled:hover {
+        color: grey;
+        cursor: default;
+        text-decoration: none;
+    }
+
+    .simple-pagination-navigation-disabled > .btn {
+        background-color: gray;
+        border: gray;
+        cursor: default;
+        color: white !important;
+    }
+
+        .simple-pagination-navigation-disabled > .btn:hover {
+            background-color: gray !important;
+            border-color: gray !important;
+        }
+
+        .simple-pagination-navigation-disabled > .btn:active {
+            background-color: gray !important;
+            border-color: gray !important;
+        }

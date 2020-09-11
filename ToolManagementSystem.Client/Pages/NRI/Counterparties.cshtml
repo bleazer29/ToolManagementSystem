@@ -36,7 +36,7 @@
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" asp-for="FilterByName" />
+                                <input type="text" class="form-control" asp-for="filterByName"/>
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -44,7 +44,7 @@
                                 ЕДРПОУ:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" asp-for="FilterByEDRPOU" />
+                                <input type="text" class="form-control" asp-for="filterByEDRPOU"/>
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -52,11 +52,11 @@
                                 Адрес:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" asp-for="FilterByAddress" />
+                                <input type="text" class="form-control" asp-for="filterByAddress"/>
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary  search-button">
+                            <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -264,7 +264,8 @@
         var itemsOnPage = 5;
         var isAscendingSort = true;
         GenList(pagedList, itemsOnPage);
-
+        EnableDeleteButton();
+        EnableEditButton();
 
         $(pagedList + " th a").click(function (e) {
             e.preventDefault();
@@ -336,8 +337,7 @@
                     + "<td>" + json[i].Name + "</td>"
                     + "<td>" + json[i].Edrpou + "</td>"
                     + "<td>" + json[i].Address + "</td>"
-                    + "<td class='table-control-buttons-row'>"
-                    + "<div class='row flex-nowrap m-auto'>"
+          
                     + "<td class='align-middle'>"
                     + "<div class='table-control-buttons-row'>"
                     + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
@@ -350,21 +350,25 @@
                 );
             }
             GenList(pagedList, itemsOnPage);
+            EnableDeleteButton();
+            EnableEditButton();
         });
 
         hubConnection.start();
 
-        $(".delete-button").click(function () {
-            var counterpartyId = $(this).data('counterpartyid');
-            $('#DeleteCounterpartyId').val(counterpartyId);
-        });
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var counterpartyId = $(this).data('counterpartyid');
+                $('#DeleteCounterpartyId').val(counterpartyId);
+            });
+        };
 
-        $('.edit-button').click(function () {
-            var counterpartyId = $(this).data('counterpartyid');
-            hubConnection.invoke('GetEditedCounterparty', counterpartyId);
-        });
-
-
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var counterpartyId = $(this).data('counterpartyid');
+                hubConnection.invoke('GetEditedCounterparty', counterpartyId);
+            });
+        };
     </script>
 }
 

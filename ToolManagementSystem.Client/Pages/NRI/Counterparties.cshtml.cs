@@ -21,18 +21,19 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public Counterparty EditCounterparty { get; set; } = new Counterparty();
 
         [BindProperty]
-        public string FilterByName { get; set; }
+        public string filterByName { get; set; }
         [BindProperty]
-        public string FilterByEDRPOU { get; set; }
+        public string filterByEDRPOU { get; set; }
         [BindProperty]
-        public string FilterByAddress { get; set; }
+        public string filterByAddress { get; set; }
 
         [BindProperty]
         public int DeleteCounterpartyId { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
-            Counterparties = await CounterpartiesManager.GetCounterpartiesAsync(FilterByName, FilterByEDRPOU, FilterByAddress);
+            Counterparties = await CounterpartiesManager.GetCounterpartiesAsync(filterByName, filterByEDRPOU, filterByAddress);
+            Counterparties = Counterparties.OrderBy(x => x.Name).ToList();
             return Page();
         }
 
@@ -65,6 +66,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
                 //do something
             }
             return RedirectToPage("Counterparties");
+            
         }
     }
 }

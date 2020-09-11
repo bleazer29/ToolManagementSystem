@@ -36,7 +36,7 @@
                                 Номер:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="filterByNum" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -44,7 +44,7 @@
                                 Статус:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <select class="form-control">
+                                <select class="form-control" id="filterByState">
                                     <option selected="selected">Активный</option>
                                     <option>Неактивный</option>
                                 </select>
@@ -55,11 +55,11 @@
                                 Период:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
-                                <input type="date" class="form-control " />
+                                <input type="date" class="form-control " id="filterByDateFrom"/>
                             </div>
                             <div class="w-100 d-md-none "></div>
                             <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
-                                <input type="date" class="form-control" />
+                                <input type="date" class="form-control" id="filterByDateTo"/>
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -67,7 +67,7 @@
                                 Скважина:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="filterByWell" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -75,7 +75,7 @@
                                 Контракт:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="filterByContract"/>
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -83,7 +83,7 @@
                                 Контрагент:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="filterByCounterparty" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -91,12 +91,12 @@
                                 Ответственный:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="filterByResponsible" />
                             </div>
                         </div>
 
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -112,62 +112,86 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
+                <div class="table-responsive" id="ordersTable">
                     <table class="table table-bordered table-hover css-numbered-rows text-nowrap">
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th>Номер</th>
-                                <th>Статус</th>
-                                <th>Дата начала</th>
-                                <th>Расчётная дата конца</th>
-                                <th>Фактическая дата конца</th>
-                                <th>Ответственный</th>
-                                <th>Контрагент</th>
-                                <th>Контракт</th>
-                                <th>Скважина</th>
+                                <th class="sort-asc">
+                                    <a href="#" data-sort="Name">Номер</a>
+                                </th>
+                                <th>
+                                    <a href="#" data-sort="State">Статус</a>
+                                </th>
+                                <th>
+                                    <a href="#" data-sort="FromDate">Дата начала</a>
+                                </th>
+                                <th>
+                                    <a href="#" data-sort="ToDateEstimated">Расчётная дата конца</a>
+                                </th>
+                                <th> <a href="#" data-sort="ToDate">Фактическая дата конца</a></th>
+                                <th><a href="#" data-sort="Responsible">Ответственный</a></th>
+                                <th><a href="#" data-sort="Counterparty">Контрагент</a></th>
+                                <th><a href="#" data-sort="Contract">Контракт</a></th>
+                                <th><a href="#" data-sort="Well">Скважина</a></th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
+                            @if (Model.Orders != null && Model.Orders.Count > 0)
+                            {
+                                foreach (Order order in Model.Orders)
+                                {
+                                    <tr>
+                                        <td></td>
 
-                                <td><a href="/Orders/Details/1">00000001</a></td>
+                                        <td><a href="/Orders/Details/@order.OrderId">@order.Name</a></td>
 
-                                <td>Активный</td>
-                                <td>
-                                    31.07.2020
-                                </td>
-                                <td>
-                                    01.08.2020
-                                </td>
-                                <td>
-                                    -
-                                </td>
-                                <td>Иванов Иван Иванович</td>
-                                <td>
-                                    Контрагент1
-                                </td>
-                                <td>
-                                    00000008
-                                </td>
-                                <td>Скважина4</td>
+                                        <td>@if (@order.OrderStatus != null)@order.OrderStatus.Name</td>
+                                        <td>
+                                            @order.StartDate
+                                        </td>
+                                        <td>
+                                            @order.EstimatedEndDate
+                                        </td>
+                                        <td>
+                                            @order.EndDate
+                                        </td>
+                                        <td>@if (@order.ResponsibleUser != null)@order.ResponsibleUser.Fio</td>
+                                        <td>
+                                            @if (@order.Counterparty != null)@order.Counterparty.Name
+                                        </td>
+                                        <td>
+                                            @if (@order.Contract != null)@order.Contract.Name
+                                        </td>
+                                        <td>@if (@order.Well != null)@order.Well.Name</td>
 
 
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                        <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
-                                                data-toggle="modal" data-target="#closeOrderModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
+                                        <td class="align-middle">
+                                            <div class="table-control-buttons-row">
+                                                <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                        data-toggle="modal" data-target="#editModal" data-orderid="@order.OrderId"></button>
+                                                <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                        data-toggle="modal" data-target="#deleteModal" data-orderid="@order.OrderId"></button>
+                                                <button class="btn btn-primary fa fa-window-close transfer-button" type="button"
+                                                        data-toggle="modal" data-target="#closeOrderModal" data-orderid="@order.OrderId"></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
                         </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -207,13 +231,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteOrderId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -343,7 +370,7 @@
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Номер:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="NewOrder.Name">
                             </div>
                         </div>
                         @*<div class="form-group row align-items-center">
@@ -360,28 +387,28 @@
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Дата начала:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <input type="date" class="form-control" />
+                                <input type="date" class="form-control" asp-for="NewOrder.StartDate"/>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Рассчётная дата конца:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <input type="date" class="form-control" />
+                                <input type="date" class="form-control" asp-for="NewOrder.EstimatedEndDate"/>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Фактическая дата конца:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <input type="date" class="form-control" />
+                                <input type="date" class="form-control" asp-for="NewOrder.EndDate"/>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Контрагент:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <select class="form-control">
+                                <select class="form-control" asp-for="NewOrder.CounterpartyId">
                                     <option>Контрагент1</option>
                                     <option>Контрагент2</option>
                                     <option>Контрагент3</option>
@@ -392,7 +419,7 @@
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Контракт:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <select class="form-control">
+                                <select class="form-control" asp-for="NewOrder.ContractId">
                                     <option>Контракт №00000001</option>
                                     <option>Контракт №00000002</option>
                                     <option>Контракт №00000003</option>
@@ -406,7 +433,7 @@
                             <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Скважина:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col mb-2">
-                                <select class="form-control">
+                                <select class="form-control" asp-for="NewOrder.WellId" >
                                     <option>Скважина 1</option>
                                     <option>Скважина 2</option>
                                     <option>Скважина 3</option>
@@ -415,14 +442,7 @@
                                     <option>Скважина 6</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-5 col-lg-4 col-form-label mb-2"> Комментарий:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col mb-2">
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
+                        </div>                     
                         <div class="form-group">
                             <div class="row align-items-center pl-3 pr-3">
                                 <label for="unitTitle" class="col-12 col-form-label mb-2"> Инструменты:</label>
