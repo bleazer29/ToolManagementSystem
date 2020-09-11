@@ -71,7 +71,7 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive" id="paged-list">
+                <div class="table-responsive" id="counterpartiesTable">
                     <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
@@ -107,6 +107,15 @@
 
                         </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -234,6 +243,14 @@
     <script type="text/javascript">
         var isCaretUp = false;
         var pagedList = "#counterpartiesTable";
+        var filterByNameStr = "";
+        var filterByEDRPOUStr = "";
+        var filterByAddressStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
@@ -251,12 +268,55 @@
             .withUrl("/data")
             .build();
 
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+
+        $('#filterByEDRPOU').change(function () {
+            filterByEDRPOUStr = $("#filterByEDRPOU").val();
+        });
+
+        $('#filterByAddress').change(function () {
+            filterByAddressStr = $("#filterByAddress").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetCounterparties', filterByNameStr, filterByEDRPOUStr, filterByAddressStr, sortField, isAscendingSort);
+        });
+
         hubConnection.on("recieveEditedCounterparty", function (data) {
             var json = JSON.parse(data);
             $('#EditCounterparty_Name').val(json.Name);
             $('#EditCounterparty_Edrpou').val(json.Edrpou);
             $('#EditCounterparty_Address').val(json.Address);
             $('#EditCounterparty_CounterpartyId').val(json.CounterpartyId);
+        });
+
+        hubConnection.on("recieveCounterparties", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();
+            var json = JSON.parse(data);
+            for (let i = 0; i < json.length; i++) {
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    + "<td>" + json[i].Edrpou + "</td>"
+                    + "<td>" + json[i].Address + "</td>"
+                    + "<td class='table-control-buttons-row'>"
+                    + "<div class='row flex-nowrap m-auto'>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-counterpartyid='"+json[i].CounterpartyId+"'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-counterpartyid='"+json[i].CounterpartyId+'"></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
         });
 
         hubConnection.start();
@@ -271,7 +331,7 @@
             hubConnection.invoke('GetEditedCounterparty', counterpartyId);
         });
 
-        
+
     </script>
 }
 
