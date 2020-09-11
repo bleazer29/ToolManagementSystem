@@ -27,7 +27,7 @@ namespace ToolManagementSystem.API.Controllers
         {
             try
             {
-                List<Tool> contracts = await db.Tool
+                List<Tool> tools = await db.Tool
                     .Include(x => x.Department)
                     .Include(x => x.Nomenclature)
                     .Include(x => x.ToolClassification)
@@ -35,9 +35,9 @@ namespace ToolManagementSystem.API.Controllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    contracts = contracts.Where(x => x.Name == name).ToList();
+                    tools = tools.Where(x => x.Name == name).ToList();
                 }
-                return Ok(contracts);
+                return Ok(tools);
             }
             catch (Exception ex)
             {
@@ -134,10 +134,16 @@ namespace ToolManagementSystem.API.Controllers
         {
             try
             {
-                Tool contract = await db.Tool.SingleAsync(x => x.ToolId == id);
-                db.Tool.Remove(contract);
-                await db.SaveChangesAsync();
-                return Ok();
+                Tool tool = await db.Tool
+                    .Include(x => x.ToolStatus)
+                    .SingleAsync(x => x.ToolId == id);
+                if(tool.ToolStatus.Name == "RFU" || tool.ToolStatus.Name == "Scrap")
+                {
+                    db.Tool.Remove(tool);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+                return Conflict();
             }
             catch (Exception ex)
             {
