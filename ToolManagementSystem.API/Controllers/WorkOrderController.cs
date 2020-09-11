@@ -176,9 +176,9 @@ namespace ToolManagementSystem.API.Controllers
                     {
                         db.WorkOrder.Remove(workOrder);
                     }
-                    return Conflict();
+                    return Problem(statusCode: 412, detail: "Нельзя удалить сервис, к которому привязаны инструменты");
                 }
-                return NotFound();
+                return Problem(statusCode: 412, detail: "Запись не найдена");
             }
             catch (Exception ex)
             {

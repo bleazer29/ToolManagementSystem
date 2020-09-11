@@ -29,7 +29,7 @@ namespace ToolManagementSystem.API.Controllers
         // GET: api/Orders
         [HttpGet]
         public async Task<IActionResult> GetOrders(string name, string status, 
-            DateTime startDate, DateTime endDate, string wellId, string counterparty, string responsible, string contract)
+            DateTime startDate, DateTime endDate, string well, string counterparty, string responsible, string contract)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace ToolManagementSystem.API.Controllers
                     .Include(x => x.ResponsibleUser)
                     .Include(x => x.Well)
                     .ToListAsync();
-                FilterOrders(orders, name, status, startDate, endDate, wellId, counterparty, responsible, contract);
+                FilterOrders(orders, name, status, startDate, endDate, well, counterparty, responsible, contract);
                 return Ok(orders);
             }
             catch (Exception ex)
@@ -50,15 +50,15 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         public List<Order> FilterOrders(List<Order> orders, string name, string status,
-            DateTime startDate, DateTime endDate, string wellId, string counterparty, string responsible, string contract)
+            DateTime startDate, DateTime endDate, string well, string counterparty, string responsible, string contract)
         {
-            orders = FilterOrdersByStringParams(orders, name, status, wellId, counterparty, responsible, contract);
+            orders = FilterOrdersByStringParams(orders, name, status, well, counterparty, responsible, contract);
             orders = FilterOrdersByDate(orders, startDate, endDate);
             return orders;
         }
 
         public List<Order> FilterOrdersByStringParams(List<Order> orders, string name, string status,
-            string wellId, string counterparty, string responsible, string contract)
+            string well, string counterparty, string responsible, string contract)
         {
 
             if (string.IsNullOrEmpty(name) == false)
@@ -69,9 +69,9 @@ namespace ToolManagementSystem.API.Controllers
             {
                 orders = orders.Where(x => x.OrderStatus != null && x.OrderStatus.Name.Contains(status)).ToList();
             }
-            if (string.IsNullOrEmpty(wellId) == false)
+            if (string.IsNullOrEmpty(well) == false)
             {
-                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(wellId)).ToList();
+                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(well)).ToList();
             }
             if (string.IsNullOrEmpty(counterparty) == false)
             {
@@ -277,9 +277,9 @@ namespace ToolManagementSystem.API.Controllers
                         db.Order.Remove(order);
                         await db.SaveChangesAsync();
                     }
-                    return Conflict();
+                    return Problem(statusCode: 412, detail: "Нельзя удалить наряд, к которому привязаны инструменты");
                 }
-                return NotFound();
+                return Problem(statusCode: 412, detail: "Запись не найдена");
             }
             catch (Exception ex)
             {

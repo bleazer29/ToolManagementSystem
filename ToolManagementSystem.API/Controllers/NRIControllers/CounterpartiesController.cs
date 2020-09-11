@@ -38,7 +38,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 }
                 if (string.IsNullOrEmpty(address) == false)
                 {
-                    counterparties = counterparties.Where(x => x.Address == address).ToList();
+                    counterparties = counterparties.Where(x => x.Address.Contains(address)).ToList();
                 }
                 return Ok(counterparties);
             }
