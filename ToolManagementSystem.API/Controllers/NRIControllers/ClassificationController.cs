@@ -64,7 +64,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 await db.ToolClassification.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.ToolClassification.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     classification.ParentToolClassificationId = value.ParentToolClassificationId;
                 }
                 await db.SaveChangesAsync();
-                return Ok(classification);
+                return Ok();
             }
             catch (Exception ex)
             {

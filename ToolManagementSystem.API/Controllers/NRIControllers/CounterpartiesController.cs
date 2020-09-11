@@ -69,7 +69,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 await db.Counterparty.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Counterparty.SingleAsync(x => x.Edrpou == value.Edrpou));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     counterparty.Edrpou = value.Edrpou;
                 }
                 await db.SaveChangesAsync();
-                return Ok(counterparty);
+                return Ok();
             }
             catch (Exception ex)
             {

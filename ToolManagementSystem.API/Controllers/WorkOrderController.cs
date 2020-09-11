@@ -86,7 +86,7 @@ namespace ToolManagementSystem.API.Controllers
             {
                 await db.WorkOrder.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.WorkOrder.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -114,7 +114,7 @@ namespace ToolManagementSystem.API.Controllers
                             await CreateNewOrderToolOperatingTime(id, toolId, operatingTime, date, comment);
                         if(newOrderToolOperatingTime != null)
                         {
-                            return Ok(newOrderToolOperatingTime);
+                            return Ok();
                         }
                     }
                     else
@@ -128,7 +128,7 @@ namespace ToolManagementSystem.API.Controllers
                             orderToolOperatingTime.Commentary = comment;
                         }
                         await db.SaveChangesAsync();
-                        return Ok(orderToolOperatingTime);
+                        return Ok();
                     }
                 }
                 return BadRequest();
@@ -191,7 +191,7 @@ namespace ToolManagementSystem.API.Controllers
                     workOrder.EstimatedEndDate = value.EstimatedEndDate;
                 }
                 await db.SaveChangesAsync();
-                return Ok(workOrder);
+                return Ok();
             }
             catch (Exception ex)
             {

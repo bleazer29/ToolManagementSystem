@@ -71,7 +71,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 await db.Nomenclature.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Nomenclature.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     }
                 }
                 await db.SaveChangesAsync();
-                return Ok(nomenclature);
+                return Ok();
             }
             catch (Exception ex)
             {
