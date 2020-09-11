@@ -32,11 +32,11 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    wells = wells.Where(x => x.Name == name).ToList();
+                    wells = wells.Where(x => x.Name.Contains(name)).ToList();
                 }
                 if (string.IsNullOrEmpty(address) == false)
                 {
-                    wells = wells.Where(x => x.Address == address).ToList();
+                    wells = wells.Where(x => x.Address.Contains(address)).ToList();
                 }
                 return Ok(wells);
             }

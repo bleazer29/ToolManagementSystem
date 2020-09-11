@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ToolManagementSystem.API.Helpers;
 using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers
@@ -14,10 +15,12 @@ namespace ToolManagementSystem.API.Controllers
     public class ToolController : ControllerBase
     {
         private readonly TMSdbContext db;
+        private HistoryWriter HistoryWriter;
 
         public ToolController(TMSdbContext context)
         {
             db = context;
+            HistoryWriter = new HistoryWriter();
         }
 
 
@@ -27,7 +30,7 @@ namespace ToolManagementSystem.API.Controllers
         {
             try
             {
-                List<Tool> contracts = await db.Tool
+                List<Tool> tools = await db.Tool
                     .Include(x => x.Department)
                     .Include(x => x.Nomenclature)
                     .Include(x => x.ToolClassification)
@@ -35,9 +38,9 @@ namespace ToolManagementSystem.API.Controllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    contracts = contracts.Where(x => x.Name == name).ToList();
+                    tools = tools.Where(x => x.Name == name).ToList();
                 }
-                return Ok(contracts);
+                return Ok(tools);
             }
             catch (Exception ex)
             {
@@ -77,7 +80,7 @@ namespace ToolManagementSystem.API.Controllers
                 await db.SaveChangesAsync();
                 Tool addedTool = await db.Tool.SingleAsync(x => x.Name == value.Name);
                 string historyMessage = "Инструмент добавлен в базу";
-                await WriteToolHistory(addedTool.ToolId, userId, addedTool.ToolStatusId, historyMessage, comment: null);
+                await HistoryWriter.WriteToolHistory(addedTool.ToolId, userId, addedTool.ToolStatusId, historyMessage, comment: null);
                 return Ok();
             }
             catch (Exception ex)
@@ -95,7 +98,7 @@ namespace ToolManagementSystem.API.Controllers
             {
                 Tool tool = await db.Tool.SingleAsync(x => x.ToolId == id);
                 string historyMessage = "К инструменту написан комментарий";
-                await WriteToolHistory(id, userId, tool.ToolStatusId, historyMessage, comment);
+                await HistoryWriter.WriteToolHistory(id, userId, tool.ToolStatusId, historyMessage, comment);
                 return Ok();
             }
             catch (Exception ex)
@@ -118,7 +121,7 @@ namespace ToolManagementSystem.API.Controllers
                 }
                 await db.SaveChangesAsync();
                 string historyMessage = "Данные об инструменте отредактированы";
-                await WriteToolHistory(tool.ToolId, userId, tool.ToolStatusId, historyMessage, comment: null);
+                await HistoryWriter.WriteToolHistory(tool.ToolId, userId, tool.ToolStatusId, historyMessage, comment: null);
                 return Ok();
             }
             catch (Exception ex)
@@ -134,35 +137,21 @@ namespace ToolManagementSystem.API.Controllers
         {
             try
             {
-                Tool contract = await db.Tool.SingleAsync(x => x.ToolId == id);
-                db.Tool.Remove(contract);
-                await db.SaveChangesAsync();
-                return Ok();
+                Tool tool = await db.Tool
+                    .Include(x => x.ToolStatus)
+                    .SingleAsync(x => x.ToolId == id);
+                if(tool.ToolStatus.Name == "RFU" || tool.ToolStatus.Name == "Scrap")
+                {
+                    db.Tool.Remove(tool);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+                return Conflict();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return BadRequest();
-            }
-        }
-
-        public async Task WriteToolHistory(int toolId, int userId, int toolStatusId, string message, string comment)
-        {
-            try
-            {
-                ToolHistory history = new ToolHistory();
-                history.ToolId = toolId;
-                history.Message = message;
-                history.Commentary = comment;
-                history.CreationDate = DateTime.UtcNow;
-                history.CreatorId = userId;
-                history.ToolStatusId = toolStatusId;
-                await db.ToolHistory.AddAsync(history);
-                await db.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
         }
     }

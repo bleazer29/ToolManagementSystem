@@ -29,7 +29,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 List<ToolClassification> classifications = await db.ToolClassification.ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    classifications = classifications.Where(x => x.Name == name).ToList();
+                    classifications = classifications.Where(x => x.Name.Contains(name)).ToList();
                 }
                 return Ok(classifications);
             }

@@ -22,16 +22,16 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/Contracts
         [HttpGet]
-        public async Task<IActionResult> GetContracts(string number)
+        public async Task<IActionResult> GetContracts(string name)
         {
             try
             {
                 List<Contract> contracts = await db.Contract
                     .Include(x => x.Counterparty)
                     .ToListAsync();
-                if (string.IsNullOrEmpty(number) == false)
+                if (string.IsNullOrEmpty(name) == false)
                 {
-                    contracts = contracts.Where(x => x.Name == number).ToList();
+                    contracts = contracts.Where(x => x.Name.Contains(name)).ToList();
                 }
                 return Ok(contracts);
             }
