@@ -23,7 +23,6 @@ namespace ToolManagementSystem.API.Controllers
             HistoryWriter = new HistoryWriter();
         }
 
-
         // GET: api/Tools
         [HttpGet]
         public async Task<IActionResult> GetTools(string name)

@@ -163,9 +163,28 @@ namespace ToolManagementSystem.API.Controllers
 
         // DELETE api/WorkOrders/5
         [HttpDelete("{id}")]
-        public void DeleteWorkOrder(int id)
+        public async Task<IActionResult> DeleteWorkOrder(int id)
         {
-            Console.WriteLine("Called DeleteMaintenance(id) method");
+            try
+            {
+                WorkOrder workOrder = await db.WorkOrder
+                    .Include(x => x.WorkOrderTool)
+                    .SingleAsync(x => x.WorkOrderId == id);
+                if(workOrder != null)
+                {
+                    if(workOrder.WorkOrderTool.Any() == false)
+                    {
+                        db.WorkOrder.Remove(workOrder);
+                    }
+                    return Conflict();
+                }
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
     }
 }
