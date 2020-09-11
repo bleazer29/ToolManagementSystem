@@ -27,7 +27,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             try
             {
                 List<ToolClassification> classifications = await db.ToolClassification.ToListAsync();
-                if (string.IsNullOrEmpty(name))
+                if (string.IsNullOrEmpty(name) == false)
                 {
                     classifications = classifications.Where(x => x.Name == name).ToList();
                 }

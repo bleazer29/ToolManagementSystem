@@ -88,22 +88,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td>№00000001</td>
-                                <td>31.07.2020</td>
-                                <td>01.08.2020</td>
-                                <td>ООО "Контрагент1"</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                            @if (Model.Contracts != null && Model.Contracts.Count > 0)
+                            {
+                                foreach (Contract contract in Model.Contracts)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@contract.Name</td>
+                                        <td>@contract.DateStart</td>
+                                        <td>@contract.DateEnd</td>
+                                        <td>@contract.Counterparty.Name</td>
+                                        <td class="align-middle">
+                                            <div class="table-control-buttons-row">
+                                                <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                        data-toggle="modal" data-target="#editModal" data-contractid="@contract.ContractId"></button>
+                                                <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                        data-toggle="modal" data-target="#deleteModal" data-contractid="@contract.ContractId"></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                                </tbody>
                     </table>
                 </div>
             </div>
@@ -121,13 +127,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteContractId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -143,48 +152,46 @@
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                <form method="post">
+                    <div class="modal-body">
+                            <div class="form-group row align-items-center">
+                                <label for="contractNumber" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="text" class="form-control"  asp-for="EditContract.Name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="date" class="form-control" />
+                            <div class="form-group row align-items-center">
+                                <label for="startDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="date" class="form-control"  asp-for="EditContract.DateStart" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="date" class="form-control" />
+                            <div class="form-group row align-items-center">
+                                <label for="endDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="date" class="form-control"  asp-for="EditContract.DateEnd" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <select class="form-control">
-                                    <option selected="selected">Контрагент 1</option>
-                                    <option>Контрагент 2</option>
-                                    <option>Контрагент 3</option>
-                                </select>
+                            <div class="form-group row align-items-center">
+                                <label for="counterparty" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <select class="form-control"  asp-for="EditContract.CounterpartyId">
+                                        <option selected="selected">Контрагент 1</option>
+                                        <option>Контрагент 2</option>
+                                        <option>Контрагент 3</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
-
-
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -200,46 +207,47 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                <form method="post">
+                    <div class="modal-body">
+                            <div class="form-group row align-items-center">
+                                <label  class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="text" class="form-control" id="contractName">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="date" class="form-control" />
+                            <div class="form-group row align-items-center">
+                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="date" class="form-control" id="startDate"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="date" class="form-control" />
+                            <div class="form-group row align-items-center">
+                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <input type="date" class="form-control" id="endDate"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <select class="form-control">
-                                    <option selected="selected">Контрагент 1</option>
-                                    <option>Контрагент 2</option>
-                                    <option>Контрагент 3</option>
-                                </select>
+                            <div class="form-group row align-items-center">
+                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                                <div class="w-100 d-md-none"></div>
+                                <div class="col col-md-8 col-lg-9 mb-2">
+                                    <select class="form-control">
+                                        @foreach (var counterparty in new List<Counterparty>())
+                                        {
+
+                                        }
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

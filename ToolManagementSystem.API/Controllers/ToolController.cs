@@ -9,29 +9,33 @@ using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers
 {
-    [Route("api/Contracts")]
+    [Route("api/Tools")]
     [ApiController]
-    public class ContractsController : ControllerBase
+    public class ToolController : ControllerBase
     {
         private readonly TMSdbContext db;
 
-        public ContractsController(TMSdbContext context)
+        public ToolController(TMSdbContext context)
         {
             db = context;
         }
 
-        // GET: api/Contracts
+
+        // GET: api/Tools
         [HttpGet]
-        public async Task<IActionResult> GetContracts(string number)
+        public async Task<IActionResult> GetTools(string name)
         {
             try
             {
-                List<Contract> contracts = await db.Contract
-                    .Include(x => x.Counterparty)
+                List<Tool> contracts = await db.Tool
+                    .Include(x => x.Department)
+                    .Include(x => x.Nomenclature)
+                    .Include(x => x.ToolClassification)
+                    .Include(x => x.ToolStatus)
                     .ToListAsync();
-                if (string.IsNullOrEmpty(number) == false)
+                if (string.IsNullOrEmpty(name) == false)
                 {
-                    contracts = contracts.Where(x => x.Name == number).ToList();
+                    contracts = contracts.Where(x => x.Name == name).ToList();
                 }
                 return Ok(contracts);
             }
@@ -42,13 +46,13 @@ namespace ToolManagementSystem.API.Controllers
             }
         }
 
-        // GET api/Contracts/5
+        // GET api/Tools/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetContract(int id)
+        public async Task<IActionResult> GetTool(int id)
         {
             try
             {
-                Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
+                Tool contract = await db.Tool.SingleAsync(x => x.ToolId == id);
                 return Ok(contract);
             }
             catch (Exception ex)
@@ -58,15 +62,15 @@ namespace ToolManagementSystem.API.Controllers
             }
         }
 
-        // POST api/Contracts
+        // POST api/Tools
         [HttpPost]
-        public async Task<IActionResult> AddContract([FromBody] Contract value)
+        public async Task<IActionResult> AddTool([FromBody] Tool value)
         {
             try
             {
-                await db.Contract.AddAsync(value);
+                await db.Tool.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Contract.SingleAsync(x => x.Name == value.Name));
+                return Ok(await db.Tool.SingleAsync(x => x.Name == value.Name));
             }
             catch (Exception ex)
             {
@@ -75,17 +79,16 @@ namespace ToolManagementSystem.API.Controllers
             }
         }
 
-        // PUT api/Contracts/5
+        // PUT api/Tools/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditContract(int id, [FromBody] Contract value)
+        public async Task<IActionResult> EditTool(int id, [FromBody] Tool value)
         {
             try
             {
-                Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
-                if(contract != null)
+                Tool contract = await db.Tool.SingleAsync(x => x.ToolId == id);
+                if (contract != null)
                 {
                     contract.Name = value.Name;
-                    contract.CounterpartyId = value.CounterpartyId;
                 }
                 await db.SaveChangesAsync();
                 return Ok(contract);
@@ -97,14 +100,14 @@ namespace ToolManagementSystem.API.Controllers
             }
         }
 
-        // DELETE api/Contracts/5
+        // DELETE api/Tools/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContract(int id)
+        public async Task<IActionResult> DeleteTool(int id)
         {
             try
             {
-                Contract contract = await db.Contract.SingleAsync(x => x.ContractId == id);
-                db.Contract.Remove(contract);
+                Tool contract = await db.Tool.SingleAsync(x => x.ToolId == id);
+                db.Tool.Remove(contract);
                 await db.SaveChangesAsync();
                 return Ok();
             }
@@ -114,5 +117,6 @@ namespace ToolManagementSystem.API.Controllers
                 return BadRequest();
             }
         }
+
     }
 }
