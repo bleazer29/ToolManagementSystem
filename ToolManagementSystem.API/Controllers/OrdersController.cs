@@ -277,9 +277,9 @@ namespace ToolManagementSystem.API.Controllers
                         db.Order.Remove(order);
                         await db.SaveChangesAsync();
                     }
-                    return Conflict();
+                    return Problem(statusCode: 412, detail: "Нельзя удалить наряд, к которому привязаны инструменты");
                 }
-                return NotFound();
+                return Problem(statusCode: 412, detail: "Запись не найдена");
             }
             catch (Exception ex)
             {
