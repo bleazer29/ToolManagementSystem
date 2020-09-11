@@ -26,10 +26,10 @@ namespace ToolManagementSystem.API.Controllers
             HistoryWriter = new HistoryWriter();
         }
 
-        // GET: api/Orders
-        [HttpGet("/{startDate:datetime?}/{endDate:datetime?}")]
-        public async Task<IActionResult> GetOrders(string name, string status, 
-            DateTime? startDate, DateTime? endDate, string well, string counterparty, string responsible, string contract)
+        // GET: api/Orders/11-09-2020/26-09-2020
+        [HttpGet("{startDate:datetime?}/{endDate:datetime?}")]
+        public async Task<IActionResult> GetOrders(DateTime startDate, DateTime endDate, string name, string status, 
+            string well, string counterparty, string responsible, string contract)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         public List<Order> FilterOrders(List<Order> orders, string name, string status,
-            DateTime? startDate, DateTime? endDate, string well, string counterparty, string responsible, string contract)
+            DateTime startDate, DateTime endDate, string well, string counterparty, string responsible, string contract)
         {
             orders = FilterOrdersByStringParams(orders, name, status, well, counterparty, responsible, contract);
             orders = FilterOrdersByDate(orders, startDate, endDate);
@@ -88,7 +88,7 @@ namespace ToolManagementSystem.API.Controllers
             return orders;
         }
 
-        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime? startDate, DateTime? endDate)
+        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime startDate, DateTime endDate)
         {
             if (startDate != null)
             {
