@@ -58,7 +58,9 @@
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:80%">Наименование</th>
+                                <th style="width:80%">
+                                <a data-sortFieldName="Name" class="current-sort">Наименование <span><i class="fa fas fa-sort-down"></i></span></a>
+                                </th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
@@ -199,21 +201,20 @@
 
         $(pagedList + " th a").click(function (e) {
             e.preventDefault();
-            $(pagedList + " th").removeClass("sort-asc sort-desc");
-            if (sortField == $(this).attr("data-sort")) {
-                sortAsc = !sortAsc;
+            $(".current-sort").children("span").children("i").removeClass("fa-sort-up", "fa-sort-down");
+            $(".current-sort").removeClass("current-sort");
+            isAscendingSort = !isAscendingSort;
+            if (isAscendingSort == true) {
+                $(this).children("span").children("i").removeClass("fa-sort-down");
+                $(this).children("span").children("i").addClass("fa-sort-up");
             }
             else {
-                sortAsc = true;
+                $(this).children("span").children("i").removeClass("fa-sort-up");
+                $(this).children("span").children("i").addClass("fa-sort-down");
             }
-            if (sortAsc == true) {
-                $(this).parent().addClass("sort-asc");
-            }
-            else {
-                $(this).parent().addClass("sort-desc");
-            }
-            sortField = $(this).attr("data-sort");
-            hubConnection.invoke("SendNomenclature", search, searchField, sortField, sortAsc);
+            $(this).addClass("current-sort");
+            sortField = $(this).data("sortfieldname");
+            hubConnection.invoke('GetDepartments', filterByNameStr, sortField, isAscendingSort);
         });
 
         $('#filterByName').change(function () {

@@ -768,3 +768,43 @@ table td {
     font-size:larger;
     font-weight: bold;
 }
+
+th > a:hover{
+    cursor: pointer;
+    text-decoration: underline!important;
+}
+
+simple-pagination-navigation-disabled:first-child{
+
+}
+
+.sort-asc a:after,
+.sort-desc a:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 3px;
+    width: 15px;
+    height: 16px;
+    color: #fff;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.sort-asc a:after {
+    content: "\f884";
+}
+
+.sort-desc a:after {
+    content: "\f160";
+}
+
+

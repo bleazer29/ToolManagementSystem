@@ -31,7 +31,7 @@ namespace ToolManagementSystem.API
 
             services.AddDbContext<TMSdbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("test")));
+                    Configuration.GetConnectionString("TMSdbEXPRESS")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

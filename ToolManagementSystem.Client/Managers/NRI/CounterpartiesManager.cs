@@ -52,24 +52,20 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return counterparty;
         }
 
-        public async static Task<Counterparty> CreateCounterpartyAsync(Counterparty newCounterparty)
+        public async static Task<System.Net.HttpStatusCode> CreateCounterpartyAsync(Counterparty newCounterparty)
         {
-            Counterparty resultCounterparty = null;
+            
             try
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(newCounterparty), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    resultCounterparty = JsonConvert.DeserializeObject<Counterparty>(apiResponse);
-                }
+                return response.StatusCode;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            return resultCounterparty;
+            return System.Net.HttpStatusCode.BadRequest;
         }
 
         public async static Task<System.Net.HttpStatusCode> DeleteCounterpartyAsync(int id)
@@ -86,24 +82,19 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<Counterparty> UpdateCounterpartyAsync(Counterparty newCounterparty)
+        public async static Task<System.Net.HttpStatusCode> UpdateCounterpartyAsync(Counterparty newCounterparty)
         {
-            Counterparty resultCounterparty = null;
             try
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(newCounterparty), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newCounterparty.CounterpartyId, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    resultCounterparty = JsonConvert.DeserializeObject<Counterparty>(apiResponse);
-                }
+                return response.StatusCode;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            return resultCounterparty;
+            return System.Net.HttpStatusCode.BadRequest;
         }
 
     }

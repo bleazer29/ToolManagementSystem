@@ -1,4 +1,6 @@
 ﻿
+$(".simple-pagination-navigation-disabled").addClass("disabled");
+
 var weekpicker;
 
 function initDatePicker() {

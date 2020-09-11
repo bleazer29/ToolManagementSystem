@@ -53,24 +53,19 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return department;
         }
 
-        public async static Task<Department> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> CreateDepartmentAsync(Department newDepartment)
         {
-            Department resultDepartment = null;
             try
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
-                }
+                return response.StatusCode;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            return resultDepartment;
+            return System.Net.HttpStatusCode.BadRequest;
         }
 
         public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
@@ -87,24 +82,20 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<Department> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> UpdateDepartmentAsync(Department newDepartment)
         {
-            Department resultDepartment = null;
+           
             try
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    resultDepartment = JsonConvert.DeserializeObject<Department>(apiResponse);
-                }
+                return response.StatusCode;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            return resultDepartment;
+            return System.Net.HttpStatusCode.BadRequest;
         }
 
     }

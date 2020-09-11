@@ -29,19 +29,56 @@ namespace ToolManagementSystem.Client.Hubs
             if (isAscendingSort)
             {
                 if (sortField == "Name")
-                {                       
-                    departments.OrderBy(x => x.Name);                          
+                {
+                    departments = departments.OrderBy(x => x.Name).ToList();                          
                 }
             }
             else
             {
                 if (sortField == "Name")
                 {
-                    departments.OrderByDescending(x => x.Name);
+                    departments = departments.OrderByDescending(x => x.Name).ToList();
                 }
             } 
             string json = JsonConvert.SerializeObject(departments);
             await Clients.Caller.SendAsync("recieveDepartments", json);
+        }
+
+        public async Task GetCounterparties(string filterByName, string filterByEDRPOU, string filterByAddress, string sortField, bool isAscendingSort)
+        {
+            List<Counterparty> counterparties = await CounterpartiesManager.GetCounterpartiesAsync(filterByName, filterByEDRPOU, filterByAddress);
+            if (isAscendingSort)
+            {
+                if (sortField == "Name")
+                {
+                    counterparties = counterparties.OrderBy(x => x.Name).ToList();
+                }
+                else if (sortField == "Edrpou")
+                {
+                    counterparties = counterparties.OrderBy(x => x.Edrpou).ToList();
+                }
+                else if (sortField == "Address")
+                {
+                    counterparties = counterparties.OrderBy(x => x.Address).ToList();
+                }
+            }
+            else
+            {
+                if (sortField == "Name")
+                {
+                    counterparties = counterparties.OrderByDescending(x => x.Name).ToList();
+                }
+                else if (sortField == "Edrpou")
+                {
+                    counterparties = counterparties.OrderByDescending(x => x.Edrpou).ToList();
+                }
+                else if (sortField == "Address")
+                {
+                    counterparties = counterparties.OrderByDescending(x => x.Address).ToList();
+                }
+            }
+            string json = JsonConvert.SerializeObject(counterparties);
+            await Clients.Caller.SendAsync("recieveCounterparties", json);
         }
 
         public async Task GetEditedCounterparty(int id)

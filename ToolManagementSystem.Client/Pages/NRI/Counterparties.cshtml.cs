@@ -38,8 +38,8 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnPostCounterparty()
         {
-            Counterparty temp = await CounterpartiesManager.CreateCounterpartyAsync(NewCounterparty);
-            if (temp == null)
+            HttpStatusCode temp = await CounterpartiesManager.CreateCounterpartyAsync(NewCounterparty);
+            if (temp != HttpStatusCode.OK)
             {
                 //do something
 
@@ -59,8 +59,8 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnPostUpdate()
         {
-            Counterparty temp = await CounterpartiesManager.UpdateCounterpartyAsync(EditCounterparty);
-            if (temp == null)
+            HttpStatusCode temp = await CounterpartiesManager.UpdateCounterpartyAsync(EditCounterparty);
+            if (temp != HttpStatusCode.OK)
             {
                 //do something
             }

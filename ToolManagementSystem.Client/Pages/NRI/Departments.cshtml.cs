@@ -33,13 +33,14 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public async Task<IActionResult> OnGet()
         {
             Departments = await DepartmentsManager.GetDepartmentsAsync(FilterByName);
+            Departments = Departments.OrderBy(x => x.Name).ToList();
             return Page();
         }
 
         public async Task<IActionResult> OnPostDepartment()
         {
-            Department temp = await DepartmentsManager.CreateDepartmentAsync(NewDepartment);
-            if(temp == null)
+            HttpStatusCode temp = await DepartmentsManager.CreateDepartmentAsync(NewDepartment);
+            if(temp != HttpStatusCode.OK)
             {
                 //do something
                
@@ -59,8 +60,8 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnPostUpdate()
         {
-            Department temp = await DepartmentsManager.UpdateDepartmentAsync(EditDepartment);
-            if (temp == null)
+            HttpStatusCode temp = await DepartmentsManager.UpdateDepartmentAsync(EditDepartment);
+            if (temp != HttpStatusCode.OK)
             {
                 //do something
             }
