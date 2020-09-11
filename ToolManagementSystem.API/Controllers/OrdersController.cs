@@ -71,7 +71,7 @@ namespace ToolManagementSystem.API.Controllers
             }
             if (string.IsNullOrEmpty(well) == false)
             {
-                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(wellId)).ToList();
+                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(well)).ToList();
             }
             if (string.IsNullOrEmpty(counterparty) == false)
             {
