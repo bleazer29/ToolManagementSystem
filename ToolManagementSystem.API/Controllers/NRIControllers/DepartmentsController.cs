@@ -65,7 +65,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 await db.Department.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Department.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     department.Name = value.Name;
                 }
                 await db.SaveChangesAsync();
-                return Ok(department);
+                return Ok();
             }
             catch (Exception ex)
             {

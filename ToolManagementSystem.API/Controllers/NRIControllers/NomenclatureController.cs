@@ -31,11 +31,11 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                        .Include(x => x.NomenclatureSpecificationUnit)
                         .ThenInclude(x => x.Unit)
                 .ToListAsync();
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name) == false)
             {
                 nomenclature = nomenclature.Where(x => x.Name == name).ToList();
             }
-            if (string.IsNullOrEmpty(vendorCode))
+            if (string.IsNullOrEmpty(vendorCode) == false)
             {
                 nomenclature = nomenclature.Where(x => x.VendorCode == vendorCode).ToList();
             }
@@ -71,7 +71,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 await db.Nomenclature.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Nomenclature.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     }
                 }
                 await db.SaveChangesAsync();
-                return Ok(nomenclature);
+                return Ok();
             }
             catch (Exception ex)
             {

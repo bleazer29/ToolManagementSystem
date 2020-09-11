@@ -29,7 +29,7 @@ namespace ToolManagementSystem.API.Controllers
                 List<Contract> contracts = await db.Contract
                     .Include(x => x.Counterparty)
                     .ToListAsync();
-                if (string.IsNullOrEmpty(number))
+                if (string.IsNullOrEmpty(number) == false)
                 {
                     contracts = contracts.Where(x => x.Name == number).ToList();
                 }
@@ -66,7 +66,7 @@ namespace ToolManagementSystem.API.Controllers
             {
                 await db.Contract.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Contract.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace ToolManagementSystem.API.Controllers
                     contract.CounterpartyId = value.CounterpartyId;
                 }
                 await db.SaveChangesAsync();
-                return Ok(contract);
+                return Ok();
             }
             catch (Exception ex)
             {

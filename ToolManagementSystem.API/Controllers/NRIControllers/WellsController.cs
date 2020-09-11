@@ -71,7 +71,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 await db.Well.AddAsync(value);
                 await db.SaveChangesAsync();
-                return Ok(await db.Well.SingleAsync(x => x.Name == value.Name));
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     well.CounterpartyId = value.CounterpartyId;
                 }
                 await db.SaveChangesAsync();
-                return Ok(well);
+                return Ok();
             }
             catch (Exception ex)
             {
