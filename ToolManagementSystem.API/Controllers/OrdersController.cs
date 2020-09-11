@@ -27,9 +27,9 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         // GET: api/Orders
-        [HttpGet]
+        [HttpGet("/{startDate:datetime?}/{endDate:datetime?}")]
         public async Task<IActionResult> GetOrders(string name, string status, 
-            DateTime startDate, DateTime endDate, string well, string counterparty, string responsible, string contract)
+            DateTime? startDate, DateTime? endDate, string well, string counterparty, string responsible, string contract)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         public List<Order> FilterOrders(List<Order> orders, string name, string status,
-            DateTime startDate, DateTime endDate, string well, string counterparty, string responsible, string contract)
+            DateTime? startDate, DateTime? endDate, string well, string counterparty, string responsible, string contract)
         {
             orders = FilterOrdersByStringParams(orders, name, status, well, counterparty, responsible, contract);
             orders = FilterOrdersByDate(orders, startDate, endDate);
@@ -88,7 +88,7 @@ namespace ToolManagementSystem.API.Controllers
             return orders;
         }
 
-        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime startDate, DateTime endDate)
+        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime? startDate, DateTime? endDate)
         {
             if (startDate != null)
             {
@@ -252,14 +252,6 @@ namespace ToolManagementSystem.API.Controllers
                 return BadRequest();
             }
         }
-
-        //// POST api/Orders
-        //[Route("api/Orders/{id}/Tools")]
-        //[HttpPut]
-        //public void EditOrderTools(int id, [FromBody] string value)
-        //{
-        //    Console.WriteLine("Called EditOrderTools(id, obj) method");
-        //}
 
         // DELETE api/Orders/5
         [HttpDelete("{id}")]
