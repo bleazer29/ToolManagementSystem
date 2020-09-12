@@ -36,35 +36,35 @@
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByName" />
                             </div>
                         </div>
-                        <div class="row pt-2">
+                        @*<div class="row pt-2">
                             <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                 Номер:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByWellNumber"/>
                             </div>
-                        </div>
-                        <div class="row pt-2">
+                        </div>*@
+                        @*<div class="row pt-2">
                             <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                 Контрагент:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
                                 <input type="text" class="form-control" />
                             </div>
-                        </div>
+                        </div>*@
                         <div class="row pt-2">
                             <div class="col-md-5 col-lg-4 pt-1 pl-0">
                                 Адрес:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByAddress"/>
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -79,36 +79,63 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
+                <div class="table-responsive" id="wellsTable">
                     <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
                                 <th style="width:5%;">#</th>
-                                <th style="width:20%;">Наименование</th>
-                                <th style="width:15%;">Номер</th>
-                                <th style="width:20%;">Контрагент</th>
-                                <th style="width:25%;">Адрес</th>
+                                <th style="width:20%;" class="sort-asc">
+                                    <a href="#" data-sort="Name">
+                                        Наименование
+                                    </a>
+                                </th>
+                                @*<th style="width:20%;">
+                                    <a href="#" data-sort="WellNumber">
+                                        Номер
+                                    </a>
+                                </th>*@
+                                <th style="width:30%;">
+                                    <a href="#" data-sort="Address">
+                                        Адрес
+                                    </a>
+                                </th>
                                 <th style="width:15%;">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td>Скважина1</td>
-                                <td>№00000001</td>
-                                <td>ООО "Weatherford"</td>
-                                <td>Украина, г.Запорожье, ул.Дудыкина 48А</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @if (Model.Wells != null && Model.Wells.Count > 0)
+                            {
+                                foreach (Well well in Model.Wells)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@well.Name</td>
+                                        @*<td>@well.WellNumber</td>*@
+                                        <td>@well.Address</td>
+                                        <td class="align-middle">
+                                            <div class="table-control-buttons-row">
+                                                <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                        data-toggle="modal" data-target="#editModal" data-wellid="@well.WellId"></button>
+                                                <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                        data-toggle="modal" data-target="#deleteModal" data-wellid="@well.WellId"></button>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+
                         </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,13 +152,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteWellId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -147,46 +177,50 @@
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
+                        <input type="hidden" class="form-control" asp-for="EditWell.WellId">
+
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" asp-for="EditWell.Name">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
+                        @*<div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="EditWell.WellNumber">
                             </div>
-                        </div>
+                        </div>*@
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Адрес:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" id="unitTitle" asp-for="EditWell.Address">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <select class="form-control">
-                                    <option selected="selected">Контрагент 1</option>
-                                    <option>Контрагент 2</option>
-                                    <option>Контрагент 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+                        @*<div class="form-group row align-items-center">
+                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                <div class="w-100 d-md-none"></div>
+                <div class="col col-md-8 col-lg-9 mb-2">
+                    <select class="form-control">
+                        <option selected="selected">Контрагент 1</option>
+                        <option>Контрагент 2</option>
+                        <option>Контрагент 3</option>
+                    </select>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+            </div>*@
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -202,46 +236,48 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" asp-for="NewWell.Name">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
+                        @*<div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="NewWell.WellNumber">
                             </div>
-                        </div>
+                        </div>*@
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Адрес:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="NewWell.Address">
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                            <div class="w-100 d-md-none"></div>
-                            <div class="col col-md-8 col-lg-9 mb-2">
-                                <select class="form-control">
-                                    <option selected="selected">Контрагент 1</option>
-                                    <option>Контрагент 2</option>
-                                    <option>Контрагент 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+                        @*<div class="form-group row align-items-center">
+                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                <div class="w-100 d-md-none"></div>
+                <div class="col col-md-8 col-lg-9 mb-2">
+                    <select class="form-control">
+                        <option selected="selected">Контрагент 1</option>
+                        <option>Контрагент 2</option>
+                        <option>Контрагент 3</option>
+                    </select>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+            </div>*@
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Create">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -251,6 +287,104 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
+        var pagedList = "#wellsTable";
+        var filterByNameStr = "";
+        var filterByWellNumberStr = "";
+        var filterByAddressStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+        $(pagedList + " th a").click(function (e) {
+            e.preventDefault();
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
+            }
+            else {
+                isAscendingSort = true;
+            }
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
+            hubConnection.invoke('GetWells', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var wellId = $(this).data('wellid');
+                $('#DeleteWellId').val(wellId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var wellId = $(this).data('wellid');
+                hubConnection.invoke('GetEditedWell', wellId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+        $('#filterByWellNumber').change(function () {
+            filterByWellNumberStr = $("#filterByWellNumber").val();
+        });
+        $('#filterByAddress').change(function () {
+            filterByAddressStr = $("#filterByAddress").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetWells', filterByNameStr, filterByAddressStr, /*filterByWellNumberStr,*/ sortField, isAscendingSort);
+        });
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        hubConnection.on("recieveEditedWell", function (data) {
+            var json = JSON.parse(data);
+            $('#EditWell_Name').val(json.Name);
+            $('#EditWell_WellId').val(json.WellId);
+            $('#EditWell_Address').val(json.Address);
+            $('#EditWell_WellNumber').val(json.WellNumber);
+        });
+
+        hubConnection.on("recieveWells", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();
+            var json = JSON.parse(data);
+            for (let i = 0; i < json.length; i++) {
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    /* + "<td>" + json[i].WellNumber + "</td>"*/
+                    + "<td>" + json[i].Address + "</td>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-wellid='" + json[i].WellId + "'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-wellid='" + json[i].WellId + "'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
+        hubConnection.start();
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;

@@ -44,5 +44,61 @@ namespace ToolManagementSystem.Client.Hubs
             await Clients.Caller.SendAsync("recieveEditedCounterparty", json);
         }
 
+        public async Task GetEditedStatus(int id)
+        {
+            ToolStatus toolStatus = await ToolStatusesManager.GetToolStatusAsync(id);
+            string json = JsonConvert.SerializeObject(toolStatus);
+            await Clients.Caller.SendAsync("recieveEditedStatus", json);
+        }
+
+        public async Task GetStatuses(string filterByName, string sortField, bool isAscendingSort)
+        {
+            List<ToolStatus> toolStatuses = await ToolStatusesManager.GetToolStatusesAsync(filterByName, sortField, isAscendingSort);
+            string json = JsonConvert.SerializeObject(toolStatuses);
+            await Clients.Caller.SendAsync("recieveStatuses", json);
+        }
+
+        public async Task GetEditedUnit(int id)
+        {
+            Unit unit = await UnitsManager.GetUnitAsync(id);
+            string json = JsonConvert.SerializeObject(unit);
+            await Clients.Caller.SendAsync("recieveEditedUnit", json);
+        }
+
+        public async Task GetUnits(string filterByName, string sortField, bool isAscendingSort)
+        {
+            List<Unit> units = await UnitsManager.GetUnitsAsync(filterByName, sortField, isAscendingSort);
+            string json = JsonConvert.SerializeObject(units);
+            await Clients.Caller.SendAsync("recieveUnits", json);
+        }
+
+        public async Task GetEditedSpecification(int id)
+        {
+            Specification specification = await SpecificationsManager.GetSpecificationAsync(id);
+            string json = JsonConvert.SerializeObject(specification);
+            await Clients.Caller.SendAsync("recieveEditedSpecification", json);
+        }
+
+        public async Task GetSpecifications(string filterByName, string sortField, bool isAscendingSort)
+        {
+            List<Specification> specifications = await SpecificationsManager.GetSpecificationsAsync(filterByName, sortField, isAscendingSort);
+            string json = JsonConvert.SerializeObject(specifications);
+            await Clients.Caller.SendAsync("recieveSpecifications", json);
+        }
+
+        public async Task GetEditedWell(int id)
+        {
+            Well well = await WellsManager.GetWellAsync(id);
+            string json = JsonConvert.SerializeObject(well);
+            await Clients.Caller.SendAsync("recieveEditedWell", json);
+        }
+
+        public async Task GetWells(string filterByName, string filterByAddress, /*string filterByWellNumber,*/ string sortField, bool isAscendingSort)
+        {
+            List<Well> wells = await WellsManager.GetWellsAsync(filterByName, filterByAddress, /*filterByWellNumber,*/ sortField, isAscendingSort);
+            string json = JsonConvert.SerializeObject(wells);
+            await Clients.Caller.SendAsync("recieveWells", json);
+        }
+
     }
 }

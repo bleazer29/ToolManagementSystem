@@ -33,16 +33,23 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public async Task<IActionResult> OnGet()
         {
             Counterparties = await CounterpartiesManager.GetCounterpartiesAsync(filterByName, filterByEDRPOU, filterByAddress, "Name", true);
-            Counterparties = Counterparties.OrderBy(x => x.Name).ToList();
-            return Page();
+            if (Counterparties != null)
+            {
+                Counterparties = Counterparties.OrderBy(x => x.Name).ToList();
+                return Page();
+            }  
+            else
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось получить данные из базы данных." });
+
         }
 
-        public async Task<IActionResult> OnPostCounterparty()
+        public async Task<IActionResult> OnPostCreate()
         {
             HttpStatusCode temp = await CounterpartiesManager.CreateCounterpartyAsync(NewCounterparty);
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось добавить новую запись в базу данных." });
 
             }
             return RedirectToPage("Counterparties");
@@ -54,6 +61,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось удалить запись из базы данных." });
             }
             return RedirectToPage("Counterparties");
         }
@@ -64,6 +72,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось обновить данные записи в базе данных." });
             }
             return RedirectToPage("Counterparties");
             

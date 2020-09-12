@@ -25,45 +25,59 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public Department EditDepartment { get; set; } = new Department();
 
         [BindProperty]
-        public string FilterByName { get; set; }
+        public string filterByName { get; set; }
 
         [BindProperty]
         public int DeleteDepartmentId { get; set; }
 
+        [BindProperty]
+        public string ErrorMessage { get; set; }
+
         public async Task<IActionResult> OnGet()
-        {
-            Departments = await DepartmentsManager.GetDepartmentsAsync(FilterByName, "Name", true);
-            Departments = Departments.OrderBy(x => x.Name).ToList();
-            return Page();
+        {      
+            Departments = await DepartmentsManager.GetDepartmentsAsync(filterByName, "Name", true);
+            if (Departments != null)
+            {
+                Departments = Departments.OrderBy(x => x.Name).ToList();
+                return Page();
+            }   
+            else
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось получить данные из базы данных." });
+
         }
 
-        public async Task<IActionResult> OnPostDepartment()
+        public async Task<IActionResult> OnPostCreate()
         {
+            ErrorMessage = "";
             HttpStatusCode temp = await DepartmentsManager.CreateDepartmentAsync(NewDepartment);
             if(temp != HttpStatusCode.OK)
             {
                 //do something
-               
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось добавить новую запись в базу данных." });
             }
             return RedirectToPage("Departments");
         }
 
         public async Task<IActionResult> OnPostDelete()
         {
+            ErrorMessage = "";
             HttpStatusCode temp = await DepartmentsManager.DeleteDepartmentAsync(DeleteDepartmentId);
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось удалить запись из базы данных." });
             }
             return RedirectToPage("Departments");
         }
 
         public async Task<IActionResult> OnPostUpdate()
         {
+            ErrorMessage = "";
             HttpStatusCode temp = await DepartmentsManager.UpdateDepartmentAsync(EditDepartment);
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось обновить данные записи в базе данных." });
             }
             return RedirectToPage("Departments");
         }

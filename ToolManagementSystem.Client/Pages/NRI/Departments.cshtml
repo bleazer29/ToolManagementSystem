@@ -34,12 +34,12 @@
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" id="filterByName" />
+                                <input type="text" class="form-control" asp-for="filterByName" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
                             <button class="btn btn-primary" id="search-button" type="button">
-                                <span aria-hidden="true" class="fa fa fa-search" ></span>
+                                <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                 <th style="width:5%">#</th>
                                 <th style="width:80%" class="sort-asc">
                                     <a href="#" data-sort="Name">
-                                        Наименование 
+                                        Наименование
                                     </a>
                                 </th>
                                 <th style="width:15%">Управление</th>
@@ -71,19 +71,20 @@
                             {
                                 foreach (Department department in Model.Departments)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td>@department.Name</td>
-                                        <td class="table-control-buttons-row">
-                                            <div class="row flex-nowrap m-auto">
-                                                <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                        data-toggle="modal" data-target="#editModal" data-departmentid="@department.DepartmentId"></button>
-                                                <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                        data-toggle="modal" data-target="#deleteModal" data-departmentid="@department.DepartmentId"></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-}
+                            <tr>
+                                <td></td>
+                                <td>@department.Name</td>
+                                <td class="align-middle">
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal" data-departmentid="@department.DepartmentId"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal" data-departmentid="@department.DepartmentId"></button>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                                }
                             }
                         </tbody>
                     </table>
@@ -181,15 +182,19 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary" asp-page-handler="Department">Сохранить</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Create">Сохранить</button>
                     </div>
                 </form>
-               
+
             </div>
         </div>
     </div>
     @*Modal Create*@
+
+   
 </div>
+
+
 
 @section Scripts {
     <script type="text/javascript">
@@ -202,9 +207,6 @@
         GenList(pagedList, itemsOnPage);
         EnableDeleteButton();
         EnableEditButton();
-
-       
-
 
         $(pagedList + " th a").click(function (e) {
             e.preventDefault();
@@ -266,8 +268,8 @@
                     "<tr>"
                     + "<td></td>"
                     + "<td>" + json[i].Name + "</td>"
-                    + "<td class='table-control-buttons-row'>"
-                    + "<div class='row flex-nowrap m-auto'>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
                     + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
                     + "data-toggle='modal' data-target='#editModal' data-departmentid='" + json[i].DepartmentId + "'></button>"
                     + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
@@ -280,24 +282,24 @@
             GenList(pagedList, itemsOnPage);
             EnableEditButton();
             EnableDeleteButton();
-            });
+        });
 
         hubConnection.start();
 
         function ChangeCaret() {
-        isCaretUp = !isCaretUp;
+            isCaretUp = !isCaretUp;
             if (isCaretUp == true) {
 
-            $(".Caret").removeClass("fa-caret-down");
-            $(".Caret").addClass("fa-caret-up");
-        }
-        else {
-            $(".Caret").removeClass("fa-caret-up");
-            $(".Caret").addClass("fa-caret-down");
-        }
+                $(".Caret").removeClass("fa-caret-down");
+                $(".Caret").addClass("fa-caret-up");
+            }
+            else {
+                $(".Caret").removeClass("fa-caret-up");
+                $(".Caret").addClass("fa-caret-down");
+            }
         };
 
-            </script>
-    }
+    </script>
+}
 
 
