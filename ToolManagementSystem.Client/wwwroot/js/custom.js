@@ -1,6 +1,4 @@
 ﻿
-
-
 var weekpicker;
 
 function initDatePicker() {
@@ -286,18 +284,6 @@ function AddRolesTree(elementName) {
     });
 }
 
-//function AddPartRow(tBodyName, counter) {
-//    var tBodyElem = '#' + tBodyName;
-//    $(tBodyElem).append(
-//        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
-//        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
-//            + "</td >"
-//        + "<td class='text-left'><select class='form-control'></select></td>"
-//            + "<td class='text-left'></td>"
-//            + "</tr>"
-//    );
-//}
-
 function ClearTable(tBodyName) {
     var tBodyElem = '#' + tBodyName;
     $(tBodyElem).empty();
@@ -358,5 +344,17 @@ function ConvertToClassificationTreeGridJSON(listJSON) {
 //        + "</td >"
 //        + "<td class='text-left'><select class='form-control'></select></td>"
 //        + "</tr>"
+//    );
+//}
+
+//function AddPartRow(tBodyName, counter) {
+//    var tBodyElem = '#' + tBodyName;
+//    $(tBodyElem).append(
+//        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
+//        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+//            + "</td >"
+//        + "<td class='text-left'><select class='form-control'></select></td>"
+//            + "<td class='text-left'></td>"
+//            + "</tr>"
 //    );
 //}

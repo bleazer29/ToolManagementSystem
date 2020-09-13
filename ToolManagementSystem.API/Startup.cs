@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ToolManagementSystem.Shared.Models;
+using Newtonsoft.Json;
 
 namespace ToolManagementSystem.API
 {
@@ -20,7 +21,9 @@ namespace ToolManagementSystem.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             services.AddDbContext<TMSdbContext>(options =>
                 options.UseSqlServer(
@@ -45,6 +48,8 @@ namespace ToolManagementSystem.API
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }
