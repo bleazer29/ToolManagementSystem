@@ -100,7 +100,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form>
+                <form method="post">
                     <div class="modal-body">
                         <input type="hidden" class="form-control" asp-for="EditClassification.ToolClassificationId">
                         <div class="form-group row">
@@ -115,7 +115,8 @@
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9">
                                 <div id="editParentDropdownWrapper" class="dropdown">
-                                    <input type="text" class="form-control dropdown-toggle" asp-for="EditClassification.Name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly />
+                                    <input type="hidden" class="form-control" asp-for="EditClassification.ParentToolClassificationId">
+                                    <input type="text" id="editParentNodeName" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly />
                                     <div id="editDropdown" class="dropdown-menu" aria-labelledby="editParentNode">
                                         <div id="editClassificationTree">
 
@@ -145,13 +146,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
                         <div class="form-group row">
                             <label for="classificationTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="classificationTitle">
+                                <input type="text" class="form-control" asp-for="NewClassification.Name">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -159,7 +161,8 @@
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9">
                                 <div id="creationParentDropdownWrapper" class="dropdown">
-                                    <input type="text" class="form-control dropdown-toggle" id="creationParentNode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly />
+                                    <input type="hidden" class="form-control" asp-for="NewClassification.ParentToolClassificationId">
+                                    <input type="text" id="creationParentNodeName" class="form-control dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly />
                                     <div id="creationDropdown" class="dropdown-menu" aria-labelledby="creationParentNode">
                                         <div id="creationClassificationTree">
 
@@ -170,12 +173,13 @@
                             </div>
                         </div>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Create">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -185,7 +189,69 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
-        var ClassificationList = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.Classifications))');
+        var ClassificationList = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.Classifications))'); 
+        var ClassificationListDropdown = ClassificationList;
+        var pagedList = "#classification-table";
+        var filterByNameStr = "";
+     
+
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var classificationId = $(this).data('classificationid');
+                $('#DeleteClassificationId').val(classificationId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var classificationId = $(this).data('classificationid');
+                hubConnection.invoke('GetEditedClassification', classificationId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+
+        $('#search-button').click(function () {
+            $(pagedList).jstree(true).search(filterByNameStr);
+        });
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        hubConnection.on("recieveEditedClassification", function (data) {
+            var json = JSON.parse(data);
+            $('#EditClassification_Name').val(json.Name);
+            $('#EditClassification_ToolClassificationId').val(json.ToolClassificationId);
+            $("#editClassificationTree").jstree(true).deselect_all();
+            $("#editClassificationTree").jstree(true).select_node(json.ParentToolClassificationId);     
+        });
+
+        hubConnection.on("recieveClassifications", function (data) {
+            $(pagedList).jstree(true).destroy().empty();
+            ClassificationList = ConvertToClassificationTreeGridJSON(data);
+            AddClasificationTree("classification-table", ClassificationList);
+
+            $("#editClassificationTree").jstree("destroy").empty();
+            $("EditClassification_Name").val("");
+            $("EditClassification_ParentToolClassificationId").val("");
+            AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
+            StopDropdownFromClosing("creationDropdown");
+
+            $("#creationClassificationTree").jstree("destroy").empty();
+            $("NewClassification_Name").val("");
+            $("NewClassification_ParentToolClassificationId").val("");
+            AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
+            StopDropdownFromClosing("editDropdown");
+            
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
+        hubConnection.start();
+       
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
@@ -200,12 +266,26 @@
         };
 
         $(document).ready(function () {
-            var classificationTreeGridJSON = ConvertToClassificationTreeGridJSON(ClassificationList);
-            AddClasificationTree("classification-table", classificationTreeGridJSON);
-            AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
-            AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
+           
+            ClassificationList = ConvertToClassificationTreeGridJSON(ClassificationList);
+            AddClasificationTree("classification-table", ClassificationList);
+
+
+            ClassificationListDropdown = ConvertToClassificationDropdownTreeGridJSON(ClassificationListDropdown);
+            AddClassificationTreeDropdown("editClassificationTree", "editParentNodeName", "EditClassification_ParentToolClassificationId", ClassificationListDropdown);
+            StopDropdownFromClosing("editDropdown"); 
+
+            AddClassificationTreeDropdown("creationClassificationTree", "creationParentNodeName", "NewClassification_ParentToolClassificationId", ClassificationListDropdown);
             StopDropdownFromClosing("creationDropdown");
+
+   
         });
+
+        $(pagedList).bind('ready.jstree', function (e, data) {
+            EnableDeleteButton();
+            EnableEditButton();
+        });
+       
     </script>
 }
 

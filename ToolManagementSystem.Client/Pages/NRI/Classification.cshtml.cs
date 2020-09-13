@@ -31,7 +31,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Classifications = await ClassificationManager.GetClassificationsAsync(filterByName, "Name", true);
+            Classifications = await ClassificationManager.GetClassificationsAsync(filterByName);
             if (Classifications != null)
             {
                 Classifications = Classifications.OrderBy(x => x.Name).ToList();
@@ -51,7 +51,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
                 //do something
                 return RedirectToPage("/Error", new { ErrorMessage = "Не удалось добавить новую запись в базу данных." });
             }
-            return RedirectToPage("Classifications");
+            return RedirectToPage("Classification");
         }
 
         public async Task<IActionResult> OnPostDelete()
@@ -63,7 +63,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
                 //do something
                 return RedirectToPage("/Error", new { ErrorMessage = "Не удалось удалить запись из базы данных." });
             }
-            return RedirectToPage("Classifications");
+            return RedirectToPage("Classification");
         }
 
         public async Task<IActionResult> OnPostUpdate()
@@ -75,7 +75,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
                 //do something
                 return RedirectToPage("/Error", new { ErrorMessage = "Не удалось обновить данные записи в базе данных." });
             }
-            return RedirectToPage("Classifications");
+            return RedirectToPage("Classification");
         }
     }
 }

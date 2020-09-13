@@ -738,16 +738,16 @@ table td {
     max-height: 30px;
 }
 
-.jstree-grid-cell-root-classification-table{
-    padding:10px!important;
+.jstree-grid-cell-root-classification-table {
+    padding: 10px !important;
 }
 
-    .jstree-grid-cell-root-classification-table.jstree-grid-col-0{
-        height:49px;
+    .jstree-grid-cell-root-classification-table.jstree-grid-col-0 {
+        height: 49px;
     }
 
     .jstree-grid-cell-root-classification-table.jstree-grid-col-2 {
-        height: 49px!important;
+        height: 49px !important;
     }
 
 .modal-body .table-responsive {

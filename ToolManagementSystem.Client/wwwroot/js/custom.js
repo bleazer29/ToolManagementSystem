@@ -83,6 +83,49 @@ function initTooltips() {
     })
 }
 
+function ConvertToClassificationTreeGridJSON(listJSON) {
+
+    var res = [];
+    for (var i = 0; i < listJSON.length; i++) {
+        res.push(
+            {
+                "id": listJSON[i].ToolClassificationId,
+                "parent": ((listJSON[i].ParentToolClassificationId == null) ? "#" : listJSON[i].ParentToolClassificationId),
+                "text": listJSON[i].Name,
+                "data": listJSON[i],
+                "state": { "opened": "true" }
+            }
+        );
+    }
+    return res;
+};
+
+function ConvertToClassificationDropdownTreeGridJSON(listJSON) {
+
+    var res = [];
+    res.push(
+        {
+            "id": -1,
+            "parent": "#",
+            "text": "Добавить в корень",
+            "data": "",
+            "state": { "opened": "true" }
+        }
+    );
+    for (var i = 0; i < listJSON.length; i++) {
+        res.push(
+            {
+                "id": listJSON[i].ToolClassificationId,
+                "parent": ((listJSON[i].ParentToolClassificationId == null) ? "#" : listJSON[i].ParentToolClassificationId),
+                "text": listJSON[i].Name,
+                "data": listJSON[i],
+                "state": { "opened": "true" }
+            }
+        );
+    }
+    return res;
+};
+
 function AddClasificationTree(elementName, data) {
     var elem = "#" + elementName;
     // tree data
@@ -120,26 +163,33 @@ function AddClasificationTree(elementName, data) {
 
                     "format": function (v) {
                         return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
-                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "'></button>"
+                            + "data-toggle='modal' data-target='#editModal' data-classificationid='" + v + "'></button>"
                             + "<button class='btn btn-primary ml-1 fa fa-trash-alt delete-button' type='button'"
-                            + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");
+                            + "data-toggle='modal' data-target='#deleteModal' data-classificationid='" + v + "'></button>");
                     },
                 }
             ]
+        },
+        "search": {
+            "case_sensitive": false,
+            "show_only_matches": true
         }
     });
 }
 
-function AddClassificationTreeDropdown(elementName, textboxName, data) {
+function AddClassificationTreeDropdown(elementName, nametextboxName, parentidtextboxName,  data) {
     var elem = "#" + elementName;
-    var textboxElem = "#" + textboxName;
+    var nametextboxElem = "#" + nametextboxName;
+    var parentidtextboxElem = "#" + parentidtextboxName;
+
 
     $(elem).on("select_node.jstree", function (e, data) {
-        $(textboxElem).val(data.node.text);
+        $(nametextboxElem).val(data.node.text);
+        $(parentidtextboxElem).val(data.node.id == "-1" ? "" : data.node.id);
     });
 
     $(elem).jstree({
-        "plugins": ["wholerow", "search"],
+        "plugins": ["wholerow"],
         "core": {
             "multiple": false,
             "themes": {
@@ -296,22 +346,7 @@ function GenList(listElem, itemsPerPage) {
     });
 }
 
-function ConvertToClassificationTreeGridJSON(listJSON) {
-    //var listObj = JSON.parse(listJSON);
-    var res;
-    for (var i = 0; i < listObj.length; i++){
-        res.push(
-            {
-                id: listJSON[i].ToolClassificationId,
-                parent: listJSON[i].ParentId == null ? "#" : listJSON[i].ParentId,
-                text: listJSON[i].Name,
-                data: listJSON[i],
-                state: { opened: "true" }
-            }
-        )
-    }
-    return JSON.stringify(res);
-};
+
 
 
 //function AddClassificationRow(tBodyName, counter) {

@@ -278,8 +278,6 @@
         hubConnection.on("recieveStatuses", function (data) {
             var json = JSON.parse(data);
             $(pagedList + " tbody").empty();
-            var json = JSON.parse(data);
-                   
             for (let i = 0; i < json.length; i++) {
                 $(pagedList + " tbody").append(
                     "<tr>"

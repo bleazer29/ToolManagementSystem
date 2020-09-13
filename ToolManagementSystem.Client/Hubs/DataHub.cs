@@ -107,9 +107,9 @@ namespace ToolManagementSystem.Client.Hubs
             await Clients.Caller.SendAsync("recieveEditedClassification", json);
         }
 
-        public async Task GetClassifications(string filterByName, string sortField, bool isAscendingSort)
+        public async Task GetClassifications(string filterByName)
         {
-            List<ToolClassification> classification = await ClassificationManager.GetClassificationsAsync(filterByName, sortField, isAscendingSort);
+            List<ToolClassification> classification = await ClassificationManager.GetClassificationsAsync(filterByName);
             string json = JsonConvert.SerializeObject(classification);
             await Clients.Caller.SendAsync("recieveClassifications", json);
         }

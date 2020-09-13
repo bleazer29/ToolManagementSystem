@@ -14,7 +14,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
     {
         static string apiControllerName { get; set; } = "NRI/Classification";
 
-        public async static Task<List<ToolClassification>> GetClassificationsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<ToolClassification>> GetClassificationsAsync(string filterByName)
         {
             List<ToolClassification> classifications = null;
             try
@@ -24,20 +24,6 @@ namespace ToolManagementSystem.Client.Managers.NRI
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     classifications = JsonConvert.DeserializeObject<List<ToolClassification>>(apiResponse);
-                    if (isAscendingSort)
-                    {
-                        if (sortField == "Name")
-                        {
-                            classifications = classifications.OrderBy(x => x.Name).ToList();
-                        }
-                    }
-                    else
-                    {
-                        if (sortField == "Name")
-                        {
-                            classifications = classifications.OrderByDescending(x => x.Name).ToList();
-                        }
-                    }
                 }
             }
             catch (Exception ex)

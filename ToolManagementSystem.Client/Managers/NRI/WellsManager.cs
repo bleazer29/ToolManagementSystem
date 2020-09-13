@@ -18,7 +18,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
             List<Well> wells = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName + "?address=" + filterByAddress + "?wellNumber="+ filterByWellNumber);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName + "&address=" + filterByAddress + "&wellNumber="+ filterByWellNumber);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
