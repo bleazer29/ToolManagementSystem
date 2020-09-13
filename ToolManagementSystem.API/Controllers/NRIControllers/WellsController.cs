@@ -28,7 +28,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             {
                 List<Well> wells = new List<Well>();
                 wells = await db.Well
-                    .Include(x => x.CounterpartyId)
+                    .Include(x => x.Counterparty)
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
