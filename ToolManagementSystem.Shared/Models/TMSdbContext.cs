@@ -16,6 +16,7 @@ namespace ToolManagementSystem.Shared.Models
         }
 
         public virtual DbSet<Contract> Contract { get; set; }
+        public virtual DbSet<RepairTool> RepairTool { get; set; }
         public virtual DbSet<Counterparty> Counterparty { get; set; }
         public virtual DbSet<Cycle> Cycle { get; set; }
         public virtual DbSet<CycleItem> CycleItem { get; set; }

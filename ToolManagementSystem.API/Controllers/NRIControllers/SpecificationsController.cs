@@ -20,14 +20,14 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             db = context;
         }
 
-        // GET api/NRI/Specifications/
+        // GET api/NRI/Specifications
         [HttpGet]
         public async Task<IActionResult> GetSpecifications(string name)
         {
             try
             {
                 List<Specification> specifications = await db.Specification.ToListAsync();
-                if (string.IsNullOrEmpty(name))
+                if (string.IsNullOrEmpty(name) == false)
                 {
                     specifications = specifications.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
