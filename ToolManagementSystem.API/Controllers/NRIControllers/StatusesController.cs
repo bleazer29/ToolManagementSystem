@@ -31,7 +31,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 statuses = await db.ToolStatus.ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    statuses = statuses.Where(x => x.Name.Contains(name)).ToList();
+                    statuses = statuses.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 return Ok(statuses);
             }

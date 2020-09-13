@@ -35,15 +35,15 @@ namespace ToolManagementSystem.API.Controllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    workOrders = workOrders.Where(x => x.Name.Contains(name)).ToList();
+                    workOrders = workOrders.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 if (string.IsNullOrEmpty(responsible) == false)
                 {
-                    workOrders = workOrders.Where(x => x.ResponsibleUser.Fio.Contains(responsible)).ToList();
+                    workOrders = workOrders.Where(x => x.ResponsibleUser.Fio.ToLower().Contains(responsible.ToLower())).ToList();
                 }
                 if (string.IsNullOrEmpty(status) == false)
                 {
-                    workOrders = workOrders.Where(x => x.WorkOrderStatus.Name.Contains(status)).ToList();
+                    workOrders = workOrders.Where(x => x.WorkOrderStatus.Name.ToLower().Contains(status.ToLower())).ToList();
                 }
                 if(startdate != null)
                 {

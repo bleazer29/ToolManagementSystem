@@ -22,7 +22,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
         // GET: api/NRI/Wells
         [HttpGet]
-        public async Task<IActionResult> GetWells(string name, string address)
+        public async Task<IActionResult> GetWells(string name, string address, string wellNumber)
         {
             try
             {
@@ -32,11 +32,15 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    wells = wells.Where(x => x.Name.Contains(name)).ToList();
+                    wells = wells.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 if (string.IsNullOrEmpty(address) == false)
                 {
-                    wells = wells.Where(x => x.Address.Contains(address)).ToList();
+                    wells = wells.Where(x => x.Address.ToLower().Contains(address.ToLower())).ToList();
+                }
+                if (string.IsNullOrEmpty(wellNumber) == false)
+                {
+                    wells = wells.Where(x => x.WellNumber.ToLower().Contains(wellNumber.ToLower())).ToList();
                 }
                 return Ok(wells);
             }

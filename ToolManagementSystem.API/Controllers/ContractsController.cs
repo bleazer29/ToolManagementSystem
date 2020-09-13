@@ -31,7 +31,7 @@ namespace ToolManagementSystem.API.Controllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    contracts = contracts.Where(x => x.Name.Contains(name)).ToList();
+                    contracts = contracts.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 return Ok(contracts);
             }

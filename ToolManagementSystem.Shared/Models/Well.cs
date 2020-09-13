@@ -14,6 +14,7 @@ namespace ToolManagementSystem.Shared.Models
         public string Name { get; set; }
         public int? CounterpartyId { get; set; }
         public string Address { get; set; }
+        public string WellNumber { get; set; }
 
         public virtual Counterparty Counterparty { get; set; }
         public virtual ICollection<Order> Order { get; set; }

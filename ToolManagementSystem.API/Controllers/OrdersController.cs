@@ -63,27 +63,27 @@ namespace ToolManagementSystem.API.Controllers
 
             if (string.IsNullOrEmpty(name) == false)
             {
-                orders = orders.Where(x => x.Name.Contains(name)).ToList();
+                orders = orders.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(status) == false)
             {
-                orders = orders.Where(x => x.OrderStatus != null && x.OrderStatus.Name.Contains(status)).ToList();
+                orders = orders.Where(x => x.OrderStatus != null && x.OrderStatus.Name.ToLower().Contains(status.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(well) == false)
             {
-                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(well)).ToList();
+                orders = orders.Where(x => x.Well != null && x.Well.Name.ToLower().Contains(well.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(counterparty) == false)
             {
-                orders = orders.Where(x => x.Counterparty != null && x.Counterparty.Name.Contains(counterparty)).ToList();
+                orders = orders.Where(x => x.Counterparty != null && x.Counterparty.Name.ToLower().Contains(counterparty.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(responsible) == false)
             {
-                orders = orders.Where(x => x.ResponsibleUser != null && x.ResponsibleUser.Fio.Contains(responsible)).ToList();
+                orders = orders.Where(x => x.ResponsibleUser != null && x.ResponsibleUser.Fio.ToLower().Contains(responsible.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(contract) == false)
             {
-                orders = orders.Where(x => x.Contract != null && x.Contract.Name.Contains(contract)).ToList();
+                orders = orders.Where(x => x.Contract != null && x.Contract.Name.ToLower().Contains(contract.ToLower())).ToList();
             }
             return orders;
         }

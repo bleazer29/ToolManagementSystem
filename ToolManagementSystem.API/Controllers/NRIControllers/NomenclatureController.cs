@@ -33,11 +33,11 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 .ToListAsync();
             if (string.IsNullOrEmpty(name) == false)
             {
-                nomenclature = nomenclature.Where(x => x.Name.Contains(name)).ToList();
+                nomenclature = nomenclature.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(vendorCode) == false)
             {
-                nomenclature = nomenclature.Where(x => x.VendorCode.Contains(vendorCode)).ToList();
+                nomenclature = nomenclature.Where(x => x.VendorCode.ToLower().Contains(vendorCode.ToLower())).ToList();
             }
             return Ok(nomenclature);
         }
