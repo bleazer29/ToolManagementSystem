@@ -37,7 +37,7 @@ namespace ToolManagementSystem.API.Controllers
                     .ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    tools = tools.Where(x => x.Name == name).ToList();
+                    tools = tools.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 return Ok(tools);
             }

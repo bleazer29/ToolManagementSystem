@@ -30,15 +30,15 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 counterparties = await db.Counterparty.ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    counterparties = counterparties.Where(x => x.Name.Contains(name)).ToList();
+                    counterparties = counterparties.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 if (string.IsNullOrEmpty(edrpou) == false)
                 {
-                    counterparties = counterparties.Where(x => x.Edrpou.Contains(edrpou)).ToList();
+                    counterparties = counterparties.Where(x => x.Edrpou.ToLower().Contains(edrpou.ToLower())).ToList();
                 }
                 if (string.IsNullOrEmpty(address) == false)
                 {
-                    counterparties = counterparties.Where(x => x.Address.Contains(address)).ToList();
+                    counterparties = counterparties.Where(x => x.Address.ToLower().Contains(address.ToLower())).ToList();
                 }
                 return Ok(counterparties);
             }

@@ -26,10 +26,10 @@ namespace ToolManagementSystem.API.Controllers
             HistoryWriter = new HistoryWriter();
         }
 
-        // GET: api/Orders
-        [HttpGet("/{startDate:datetime?}/{endDate:datetime?}")]
-        public async Task<IActionResult> GetOrders(string name, string status, 
-            DateTime? startDate, DateTime? endDate, string well, string counterparty, string responsible, string contract)
+        // GET: api/Orders/11-09-2020/26-09-2020
+        [HttpGet("{startDate:datetime}/{endDate:datetime}")]
+        public async Task<IActionResult> GetOrders(DateTime startDate, DateTime endDate, string name, string status, 
+            string well, string counterparty, string responsible, string contract)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         public List<Order> FilterOrders(List<Order> orders, string name, string status,
-            DateTime? startDate, DateTime? endDate, string well, string counterparty, string responsible, string contract)
+            DateTime startDate, DateTime endDate, string well, string counterparty, string responsible, string contract)
         {
             orders = FilterOrdersByStringParams(orders, name, status, well, counterparty, responsible, contract);
             orders = FilterOrdersByDate(orders, startDate, endDate);
@@ -63,32 +63,32 @@ namespace ToolManagementSystem.API.Controllers
 
             if (string.IsNullOrEmpty(name) == false)
             {
-                orders = orders.Where(x => x.Name.Contains(name)).ToList();
+                orders = orders.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(status) == false)
             {
-                orders = orders.Where(x => x.OrderStatus != null && x.OrderStatus.Name.Contains(status)).ToList();
+                orders = orders.Where(x => x.OrderStatus != null && x.OrderStatus.Name.ToLower().Contains(status.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(well) == false)
             {
-                orders = orders.Where(x => x.Well != null && x.Well.Name.Contains(well)).ToList();
+                orders = orders.Where(x => x.Well != null && x.Well.Name.ToLower().Contains(well.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(counterparty) == false)
             {
-                orders = orders.Where(x => x.Counterparty != null && x.Counterparty.Name.Contains(counterparty)).ToList();
+                orders = orders.Where(x => x.Counterparty != null && x.Counterparty.Name.ToLower().Contains(counterparty.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(responsible) == false)
             {
-                orders = orders.Where(x => x.ResponsibleUser != null && x.ResponsibleUser.Fio.Contains(responsible)).ToList();
+                orders = orders.Where(x => x.ResponsibleUser != null && x.ResponsibleUser.Fio.ToLower().Contains(responsible.ToLower())).ToList();
             }
             if (string.IsNullOrEmpty(contract) == false)
             {
-                orders = orders.Where(x => x.Contract != null && x.Contract.Name.Contains(contract)).ToList();
+                orders = orders.Where(x => x.Contract != null && x.Contract.Name.ToLower().Contains(contract.ToLower())).ToList();
             }
             return orders;
         }
 
-        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime? startDate, DateTime? endDate)
+        public List<Order> FilterOrdersByDate(List<Order> orders, DateTime startDate, DateTime endDate)
         {
             if (startDate != null)
             {

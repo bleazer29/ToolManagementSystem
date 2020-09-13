@@ -30,7 +30,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 departments = await db.Department.ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    departments = departments.Where(x => x.Name.Contains(name)).ToList();
+                    departments = departments.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 return Ok(departments);
             }

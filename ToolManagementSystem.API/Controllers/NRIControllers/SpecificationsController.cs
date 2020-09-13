@@ -29,7 +29,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
                 List<Specification> specifications = await db.Specification.ToListAsync();
                 if (string.IsNullOrEmpty(name))
                 {
-                    specifications = specifications.Where(x => x.Name.Contains(name)).ToList();
+                    specifications = specifications.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
                 }
                 return Ok(specifications);
             }
