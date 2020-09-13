@@ -40,6 +40,23 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
             }
         }
 
+
+        // GET api/NRI/Specifications/Units
+        [HttpGet("/Units")]
+        public async Task<IActionResult> GetUnits()
+        {
+            try
+            {
+                List<Unit> units = await db.Unit.ToListAsync();
+                return Ok(units);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+        }
+
         // POST api/NRI/Specifications
         [HttpPost]
         public async Task<IActionResult> AddSpecification([FromBody] Specification value)
