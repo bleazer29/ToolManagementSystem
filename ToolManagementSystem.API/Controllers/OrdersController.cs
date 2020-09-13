@@ -27,7 +27,7 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         // GET: api/Orders/11-09-2020/26-09-2020
-        [HttpGet("{startDate:datetime?}/{endDate:datetime?}")]
+        [HttpGet("{startDate:datetime}/{endDate:datetime}")]
         public async Task<IActionResult> GetOrders(DateTime startDate, DateTime endDate, string name, string status, 
             string well, string counterparty, string responsible, string contract)
         {
