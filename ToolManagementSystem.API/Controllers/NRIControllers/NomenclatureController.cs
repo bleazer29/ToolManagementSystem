@@ -69,15 +69,43 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
+                List<Unit> units = await db.Unit.ToListAsync();
+                foreach(NomenclatureSpecificationUnit item in value.NomenclatureSpecificationUnit)
+                {
+                    Unit unit = units.Where(x => x.Name == item.Unit.Name).FirstOrDefault();
+                    await AddUnitIfNotExist(unit);
+                }
                 await db.Nomenclature.AddAsync(value);
+                Nomenclature nomenclature = await db.Nomenclature.SingleAsync(x => x.Name == value.Name);
+                await AddNomenclatureAttributes(value.NomenclatureSpecificationUnit, nomenclature.NomenclatureId);
                 await db.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return BadRequest();
             }
-            return BadRequest();
+        }
+
+        public async Task AddUnitIfNotExist(Unit unit)
+        {
+            if (unit == null)
+            {
+                await db.Unit.AddAsync(unit);
+                await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task AddNomenclatureAttributes(ICollection<NomenclatureSpecificationUnit> specificationUnits, int nomenclatureId)
+        {
+            foreach (var item in specificationUnits)
+            {
+                item.NomenclatureId = nomenclatureId;
+                item.UnitId = db.Unit.Single(x => x.Name == item.Unit.Name).UnitId;
+                await db.NomenclatureSpecificationUnit.AddAsync(item);
+                await db.SaveChangesAsync();
+            }
         }
 
         // PUT api/NRI/Nomenclature/5
