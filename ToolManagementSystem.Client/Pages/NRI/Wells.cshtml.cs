@@ -39,7 +39,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Wells = await WellsManager.GetWellsAsync(filterByName, filterByAddress, /*filterByWellNumber,*/  "Name", true);
+            Wells = await WellsManager.GetWellsAsync(filterByName, filterByAddress, filterByWellNumber, "Name", true);
             if (Wells != null)
             {
                 Wells = Wells.OrderBy(x => x.Name).ToList();

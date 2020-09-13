@@ -93,9 +93,9 @@ namespace ToolManagementSystem.Client.Hubs
             await Clients.Caller.SendAsync("recieveEditedWell", json);
         }
 
-        public async Task GetWells(string filterByName, string filterByAddress, /*string filterByWellNumber,*/ string sortField, bool isAscendingSort)
+        public async Task GetWells(string filterByName, string filterByAddress, string filterByWellNumber, string sortField, bool isAscendingSort)
         {
-            List<Well> wells = await WellsManager.GetWellsAsync(filterByName, filterByAddress, /*filterByWellNumber,*/ sortField, isAscendingSort);
+            List<Well> wells = await WellsManager.GetWellsAsync(filterByName, filterByAddress, filterByWellNumber, sortField, isAscendingSort);
             string json = JsonConvert.SerializeObject(wells);
             await Clients.Caller.SendAsync("recieveWells", json);
         }

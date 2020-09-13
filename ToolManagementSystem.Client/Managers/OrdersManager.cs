@@ -11,7 +11,7 @@ namespace ToolManagementSystem.Client.Managers
 {
     public class OrdersManager
     {
-        static string apiControllerName { get; set; } = "NRI/Orders";
+        static string apiControllerName { get; set; } = "Orders";
 
         public async static Task<List<Order>> GetOrdersAsync(string filterByName, string filterByState, DateTime filterByDateFrom, DateTime filterByDateTo, string filterByWell, string filterByContract, string filterByCounterparty, string filterByResponsible, string sortField, bool isAscendingSort)
         {

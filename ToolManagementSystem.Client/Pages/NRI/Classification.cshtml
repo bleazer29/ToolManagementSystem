@@ -200,7 +200,8 @@
         };
 
         $(document).ready(function () {
-            AddClasificationTree("classification-table", classificationList, ConvertToClassificationTreeGridJSON(ClassificationList));
+            var classificationTreeGridJSON = ConvertToClassificationTreeGridJSON(ClassificationList);
+            AddClasificationTree("classification-table", classificationTreeGridJSON);
             AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
             AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
             StopDropdownFromClosing("creationDropdown");

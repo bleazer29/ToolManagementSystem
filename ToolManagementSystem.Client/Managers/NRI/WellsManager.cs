@@ -13,12 +13,12 @@ namespace ToolManagementSystem.Client.Managers.NRI
     {
         static string apiControllerName { get; set; } = "NRI/Wells";
 
-        public async static Task<List<Well>> GetWellsAsync(string filterByName, string filterByAddress, /*string filterByWellNumber,*/ string sortField, bool isAscendingSort)
+        public async static Task<List<Well>> GetWellsAsync(string filterByName, string filterByAddress, string filterByWellNumber, string sortField, bool isAscendingSort)
         {
             List<Well> wells = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName + "?address=" + filterByAddress);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName + "?address=" + filterByAddress + "?wellNumber="+ filterByWellNumber);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -33,10 +33,10 @@ namespace ToolManagementSystem.Client.Managers.NRI
                         {
                             wells = wells.OrderBy(x => x.Address).ToList();
                         }
-                        //else if (sortField == "WellNumber")
-                        //{
-                        //    wells = wells.OrderBy(x => x.WellNumber).ToList();
-                        //}
+                        else if (sortField == "WellNumber")
+                        {
+                            wells = wells.OrderBy(x => x.WellNumber).ToList();
+                        }
                     }
                     else
                     {
@@ -48,10 +48,10 @@ namespace ToolManagementSystem.Client.Managers.NRI
                         {
                             wells = wells.OrderByDescending(x => x.Address).ToList();
                         }
-                        //else if (sortField == "WellNumber")
-                        //{
-                        //    wells = wells.OrderByDescending(x => x.WellNumber).ToList();
-                        //}
+                        else if (sortField == "WellNumber")
+                        {
+                            wells = wells.OrderByDescending(x => x.WellNumber).ToList();
+                        }
                     }
                 }
             }

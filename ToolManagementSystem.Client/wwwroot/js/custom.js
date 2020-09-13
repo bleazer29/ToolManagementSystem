@@ -83,17 +83,9 @@ function initTooltips() {
     })
 }
 
-function AddClasificationTree(elementName) {
+function AddClasificationTree(elementName, data) {
     var elem = "#" + elementName;
     // tree data
-    var data;
-    data = [{ "id": "1", "parent": "#", "text": "Вид1", "data": { "nodeId": "1" }, "state": { "opened": "true" } },
-    { "id": "2", "parent": "#", "text": "Вид2", "data": { "nodeId": "2" }, "state": { "opened": "true" } },
-    { "id": "3", "parent": "#", "text": "Вид3", "data": { "nodeId": "3" }, "state": { "opened": "true" } },
-    { "id": "4", "parent": "1", "text": "Тип1", "data": { "nodeId": "4" }, "state": { "opened": "true" } },
-    { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" }, "state": { "opened": "true" } },
-    { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" }, "state": { "opened": "true" } },
-    { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" }, "state": { "opened": "true" } }];
     var i = 0;
     $(elem).jstree({
         "plugins": ["grid", "wholerow", "search"],
@@ -124,10 +116,9 @@ function AddClasificationTree(elementName) {
                     "header": "Управление",
                     "tree": false,
                     "cellClass": "jstree-grid-buttons-cell",
-                    "value": "nodeId",
+                    "value": "ToolClassificationId",
 
                     "format": function (v) {
-
                         return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
                             + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "'></button>"
                             + "<button class='btn btn-primary ml-1 fa fa-trash-alt delete-button' type='button'"
@@ -306,15 +297,15 @@ function GenList(listElem, itemsPerPage) {
 }
 
 function ConvertToClassificationTreeGridJSON(listJSON) {
-    var listObj = JSON.parse(listJSON);
+    //var listObj = JSON.parse(listJSON);
     var res;
     for (var i = 0; i < listObj.length; i++){
         res.push(
             {
-                id: listObj[i].ToolClassificationId,
-                parent: listObj[i].ParentId == null ? "#" : listObj[i].ParentId,
-                text: listObj[i].Name,
-                data: listObj[i],
+                id: listJSON[i].ToolClassificationId,
+                parent: listJSON[i].ParentId == null ? "#" : listJSON[i].ParentId,
+                text: listJSON[i].Name,
+                data: listJSON[i],
                 state: { opened: "true" }
             }
         )
