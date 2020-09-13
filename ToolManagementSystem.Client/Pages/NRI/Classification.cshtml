@@ -1,5 +1,6 @@
 ﻿@page "/NRI/Classification"
 @model ToolManagementSystem.Client.Pages.NRI.ClassificationModel
+@using Newtonsoft.Json;
 @{
     ViewData["Title"] = "Classification";
 }
@@ -181,6 +182,7 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
+        var ClassificationList = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.Classifications))');
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
@@ -195,7 +197,7 @@
         };
 
         $(document).ready(function () {
-            AddClasificationTree("classification-table");
+            AddClasificationTree("classification-table", classificationList, ConvertToClassificationTreeGridJSON(ClassificationList));
             AddClassificationTreeDropdown("creationClassificationTree", "creationParentNode");
             StopDropdownFromClosing("creationDropdown");
         });

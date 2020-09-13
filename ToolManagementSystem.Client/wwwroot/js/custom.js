@@ -141,26 +141,13 @@ function AddClasificationTree(elementName) {
     });
 }
 
-function AddClassificationTreeDropdown(elementName, textboxName) {
+function AddClassificationTreeDropdown(elementName, textboxName, data) {
     var elem = "#" + elementName;
     var textboxElem = "#" + textboxName;
 
     $(elem).on("select_node.jstree", function (e, data) {
         $(textboxElem).val(data.node.text);
     });
-
-    // tree data
-
-    var data;
-    data = [
-        { "id": "-1", "parent": "#", "text": "Добавить в корень", "data": { "title": "t-1" } },
-        { "id": "1", "parent": "#", "text": "Вид1", "data": { "nodeId": "1" } },
-        { "id": "2", "parent": "#", "text": "Вид2", "data": { "nodeId": "2" } },
-        { "id": "3", "parent": "#", "text": "Вид3", "data": { "nodeId": "3" } },
-        { "id": "4", "parent": "1", "text": "Тип1", "data": { "nodeId": "4" } },
-        { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" } },
-        { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" } },
-        { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" } }];
 
     $(elem).jstree({
         "plugins": ["wholerow", "search"],
@@ -176,8 +163,6 @@ function AddClassificationTreeDropdown(elementName, textboxName) {
         },
 
     });
-
-
 }
 
 function StopDropdownFromClosing(dropDownName) {
@@ -333,6 +318,23 @@ function GenList(listElem, itemsPerPage) {
         last_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-double-right'></i></div>"
     });
 }
+
+function ConvertToClassificationTreeGridJSON(listJSON) {
+    var listObj = JSON.parse(listJSON);
+    var res;
+    for (var i = 0; i < listObj.length; i++){
+        res.push(
+            {
+                id: listObj[i].ToolClassificationId,
+                parent: listObj[i].ParentId == null ? "#" : listObj[i].ParentId,
+                text: listObj[i].Name,
+                data: listObj[i],
+                state: { opened: "true" }
+            }
+        )
+    }
+    return JSON.stringify(res);
+};
 
 
 //function AddClassificationRow(tBodyName, counter) {

@@ -100,5 +100,20 @@ namespace ToolManagementSystem.Client.Hubs
             await Clients.Caller.SendAsync("recieveWells", json);
         }
 
+        public async Task GetEditedClassification(int id)
+        {
+            ToolClassification classification = await ClassificationManager.GetClassificationAsync(id);
+            string json = JsonConvert.SerializeObject(classification);
+            await Clients.Caller.SendAsync("recieveEditedClassification", json);
+        }
+
+        public async Task GetClassifications(string filterByName, string sortField, bool isAscendingSort)
+        {
+            List<ToolClassification> classification = await ClassificationManager.GetClassificationsAsync(filterByName, sortField, isAscendingSort);
+            string json = JsonConvert.SerializeObject(classification);
+            await Clients.Caller.SendAsync("recieveClassifications", json);
+        }
+
+
     }
 }
