@@ -26,7 +26,7 @@ namespace ToolManagementSystem.API.Controllers
             HistoryWriter = new HistoryWriter();
         }
 
-        // GET: api/Orders/11-09-2020/26-09-2020
+        // GET: api/Orders/2020-08-11/2020-12-30
         [HttpGet("{startDate:datetime}/{endDate:datetime}")]
         public async Task<IActionResult> GetOrders(DateTime startDate, DateTime endDate, string name, string status, 
             string well, string counterparty, string responsible, string contract)

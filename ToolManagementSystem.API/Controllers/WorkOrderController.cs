@@ -23,8 +23,8 @@ namespace ToolManagementSystem.API.Controllers
             HistoryWriter = new HistoryWriter();
         }
 
-        // GET: api/WorkOrders
-        [HttpGet("{startdate:datetime?}/{enddate:datetime?}/{status?}")]
+        // GET: api/WorkOrders/2020-08-11/2020-12-30
+        [HttpGet("{startdate:datetime}/{enddate:datetime}")]
         public async Task<IActionResult> GetWorkOrders(DateTime startdate, DateTime enddate, string name, string responsible, string status)
         {
             try
@@ -54,6 +54,37 @@ namespace ToolManagementSystem.API.Controllers
                     workOrders = workOrders.Where(x => x.EndDate <= enddate).ToList();
                 }
                 return Ok(workOrders);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+        }
+
+        // GET: api/WorkOrders/Repairs/2020-08-11/2020-12-30
+        [HttpGet("Repairs/{startdate:datetime?}/{enddate:datetime?}/{status?}")]
+        public async Task<IActionResult> GetRepairs(DateTime startdate, DateTime enddate, string responsible)
+        {
+            try
+            {
+                List<RepairTool> repairTools = await db.RepairTool
+                    .Include(x => x.User)
+                    .Include(x => x.Tool)
+                    .ToListAsync();
+                if (string.IsNullOrEmpty(responsible) == false)
+                {
+                    repairTools = repairTools.Where(x => x.User.Fio.ToLower().Contains(responsible.ToLower())).ToList();
+                }
+                if (startdate != null)
+                {
+                    repairTools = repairTools.Where(x => x.DateStart >= startdate).ToList();
+                }
+                if (enddate != null)
+                {
+                    repairTools = repairTools.Where(x => x.DateEnd <= enddate).ToList();
+                }
+                return Ok(repairTools);
             }
             catch (Exception ex)
             {

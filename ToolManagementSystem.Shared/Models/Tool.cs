@@ -8,6 +8,7 @@ namespace ToolManagementSystem.Shared.Models
         public Tool()
         {
             OrderTool = new HashSet<OrderTool>();
+            RepairTool = new HashSet<RepairTool>();
             ToolDocument = new HashSet<ToolDocument>();
             ToolHistory = new HashSet<ToolHistory>();
             WorkOrderTool = new HashSet<WorkOrderTool>();
@@ -33,6 +34,7 @@ namespace ToolManagementSystem.Shared.Models
         public virtual ToolClassification ToolClassification { get; set; }
         public virtual ToolStatus ToolStatus { get; set; }
         public virtual ICollection<OrderTool> OrderTool { get; set; }
+        public virtual ICollection<RepairTool> RepairTool { get; set; }
         public virtual ICollection<ToolDocument> ToolDocument { get; set; }
         public virtual ICollection<ToolHistory> ToolHistory { get; set; }
         public virtual ICollection<WorkOrderTool> WorkOrderTool { get; set; }

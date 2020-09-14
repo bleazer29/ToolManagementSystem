@@ -15,6 +15,7 @@ namespace ToolManagementSystem.Shared.Models
             OrderHistory = new HashSet<OrderHistory>();
             OrderResponsibleUser = new HashSet<Order>();
             OrderToolOperatingTime = new HashSet<OrderToolOperatingTime>();
+            RepairTool = new HashSet<RepairTool>();
             ReportHistory = new HashSet<ReportHistory>();
             RoleCreator = new HashSet<Role>();
             RoleLastUpdator = new HashSet<Role>();
@@ -52,6 +53,7 @@ namespace ToolManagementSystem.Shared.Models
         public virtual ICollection<OrderHistory> OrderHistory { get; set; }
         public virtual ICollection<Order> OrderResponsibleUser { get; set; }
         public virtual ICollection<OrderToolOperatingTime> OrderToolOperatingTime { get; set; }
+        public virtual ICollection<RepairTool> RepairTool { get; set; }
         public virtual ICollection<ReportHistory> ReportHistory { get; set; }
         public virtual ICollection<Role> RoleCreator { get; set; }
         public virtual ICollection<Role> RoleLastUpdator { get; set; }
