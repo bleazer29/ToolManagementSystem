@@ -552,8 +552,7 @@ namespace ToolManagementSystem.Shared.Models
 
                 entity.HasOne(d => d.Creator)
                     .WithMany(p => p.InverseCreator)
-                    .HasForeignKey(d => d.CreatorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .HasForeignKey(d => d.CreatorId);
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.User)

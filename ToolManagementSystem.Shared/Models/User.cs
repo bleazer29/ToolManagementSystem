@@ -38,7 +38,7 @@ namespace ToolManagementSystem.Shared.Models
         public string Password { get; set; }
         public int? DepartmentId { get; set; }
         public DateTime CreationDate { get; set; }
-        public int CreatorId { get; set; }
+        public int? CreatorId { get; set; }
         public DateTime? LastUpdate { get; set; }
         public int? LastUpdatorId { get; set; }
 

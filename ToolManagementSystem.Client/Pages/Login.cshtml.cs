@@ -11,9 +11,9 @@ namespace ToolManagementSystem.Client.Pages
     public class LoginModel : PageModel
     {
 
-        [BindProperty]
+        [BindProperty(SupportsGet =true)]
         public string Login { get; set; }
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string Password { get; set; }
 
         public void OnGet()
@@ -21,7 +21,7 @@ namespace ToolManagementSystem.Client.Pages
 
         }
 
-        public async Task<IActionResult> OnGetUser()
+        public async Task<IActionResult> OnPostLogin()
         {
             await AccountManager.LoginAsync(Login, Password);
             if(AccountManager.CurrentUser != null)

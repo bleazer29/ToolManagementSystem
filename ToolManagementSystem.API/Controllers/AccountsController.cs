@@ -23,24 +23,27 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/Accounts/Login
         [HttpGet("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login(string Login, string Password)
         {
             try
             {
                 User user = await db.User
                     .Include(x => x.UserRoleUser)
                         .ThenInclude(x => x.Role)
-                    .SingleAsync(x => x.Login == request.Login && x.Password == request.Password);
+                            .ThenInclude(x => x.RolePermission)
+                    .SingleAsync(x => x.Login == Login && x.Password == Password);
                 if(user != null)
                 {
                     return Ok(user);
                 }
+                return Problem(statusCode: 412, detail: "Пользователь не найден в базе данных");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Login failed User`s login is: {0}, pass: {1} \n" + ex.Message, request.Login, request.Password);
+                Console.WriteLine("Login failed User`s login is: {0}, pass: {1} \n" 
+                    + ex.Message, Login, Password);
+                return BadRequest();
             }
-            return BadRequest();
         }
     }
 }

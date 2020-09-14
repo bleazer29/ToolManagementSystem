@@ -26,7 +26,7 @@
             <h2>Авторизация в системе</h2>
         </div>
         <div class="form-pos login-form-pos">
-            <form method="get">
+            <form method="post">
                 <div class="form-group row">
                     <label class="control-label">Логин</label>
                     <input type="text" required class="form-control"  asp-for="Login"/>
@@ -45,8 +45,7 @@
                     <!-- <a href="#">Забыли пароль?</a> -->
                 </div>
                 <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-primary mt-1 text-center w-auto" asp-page-handler="Login" href="/Index">Войти</button>
-
+                    <button type="submit" class="btn btn-primary mt-1 text-center w-auto" asp-page-handler="Login">Войти</button>
                 </div>
             </form>
         </div>

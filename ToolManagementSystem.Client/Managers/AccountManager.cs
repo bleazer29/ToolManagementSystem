@@ -17,14 +17,7 @@ namespace ToolManagementSystem.Client.Managers
         public async static Task<User> LoginAsync(string login, string pass)
         {
             User user = new User();
-            LoginRequest loginRequestObj = new LoginRequest() { Login = login, Password = pass };
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(apiControllerName + "/Login"),
-                Content = new StringContent(JsonConvert.SerializeObject(loginRequestObj)),
-            };
-            HttpResponseMessage response = await CustomHttpClient.GetClientInstance().SendAsync(request).ConfigureAwait(false);
+            HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/Login" + "?Login=" + login + "&Password=" + pass);
             if (response.IsSuccessStatusCode)
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
