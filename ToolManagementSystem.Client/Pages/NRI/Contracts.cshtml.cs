@@ -21,57 +21,65 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public Contract EditContract { get; set; } = new Contract();
 
         [BindProperty]
-        public string FilterByNumber{ get; set; }
-
+        public string filterByName{ get; set; }
+        [BindProperty]
+        public string filterByDateStart { get; set; }
+        [BindProperty]
+        public string filterByDateEnd { get; set; }
+        [BindProperty]
+        public string filterByCounterparty { get; set; }
         [BindProperty]
         public int DeleteContractId { get; set; }
-
+        [BindProperty]
+        public string ErrorMessage { get; set; }
+        
         public async Task<IActionResult> OnGet()
         {
-            Contracts = await ContractsManager.GetContractsAsync(FilterByNumber);
-            return RedirectToPage("Contracts");
+            Contracts = await ContractsManager.GetContractsAsync(filterByName, "Name", true);
+            if (Contracts != null)
+            {
+                Contracts = Contracts.OrderBy(x => x.Name).ToList();
+                return Page();
+            }
+            else
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось получить данные из базы данных." });
+
         }
 
-        public void OnGetContract(int id)
+        public async Task<IActionResult> OnPostCreate()
         {
-            EditContract = ContractsManager.GetContractAsync(id).Result;
-            if (EditContract.ContractId == -1)
+            ErrorMessage = "";
+            HttpStatusCode temp = await ContractsManager.CreateContractAsync(NewContract);
+            if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось добавить новую запись в базу данных." });
             }
-        }
-
-        public async Task<IActionResult> OnPostContract()
-        {
-            Contract temp = await ContractsManager.CreateContractAsync(NewContract);
-            if (temp != null)
-            {
-                await ContractsManager.CreateContractAsync(temp);
-            }
-            return await OnGet();
+            return RedirectToPage("Contracts");
         }
 
         public async Task<IActionResult> OnPostDelete()
         {
+            ErrorMessage = "";
             HttpStatusCode temp = await ContractsManager.DeleteContractAsync(DeleteContractId);
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось удалить запись из базы данных." });
             }
-            return await OnGet();
+            return RedirectToPage("Contracts");
         }
 
         public async Task<IActionResult> OnPostUpdate()
         {
-            Contract temp = await ContractsManager.UpdateContractAsync(EditContract);
-            if (temp != null)
+            ErrorMessage = "";
+            HttpStatusCode temp = await ContractsManager.UpdateContractAsync(EditContract);
+            if (temp != HttpStatusCode.OK)
             {
-                if (temp.ContractId == -1)
-                {
-                    //do something
-                }
+                //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось обновить данные записи в базе данных." });
             }
-            return await OnGet();
+            return RedirectToPage("Contracts");
         }
 
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ToolManagementSystem.Client.Managers;
 using ToolManagementSystem.Client.Managers.NRI;
 using ToolManagementSystem.Shared.Models;
 
@@ -112,6 +113,19 @@ namespace ToolManagementSystem.Client.Hubs
             List<ToolClassification> classification = await ClassificationManager.GetClassificationsAsync(filterByName);
             string json = JsonConvert.SerializeObject(classification);
             await Clients.Caller.SendAsync("recieveClassifications", json);
+        }
+        public async Task GetEditedContract(int id)
+        {
+            Contract contract = await ContractsManager.GetContractAsync(id);
+            string json = JsonConvert.SerializeObject(contract);
+            await Clients.Caller.SendAsync("recieveEditedContract", json);
+        }
+
+        public async Task GetContracts(string filterByName, string sortField, bool isAscendingSort)
+        {
+            List<Contract> contracts = await ContractsManager.GetContractsAsync(filterByName, sortField, isAscendingSort);
+            string json = JsonConvert.SerializeObject(contracts);
+            await Clients.Caller.SendAsync("recieveContracts", json);
         }
 
 
