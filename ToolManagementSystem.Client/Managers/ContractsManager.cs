@@ -13,12 +13,12 @@ namespace ToolManagementSystem.Client.Managers
     {
         static string apiControllerName { get; set; } = "Contracts";
 
-        public async static Task<List<Contract>> GetContractsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<Contract>> GetContractsAsync(string filterByName, DateTime filterByDateStart, DateTime filterByDateEnd, string filterByCounterpartyName, string sortField, bool isAscendingSort)
         {
             List<Contract> contracts = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + filterByDateStart.ToString("yyyy-MM-dd")+"/" + filterByDateEnd.ToString("yyyy-MM-dd") + "?name="+ filterByName + "&counterparty=" + filterByCounterpartyName);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

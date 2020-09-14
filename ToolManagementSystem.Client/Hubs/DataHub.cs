@@ -121,9 +121,9 @@ namespace ToolManagementSystem.Client.Hubs
             await Clients.Caller.SendAsync("recieveEditedContract", json);
         }
 
-        public async Task GetContracts(string filterByName, string sortField, bool isAscendingSort)
+        public async Task GetContracts(string filterByName, DateTime filterByDateStart, DateTime filterByDateEnd, string filterByCounterpartyName, string sortField, bool isAscendingSort)
         {
-            List<Contract> contracts = await ContractsManager.GetContractsAsync(filterByName, sortField, isAscendingSort);
+            List<Contract> contracts = await ContractsManager.GetContractsAsync(filterByName, filterByDateStart, filterByDateEnd, filterByCounterpartyName, sortField, isAscendingSort);
             string json = JsonConvert.SerializeObject(contracts);
             await Clients.Caller.SendAsync("recieveContracts", json);
         }

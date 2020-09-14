@@ -182,36 +182,38 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                            <div class="form-group row align-items-center">
-                                <label for="contractNumber" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="text" class="form-control"  asp-for="EditContract.Name">
-                                </div>
+                        <input type="hidden" class="form-control" asp-for="EditContract.ContractId">
+
+                        <div class="form-group row align-items-center">
+                            <label for="contractNumber" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" asp-for="EditContract.Name">
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="startDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control"  asp-for="EditContract.DateStart" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="startDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="EditContract.DateStart" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="endDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control"  asp-for="EditContract.DateEnd" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="endDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="EditContract.DateEnd" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="counterparty" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <select class="form-control" asp-for="EditContract.CounterpartyId" asp-items="@Model.CounterpartiesList">
-                                        <option value=null></option>option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="counterparty" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control" asp-for="EditContract.CounterpartyId" asp-items="@Model.CounterpartiesList">
+                                    <option value=null></option>option>
+                                </select>
                             </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
@@ -235,6 +237,8 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
+                        <input type="hidden" class="form-control" asp-for="NewContract.ContractId">
+
                         <div class="form-group row align-items-center">
                             <label class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
                             <div class="w-100 d-md-none"></div>
@@ -282,6 +286,9 @@
         var isCaretUp = false;
         var pagedList = "#contractsTable";
         var filterByNameStr = "";
+        var filterByDateStart = "";
+        var filterByDateEnd = "";
+        var filterByCounterpartyStr = "";
         var sortField = "Name";
         var itemsOnPage = 5;
         var isAscendingSort = true;
@@ -334,9 +341,18 @@
         $('#filterByName').change(function () {
             filterByNameStr = $("#filterByName").val();
         });
+        $('#filterByDateStart').change(function () {
+            filterByDateStart = $("#filterByDateStart").val();
+        });
+        $('#filterByDateEnd').change(function () {
+            filterByDateEnd = $("#filterByDateEnd").val();
+        });
+        $('#filterByCounterparty').change(function () {
+            filterByCounterpartyStr = $("#filterByCounterparty").val();
+        });
 
         $('#search-button').click(function () {
-            hubConnection.invoke('GetContracts', filterByNameStr, sortField, isAscendingSort);
+            hubConnection.invoke('GetContracts', filterByNameStr, filterByDateStart, filterByDateEnd, filterByCounterpartyStr, sortField, isAscendingSort);
         });
 
         const hubConnection = new signalR.HubConnectionBuilder()

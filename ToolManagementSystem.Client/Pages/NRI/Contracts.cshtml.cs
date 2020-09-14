@@ -39,11 +39,14 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Contracts = await ContractsManager.GetContractsAsync(filterByName, "Name", true);
+            filterByDateStart = DateTime.Now.AddMonths(-1);
+            filterByDateEnd = DateTime.Now.AddMonths(1); ;
+            Contracts = await ContractsManager.GetContractsAsync(filterByName, filterByDateStart, filterByDateEnd, filterByCounterparty, "Name", true);
             List<Counterparty> counterparties = await CounterpartiesManager.GetCounterpartiesAsync("", "","", "Name", true);
-            CounterpartiesList = new SelectList(counterparties, nameof(Counterparty.CounterpartyId), nameof(Counterparty.Name));
+            if (counterparties != null) CounterpartiesList = new SelectList(counterparties, nameof(Counterparty.CounterpartyId), nameof(Counterparty.Name));
+           
             NewContract.DateStart = DateTime.Now;
-            NewContract.DateEnd = DateTime.Now;
+            NewContract.DateEnd = DateTime.Now.AddDays(1);
             NewContract.CounterpartyId=null;
             if (Contracts != null)
             {
