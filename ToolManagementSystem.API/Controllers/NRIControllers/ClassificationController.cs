@@ -102,10 +102,17 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                ToolClassification classification = await db.ToolClassification.SingleAsync(x => x.ToolClassificationId == id);
-                db.ToolClassification.Remove(classification);
-                await db.SaveChangesAsync();
-                return Ok();
+                ToolClassification classification = await db.ToolClassification
+                    .Include(x => x.InverseParentToolClassification)
+                    .SingleAsync(x => x.ToolClassificationId == id);
+                if(classification.ParentToolClassificationId != null &&
+                    classification.InverseParentToolClassification.Any() == false)
+                {
+                    db.ToolClassification.Remove(classification);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+                return Problem(statusCode: 412, detail: "Нельзя удалить узел классификации, который имеет родительский или дочерние узлы");
             }
             catch (Exception ex)
             {
