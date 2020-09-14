@@ -135,9 +135,9 @@ namespace ToolManagementSystem.Client.Hubs
             await Clients.Caller.SendAsync("recieveEditedNomenclature", json);
         }
 
-        public async Task GetNomenclatures(string filterByName, string sortField, bool isAscendingSort)
+        public async Task GetNomenclatures(string filterByName, string filterByVendorCode, string sortField, bool isAscendingSort)
         {
-            List<Nomenclature> nomenclatures = await NomenclatureManager.GetNomenclaturesAsync(filterByName, sortField, isAscendingSort);
+            List<Nomenclature> nomenclatures = await NomenclatureManager.GetNomenclaturesAsync(filterByName, filterByVendorCode, sortField, isAscendingSort);
             string json = JsonConvert.SerializeObject(nomenclatures);
             await Clients.Caller.SendAsync("recieveNomenclatures", json);
         }

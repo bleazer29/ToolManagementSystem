@@ -235,7 +235,7 @@ function AddRolesTree(elementName) {
         { "id": "6", "parent": "#", "text": "Ремонт", "state": { "opened": "true" }, "data": { "nodeId": "6", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
         { "id": "7", "parent": "#", "text": "Администрирование", "state": { "opened": "true"}, "data": { "nodeId": "7", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
         { "id": "9", "parent": "#", "text": "Отчёты", "state": { "opened": "true" }, "data": { "nodeId": "8", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
-        { "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true" }, "data": { "nodeId": "9", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
+        //{ "id": "8", "parent": "#", "text": "Документация", "state": { "opened": "true" }, "data": { "nodeId": "9", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
         { "id": "11", "parent": "19", "text": "Подразделения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Departments" }, "data": { "nodeId": "10", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
         { "id": "10", "parent": "20", "text": "Статусы", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Statuses" }, "data": { "nodeId": "11", "view": "true", "add": "true", "edit": "true", "delete": "true" } },
         { "id": "18", "parent": "7", "text": "Роли", "state": { "opened": "true" }, "a_attr": { "href": "/Administrative/Roles" }, "data": { "nodeId": "18", "view": "true", "add": "true", "edit": "true", "delete": "true" } },

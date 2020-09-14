@@ -13,12 +13,12 @@ namespace ToolManagementSystem.Client.Managers.NRI
     {
         static string apiControllerName { get; set; } = "NRI/Nomenclature";
 
-        public async static Task<List<Nomenclature>> GetNomenclaturesAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<Nomenclature>> GetNomenclaturesAsync(string filterByName, string filterByVendorCode, string sortField, bool isAscendingSort)
         {
             List<Nomenclature> nomenclatures = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName + "&vendorCode=" + filterByVendorCode);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -29,12 +29,28 @@ namespace ToolManagementSystem.Client.Managers.NRI
                         {
                             nomenclatures = nomenclatures.OrderBy(x => x.Name).ToList();
                         }
+                        else if (sortField == "VendorCode")
+                        {
+                            nomenclatures = nomenclatures.OrderBy(x => x.VendorCode).ToList();
+                        }
+                        else if (sortField == "OperatingTime")
+                        {
+                            nomenclatures = nomenclatures.OrderBy(x => x.MaxOperatingTime).ToList();
+                        }
                     }
                     else
                     {
                         if (sortField == "Name")
                         {
                             nomenclatures = nomenclatures.OrderByDescending(x => x.Name).ToList();
+                        }
+                        else if (sortField == "VendorCode")
+                        {
+                            nomenclatures = nomenclatures.OrderByDescending(x => x.VendorCode).ToList();
+                        }
+                        else if (sortField == "OperatingTime")
+                        {
+                            nomenclatures = nomenclatures.OrderByDescending(x => x.MaxOperatingTime).ToList();
                         }
                     }
                 }

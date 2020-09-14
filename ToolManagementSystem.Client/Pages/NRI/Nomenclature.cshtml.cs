@@ -33,7 +33,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Nomenclatures = await NomenclatureManager.GetNomenclaturesAsync(filterByName, "Name", true);
+            Nomenclatures = await NomenclatureManager.GetNomenclaturesAsync(filterByName, filterByVendorCode, "Name", true);
             if (Nomenclatures != null)
             {
                 return Page();

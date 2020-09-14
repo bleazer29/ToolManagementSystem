@@ -28,7 +28,7 @@
                 </h5>
             </div>
             <div id="statusesSearchCollapse" class="collapse">
-                <form class="m-3">
+                <form class="m-3" method="post">
                     <div class="container-fluid">
                         <div class="row pt-2">
                             <div class="col-md-5 col-lg-4 pt-1 pl-0">
@@ -43,9 +43,10 @@
                                 Артикул:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" asp-for="filterByVendorCode"/>
+                                <input type="text" class="form-control" asp-for="filterByVendorCode" />
                             </div>
                         </div>
+                      
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
                             <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
@@ -73,12 +74,12 @@
                                     </a>
                                 </th>
                                 <th style="width:15%">
-                                    <a href="#" data-sort="Name">
+                                    <a href="#" data-sort="VendorCode">
                                         Артикул
                                     </a>
                                 </th>
                                 <th style="width:10%">
-                                    <a href="#" data-sort="Name">
+                                    <a href="#" data-sort="OperatingTime">
                                         Максимальное время работы
                                     </a>
                                 </th>
@@ -102,7 +103,7 @@
                                     {
                                         foreach (NomenclatureSpecificationUnit spec in nomenclature.NomenclatureSpecificationUnit)
                                         {
-                                            @spec.Specification.Name <span>-</span> @spec.Value
+                                            @spec.Specification.Name <span>- </span> @spec.Value
                                             @(spec.Unit == null ? "" : spec.Unit.Name)
                                             <br />
                                         }
@@ -174,27 +175,30 @@
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
+                        <input type="hidden" class="form-control" asp-for="EditNomenclature.NomenclatureId">
+
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" asp-for="EditNomenclature.Name">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="EditNomenclature.VendorCode">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Максимальное время работы:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="time" class="form-control" asp-for="EditNomenclature.MaxOperatingTime">
                             </div>
                         </div>
                         <div class="form-group">
@@ -250,12 +254,13 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationEditTbody')">Отмена</button>
-                    <button type="button" class="btn btn-primary" onclick="ClearClassificationTable('classificationEditTbody')">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationEditTbody')">Отмена</button>
+                        <button type="button" class="btn btn-primary" onclick="ClearClassificationTable('classificationEditTbody')">Сохранить</button>
+                    </div>
+                </form>
             </div>
 
         </div>
@@ -369,6 +374,8 @@
         var isCaretUp = false;
         var pagedList = "#nomenclaturesTable";
         var filterByNameStr = "";
+        var filterByVendorCodeStr = "";
+        
         var sortField = "Name";
         var itemsOnPage = 5;
         var isAscendingSort = true;
@@ -392,7 +399,7 @@
                 $(this).parent().addClass("sort-desc");
             }
             sortField = $(this).attr("data-sort");
-            hubConnection.invoke('GetNomenclatures', filterByNameStr, sortField, isAscendingSort);
+            hubConnection.invoke('GetNomenclatures', filterByNameStr, filterByVendorCodeStr, sortField, isAscendingSort);
         });
 
         function EnableDeleteButton() {
@@ -413,8 +420,12 @@
             filterByNameStr = $("#filterByName").val();
         });
 
+        $('#filterByVendorCode').change(function () {
+            filterByVendorCodeStr = $("#filterByVendorCode").val();
+        });
+
         $('#search-button').click(function () {
-            hubConnection.invoke('GetNomenclatures', filterByNameStr, sortField, isAscendingSort);
+            hubConnection.invoke('GetNomenclatures', filterByNameStr, filterByVendorCodeStr, sortField, isAscendingSort);
         });
 
         const hubConnection = new signalR.HubConnectionBuilder()
@@ -425,16 +436,12 @@
             var json = JSON.parse(data);
             $('#EditNomenclature_Name').val(json.Name);
             $('#EditNomenclature_NomenclatureId').val(json.NomenclatureId);
-        });
+        });  
 
-        function getTimeSpan(ticks) {
-            var d = new Date(ticks);
-            return {
-                
-                hour: d.getUTCHours(),
-                minute: d.getMinutes(),
-                second: d.getSeconds()
-            }
+        function timeConvert(ticks) {
+            var sec = ticks / 10000000;
+            var min = sec / 60;
+            return Math.floor(min / 24 / 60) + ":" + Math.floor(min / 60 % 24) + ':' + Math.floor(min % 60);
         }
 
         hubConnection.on("recieveNomenclatures", function (data) {
@@ -445,8 +452,8 @@
                 attributes = "";
                 if (json[i].NomenclatureSpecificationUnit != null) {
                     for (var j = 0; j < json[i].NomenclatureSpecificationUnit.length;j++){
-                        if (json[i].NomenclatureSpecificationUnit[j].Unit != null) attributes += json[i].NomenclatureSpecificationUnit[j].Specification.Name + "<span>-</span>" + json[i].NomenclatureSpecificationUnit[j].value + " " + json[i].NomenclatureSpecificationUnit[j].Unit.Name + "<br/>";
-                        else attributes += json[i].NomenclatureSpecificationUnit[j].Specification.Name + "<span>-</span>" + json[i].NomenclatureSpecificationUnit[j].value + "<br/>";
+                        if (json[i].NomenclatureSpecificationUnit[j].Unit != null) attributes += json[i].NomenclatureSpecificationUnit[j].Specification.Name + "<span>- </span>" + json[i].NomenclatureSpecificationUnit[j].Value + " " + json[i].NomenclatureSpecificationUnit[j].Unit.Name + "<br/>";
+                        else attributes += json[i].NomenclatureSpecificationUnit[j].Specification.Name + "<span>- </span>" + json[i].NomenclatureSpecificationUnit[j].Value + "<br/>";
                     }
                 }
                 $(pagedList + " tbody").append(
@@ -454,7 +461,7 @@
                     + "<td></td>"
                     + "<td>" + json[i].Name + "</td>"
                     + "<td>" + json[i].VendorCode + "</td>"
-                    + "<td>" + getTimeSpan(json[i].MaxOperatingTime) + "</td>"
+                    + "<td>" + timeConvert(json[i].MaxOperatingTime) + "</td>"
                     + "<td>" + attributes + "</td>"
                     + "<td class='align-middle'>"
                     + "<div class='table-control-buttons-row'>"
