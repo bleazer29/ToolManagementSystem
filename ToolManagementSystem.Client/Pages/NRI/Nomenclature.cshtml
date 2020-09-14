@@ -35,7 +35,7 @@
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByName" />
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -43,11 +43,11 @@
                                 Артикул:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByVendorCode"/>
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -62,40 +62,76 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
+                <div class="table-responsive" id="nomenclaturesTable">
                     <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:25%">Наименование</th>
-                                <th style="width:15%">Артикул</th>
+                                <th style="width:25%" class="sort-asc">
+                                    <a href="#" data-sort="Name">
+                                        Наименование
+                                    </a>
+                                </th>
+                                <th style="width:15%">
+                                    <a href="#" data-sort="Name">
+                                        Артикул
+                                    </a>
+                                </th>
+                                <th style="width:10%">
+                                    <a href="#" data-sort="Name">
+                                        Максимальное время работы
+                                    </a>
+                                </th>
                                 <th style="width:30%">Атрибуты</th>
-                                <th style="width:10%">Максимальное время работы</th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if (Model.Nomenclatures != null && Model.Nomenclatures.Count > 0)
+                            {
+                                foreach (Nomenclature nomenclature in Model.Nomenclatures)
+                                {
                             <tr>
                                 <td></td>
-                                <td>Наименование1</td>
-                                <td>12345678</td>
+                                <td>@nomenclature.Name</td>
+                                <td>@nomenclature.VendorCode</td>
+
+                                <td>@TimeSpan.FromTicks(nomenclature.MaxOperatingTime).ToString(@"d\.h\:mm")</td>
                                 <td>
-                                    Длина - 1 <br />
-                                    Ширина - 2 <br />
-                                    Вес - 3 <br />
+                                    @if (nomenclature.NomenclatureSpecificationUnit != null)
+                                    {
+                                        foreach (NomenclatureSpecificationUnit spec in nomenclature.NomenclatureSpecificationUnit)
+                                        {
+                                            @spec.Specification.Name <span>-</span> @spec.Value
+                                            @(spec.Unit == null ? "" : spec.Unit.Name)
+                                            <br />
+                                        }
+                                    }
                                 </td>
-                                <td>02:30</td>
                                 <td class="align-middle">
                                     <div class="table-control-buttons-row">
                                         <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
+                                                data-toggle="modal" data-target="#editModal" data-nomenclatureid="@nomenclature.NomenclatureId"></button>
                                         <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
+                                                data-toggle="modal" data-target="#deleteModal" data-nomenclatureid="@nomenclature.NomenclatureId"></button>
                                     </div>
                                 </td>
+
                             </tr>
+                                }
+                            }
+                           
                         </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -113,13 +149,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteNomenclatureId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -327,6 +366,104 @@
         var isCaretUp = false;
         var AttributeCounter = 0;
 
+        var isCaretUp = false;
+        var pagedList = "#nomenclaturesTable";
+        var filterByNameStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+        $(pagedList + " th a").click(function (e) {
+            e.preventDefault();
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
+            }
+            else {
+                isAscendingSort = true;
+            }
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
+            hubConnection.invoke('GetNomenclatures', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var nomenclatureId = $(this).data('nomenclatureid');
+                $('#DeleteNomenclatureId').val(nomenclatureId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var nomenclatureId = $(this).data('nomenclatureid');
+                hubConnection.invoke('GetEditedNomenclature', nomenclatureId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetNomenclatures', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        hubConnection.on("recieveEditedNomenclature", function (data) {
+            var json = JSON.parse(data);
+            $('#EditNomenclature_Name').val(json.Name);
+            $('#EditNomenclature_NomenclatureId').val(json.NomenclatureId);
+        });
+      
+        hubConnection.on("recieveNomenclatures", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();
+            var attributes = "";
+            for (let i = 0; i < json.length; i++) {
+                attributes = "";
+                if (json[i].NomenclatureSpecificationUnit != null) {
+                    for (var j = 0; j < json[i].NomenclatureSpecificationUnit.length;j++){
+                        if (json[i].NomenclatureSpecificationUnit[j].Unit != null) attributes += json[i].NomenclatureSpecificationUnit[j].Specification.Name + "<span>-</span>" + json[i].NomenclatureSpecificationUnit[j].value + " " + json[i].NomenclatureSpecificationUnit[j].Unit.Name + "<br/>";
+                        else attributes += json[i].NomenclatureSpecificationUnit[j].Specification.Name + "<span>-</span>" + json[i].NomenclatureSpecificationUnit[j].value + "<br/>";
+                    }
+                }
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    + "<td>" + json[i].VendorCode + "</td>"
+                    + "<td>" + json[i].MaxOperatingTime + "</td>"
+                    + "<td>" + attributes + "</td>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-nomenclatureid='" + json[i].NomenclatureId + "'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-nomenclatureid='" + json[i].NomenclatureId + "'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
+        hubConnection.start();
+
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
             if (isCaretUp == true) {
@@ -344,7 +481,7 @@
             AttributeCounter++;
         };
 
-        function AddClassificationRow(tBodyName) {           
+        function AddClassificationRow(tBodyName) {
             var tBodyElem = '#' + tBodyName;
             $(tBodyElem).append(
                 "<tr id='classification-row-" + AttributeCounter + "'><td class= 'text-left'></td>"
