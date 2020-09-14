@@ -5,7 +5,9 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ToolManagementSystem.Client.Managers;
+using ToolManagementSystem.Client.Managers.NRI;
 using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.Client.Pages.NRI
@@ -23,19 +25,26 @@ namespace ToolManagementSystem.Client.Pages.NRI
         [BindProperty]
         public string filterByName{ get; set; }
         [BindProperty]
-        public string filterByDateStart { get; set; }
+        public DateTime filterByDateStart { get; set; }
         [BindProperty]
-        public string filterByDateEnd { get; set; }
+        public DateTime filterByDateEnd { get; set; }
         [BindProperty]
         public string filterByCounterparty { get; set; }
         [BindProperty]
         public int DeleteContractId { get; set; }
         [BindProperty]
         public string ErrorMessage { get; set; }
-        
+       
+        public SelectList CounterpartiesList { get; set; }
+
         public async Task<IActionResult> OnGet()
         {
             Contracts = await ContractsManager.GetContractsAsync(filterByName, "Name", true);
+            List<Counterparty> counterparties = await CounterpartiesManager.GetCounterpartiesAsync("", "","", "Name", true);
+            CounterpartiesList = new SelectList(counterparties, nameof(Counterparty.CounterpartyId), nameof(Counterparty.Name));
+            NewContract.DateStart = DateTime.Now;
+            NewContract.DateEnd = DateTime.Now;
+            NewContract.CounterpartyId=null;
             if (Contracts != null)
             {
                 Contracts = Contracts.OrderBy(x => x.Name).ToList();

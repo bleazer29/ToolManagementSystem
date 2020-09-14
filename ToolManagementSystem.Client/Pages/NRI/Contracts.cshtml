@@ -113,10 +113,11 @@
                                         <td></td>
                                         <td>@contract.Name</td>
 
-                                        <td>@contract.DateStart</td>
-                                        <td>@contract.DateEnd</td>
-                                        <td>@contract.Counterparty.Name</td>
-                                        <td class="align-middle">
+                                        <td>@contract.DateStart.ToString("dd-MM-yyyy")</td>
+                                        <td>@contract.DateEnd.ToString("dd-MM-yyyy")</td>
+                                        <td>@if(contract.Counterparty != null) @contract.Counterparty.Name</td>
+
+                                      <td class="align-middle">
                                             <div class="table-control-buttons-row">
                                                 <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                         data-toggle="modal" data-target="#editModal" data-contractid="@contract.ContractId"></button>
@@ -206,10 +207,8 @@
                                 <label for="counterparty" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
                                 <div class="w-100 d-md-none"></div>
                                 <div class="col col-md-8 col-lg-9 mb-2">
-                                    <select class="form-control"  asp-for="EditContract.CounterpartyId">
-                                        <option selected="selected">Контрагент 1</option>
-                                        <option>Контрагент 2</option>
-                                        <option>Контрагент 3</option>
+                                    <select class="form-control" asp-for="EditContract.CounterpartyId" asp-items="@Model.CounterpartiesList">
+                                        <option value=null></option>option>
                                     </select>
                                 </div>
                             </div>
@@ -236,45 +235,42 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                            <div class="form-group row align-items-center">
-                                <label  class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="text" class="form-control" id="contractName">
-                                </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" asp-for="NewContract.Name">
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control" id="startDate"/>
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="NewContract.DateStart" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control" id="endDate"/>
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="NewContract.DateEnd" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <select class="form-control">
-                                        @foreach (var counterparty in new List<Counterparty>())
-                                        {
-
-                                        }
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control" asp-for="NewContract.CounterpartyId" asp-items="@Model.CounterpartiesList">
+                                    <option value=null></option>option>
+                                </select>
                             </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Create">Сохранить</button>
                     </div>
-                </form>
+                </form>contracts
             </div>
         </div>
     </div>
@@ -284,6 +280,114 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
+        var pagedList = "#contractsTable";
+        var filterByNameStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+        function formatJsonDate(d) {
+            var dateString = new Date(d);
+            var month = dateString.getMonth() + 1;
+            var day = dateString.getDate();
+            var year = dateString.getFullYear();
+            var date = day + "-" + month + "-" + year;
+            return date;
+        }
+
+        $(pagedList + " th a").click(function (e) {
+            e.preventDefault();
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
+            }
+            else {
+                isAscendingSort = true;
+            }
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
+            hubConnection.invoke('GetContracts', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var contractId = $(this).data('contractid');
+                $('#DeleteContractId').val(contractId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var contractId = $(this).data('contractid');
+                hubConnection.invoke('GetEditedContract', contractId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetContracts', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        
+        function convertToTimeZone(d) {
+            let datestring = d.getFullYear().toString() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
+            return datestring;
+        }
+
+        hubConnection.on("recieveEditedContract", function (data) {
+            var json = JSON.parse(data);
+            $('#EditContract_Name').val(json.Name);
+
+            $('#EditContract_DateStart').val(convertToTimeZone(new Date(json.DateStart)));
+            $('#EditContract_DateEnd').val(convertToTimeZone(new Date(json.DateEnd)));
+            $('#EditContract_ContractId').val(json.ContractId);
+            $('#EditContract_CounterpartyId').val(json.CounterpartyId);
+        });
+
+        hubConnection.on("recieveContracts", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();        
+            for (let i = 0; i < json.length; i++) {
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    + "<td>" + formatJsonDate(json[i].DateStart) + "</td>"
+                    + "<td>" + formatJsonDate(json[i].DateEnd) + "</td>"
+                    + "<td>" + ((json[i].Counterparty == null) ? "" : json[i].Counterparty.Name) + "</td>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-contractid='" + json[i].ContractId + "'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-contractid='" + json[i].ContractId + "'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
+        hubConnection.start();
+
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;

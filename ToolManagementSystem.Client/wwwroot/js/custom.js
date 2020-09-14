@@ -52,7 +52,6 @@ function AddMainMenuTree(elementName) {
                 { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } },
-                { "id": "22", "parent": "20", "text": "Единицы измерения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Units" }  }
             ]
         }
     }).on("changed.jstree", function (e, data) {
@@ -171,7 +170,7 @@ function AddClasificationTree(elementName, data) {
             ]
         },
         "search": {
-            "case_sensitive": false,
+            "case_sensitive": true,
             "show_only_matches": true
         }
     });

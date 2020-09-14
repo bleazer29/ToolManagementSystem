@@ -11,7 +11,7 @@ namespace ToolManagementSystem.Client.Managers
 {
     public class ContractsManager
     {
-        static string apiControllerName { get; set; } = "NRI/Contracts";
+        static string apiControllerName { get; set; } = "Contracts";
 
         public async static Task<List<Contract>> GetContractsAsync(string filterByName, string sortField, bool isAscendingSort)
         {
@@ -29,12 +29,36 @@ namespace ToolManagementSystem.Client.Managers
                         {
                             contracts = contracts.OrderBy(x => x.Name).ToList();
                         }
+                        else if (sortField == "DateStart")
+                        {
+                            contracts = contracts.OrderBy(x => x.DateStart).ToList();
+                        }
+                        else if (sortField == "DateEnd")
+                        {
+                            contracts = contracts.OrderBy(x => x.DateEnd).ToList();
+                        }
+                        else if (sortField == "Counterparty")
+                        {
+                            contracts = contracts.OrderBy(x => x.Counterparty == null ? "" : x.Counterparty.Name).ToList();
+                        }
                     }
                     else
                     {
                         if (sortField == "Name")
                         {
                             contracts = contracts.OrderByDescending(x => x.Name).ToList();
+                        }
+                        else if (sortField == "DateStart")
+                        {
+                            contracts = contracts.OrderByDescending(x => x.DateStart).ToList();
+                        }
+                        else if (sortField == "DateEnd")
+                        {
+                            contracts = contracts.OrderByDescending(x => x.DateEnd).ToList();
+                        }
+                        else if (sortField == "Counterparty")
+                        {
+                            contracts = contracts.OrderByDescending(x => x.Counterparty == null ? "" : x.Counterparty.Name).ToList();
                         }
                     }
                 }
