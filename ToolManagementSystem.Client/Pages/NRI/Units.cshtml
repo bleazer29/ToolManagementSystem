@@ -37,11 +37,11 @@
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control"asp-for="filterByName" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" type="button" id="search-button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -56,54 +56,49 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
+                <div class="table-responsive" id="unitsTable">
                     <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:80%">Наименование</th>
+                                <th style="width:80%" class="sort-asc">
+                                    <a href="#" data-sort="Name">
+                                        Наименование
+                                    </a>
+                                </th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td>см</td>
-                                <td class="table-control-buttons-row">
-                                    <div class="row flex-nowrap m-auto">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>м</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>куб.м</td>
-                                <td class="align-middle">
-                                    <div class="table-control-buttons-row">
-                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                                data-toggle="modal" data-target="#editModal"></button>
-                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                                data-toggle="modal" data-target="#deleteModal"></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @if (Model.Units != null && Model.Units.Count > 0)
+                            {
+                                foreach (Unit unit in Model.Units)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@unit.Name</td>
+                                        <td class="align-middle">
+                                            <div class="table-control-buttons-row">
+                                                <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                        data-toggle="modal" data-target="#editModal" data-unitsid="@unit.UnitId"></button>
+                                                <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                        data-toggle="modal" data-target="#deleteModal" data-unitsid="@unit.UnitId"></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,13 +115,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Принять</button>
-                </div>
+                <form method="post">
+                    <input type="hidden" class="form-control" asp-for="DeleteUnitId">
+                    <div class="modal-body">
+                        Вы действительно хотите удалить запись?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Delete">Принять</button>
+                    </div>
+                </form>
+                
             </div>
         </div>
     </div>
@@ -142,21 +141,24 @@
                         <span aria-hidden="true" class="fa fa fa-times"></span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
+                        <input type="hidden" class="form-control" asp-for="EditUnit.UnitId">
                         <div class="form-group row">
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="departmentTitle">
+                                <input type="text" class="form-control" asp-for="EditUnit.Name">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Update">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -172,22 +174,25 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
                         <div class="form-group row">
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="departmentTitle">
+                                <input type="text" class="form-control"  asp-for="NewUnit.Name">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary ">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary " asp-page-handler="Create">Сохранить</button>
+                    </div>
+                </form>
             </div>
+            
         </div>
     </div>
     @*Modal Create*@
@@ -196,6 +201,92 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
+        var pagedList = "#unitsTable";
+        var filterByNameStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+        $(pagedList + " th a").click(function (e) {
+            e.preventDefault();
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
+            }
+            else {
+                isAscendingSort = true;
+            }
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
+            hubConnection.invoke('GetUnits', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var unitId = $(this).data('unitid');
+                $('#DeleteUnitId').val(unitId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var unitId = $(this).data('unitid');
+                hubConnection.invoke('GetEditedUnit', unitId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetUnits', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        hubConnection.on("recieveEditedUnit", function (data) {
+            var json = JSON.parse(data);
+            $('#EditUnit_Name').val(json.Name);
+            $('#EditUnit_UnitId').val(json.UnitId);
+        });
+
+        hubConnection.on("recieveUnits", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();
+            for (let i = 0; i < json.length; i++) {
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-unitid='" + json[i].UnitId + "'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-unitid='" + json[i].UnitId + "'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
+        hubConnection.start();
+
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;

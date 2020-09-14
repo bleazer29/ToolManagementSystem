@@ -10,68 +10,54 @@ using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.Client.Managers.NRI
 {
-    public class DepartmentsManager
+    public class ClassificationManager
     {
-        static string apiControllerName { get; set; } = "NRI/Departments";
+        static string apiControllerName { get; set; } = "NRI/Classification";
 
-        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<ToolClassification>> GetClassificationsAsync(string filterByName)
         {
-            List<Department> departments = null;
+            List<ToolClassification> classifications = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
-                    if (isAscendingSort)
-                    {
-                        if (sortField == "Name")
-                        {
-                            departments = departments.OrderBy(x => x.Name).ToList();
-                        }
-                    }
-                    else
-                    {
-                        if (sortField == "Name")
-                        {
-                            departments = departments.OrderByDescending(x => x.Name).ToList();
-                        }
-                    }
+                    classifications = JsonConvert.DeserializeObject<List<ToolClassification>>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-           
-            return departments;
+
+            return classifications;
         }
 
-        public async static Task<Department> GetDepartmentAsync(int id)
+        public async static Task<ToolClassification> GetClassificationAsync(int id)
         {
-            Department department = null;
+            ToolClassification classification = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                    classification = JsonConvert.DeserializeObject<ToolClassification>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }          
-            return department;
+            }
+            return classification;
         }
 
-        public async static Task<System.Net.HttpStatusCode> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> CreateClassificationAsync(ToolClassification newToolClassification)
         {
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newToolClassification), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
                 return response.StatusCode;
             }
@@ -82,7 +68,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteClassificationAsync(int id)
         {
             try
             {
@@ -96,13 +82,13 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> UpdateClassificationAsync(ToolClassification newToolClassification)
         {
-           
+
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newToolClassification), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newToolClassification.ToolClassificationId, content);
                 return response.StatusCode;
             }
             catch (Exception ex)
@@ -111,6 +97,5 @@ namespace ToolManagementSystem.Client.Managers.NRI
             }
             return System.Net.HttpStatusCode.BadRequest;
         }
-
     }
 }

@@ -35,7 +35,7 @@
                                 Номер контракта:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByName"/>
                             </div>
                         </div>
                         <div class="row pt-2">
@@ -43,11 +43,11 @@
                                 Период:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
-                                <input type="date" class="form-control " />
+                                <input type="date" class="form-control " asp-for="filterByDateStart"/>
                             </div>
                             <div class="w-100 d-md-none "></div>
                             <div class="col pr-0 pl-0 pl-md-1 pb-2 pb-lg-0">
-                                <input type="date" class="form-control" />
+                                <input type="date" class="form-control" asp-for="filterByDateEnd"/>
                             </div>
                         </div>
 
@@ -56,11 +56,11 @@
                                 Контрагент:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByCounterparty" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -75,15 +75,32 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
+                <div class="table-responsive" id="contractsTable">
                     <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:25%">Номер контракта</th>
-                                <th style="width:15%">Дата начала</th>
-                                <th style="width:15%">Дата конца</th>
-                                <th style="width:25%">Контрагент</th>
+                                <th style="width:25%" class="sort-asc">
+                                    <a href="#" data-sort="Name">
+                                        Номер контракта
+                                    </a>
+                                </th>
+
+                                <th style="width:15%">
+                                    <a href="#" data-sort="DateStart">
+                                        Дата начала
+                                    </a>
+                                </th>
+                                <th style="width:15%">
+                                    <a href="#" data-sort="DateEnd">
+                                        Дата конца
+                                    </a>
+                                </th>
+                                <th style="width:25%">
+                                    <a href="#" data-sort="Counterparty">
+                                        Контрагент
+                                    </a>
+                                </th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
@@ -95,10 +112,12 @@
                                     <tr>
                                         <td></td>
                                         <td>@contract.Name</td>
-                                        <td>@contract.DateStart</td>
-                                        <td>@contract.DateEnd</td>
-                                        <td>@contract.Counterparty.Name</td>
-                                        <td class="align-middle">
+
+                                        <td>@contract.DateStart.ToString("dd-MM-yyyy")</td>
+                                        <td>@contract.DateEnd.ToString("dd-MM-yyyy")</td>
+                                        <td>@if(contract.Counterparty != null) @contract.Counterparty.Name</td>
+
+                                      <td class="align-middle">
                                             <div class="table-control-buttons-row">
                                                 <button class="btn btn-primary fa fa-edit edit-button" type="button"
                                                         data-toggle="modal" data-target="#editModal" data-contractid="@contract.ContractId"></button>
@@ -109,8 +128,17 @@
                                     </tr>
                                 }
                             }
-                                </tbody>
+                        </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,38 +182,38 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                            <div class="form-group row align-items-center">
-                                <label for="contractNumber" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="text" class="form-control"  asp-for="EditContract.Name">
-                                </div>
+                        <input type="hidden" class="form-control" asp-for="EditContract.ContractId">
+
+                        <div class="form-group row align-items-center">
+                            <label for="contractNumber" class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" asp-for="EditContract.Name">
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="startDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control"  asp-for="EditContract.DateStart" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="startDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="EditContract.DateStart" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="endDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control"  asp-for="EditContract.DateEnd" />
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="endDate" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="EditContract.DateEnd" />
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="counterparty" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <select class="form-control"  asp-for="EditContract.CounterpartyId">
-                                        <option selected="selected">Контрагент 1</option>
-                                        <option>Контрагент 2</option>
-                                        <option>Контрагент 3</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="counterparty" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control" asp-for="EditContract.CounterpartyId" asp-items="@Model.CounterpartiesList">
+                                    <option value=null></option>option>
+                                </select>
                             </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
@@ -209,45 +237,44 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                            <div class="form-group row align-items-center">
-                                <label  class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="text" class="form-control" id="contractName">
-                                </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control" id="startDate"/>
-                                </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <input type="date" class="form-control" id="endDate"/>
-                                </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
-                                <div class="w-100 d-md-none"></div>
-                                <div class="col col-md-8 col-lg-9 mb-2">
-                                    <select class="form-control">
-                                        @foreach (var counterparty in new List<Counterparty>())
-                                        {
+                        <input type="hidden" class="form-control" asp-for="NewContract.ContractId">
 
-                                        }
-                                    </select>
-                                </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col col-md-4 col-lg-3 col-form-label mb-2"> Номер контракта:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="text" class="form-control" asp-for="NewContract.Name">
                             </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата начала:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="NewContract.DateStart" />
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Дата конца:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <input type="date" class="form-control" asp-for="NewContract.DateEnd" />
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Контрагент:</label>
+                            <div class="w-100 d-md-none"></div>
+                            <div class="col col-md-8 col-lg-9 mb-2">
+                                <select class="form-control" asp-for="NewContract.CounterpartyId" asp-items="@Model.CounterpartiesList">
+                                    <option value=null></option>option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Create">Сохранить</button>
                     </div>
-                </form>
+                </form>contracts
             </div>
         </div>
     </div>
@@ -257,6 +284,126 @@
 @section Scripts {
     <script type="text/javascript">
         var isCaretUp = false;
+        var pagedList = "#contractsTable";
+        var filterByNameStr = "";
+        var filterByDateStart = "";
+        var filterByDateEnd = "";
+        var filterByCounterpartyStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+        function formatJsonDate(d) {
+            var dateString = new Date(d);
+            var month = dateString.getMonth() + 1;
+            var day = dateString.getDate();
+            var year = dateString.getFullYear();
+            var date = day + "-" + month + "-" + year;
+            return date;
+        }
+
+        $(pagedList + " th a").click(function (e) {
+            e.preventDefault();
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
+            }
+            else {
+                isAscendingSort = true;
+            }
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
+            hubConnection.invoke('GetContracts', filterByNameStr, sortField, isAscendingSort);
+        });
+
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var contractId = $(this).data('contractid');
+                $('#DeleteContractId').val(contractId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var contractId = $(this).data('contractid');
+                hubConnection.invoke('GetEditedContract', contractId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+        $('#filterByDateStart').change(function () {
+            filterByDateStart = $("#filterByDateStart").val();
+        });
+        $('#filterByDateEnd').change(function () {
+            filterByDateEnd = $("#filterByDateEnd").val();
+        });
+        $('#filterByCounterparty').change(function () {
+            filterByCounterpartyStr = $("#filterByCounterparty").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetContracts', filterByNameStr, filterByDateStart, filterByDateEnd, filterByCounterpartyStr, sortField, isAscendingSort);
+        });
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/data")
+            .build();
+
+        
+        function convertToTimeZone(d) {
+            let datestring = d.getFullYear().toString() + '-' + (d.getMonth() + 1).toString().padStart(2, '0') + '-' + d.getDate().toString().padStart(2, '0');
+            return datestring;
+        }
+
+        hubConnection.on("recieveEditedContract", function (data) {
+            var json = JSON.parse(data);
+            $('#EditContract_Name').val(json.Name);
+
+            $('#EditContract_DateStart').val(convertToTimeZone(new Date(json.DateStart)));
+            $('#EditContract_DateEnd').val(convertToTimeZone(new Date(json.DateEnd)));
+            $('#EditContract_ContractId').val(json.ContractId);
+            $('#EditContract_CounterpartyId').val(json.CounterpartyId);
+        });
+
+        hubConnection.on("recieveContracts", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();        
+            for (let i = 0; i < json.length; i++) {
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    + "<td>" + formatJsonDate(json[i].DateStart) + "</td>"
+                    + "<td>" + formatJsonDate(json[i].DateEnd) + "</td>"
+                    + "<td>" + ((json[i].Counterparty == null) ? "" : json[i].Counterparty.Name) + "</td>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-contractid='" + json[i].ContractId + "'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-contractid='" + json[i].ContractId + "'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
+        hubConnection.start();
+
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;

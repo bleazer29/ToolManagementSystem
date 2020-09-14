@@ -34,11 +34,11 @@
                                 Наименование:
                             </div>
                             <div class="col pr-0 pl-0 pl-md-1">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" asp-for="filterByName" />
                             </div>
                         </div>
                         <div class="row d-flex flex-row-reverse pt-2 pb-2">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" id="search-button" type="button">
                                 <span aria-hidden="true" class="fa fa fa-search"></span>
                             </button>
                         </div>
@@ -53,12 +53,16 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap" id="departmentsTable">
+                <div class="table-responsive" id="departmentsTable">
+                    <table class="table table-bordered table-hover css-numbered-rows nri-table text-nowrap">
                         <thead>
                             <tr>
                                 <th style="width:5%">#</th>
-                                <th style="width:80%">Наименование</th>
+                                <th style="width:80%" class="sort-asc">
+                                    <a href="#" data-sort="Name">
+                                        Наименование
+                                    </a>
+                                </th>
                                 <th style="width:15%">Управление</th>
                             </tr>
                         </thead>
@@ -67,21 +71,32 @@
                             {
                                 foreach (Department department in Model.Departments)
                                 {
-                <tr>
-                    <td></td>
-                    <td>@department.Name</td>
-                    <td class="table-control-buttons-row">
-                        <div class="row flex-nowrap m-auto">
-                            <button class="btn btn-primary fa fa-edit edit-button" type="button"
-                                    data-toggle="modal" data-target="#editModal"  data-departmentid="@department.DepartmentId"></button>
-                            <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
-                                    data-toggle="modal" data-target="#deleteModal" data-departmentid="@department.DepartmentId"></button>
-                        </div>
-                    </td>
-                </tr>}
+                            <tr>
+                                <td></td>
+                                <td>@department.Name</td>
+                                <td class="align-middle">
+                                    <div class="table-control-buttons-row">
+                                        <button class="btn btn-primary fa fa-edit edit-button" type="button"
+                                                data-toggle="modal" data-target="#editModal" data-departmentid="@department.DepartmentId"></button>
+                                        <button class="btn btn-primary fa fa-trash-alt delete-button" type="button"
+                                                data-toggle="modal" data-target="#deleteModal" data-departmentid="@department.DepartmentId"></button>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                                }
                             }
                         </tbody>
                     </table>
+                    <div class="simple-pagination container align-content-center">
+                        <div class="row justify-content-center">
+                            <div class="simple-pagination-first"></div>
+                            <div class="simple-pagination-previous"></div>
+                            <div class="simple-pagination-page-numbers row m-0 align-content-center"></div>
+                            <div class="simple-pagination-next"></div>
+                            <div class="simple-pagination-last"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,12 +140,13 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
+                        <input type="hidden" class="form-control" asp-for="EditDepartment.DepartmentId">
                         <div class="form-group row">
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
                                 <input type="text" class="form-control" asp-for="EditDepartment.Name">
-                                <input type="hidden" class="form-control" asp-for="EditDepartment.DepartmentId">
+
                             </div>
                         </div>
                     </div>
@@ -156,7 +172,6 @@
                 </div>
                 <form method="POST">
                     <div class="modal-body">
-
                         <div class="form-group row">
                             <label for="departmentTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
@@ -168,28 +183,71 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary" asp-page-handler="Department">Сохранить</button>
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Create">Сохранить</button>
                     </div>
                 </form>
-               
+
             </div>
         </div>
     </div>
     @*Modal Create*@
+
+   
 </div>
 
-@section Scripts {
-    <script type="text/javascript">var isCaretUp = false;
-        var pagedList = "#departmentsTable";
 
-        $(".delete-button").click(function () {
-            var departmentId = $(this).data('departmentid');
-            $('#DeleteDepartmentId').val(departmentId);
+
+@section Scripts {
+    <script type="text/javascript">
+        var isCaretUp = false;
+        var pagedList = "#departmentsTable";
+        var filterByNameStr = "";
+        var sortField = "Name";
+        var itemsOnPage = 5;
+        var isAscendingSort = true;
+        GenList(pagedList, itemsOnPage);
+        EnableDeleteButton();
+        EnableEditButton();
+
+        $(pagedList + " th a").click(function (e) {
+            e.preventDefault();
+            $(pagedList + " th").removeClass("sort-asc sort-desc");
+            if (sortField == $(this).attr("data-sort")) {
+                isAscendingSort = !isAscendingSort;
+            }
+            else {
+                isAscendingSort = true;
+            }
+            if (isAscendingSort == true) {
+                $(this).parent().addClass("sort-asc");
+            }
+            else {
+                $(this).parent().addClass("sort-desc");
+            }
+            sortField = $(this).attr("data-sort");
+            hubConnection.invoke('GetDepartments', filterByNameStr, sortField, isAscendingSort);
         });
 
-        $('.edit-button').click(function () {
-            var departmentId = $(this).data('departmentid');
-            hubConnection.invoke('GetEditedDepartment', departmentId);
+        function EnableDeleteButton() {
+            $(".delete-button").click(function () {
+                var departmentId = $(this).data('departmentid');
+                $('#DeleteDepartmentId').val(departmentId);
+            });
+        };
+
+        function EnableEditButton() {
+            $('.edit-button').click(function () {
+                var departmentId = $(this).data('departmentid');
+                hubConnection.invoke('GetEditedDepartment', departmentId);
+            });
+        };
+
+        $('#filterByName').change(function () {
+            filterByNameStr = $("#filterByName").val();
+        });
+
+        $('#search-button').click(function () {
+            hubConnection.invoke('GetDepartments', filterByNameStr, sortField, isAscendingSort);
         });
 
         const hubConnection = new signalR.HubConnectionBuilder()
@@ -202,11 +260,36 @@
             $('#EditDepartment_DepartmentId').val(json.DepartmentId);
         });
 
+        hubConnection.on("recieveDepartments", function (data) {
+            var json = JSON.parse(data);
+            $(pagedList + " tbody").empty();
+            for (let i = 0; i < json.length; i++) {
+                $(pagedList + " tbody").append(
+                    "<tr>"
+                    + "<td></td>"
+                    + "<td>" + json[i].Name + "</td>"
+                    + "<td class='align-middle'>"
+                    + "<div class='table-control-buttons-row'>"
+                    + "<button class='btn btn-primary fa fa-edit edit-button' type='button'"
+                    + "data-toggle='modal' data-target='#editModal' data-departmentid='" + json[i].DepartmentId + "'></button>"
+                    + "<button class='btn btn-primary fa fa-trash-alt delete-button' type='button'"
+                    + "data-toggle='modal' data-target='#deleteModal' data-departmentid='" + json[i].DepartmentId + "'></button>"
+                    + "</div>"
+                    + "</td>"
+                    + "</tr>"
+                );
+            }
+            GenList(pagedList, itemsOnPage);
+            EnableEditButton();
+            EnableDeleteButton();
+        });
+
         hubConnection.start();
 
         function ChangeCaret() {
             isCaretUp = !isCaretUp;
             if (isCaretUp == true) {
+
                 $(".Caret").removeClass("fa-caret-down");
                 $(".Caret").addClass("fa-caret-up");
             }

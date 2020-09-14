@@ -52,7 +52,6 @@ function AddMainMenuTree(elementName) {
                 { "id": "19", "parent": "1", "text": "Компания", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "20", "parent": "1", "text": "Инструменты", "state": { "opened": "true", "disabled": "true" } },
                 { "id": "21", "parent": "1", "text": "Клиенты", "state": { "opened": "true", "disabled": "true" } },
-                { "id": "22", "parent": "20", "text": "Единицы измерения", "state": { "opened": "true" }, "a_attr": { "href": "/NRI/Units" }  }
             ]
         }
     }).on("changed.jstree", function (e, data) {
@@ -83,17 +82,52 @@ function initTooltips() {
     })
 }
 
-function AddClasificationTree(elementName) {
+function ConvertToClassificationTreeGridJSON(listJSON) {
+
+    var res = [];
+    for (var i = 0; i < listJSON.length; i++) {
+        res.push(
+            {
+                "id": listJSON[i].ToolClassificationId,
+                "parent": ((listJSON[i].ParentToolClassificationId == null) ? "#" : listJSON[i].ParentToolClassificationId),
+                "text": listJSON[i].Name,
+                "data": listJSON[i],
+                "state": { "opened": "true" }
+            }
+        );
+    }
+    return res;
+};
+
+function ConvertToClassificationDropdownTreeGridJSON(listJSON) {
+
+    var res = [];
+    res.push(
+        {
+            "id": -1,
+            "parent": "#",
+            "text": "Добавить в корень",
+            "data": "",
+            "state": { "opened": "true" }
+        }
+    );
+    for (var i = 0; i < listJSON.length; i++) {
+        res.push(
+            {
+                "id": listJSON[i].ToolClassificationId,
+                "parent": ((listJSON[i].ParentToolClassificationId == null) ? "#" : listJSON[i].ParentToolClassificationId),
+                "text": listJSON[i].Name,
+                "data": listJSON[i],
+                "state": { "opened": "true" }
+            }
+        );
+    }
+    return res;
+};
+
+function AddClasificationTree(elementName, data) {
     var elem = "#" + elementName;
     // tree data
-    var data;
-    data = [{ "id": "1", "parent": "#", "text": "Вид1", "data": { "nodeId": "1" }, "state": { "opened": "true" } },
-    { "id": "2", "parent": "#", "text": "Вид2", "data": { "nodeId": "2" }, "state": { "opened": "true" } },
-    { "id": "3", "parent": "#", "text": "Вид3", "data": { "nodeId": "3" }, "state": { "opened": "true" } },
-    { "id": "4", "parent": "1", "text": "Тип1", "data": { "nodeId": "4" }, "state": { "opened": "true" } },
-    { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" }, "state": { "opened": "true" } },
-    { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" }, "state": { "opened": "true" } },
-    { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" }, "state": { "opened": "true" } }];
     var i = 0;
     $(elem).jstree({
         "plugins": ["grid", "wholerow", "search"],
@@ -124,44 +158,37 @@ function AddClasificationTree(elementName) {
                     "header": "Управление",
                     "tree": false,
                     "cellClass": "jstree-grid-buttons-cell",
-                    "value": "nodeId",
+                    "value": "ToolClassificationId",
 
                     "format": function (v) {
-
                         return ("<button class='btn btn-primary mr-1 fa fa-edit edit-button' type='button'"
-                            + "data-toggle='modal' data-target='#editModal' nodeId='" + v + "'></button>"
+                            + "data-toggle='modal' data-target='#editModal' data-classificationid='" + v + "'></button>"
                             + "<button class='btn btn-primary ml-1 fa fa-trash-alt delete-button' type='button'"
-                            + "data-toggle='modal' data-target='#deleteModal' nodeId='" + v + "'></button>");
+                            + "data-toggle='modal' data-target='#deleteModal' data-classificationid='" + v + "'></button>");
                     },
                 }
             ]
+        },
+        "search": {
+            "case_sensitive": true,
+            "show_only_matches": true
         }
     });
 }
 
-function AddClassificationTreeDropdown(elementName, textboxName) {
+function AddClassificationTreeDropdown(elementName, nametextboxName, parentidtextboxName,  data) {
     var elem = "#" + elementName;
-    var textboxElem = "#" + textboxName;
+    var nametextboxElem = "#" + nametextboxName;
+    var parentidtextboxElem = "#" + parentidtextboxName;
+
 
     $(elem).on("select_node.jstree", function (e, data) {
-        $(textboxElem).val(data.node.text);
+        $(nametextboxElem).val(data.node.text);
+        $(parentidtextboxElem).val(data.node.id == "-1" ? "" : data.node.id);
     });
 
-    // tree data
-
-    var data;
-    data = [
-        { "id": "-1", "parent": "#", "text": "Добавить в корень", "data": { "title": "t-1" } },
-        { "id": "1", "parent": "#", "text": "Вид1", "data": { "nodeId": "1" } },
-        { "id": "2", "parent": "#", "text": "Вид2", "data": { "nodeId": "2" } },
-        { "id": "3", "parent": "#", "text": "Вид3", "data": { "nodeId": "3" } },
-        { "id": "4", "parent": "1", "text": "Тип1", "data": { "nodeId": "4" } },
-        { "id": "5", "parent": "1", "text": "Тип2", "data": { "nodeId": "5" } },
-        { "id": "6", "parent": "2", "text": "Тип3", "data": { "nodeId": "6" } },
-        { "id": "7", "parent": "4", "text": "Подтип4", "data": { "nodeId": "7" } }];
-
     $(elem).jstree({
-        "plugins": ["wholerow", "search"],
+        "plugins": ["wholerow"],
         "core": {
             "multiple": false,
             "themes": {
@@ -174,8 +201,6 @@ function AddClassificationTreeDropdown(elementName, textboxName) {
         },
 
     });
-
-
 }
 
 function StopDropdownFromClosing(dropDownName) {
@@ -299,18 +324,6 @@ function AddRolesTree(elementName) {
     });
 }
 
-//function AddPartRow(tBodyName, counter) {
-//    var tBodyElem = '#' + tBodyName;
-//    $(tBodyElem).append(
-//        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
-//        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
-//            + "</td >"
-//        + "<td class='text-left'><select class='form-control'></select></td>"
-//            + "<td class='text-left'></td>"
-//            + "</tr>"
-//    );
-//}
-
 function ClearTable(tBodyName) {
     var tBodyElem = '#' + tBodyName;
     $(tBodyElem).empty();
@@ -320,6 +333,20 @@ function RemoveTableRow(tBodyName) {
     var tBodyElem = '#' + tBodyName.substr(0, tBodyName.lastIndexOf("_")) + tBodyName.substr(tBodyName.lastIndexOf("-"));
     $(tBodyElem).remove();
 }
+
+function GenList(listElem, itemsPerPage) {
+    $(listElem).simplePagination({
+        items_per_page: itemsPerPage,
+        number_of_visible_page_numbers: 5,
+        first_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-double-left'></i></div>",
+        previous_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-left'></i></div>",
+        next_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-right'></i></div>",
+        last_content: "<div class='btn btn-primary m-1'> <i class='fas fa fa-angle-double-right'></i></div>"
+    });
+}
+
+
+
 
 //function AddClassificationRow(tBodyName, counter) {
 //    var tBodyElem = '#' + tBodyName;
@@ -342,5 +369,17 @@ function RemoveTableRow(tBodyName) {
 //        + "</td >"
 //        + "<td class='text-left'><select class='form-control'></select></td>"
 //        + "</tr>"
+//    );
+//}
+
+//function AddPartRow(tBodyName, counter) {
+//    var tBodyElem = '#' + tBodyName;
+//    $(tBodyElem).append(
+//        "<tr id='parts-row-" + counter + "'><td class= 'text-left'>"  
+//        + "<button id='parts-row_button-" + counter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
+//            + "</td >"
+//        + "<td class='text-left'><select class='form-control'></select></td>"
+//            + "<td class='text-left'></td>"
+//            + "</tr>"
 //    );
 //}

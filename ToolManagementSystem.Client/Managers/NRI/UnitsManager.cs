@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,32 +9,32 @@ using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.Client.Managers.NRI
 {
-    public class DepartmentsManager
+    public class UnitsManager
     {
-        static string apiControllerName { get; set; } = "NRI/Departments";
+        static string apiControllerName { get; set; } = "NRI/Units";
 
-        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<Unit>> GetUnitsAsync(string filterByName, string sortField, bool isAscendingSort)
         {
-            List<Department> departments = null;
+            List<Unit> units = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                    units = JsonConvert.DeserializeObject<List<Unit>>(apiResponse);
                     if (isAscendingSort)
                     {
                         if (sortField == "Name")
                         {
-                            departments = departments.OrderBy(x => x.Name).ToList();
+                            units = units.OrderBy(x => x.Name).ToList();
                         }
                     }
                     else
                     {
                         if (sortField == "Name")
                         {
-                            departments = departments.OrderByDescending(x => x.Name).ToList();
+                            units = units.OrderByDescending(x => x.Name).ToList();
                         }
                     }
                 }
@@ -44,34 +43,34 @@ namespace ToolManagementSystem.Client.Managers.NRI
             {
                 Console.WriteLine(ex.Message);
             }
-           
-            return departments;
+
+            return units;
         }
 
-        public async static Task<Department> GetDepartmentAsync(int id)
+        public async static Task<Unit> GetUnitAsync(int id)
         {
-            Department department = null;
+            Unit unit = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                    unit = JsonConvert.DeserializeObject<Unit>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }          
-            return department;
+            }
+            return unit;
         }
 
-        public async static Task<System.Net.HttpStatusCode> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> CreateUnitAsync(Unit newUnit)
         {
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newUnit), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
                 return response.StatusCode;
             }
@@ -82,7 +81,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteUnitAsync(int id)
         {
             try
             {
@@ -96,13 +95,13 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> UpdateUnitAsync(Unit newUnit)
         {
-           
+
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newUnit), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newUnit.UnitId, content);
                 return response.StatusCode;
             }
             catch (Exception ex)
@@ -111,6 +110,5 @@ namespace ToolManagementSystem.Client.Managers.NRI
             }
             return System.Net.HttpStatusCode.BadRequest;
         }
-
     }
 }

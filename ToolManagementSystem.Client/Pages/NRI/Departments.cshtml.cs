@@ -25,57 +25,61 @@ namespace ToolManagementSystem.Client.Pages.NRI
         public Department EditDepartment { get; set; } = new Department();
 
         [BindProperty]
-        public string FilterByName { get; set; }
+        public string filterByName { get; set; }
 
         [BindProperty]
         public int DeleteDepartmentId { get; set; }
 
-        public IActionResult OnGet()
-        {
-            Departments = DepartmentsManager.GetDepartmentsAsync(FilterByName).Result;
-            return Page();
+        [BindProperty]
+        public string ErrorMessage { get; set; }
+
+        public async Task<IActionResult> OnGet()
+        {      
+            Departments = await DepartmentsManager.GetDepartmentsAsync(filterByName, "Name", true);
+            if (Departments != null)
+            {
+                Departments = Departments.OrderBy(x => x.Name).ToList();
+                return Page();
+            }   
+            else
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось получить данные из базы данных." });
+
         }
 
-        public void OnGetDepartment(int id)
+        public async Task<IActionResult> OnPostCreate()
         {
-            EditDepartment = DepartmentsManager.GetDepartmentAsync(id).Result;
-            if (EditDepartment.DepartmentId == -1)
+            ErrorMessage = "";
+            HttpStatusCode temp = await DepartmentsManager.CreateDepartmentAsync(NewDepartment);
+            if(temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось добавить новую запись в базу данных." });
             }
+            return RedirectToPage("Departments");
         }
 
-        public IActionResult OnPostDepartment()
+        public async Task<IActionResult> OnPostDelete()
         {
-            Department temp = DepartmentsManager.CreateDepartmentAsync(NewDepartment).Result;
-            if(temp != null)
-            {
-                DepartmentsManager.CreateDepartmentAsync(temp);
-            }
-            return OnGet();
-        }
-
-        public IActionResult OnPostDelete()
-        {
-            HttpStatusCode temp = DepartmentsManager.DeleteDepartmentAsync(DeleteDepartmentId).Result;
+            ErrorMessage = "";
+            HttpStatusCode temp = await DepartmentsManager.DeleteDepartmentAsync(DeleteDepartmentId);
             if (temp != HttpStatusCode.OK)
             {
                 //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось удалить запись из базы данных." });
             }
-            return OnGet();
+            return RedirectToPage("Departments");
         }
 
-        public IActionResult OnPostUpdate()
+        public async Task<IActionResult> OnPostUpdate()
         {
-            Department temp = DepartmentsManager.UpdateDepartmentAsync(EditDepartment).Result;
-            if(temp != null)
+            ErrorMessage = "";
+            HttpStatusCode temp = await DepartmentsManager.UpdateDepartmentAsync(EditDepartment);
+            if (temp != HttpStatusCode.OK)
             {
-                if (temp.DepartmentId == -1)
-                {
-                    //do something
-                }
+                //do something
+                return RedirectToPage("/Error", new { ErrorMessage = "Не удалось обновить данные записи в базе данных." });
             }
-            return OnGet();
+            return RedirectToPage("Departments");
         }
 
 

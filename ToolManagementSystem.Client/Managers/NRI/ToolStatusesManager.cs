@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +9,33 @@ using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.Client.Managers.NRI
 {
-    public class DepartmentsManager
+    public class ToolStatusesManager
     {
-        static string apiControllerName { get; set; } = "NRI/Departments";
+        static string apiControllerName { get; set; } = "NRI/Statuses";
 
-        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<ToolStatus>> GetToolStatusesAsync(string filterByName, string sortField, bool isAscendingSort)
         {
-            List<Department> departments = null;
+            List<ToolStatus> toolStatuses = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                    toolStatuses = JsonConvert.DeserializeObject<List<ToolStatus>>(apiResponse);
                     if (isAscendingSort)
                     {
                         if (sortField == "Name")
                         {
-                            departments = departments.OrderBy(x => x.Name).ToList();
-                        }
+                            toolStatuses = toolStatuses.OrderBy(x => x.Name).ToList();
+                        }                       
                     }
                     else
                     {
                         if (sortField == "Name")
                         {
-                            departments = departments.OrderByDescending(x => x.Name).ToList();
-                        }
+                            toolStatuses = toolStatuses.OrderByDescending(x => x.Name).ToList();
+                        }                        
                     }
                 }
             }
@@ -44,34 +43,35 @@ namespace ToolManagementSystem.Client.Managers.NRI
             {
                 Console.WriteLine(ex.Message);
             }
-           
-            return departments;
+
+            return toolStatuses;
         }
 
-        public async static Task<Department> GetDepartmentAsync(int id)
+        public async static Task<ToolStatus> GetToolStatusAsync(int id)
         {
-            Department department = null;
+            ToolStatus toolStatus = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                    toolStatus = JsonConvert.DeserializeObject<ToolStatus>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }          
-            return department;
+            }
+            return toolStatus;
         }
 
-        public async static Task<System.Net.HttpStatusCode> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> CreateToolStatusAsync(ToolStatus newToolStatus)
         {
+
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newToolStatus), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
                 return response.StatusCode;
             }
@@ -82,7 +82,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteToolStatusAsync(int id)
         {
             try
             {
@@ -96,13 +96,12 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> UpdateToolStatusAsync(ToolStatus newToolStatus)
         {
-           
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newToolStatus), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newToolStatus.ToolStatusId, content);
                 return response.StatusCode;
             }
             catch (Exception ex)
@@ -111,6 +110,5 @@ namespace ToolManagementSystem.Client.Managers.NRI
             }
             return System.Net.HttpStatusCode.BadRequest;
         }
-
     }
 }

@@ -1,41 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using ToolManagementSystem.Client.Managers.NRI;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net;
 using ToolManagementSystem.Shared.Models;
+using System.Text;
 
 namespace ToolManagementSystem.Client.Managers.NRI
 {
-    public class DepartmentsManager
+    public class SpecificationsManager
     {
-        static string apiControllerName { get; set; } = "NRI/Departments";
+        static string apiControllerName { get; set; } = "NRI/Specifications";
 
-        public async static Task<List<Department>> GetDepartmentsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<Specification>> GetSpecificationsAsync(string filterByName, string sortField, bool isAscendingSort)
         {
-            List<Department> departments = null;
+            List<Specification> specifications = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    departments = JsonConvert.DeserializeObject<List<Department>>(apiResponse);
+                    specifications = JsonConvert.DeserializeObject<List<Specification>>(apiResponse);
                     if (isAscendingSort)
                     {
                         if (sortField == "Name")
                         {
-                            departments = departments.OrderBy(x => x.Name).ToList();
+                            specifications = specifications.OrderBy(x => x.Name).ToList();
                         }
                     }
                     else
                     {
                         if (sortField == "Name")
                         {
-                            departments = departments.OrderByDescending(x => x.Name).ToList();
+                            specifications = specifications.OrderByDescending(x => x.Name).ToList();
                         }
                     }
                 }
@@ -44,34 +45,34 @@ namespace ToolManagementSystem.Client.Managers.NRI
             {
                 Console.WriteLine(ex.Message);
             }
-           
-            return departments;
+
+            return specifications;
         }
 
-        public async static Task<Department> GetDepartmentAsync(int id)
+        public async static Task<Specification> GetSpecificationAsync(int id)
         {
-            Department department = null;
+            Specification specification = null;
             try
             {
                 HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "/" + id);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    department = JsonConvert.DeserializeObject<Department>(apiResponse);
+                    specification = JsonConvert.DeserializeObject<Specification>(apiResponse);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }          
-            return department;
+            }
+            return specification;
         }
 
-        public async static Task<System.Net.HttpStatusCode> CreateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> CreateSpecificationAsync(Specification newSpecification)
         {
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newSpecification), Encoding.UTF8, "application/json");
                 var response = await CustomHttpClient.GetClientInstance().PostAsync(apiControllerName, content);
                 return response.StatusCode;
             }
@@ -82,7 +83,7 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> DeleteDepartmentAsync(int id)
+        public async static Task<System.Net.HttpStatusCode> DeleteSpecificationAsync(int id)
         {
             try
             {
@@ -96,13 +97,13 @@ namespace ToolManagementSystem.Client.Managers.NRI
             return System.Net.HttpStatusCode.BadRequest;
         }
 
-        public async static Task<System.Net.HttpStatusCode> UpdateDepartmentAsync(Department newDepartment)
+        public async static Task<System.Net.HttpStatusCode> UpdateSpecificationAsync(Specification newSpecification)
         {
-           
+
             try
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(newDepartment), Encoding.UTF8, "application/json");
-                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newDepartment.DepartmentId, content);
+                StringContent content = new StringContent(JsonConvert.SerializeObject(newSpecification), Encoding.UTF8, "application/json");
+                var response = await CustomHttpClient.GetClientInstance().PutAsync(apiControllerName + "/" + newSpecification.SpecificationId, content);
                 return response.StatusCode;
             }
             catch (Exception ex)
@@ -111,6 +112,5 @@ namespace ToolManagementSystem.Client.Managers.NRI
             }
             return System.Net.HttpStatusCode.BadRequest;
         }
-
     }
 }
