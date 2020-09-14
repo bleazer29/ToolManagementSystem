@@ -34,7 +34,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Units = await UnitsManager.GetUnitsAsync(filterByName, "Name", true);
             if (Units != null)
             {
-                Units = Units.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else

@@ -34,7 +34,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Classifications = await ClassificationManager.GetClassificationsAsync(filterByName);
             if (Classifications != null)
             {
-                Classifications = Classifications.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else

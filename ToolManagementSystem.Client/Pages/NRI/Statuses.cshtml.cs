@@ -34,7 +34,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Statuses = await ToolStatusesManager.GetToolStatusesAsync(filterByName, "Name", true);
             if (Statuses != null)
             {
-                Statuses = Statuses.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else
