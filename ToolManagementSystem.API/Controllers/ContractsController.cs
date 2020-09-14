@@ -21,8 +21,8 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         // GET: api/Contracts
-        [HttpGet]
-        public async Task<IActionResult> GetContracts(string name, string counterparty)
+        [HttpGet("{startDate:datetime?}/{endDate:datetime?}")]
+        public async Task<IActionResult> GetContracts(string name, string counterparty, DateTime? startDate, DateTime? endDate)
         {
             try
             {
@@ -36,6 +36,14 @@ namespace ToolManagementSystem.API.Controllers
                 if (string.IsNullOrEmpty(counterparty) == false)
                 {
                     contracts = contracts.Where(x => x.Counterparty.Name.ToLower().Contains(counterparty.ToLower())).ToList();
+                }
+                if(startDate != null)
+                {
+                    contracts = contracts.Where(x => x.DateStart >= startDate).ToList();
+                }
+                if (endDate != null)
+                {
+                    contracts = contracts.Where(x => x.DateStart <= endDate).ToList();
                 }
                 return Ok(contracts);
             }
@@ -89,6 +97,8 @@ namespace ToolManagementSystem.API.Controllers
                 if(contract != null)
                 {
                     contract.Name = value.Name;
+                    contract.DateStart = value.DateStart;
+                    contract.DateEnd = value.DateEnd;
                     contract.CounterpartyId = value.CounterpartyId;
                 }
                 await db.SaveChangesAsync();
