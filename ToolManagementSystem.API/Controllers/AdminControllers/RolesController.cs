@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers.AdminControllers
 {
@@ -11,9 +13,16 @@ namespace ToolManagementSystem.API.Controllers.AdminControllers
     [ApiController]
     public class RolesController : ControllerBase
     {
+        private readonly TMSdbContext db;
+
+        public RolesController(TMSdbContext context)
+        {
+            db = context;
+        }
+
         // GET: api/Admin/Roles
         [HttpGet]
-        public IEnumerable<string> GetRoles()
+        public IEnumerable<string> GetRoles(string name)
         {
             Console.WriteLine("CalledGetRoles() method");
             return new string[] { "value1", "value2" };

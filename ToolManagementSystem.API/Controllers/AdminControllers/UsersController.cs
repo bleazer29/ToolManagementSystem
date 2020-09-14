@@ -99,6 +99,27 @@ namespace ToolManagementSystem.API.Controllers.AdminControllers
             }
         }
 
+        // PUT api/Admin/Users/5/ChangePassword
+        [HttpPut("{id}/ChangePassword")]
+        public async Task<IActionResult> ChangeUserPassword(int id)
+        {
+            try
+            {
+                User user = await db.User.SingleAsync(x => x.UserId == id);
+                if (user != null)
+                {
+                    user.Password = "pass";
+                }
+                await db.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
+        }
+
         // DELETE api/Admin/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)

@@ -14,6 +14,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
     public class ClassificationController : ControllerBase
     {
         private readonly TMSdbContext db;
+        private List<ToolClassification> ClassificationListForClient = new List<ToolClassification>();
 
         public ClassificationController(TMSdbContext context)
         {
@@ -26,17 +27,54 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                List<ToolClassification> classifications = await db.ToolClassification.ToListAsync();
+                ClassificationListForClient = await db.ToolClassification.ToListAsync();
                 if (string.IsNullOrEmpty(name) == false)
                 {
-                    classifications = classifications.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
+                    ClassificationListForClient = FilterClassifications(ClassificationListForClient, name);
                 }
-                return Ok(classifications);
+                ClearNodeReferencesInClientList();
+                return Ok(ClassificationListForClient);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return BadRequest();
+            }
+        }
+
+        // Clearing all parent and children obj references for optimizing response size
+        public void ClearNodeReferencesInClientList()
+        {
+            foreach (ToolClassification item in ClassificationListForClient)
+            {
+                item.ParentToolClassification = null;
+                item.InverseParentToolClassification = null;
+            }
+        }
+
+        public List<ToolClassification> FilterClassifications(List<ToolClassification> classifications, string nameFilter)
+        {
+            classifications = classifications.Where(x => x.Name.ToLower().Contains(nameFilter.ToLower())).ToList();
+            BuildClassificationListForClient(classifications);
+            return classifications;
+        }
+
+        // Build list for client jstree plugin
+        public void BuildClassificationListForClient(List<ToolClassification> classifications)
+        {
+            foreach (ToolClassification classification in classifications)
+            {
+                ClassificationListForClient.Add(classification);
+                GetClassificationParent(classification);
+            }
+        }
+
+        public void GetClassificationParent(ToolClassification node)
+        {
+            if(node.ParentToolClassification != null)
+            {
+                ClassificationListForClient.Add(node.ParentToolClassification);
+                GetClassificationParent(node.ParentToolClassification);
             }
         }
 
@@ -102,10 +140,17 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         {
             try
             {
-                ToolClassification classification = await db.ToolClassification.SingleAsync(x => x.ToolClassificationId == id);
-                db.ToolClassification.Remove(classification);
-                await db.SaveChangesAsync();
-                return Ok();
+                ToolClassification classification = await db.ToolClassification
+                    .Include(x => x.InverseParentToolClassification)
+                    .SingleAsync(x => x.ToolClassificationId == id);
+                if(classification.ParentToolClassificationId != null &&
+                    classification.InverseParentToolClassification.Any() == false)
+                {
+                    db.ToolClassification.Remove(classification);
+                    await db.SaveChangesAsync();
+                    return Ok();
+                }
+                return Problem(statusCode: 412, detail: "Нельзя удалить узел классификации, который имеет родительский или дочерние узлы");
             }
             catch (Exception ex)
             {
