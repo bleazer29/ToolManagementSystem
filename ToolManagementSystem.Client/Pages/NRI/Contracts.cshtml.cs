@@ -50,7 +50,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             NewContract.CounterpartyId=null;
             if (Contracts != null)
             {
-                Contracts = Contracts.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else

@@ -35,7 +35,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Counterparties = await CounterpartiesManager.GetCounterpartiesAsync(filterByName, filterByEDRPOU, filterByAddress, "Name", true);
             if (Counterparties != null)
             {
-                Counterparties = Counterparties.OrderBy(x => x.Name).ToList();
                 return Page();
             }  
             else

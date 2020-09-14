@@ -38,7 +38,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Specifications = await SpecificationsManager.GetSpecificationsAsync(filterByName, "Name", true);
             if (Specifications != null)
             {
-                Specifications = Specifications.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else

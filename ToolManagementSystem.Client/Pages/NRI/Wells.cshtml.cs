@@ -42,7 +42,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Wells = await WellsManager.GetWellsAsync(filterByName, filterByAddress, filterByWellNumber, "Name", true);
             if (Wells != null)
             {
-                Wells = Wells.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else

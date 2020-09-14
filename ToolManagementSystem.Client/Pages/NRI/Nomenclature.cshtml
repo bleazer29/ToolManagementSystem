@@ -426,7 +426,17 @@
             $('#EditNomenclature_Name').val(json.Name);
             $('#EditNomenclature_NomenclatureId').val(json.NomenclatureId);
         });
-      
+
+        function getTimeSpan(ticks) {
+            var d = new Date(ticks);
+            return {
+                
+                hour: d.getUTCHours(),
+                minute: d.getMinutes(),
+                second: d.getSeconds()
+            }
+        }
+
         hubConnection.on("recieveNomenclatures", function (data) {
             var json = JSON.parse(data);
             $(pagedList + " tbody").empty();
@@ -444,7 +454,7 @@
                     + "<td></td>"
                     + "<td>" + json[i].Name + "</td>"
                     + "<td>" + json[i].VendorCode + "</td>"
-                    + "<td>" + json[i].MaxOperatingTime + "</td>"
+                    + "<td>" + getTimeSpan(json[i].MaxOperatingTime) + "</td>"
                     + "<td>" + attributes + "</td>"
                     + "<td class='align-middle'>"
                     + "<div class='table-control-buttons-row'>"

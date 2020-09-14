@@ -36,7 +36,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Nomenclatures = await NomenclatureManager.GetNomenclaturesAsync(filterByName, "Name", true);
             if (Nomenclatures != null)
             {
-                Nomenclatures = Nomenclatures.OrderBy(x => x.Name).ToList();
                 return Page();
             }
             else

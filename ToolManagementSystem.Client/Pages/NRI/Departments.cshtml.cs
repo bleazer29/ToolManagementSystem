@@ -38,7 +38,6 @@ namespace ToolManagementSystem.Client.Pages.NRI
             Departments = await DepartmentsManager.GetDepartmentsAsync(filterByName, "Name", true);
             if (Departments != null)
             {
-                Departments = Departments.OrderBy(x => x.Name).ToList();
                 return Page();
             }   
             else
