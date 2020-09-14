@@ -22,7 +22,7 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/Contracts
         [HttpGet]
-        public async Task<IActionResult> GetContracts(string name)
+        public async Task<IActionResult> GetContracts(string name, string counterparty)
         {
             try
             {
@@ -32,6 +32,10 @@ namespace ToolManagementSystem.API.Controllers
                 if (string.IsNullOrEmpty(name) == false)
                 {
                     contracts = contracts.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToList();
+                }
+                if (string.IsNullOrEmpty(counterparty) == false)
+                {
+                    contracts = contracts.Where(x => x.Counterparty.Name.ToLower().Contains(counterparty.ToLower())).ToList();
                 }
                 return Ok(contracts);
             }
