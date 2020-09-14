@@ -24,8 +24,8 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         // GET: api/WorkOrders/2020-08-11/2020-12-30
-        [HttpGet("{startdate:datetime}/{enddate:datetime}")]
-        public async Task<IActionResult> GetWorkOrders(DateTime startdate, DateTime enddate, string name, string responsible, string status)
+        [HttpGet("{startdate:datetime?}/{enddate:datetime?}")]
+        public async Task<IActionResult> GetWorkOrders(DateTime? startdate, DateTime? enddate, string name, string responsible, string status)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace ToolManagementSystem.API.Controllers
 
         // GET: api/WorkOrders/Repairs/2020-08-11/2020-12-30
         [HttpGet("Repairs/{startdate:datetime?}/{enddate:datetime?}/{status?}")]
-        public async Task<IActionResult> GetRepairs(DateTime startdate, DateTime enddate, string responsible)
+        public async Task<IActionResult> GetRepairs(DateTime? startdate, DateTime? enddate, string responsible)
         {
             try
             {
