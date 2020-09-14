@@ -90,17 +90,10 @@ namespace ToolManagementSystem.API.Controllers
 
         public List<Order> FilterOrdersByDate(List<Order> orders, DateTime? startDate, DateTime? endDate)
         {
-            if (startDate != null)
+            if (startDate != null && endDate != null)
             {
-                orders = orders.Where(x => x.StartDate >= startDate
-                || x.EndDate >= startDate
-                || x.EstimatedEndDate >= startDate).ToList();
-            }
-            if (endDate != null)
-            {
-                orders = orders.Where(x => x.StartDate >= endDate
-                || x.EndDate >= endDate
-                || x.EstimatedEndDate >= endDate).ToList();
+                orders = orders.Where(x => (x.StartDate >= startDate && x.StartDate <= endDate)
+                || (x.EndDate <= endDate && x.EndDate >= startDate)).ToList();
             }
             return orders;
         }

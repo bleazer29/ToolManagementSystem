@@ -10,15 +10,28 @@ namespace ToolManagementSystem.Client.Pages
 {
     public class LoginModel : PageModel
     {
+
+        [BindProperty]
+        public string Login { get; set; }
+        [BindProperty]
+        public string Password { get; set; }
+
         public void OnGet()
         {
 
         }
 
-        public async Task<IActionResult> OnGetUser(string login, string password)
+        public async Task<IActionResult> OnGetUser()
         {
-            await AccountManager.LoginAsync(login, password);
-            return RedirectToPage("Index");
+            await AccountManager.LoginAsync(Login, Password);
+            if(AccountManager.CurrentUser != null)
+            {
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                return RedirectToPage("Login");
+            }
         }
     }
 }

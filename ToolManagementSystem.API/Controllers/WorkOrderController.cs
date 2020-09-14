@@ -45,13 +45,10 @@ namespace ToolManagementSystem.API.Controllers
                 {
                     workOrders = workOrders.Where(x => x.WorkOrderStatus.Name.ToLower().Contains(status.ToLower())).ToList();
                 }
-                if(startdate != null)
+                if(startdate != null && enddate != null)
                 {
-                    workOrders = workOrders.Where(x => x.StartDate >= startdate).ToList();
-                }
-                if(enddate != null)
-                {
-                    workOrders = workOrders.Where(x => x.EndDate <= enddate).ToList();
+                    workOrders = workOrders.Where(x => (x.StartDate >= startdate && x.StartDate <= enddate) 
+                    || (x.EndDate <= enddate && x.EndDate >= startdate)).ToList();
                 }
                 return Ok(workOrders);
             }

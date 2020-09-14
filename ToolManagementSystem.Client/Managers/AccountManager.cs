@@ -12,7 +12,8 @@ namespace ToolManagementSystem.Client.Managers
 {
     public class AccountManager
     {
-        static string apiControllerName { get; set; } = "Accounts";
+        private static string apiControllerName { get; } = "Accounts";
+        public static User CurrentUser { get; set; }
         public async static Task<User> LoginAsync(string login, string pass)
         {
             User user = new User();
@@ -28,6 +29,7 @@ namespace ToolManagementSystem.Client.Managers
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 user = JsonConvert.DeserializeObject<User>(apiResponse);
+                CurrentUser = user;
             }
             return user;
         }

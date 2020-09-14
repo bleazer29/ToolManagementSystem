@@ -37,13 +37,10 @@ namespace ToolManagementSystem.API.Controllers
                 {
                     contracts = contracts.Where(x => x.Counterparty.Name.ToLower().Contains(counterparty.ToLower())).ToList();
                 }
-                if(startDate != null)
+                if (startDate != null && endDate != null)
                 {
-                    contracts = contracts.Where(x => x.DateStart >= startDate).ToList();
-                }
-                if (endDate != null)
-                {
-                    contracts = contracts.Where(x => x.DateStart <= endDate).ToList();
+                    contracts = contracts.Where(x => (x.DateStart >= startDate && x.DateStart <= endDate)
+                    || (x.DateEnd <= endDate && x.DateEnd >= startDate)).ToList();
                 }
                 return Ok(contracts);
             }
