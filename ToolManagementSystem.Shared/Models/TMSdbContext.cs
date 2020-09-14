@@ -16,7 +16,6 @@ namespace ToolManagementSystem.Shared.Models
         }
 
         public virtual DbSet<Contract> Contract { get; set; }
-        public virtual DbSet<RepairTool> RepairTool { get; set; }
         public virtual DbSet<Counterparty> Counterparty { get; set; }
         public virtual DbSet<Cycle> Cycle { get; set; }
         public virtual DbSet<CycleItem> CycleItem { get; set; }
@@ -31,6 +30,7 @@ namespace ToolManagementSystem.Shared.Models
         public virtual DbSet<OrderTool> OrderTool { get; set; }
         public virtual DbSet<OrderToolOperatingTime> OrderToolOperatingTime { get; set; }
         public virtual DbSet<Permission> Permission { get; set; }
+        public virtual DbSet<RepairTool> RepairTool { get; set; }
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<ReportHistory> ReportHistory { get; set; }
         public virtual DbSet<Right> Right { get; set; }
@@ -58,7 +58,7 @@ namespace ToolManagementSystem.Shared.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source = (localdb)\\mssqllocaldb; Initial Catalog = TMSdb; Integrated Security = True;");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=TMSdb");
             }
         }
 
@@ -294,6 +294,19 @@ namespace ToolManagementSystem.Shared.Models
                     .HasConstraintName("FK_Permission_Permission");
             });
 
+            modelBuilder.Entity<RepairTool>(entity =>
+            {
+                entity.HasOne(d => d.Tool)
+                    .WithMany(p => p.RepairTool)
+                    .HasForeignKey(d => d.ToolId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.RepairTool)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
             modelBuilder.Entity<Report>(entity =>
             {
                 entity.Property(e => e.FillePath)
@@ -507,10 +520,7 @@ namespace ToolManagementSystem.Shared.Models
 
             modelBuilder.Entity<ToolStatus>(entity =>
             {
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(250)
-                    .IsFixedLength();
+                entity.Property(e => e.Description).HasMaxLength(250);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -585,6 +595,8 @@ namespace ToolManagementSystem.Shared.Models
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(250);
+
+                entity.Property(e => e.WellNumber).HasMaxLength(50);
 
                 entity.HasOne(d => d.Counterparty)
                     .WithMany(p => p.Well)
