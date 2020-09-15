@@ -211,7 +211,6 @@
                             </div>
                             <div class="row align-items-center pl-3 pr-3">
                                 <div class="col pt-1">
-
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover css-numbered-rows text-nowrap">
                                             <thead>
@@ -226,7 +225,6 @@
                                             <tbody id="classificationEditTbody">
                                                 <tr>
                                                     <td> </td>
-
                                                     <td>
                                                         <select class="form-control">
                                                             <option selected="selected">Длина</option>
@@ -277,27 +275,30 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post">
+                    <div class="modal-body">
+
+                        <input type="hidden" class="form-control" asp-for="NewNomenclature.NomenclatureId">
+
                         <div class="form-group row align-items-center">
                             <label for="statusTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Наименование:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="statusTitle">
+                                <input type="text" class="form-control" asp-for="NewNomenclature.Name">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Артикул:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="text" class="form-control" asp-for="NewNomenclature.VendorCode">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="unitTitle" class="col col-md-4 col-lg-3 col-form-label mb-2"> Максимальное время работы:</label>
                             <div class="w-100 d-md-none"></div>
                             <div class="col col-md-8 col-lg-9 mb-2">
-                                <input type="text" class="form-control" id="unitTitle">
+                                <input type="time" class="form-control" asp-for="NewNomenclature.MaxOperatingTime">
                             </div>
                         </div>
                         <div class="form-group">
@@ -324,7 +325,9 @@
                                             <tbody id="classificationCreationTbody">
                                                 <tr>
                                                     <td></td>
-
+                                                    <td>
+                                                        <input type="text" id="spec-name-" class="form-control" />
+                                                    </td>
                                                     <td>
                                                         <select class="form-control">
                                                             <option selected="selected">Длина</option>
@@ -333,11 +336,13 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <select class="form-control">
-                                                            <option selected="selected">м</option>
-                                                            <option>см</option>
-                                                            <option>кг</option>
-                                                        </select>
+
+                                                        <input class="form-control" list="browsers" name="browser" id="browser">
+                                                        <datalist class="form-control" id="browsers">
+                                                            <option value=null></option>option>
+
+                                                        </datalist>
+
                                                     </td>
                                                     <td>
                                                         <input class="form-control" type="number" value="12" />
@@ -352,12 +357,13 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationCreationTbody')">Отмена</button>
-                    <button type="button" class="btn btn-primary" onclick="ClearClassificationTable('classificationCreationTbody')">Сохранить</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationCreationTbody')">Отмена</button>
+                        <button type="submit" class="btn btn-primary" onclick="ClearClassificationTable('classificationCreationTbody')">Сохранить</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
