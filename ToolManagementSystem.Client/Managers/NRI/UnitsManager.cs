@@ -11,14 +11,14 @@ namespace ToolManagementSystem.Client.Managers.NRI
 {
     public class UnitsManager
     {
-        static string apiControllerName { get; set; } = "NRI/Units";
+        static string apiControllerName { get; set; } = "NRI/Specifications/Units";
 
-        public async static Task<List<Unit>> GetUnitsAsync(string filterByName, string sortField, bool isAscendingSort)
+        public async static Task<List<Unit>> GetUnitsAsync(/*string filterByName,*/ string sortField, bool isAscendingSort)
         {
             List<Unit> units = null;
             try
             {
-                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName + "?name=" + filterByName);
+                HttpResponseMessage response = await CustomHttpClient.GetClientInstance().GetAsync(apiControllerName /*+ "?name=" + filterByName*/);
                 if (response.IsSuccessStatusCode)
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

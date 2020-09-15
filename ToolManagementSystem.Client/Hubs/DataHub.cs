@@ -68,7 +68,7 @@ namespace ToolManagementSystem.Client.Hubs
 
         public async Task GetUnits(string filterByName, string sortField, bool isAscendingSort)
         {
-            List<Unit> units = await UnitsManager.GetUnitsAsync(filterByName, sortField, isAscendingSort);
+            List<Unit> units = await UnitsManager.GetUnitsAsync(/*filterByName,*/ sortField, isAscendingSort);
             string json = JsonConvert.SerializeObject(units);
             await Clients.Caller.SendAsync("recieveUnits", json);
         }

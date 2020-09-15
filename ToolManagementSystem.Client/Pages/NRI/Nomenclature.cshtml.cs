@@ -30,17 +30,22 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         [BindProperty]
         public string ErrorMessage { get; set; }
+        [BindProperty]
+        public List<Unit> Units { get; set; }
+        [BindProperty]
+        public List<Specification> Specifications { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
             Nomenclatures = await NomenclatureManager.GetNomenclaturesAsync(filterByName, filterByVendorCode, "Name", true);
+            Units = await UnitsManager.GetUnitsAsync("Name", true);
+            Specifications = await SpecificationsManager.GetSpecificationsAsync("", "Name", true);
             if (Nomenclatures != null)
             {
                 return Page();
             }
             else
                 return RedirectToPage("/Error", new { ErrorMessage = "Не удалось получить данные из базы данных." });
-
         }
 
         public async Task<IActionResult> OnPostCreate()

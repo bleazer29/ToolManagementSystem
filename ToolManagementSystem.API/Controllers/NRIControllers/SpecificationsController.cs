@@ -42,7 +42,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
 
 
         // GET api/NRI/Specifications/Units
-        [HttpGet("/Units")]
+        [HttpGet("Units")]
         public async Task<IActionResult> GetUnits()
         {
             try

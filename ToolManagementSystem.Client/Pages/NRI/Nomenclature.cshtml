@@ -1,5 +1,6 @@
 ﻿@page "/NRI/Nomenclature"
 @model ToolManagementSystem.Client.Pages.NRI.NomenclatureModel
+@using Newtonsoft.Json;
 @{
     ViewData["Title"] = "Nomenclature";
 }
@@ -312,7 +313,7 @@
                             <div class="row align-items-center pl-3 pr-3">
                                 <div class="col pt-1">
                                     <div class="table-responsive ">
-                                        <table class="table table-bordered table-hover css-numbered-rows text-nowrap">
+                                        <table class="table table-bordered table-hover css-numbered-rows text-nowrap" id="NewNomenclatureSpecTable">
                                             <thead>
                                                 <tr>
                                                     <th style="width:5%;">#</th>
@@ -323,34 +324,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="classificationCreationTbody">
-                                                <tr>
-                                                    <td></td>
-                                                    <td>
-                                                        <input type="text" id="spec-name-" class="form-control" />
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control">
-                                                            <option selected="selected">Длина</option>
-                                                            <option>Ширина</option>
-                                                            <option>Вес</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-
-                                                        <input class="form-control" list="browsers" name="browser" id="browser">
-                                                        <datalist class="form-control" id="browsers">
-                                                            <option value=null></option>option>
-
-                                                        </datalist>
-
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control" type="number" value="12" />
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-primary fa fa-minus w-100" type="button"></button>
-                                                    </td>
-                                                </tr>
+                                              
                                             </tbody>
                                         </table>
                                     </div>
@@ -361,7 +335,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClearClassificationTable('classificationCreationTbody')">Отмена</button>
-                        <button type="submit" class="btn btn-primary" onclick="ClearClassificationTable('classificationCreationTbody')">Сохранить</button>
+                        <button type="button" class="btn btn-primary" onclick="SubmitNewNomenclature('classificationCreationTbody', 'NewNomenclatureSpecTable')">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -376,18 +350,40 @@
     <script type="text/javascript">
         var isCaretUp = false;
         var AttributeCounter = 0;
-
-        var isCaretUp = false;
         var pagedList = "#nomenclaturesTable";
         var filterByNameStr = "";
         var filterByVendorCodeStr = "";
-        
         var sortField = "Name";
         var itemsOnPage = 5;
         var isAscendingSort = true;
+
+
+        var specificationsList = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.Specifications))');
+        var unitsList = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model.Units))');
+
+      
+        var SpecificationsOptionsHTML = GenerateSpecificationsOptions();
+        var UnitsOptionsHTML = GenerateUnitsOptions();
+
         GenList(pagedList, itemsOnPage);
         EnableDeleteButton();
         EnableEditButton();
+
+        function GenerateUnitsOptions() {
+            var res = "";
+            for (var i = 0; i < unitsList.length; i++) {
+                res += "<option value='" + unitsList[i].Name + "'>" + unitsList[i].Name + "</option>";
+            }
+            return res;
+        }
+
+        function GenerateSpecificationsOptions() {
+            var res = "";
+            for (var i = 0; i < specificationsList.length; i++) {
+                res += "<option value='" + specificationsList[i].SpecificationId + "'>" + specificationsList[i].Name + "</option>";
+            }
+            return res;
+        }
 
         $(pagedList + " th a").click(function (e) {
             e.preventDefault();
@@ -442,7 +438,7 @@
             var json = JSON.parse(data);
             $('#EditNomenclature_Name').val(json.Name);
             $('#EditNomenclature_NomenclatureId').val(json.NomenclatureId);
-        });  
+        });
 
         function timeConvert(ticks) {
             var sec = ticks / 10000000;
@@ -507,10 +503,10 @@
         function AddClassificationRow(tBodyName) {
             var tBodyElem = '#' + tBodyName;
             $(tBodyElem).append(
-                "<tr id='classification-row-" + AttributeCounter + "'><td class= 'text-left'></td>"
-                + "<td class='text-left'><select class='form-control'><option selected = 'selected'> Длина</option><option>Ширина</option><option>Вес</option></select></td>"
-                + "<td class='text-left'><select class='form-control'><option selected = 'selected'> м</option><option>см</option><option>кг</option></select></td>"
-                + "<td class='text-left'><input class='form-control'/></td>"
+                "<tr data-nomSpecUnitId=null id='classification-row-" + AttributeCounter + "'><td class= 'text-left'></td>"
+                + "<td class='text-left'><select class='form-control specVar'>" + SpecificationsOptionsHTML + "</select></td>"
+                + "<td class='text-left'><input class='form-control unitVar' list='unitsDataList'><datalist id = 'unitsDataList'>" + UnitsOptionsHTML + "</datalist></td>"
+                + "<td class='text-left'><input type='text' class='form-control valVar'/></td>"
                 + "<td class= 'text-left'>"
                 + "<button id='classification-row_button-" + AttributeCounter + "' onclick='RemoveTableRow(this.id)' class='btn btn-primary fa fa-minus w-100' type='button'></button>"
                 + "</td >"
@@ -523,6 +519,36 @@
             ClearTable(tBodyName);
             AttributeCounter = 1;
         };
+
+        function GetSpecificationsJSON(tbody) {
+            var trName = "#" + tbody + " tr";
+            $(trName).each(function () {
+                var nomSpecUnitId = (this).data("nomSpecUnitId");
+                var specId = (this).find("specVar").val();
+                var nomSpecUnitId = this).find("unitVar").val();
+                var nomSpecUnitId = (this).find("valVar").val();
+            });
+           
+            return res;
+        };
+
+        function SubmitNewNomenclature(table){
+            $.ajax({
+                url: '/Create',
+                type: 'POST',
+                data: {
+                    attr: GetSpecificationsJSON(table)
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    RequestVerificationToken:
+                        $('input:hidden[name="__RequestVerificationToken"]').val()
+                }
+            });
+        };
+
+        
 
     </script>
 }

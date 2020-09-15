@@ -31,7 +31,7 @@ namespace ToolManagementSystem.Client.Pages.NRI
 
         public async Task<IActionResult> OnGet()
         {
-            Units = await UnitsManager.GetUnitsAsync(filterByName, "Name", true);
+            Units = await UnitsManager.GetUnitsAsync(/*filterByName,*/ "Name", true);
             if (Units != null)
             {
                 return Page();
