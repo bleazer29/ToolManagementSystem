@@ -522,23 +522,29 @@
 
         function GetSpecificationsJSON(tbody) {
             var trName = "#" + tbody + " tr";
+            var res = [];
             $(trName).each(function () {
-                var nomSpecUnitId = (this).data("nomSpecUnitId");
-                var specId = (this).find("specVar").val();
-                var nomSpecUnitId = this).find("unitVar").val();
-                var nomSpecUnitId = (this).find("valVar").val();
+                var nomSpecUnitId = $(this).data("nomSpecUnitId");
+                var specId = $(this).find(".specVar").val();
+                var unitName = $(this).find(".unitVar").val();
+                var value = $(this).find(".valVar").val();
+                res.push({
+                    "NomenclatureSpecificationUnitId": nomSpecUnitId,
+                    "SpecificationId": specId,
+                    "Unit": { "Name": unitName},
+                    "Value": value,
+                })
             });
            
             return res;
         };
 
-        function SubmitNewNomenclature(table){
+        function SubmitNewNomenclature(table) {
+            var sendData = GetSpecificationsJSON(table);
             $.ajax({
-                url: '/Create',
+                url: '/NRI/Nomenclature?handler=Create',
                 type: 'POST',
-                data: {
-                    attr: GetSpecificationsJSON(table)
-                },
+                data: sendData,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 headers: {

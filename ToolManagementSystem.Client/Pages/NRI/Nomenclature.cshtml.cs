@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ToolManagementSystem.Client.Managers.NRI;
 using ToolManagementSystem.Shared.Models;
+using Newtonsoft.Json;
 
 namespace ToolManagementSystem.Client.Pages.NRI
 {
@@ -48,8 +49,9 @@ namespace ToolManagementSystem.Client.Pages.NRI
                 return RedirectToPage("/Error", new { ErrorMessage = "Не удалось получить данные из базы данных." });
         }
 
-        public async Task<IActionResult> OnPostCreate()
+        public async Task<IActionResult> OnPostCreate([FromBody]string attr)
         {
+            NomenclatureSpecificationUnit temp1 = JsonConvert.DeserializeObject<NomenclatureSpecificationUnit>(attr);
             ErrorMessage = "";
             HttpStatusCode temp = await NomenclatureManager.CreateNomenclatureAsync(NewNomenclature);
             if (temp != HttpStatusCode.OK)
