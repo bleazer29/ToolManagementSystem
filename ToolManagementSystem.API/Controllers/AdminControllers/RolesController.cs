@@ -22,39 +22,77 @@ namespace ToolManagementSystem.API.Controllers.AdminControllers
 
         // GET: api/Admin/Roles
         [HttpGet]
-        public IEnumerable<string> GetRoles(string name)
+        public async Task<IActionResult> GetRoles(string name)
         {
-            Console.WriteLine("CalledGetRoles() method");
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // GET api/Admin/Roles/5
         [HttpGet("{id}")]
-        public string GetRole(int id)
+        public async Task<IActionResult> GetRole(int id)
         {
-            Console.WriteLine("Called GetRole(id) method");
-            return "value";
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // POST api/Admin/Roles
         [HttpPost]
-        public void AddRole([FromBody] string value)
+        public async Task<IActionResult> AddRole([FromBody] string value)
         {
-            Console.WriteLine("Called AddRole(obj) method");
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // PUT api/Admin/Roles/5
         [HttpPut("{id}")]
-        public void EditRole(int id, [FromBody] string value)
+        public async Task<IActionResult> EditRole(int id, [FromBody] string value)
         {
-            Console.WriteLine("Called EditRole(id, obj) method");
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // DELETE api/Admin/Roles/5
         [HttpDelete("{id}")]
-        public void DeleteRole(int id)
+        public async Task<IActionResult> DeleteRole(int id)
         {
-            Console.WriteLine("Called DeleteRole(id) method");
+            try
+            {
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
     }
 }

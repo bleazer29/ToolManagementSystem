@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +10,13 @@ using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers.AdminControllers
 {
+    [Authorize(Roles = roles)]
     [Route("api/Admin/Users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly TMSdbContext db;
+        const string roles = "";
 
         public UsersController(TMSdbContext context)
         {

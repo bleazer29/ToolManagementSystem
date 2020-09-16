@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         // GET: api/NRI/Departments
+        [Authorize(Policy = "read-departments")]
         [HttpGet]
         public async Task<IActionResult> GetDepartments(string name)
         {
