@@ -15,6 +15,7 @@ using ToolManagementSystem.Shared.ResponseModels;
 
 namespace ToolManagementSystem.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/Accounts")]
     [ApiController]
     public class AccountsController : ControllerBase
@@ -27,7 +28,6 @@ namespace ToolManagementSystem.API.Controllers
         }
 
         // GET: api/Accounts/Login
-        [AllowAnonymous]
         [HttpGet("Login")]
         public async Task<IActionResult> Login(string Login, string Password)
         {
@@ -40,35 +40,11 @@ namespace ToolManagementSystem.API.Controllers
                     .SingleAsync(x => x.Login == Login && x.Password == Password);
                 if(user != null)
                 {
-                    var now = DateTime.UtcNow;
-                    List<UserRole> userRoles = new List<UserRole>(user.UserRoleUser);
-                    List<Claim> userClaims = new List<Claim>();
-                    foreach (UserRole role in userRoles)
-                    {
-                        List<RolePermissionRight> rights = db.RolePermissionRight
-                            .Include(x => x.RolePermission)
-                                .ThenInclude(x => x.Permission)
-                            .Include(x => x.Right)
-                            .Where(x => x.RolePermission.RoleId == role.RoleId)
-                            .ToList();
-                        foreach (RolePermissionRight right in rights)
-                        {
-                            userClaims.Add(new Claim("user-right", right.RolePermission.Permission.Name + "-" + right.Right.Name));
-                        }
-                    }
-                    var jwt = new JwtSecurityToken(
-                            issuer: AuthenticationOptions.ISSUER,
-                            audience: AuthenticationOptions.AUDIENCE,
-                            notBefore: now,
-                            claims: userClaims,
-                            expires: now.Add(TimeSpan.FromDays(AuthenticationOptions.LIFETIME)),
-                            signingCredentials: new SigningCredentials(AuthenticationOptions.GetSymmetricSecurityKey(),
-                            SecurityAlgorithms.HmacSha256));
-                    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+                    string userToken = GenerateJwtToken(user);
                     UserWithTokenResponse userWithToken = new UserWithTokenResponse()
                     {
                         User = user,
-                        token = encodedJwt
+                        token = userToken
                     };
                     return Ok(userWithToken);
                 }
@@ -80,6 +56,41 @@ namespace ToolManagementSystem.API.Controllers
                     + ex.Message, Login, Password);
                 return BadRequest();
             }
+        }
+
+        public string GenerateJwtToken(User user)
+        {
+            List<UserRole> userRoles = new List<UserRole>(user.UserRoleUser);
+            var now = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthenticationOptions.ISSUER,
+                    audience: AuthenticationOptions.AUDIENCE,
+                    notBefore: now,
+                    claims: GenerateUserClaims(userRoles),
+                    expires: now.Add(TimeSpan.FromDays(AuthenticationOptions.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthenticationOptions.GetSymmetricSecurityKey(),
+                    SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+            return encodedJwt;
+        }
+
+        public List<Claim> GenerateUserClaims(List<UserRole> userRoles)
+        {
+            List<Claim> userClaims = new List<Claim>();
+            foreach (UserRole role in userRoles)
+            {
+                List<RolePermissionRight> rights = db.RolePermissionRight
+                    .Include(x => x.RolePermission)
+                        .ThenInclude(x => x.Permission)
+                    .Include(x => x.Right)
+                    .Where(x => x.RolePermission.RoleId == role.RoleId)
+                    .ToList();
+                foreach (RolePermissionRight right in rights)
+                {
+                    userClaims.Add(new Claim("user-right", right.RolePermission.Permission.Name + "-" + right.Right.Name));
+                }
+            }
+            return userClaims;
         }
     }
 }

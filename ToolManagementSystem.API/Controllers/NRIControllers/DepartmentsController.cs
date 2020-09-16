@@ -10,6 +10,7 @@ using ToolManagementSystem.Shared.Models;
 
 namespace ToolManagementSystem.API.Controllers.NRIControllers
 {
+    [Authorize]
     [Route("api/NRI/Departments")]
     [ApiController]
     public class DepartmentsController : ControllerBase
@@ -22,7 +23,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         // GET: api/NRI/Departments
-        [Authorize(Policy = "read-departments")]
+        [Authorize(Policy = "departments-read")]
         [HttpGet]
         public async Task<IActionResult> GetDepartments(string name)
         {
@@ -44,6 +45,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         // GET api/NRI/Departments/5
+        [Authorize(Policy = "departments-read")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDepartment(int id)
         {
@@ -60,6 +62,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         // POST api/NRI/Departments
+        [Authorize(Policy = "departments-create")]
         [HttpPost]
         public async Task<IActionResult> AddDepartment([FromBody] Department value)
         {
@@ -77,6 +80,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         // PUT api/NRI/Departments/5
+        [Authorize(Policy = "departments-update")]
         [HttpPut("{id}")]
         public async Task<IActionResult> EditDepartment(int id, [FromBody] Department value)
         {
@@ -98,6 +102,7 @@ namespace ToolManagementSystem.API.Controllers.NRIControllers
         }
 
         // DELETE api/NRI/Departments/5
+        [Authorize(Policy = "departments-delete")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDepartment(int id)
         {
